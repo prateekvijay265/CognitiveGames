@@ -80,17 +80,18 @@ app.use('/api/alerts', alertsRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/audit', auditRouter);
 
-// Health check
+// Basic health check route
 app.get('/api/health', (_req, res) => {
   res.json({
     success: true,
-    data: {
-      status: 'healthy',
-      timestamp: new Date().toISOString(),
-      version: '1.0.0',
-      environment: process.env.NODE_ENV,
-    },
+    message: 'SMRITI CARE API is running',
+    timestamp: new Date().toISOString()
   });
+});
+
+// Root route so visitors don't see 'Cannot GET /'
+app.get('/', (_req, res) => {
+  res.send('SMRITI CARE Backend API is running successfully! The frontend application should connect to /api endpoints.');
 });
 
 // Error handler
