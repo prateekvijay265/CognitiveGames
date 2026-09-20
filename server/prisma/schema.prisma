@@ -1,0 +1,304 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  passwordHash String
+  name        String
+  role        String   // patient | caregiver | doctor | admin
+  language    String   @default("en")
+  avatarUrl   String?
+  isActive    Boolean  @default(true)
+  isDemo      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  patient         Patient?
+  caregiver       Caregiver?
+  healthcareWorker HealthcareWorker?
+  auditLogs       AuditLog[]
+  notes           Note[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model Patient {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  dateOfBirth        String?
+  emergencyContactName String?
+  emergencyContactRelationship String?
+  emergencyContactPhone String?
+  accessibilityJson  String   @default("{}")
+  difficultyJson     String   @default("{}")
+  isDemo             Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  lastActiveAt       DateTime?
+  lastSyncAt         DateTime?
+
+  user              User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gameSessions      GameSession[]
+  reminders         Reminder[]
+  routineItems      DailyRoutineItem[]
+  memoryBookEntries MemoryBookEntry[]
+  moodEntries       MoodEntry[]
+  alerts            Alert[]
+  notes             Note[]
+  cognitiveMetrics  CognitiveMetric[]
+  caregiverLinks    PatientCaregiverLink[]
+  doctorLinks       PatientDoctorLink[]
+
+  @@index([userId])
+}
+
+model Caregiver {
+  id        String @id @default(cuid())
+  userId    String @unique
+  specialty String?
+
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  patientLinks  PatientCaregiverLink[]
+}
+
+model HealthcareWorker {
+  id           String @id @default(cuid())
+  userId       String @unique
+  specialty    String?
+  licenseNumber String?
+
+  user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  patientLinks PatientDoctorLink[]
+}
+
+model PatientCaregiverLink {
+  patientId   String
+  caregiverId String
+  createdAt   DateTime @default(now())
+
+  patient   Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  caregiver Caregiver @relation(fields: [caregiverId], references: [id], onDelete: Cascade)
+
+  @@id([patientId, caregiverId])
+}
+
+model PatientDoctorLink {
+  patientId        String
+  healthcareWorkerId String
+  createdAt        DateTime @default(now())
+
+  patient          Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  healthcareWorker HealthcareWorker @relation(fields: [healthcareWorkerId], references: [id], onDelete: Cascade)
+
+  @@id([patientId, healthcareWorkerId])
+}
+
+model GameSession {
+  id                 String   @id @default(cuid())
+  gameId             String
+  patientId          String
+  sessionId          String   @unique
+  startedAt          DateTime
+  completedAt        DateTime?
+  difficulty         String
+  accuracy           Float    @default(0)
+  responseTimeMs     Int      @default(0)
+  hintsUsed          Int      @default(0)
+  mistakes           Int      @default(0)
+  score              Int      @default(0)
+  totalQuestions     Int      @default(0)
+  answeredQuestions  Int      @default(0)
+  completed          Boolean  @default(false)
+  abandoned          Boolean  @default(false)
+  cognitiveDomain    String
+  language           String   @default("en")
+  offline            Boolean  @default(false)
+  syncStatus         String   @default("synced")
+  metadataJson       String?
+  createdAt          DateTime @default(now())
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, gameId])
+  @@index([patientId, startedAt])
+}
+
+model Reminder {
+  id                String   @id @default(cuid())
+  patientId         String
+  type              String
+  title             String
+  description       String?
+  scheduledTime     String
+  repeatScheduleJson String?
+  voiceEnabled      Boolean  @default(true)
+  soundEnabled      Boolean  @default(true)
+  vibrationEnabled  Boolean  @default(false)
+  caregiverNotify   Boolean  @default(false)
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  events  ReminderEvent[]
+
+  @@index([patientId])
+}
+
+model ReminderEvent {
+  id             String   @id @default(cuid())
+  reminderId     String
+  patientId      String
+  scheduledAt    DateTime
+  acknowledgedAt DateTime?
+  status         String   @default("pending")
+  snoozeUntil    DateTime?
+  syncStatus     String   @default("synced")
+  createdAt      DateTime @default(now())
+
+  reminder Reminder @relation(fields: [reminderId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, scheduledAt])
+}
+
+model DailyRoutineItem {
+  id            String   @id @default(cuid())
+  patientId     String
+  title         String
+  icon          String   @default("📋")
+  scheduledTime String
+  category      String
+  order         Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+}
+
+model MemoryBookEntry {
+  id           String   @id @default(cuid())
+  patientId    String
+  personName   String
+  relationship String
+  photoUrl     String?
+  location     String?
+  story        String?
+  voiceNoteUrl String?
+  date         String?
+  createdAt    DateTime @default(now())
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+}
+
+model MoodEntry {
+  id         String   @id @default(cuid())
+  patientId  String
+  mood       String
+  note       String?
+  recordedAt DateTime @default(now())
+  syncStatus String   @default("synced")
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, recordedAt])
+}
+
+model Alert {
+  id           String   @id @default(cuid())
+  patientId    String
+  type         String
+  severity     String   @default("info")
+  title        String
+  message      String
+  isRead       Boolean  @default(false)
+  isResolved   Boolean  @default(false)
+  metadataJson String?
+  createdAt    DateTime @default(now())
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, isRead])
+}
+
+model Note {
+  id         String   @id @default(cuid())
+  patientId  String
+  authorId   String
+  authorName String
+  authorRole String
+  content    String
+  isPrivate  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  author  User    @relation(fields: [authorId], references: [id])
+
+  @@index([patientId])
+}
+
+model CognitiveMetric {
+  id                String   @id @default(cuid())
+  patientId         String
+  date              String
+  domain            String
+  averageAccuracy   Float    @default(0)
+  averageResponseMs Int      @default(0)
+  sessionsCount     Int      @default(0)
+  hintsUsed         Int      @default(0)
+  completionRate    Float    @default(0)
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, date])
+  @@index([patientId, domain])
+}
+
+model SyncEvent {
+  id         String   @id @default(cuid())
+  type       String
+  payloadJson String
+  deviceId   String
+  status     String   @default("pending")
+  retries    Int      @default(0)
+  syncedAt   DateTime?
+  createdAt  DateTime @default(now())
+
+  @@index([status])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  resource   String
+  resourceId String?
+  details    String?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Consent {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String
+  granted     Boolean  @default(false)
+  grantedAt   DateTime?
+  revokedAt   DateTime?
+  createdAt   DateTime @default(now())
+}
