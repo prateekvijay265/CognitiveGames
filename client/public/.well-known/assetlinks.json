@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.vercel.cognitivegames_xi.twa",
+    "sha256_cert_fingerprints": ["08:60:6D:1D:2A:8E:BA:93:19:A9:3E:F5:22:CC:A4:43:54:AF:28:A3:C2:84:4A:1C:5A:BB:0D:CB:5F:F2:79:02"]
+  }
+}]
