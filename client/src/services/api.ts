@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-// In production (Vercel), we want to use the Render backend URL.
-// Locally, it will fallback to '/api' and use the vite.config.ts proxy.
-const baseURL = import.meta.env.VITE_API_URL || '/api';
+// In production (Vercel), forcefully use the Render backend URL to avoid 404s.
+// Locally (npm run dev), fallback to '/api' to use the vite proxy.
+const baseURL = import.meta.env.PROD 
+  ? 'https://cognitivegames-5az6.onrender.com/api' 
+  : '/api';
 
 export const api = axios.create({
   baseURL,
