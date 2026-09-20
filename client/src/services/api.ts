@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+// In production (Vercel), we want to use the Render backend URL.
+// Locally, it will fallback to '/api' and use the vite.config.ts proxy.
+const baseURL = import.meta.env.VITE_API_URL || '/api';
+
 export const api = axios.create({
-  baseURL: '/api',
+  baseURL,
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
