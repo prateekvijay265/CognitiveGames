@@ -12,12 +12,28 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
+        id: '/?source=pwa',
         name: 'Smriti Care',
         short_name: 'Smriti Care',
         description: 'AI Cognitive Wellness Platform for North-Eastern India',
         theme_color: '#0d9488', // teal-600
         background_color: '#f8f7f4',
         display: 'standalone',
+        orientation: 'portrait',
+        screenshots: [
+          {
+            src: 'images/hero.jpg',
+            sizes: '1024x1024',
+            type: 'image/jpeg',
+            form_factor: 'wide'
+          },
+          {
+            src: 'images/engage.jpg',
+            sizes: '1024x1024',
+            type: 'image/jpeg',
+            form_factor: 'narrow'
+          }
+        ],
         icons: [
           {
             src: 'pwa-192x192.png',
