@@ -37,7 +37,7 @@ export default function DataProvider({ children }: { children: React.ReactNode }
             memoryBookData = patientRes.data.data.memoryBookEntries || [];
             alertsData = patientRes.data.data.alerts || [];
           } else {
-            patientsData = [{ id: user.id, name: user.name, emergencyContact: {}, difficultyProfile: {} } as any];
+            patientsData = [{ id: user.id, name: user.name, emergencyContact: {}, difficultyProfile: {}, accessibilitySettings: {} } as any];
           }
           gameSessionsData = sessionsRes.data?.data || [];
           remindersData = remindersRes.data?.data || [];

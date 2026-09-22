@@ -14,9 +14,10 @@ import {
   TrendingDown,
   Info,
   ChevronRight,
-  PlusCircle,
-  Activity,
+  ArrowRight,
+  Sparkles,
 } from 'lucide-react';
+import { toast } from 'sonner';
 
 export function DoctorDashboard() {
   const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
@@ -33,7 +34,7 @@ export function DoctorDashboard() {
   const handleSaveObservation = (e: React.FormEvent) => {
     e.preventDefault();
     if (!noteContent.trim()) return;
-    alert('Clinical note recorded.');
+    toast.success('Clinical note recorded.');
     setSelectedPatientForNote(null);
     setNoteContent('');
   };

@@ -12,6 +12,7 @@ import {
   X,
   Check,
 } from 'lucide-react';
+import { toast } from 'sonner';
 import type { User, UserRole } from '../../types';
 
 
@@ -78,7 +79,7 @@ export function AdminUsers() {
         </div>
 
         <button
-          onClick={() => alert('New user registration dialog')}
+          onClick={() => toast.success('New user registration dialog coming soon.')}
           className="px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-2 self-start sm:self-auto"
         >
           <UserPlus className="w-4 h-4" /> Add User

@@ -36,6 +36,7 @@ import {
   CartesianGrid,
   Legend,
 } from 'recharts';
+import { toast } from 'sonner';
 
 export function CaregiverPatientDetail() {
   const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
@@ -44,6 +45,21 @@ export function CaregiverPatientDetail() {
   const navigate = useNavigate();
 
   const patient = DEMO_PATIENTS.find((p) => p.id === patientId) || DEMO_PATIENTS[0];
+  
+  if (!patient) {
+    return (
+      <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold text-stone-900 mb-2">Patient Not Found</h2>
+          <p className="text-stone-500 mb-6">We couldn't find the requested patient profile.</p>
+          <button onClick={() => navigate('/caregiver/patients')} className="px-4 py-2 bg-teal-600 text-white rounded-xl font-medium hover:bg-teal-700">
+            Back to Patients
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const [activeTab, setActiveTab] = useState<
     'overview' | 'cognitive' | 'games' | 'reminders' | 'routine' | 'notes'
   >('overview');
@@ -351,7 +367,7 @@ export function CaregiverPatientDetail() {
           <div className="flex justify-between items-center">
             <h3 className="font-bold text-stone-900 text-base">Configured Reminders</h3>
             <button
-              onClick={() => alert('Add reminder modal')}
+              onClick={() => toast.success('Add reminder modal coming soon.')}
               className="px-3 py-1.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs flex items-center gap-1"
             >
               <Plus className="w-4 h-4" /> Add Reminder

@@ -14,15 +14,28 @@ import {
   Info,
 } from 'lucide-react';
 
+import { EmptyState } from '@/components/ui/EmptyState';
+
 export function DoctorReports() {
   const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
 
-  const [selectedPatientId, setSelectedPatientId] = useState(DEMO_PATIENTS[0].id);
+  const [selectedPatientId, setSelectedPatientId] = useState(DEMO_PATIENTS[0]?.id || '');
   const [dateRange, setDateRange] = useState<'30d' | '60d' | '90d'>('30d');
   const [reportType, setReportType] = useState<
     'comprehensive' | 'domain-breakdown' | 'adherence-summary'
   >('comprehensive');
   const [generated, setGenerated] = useState(true);
+
+  if (DEMO_PATIENTS.length === 0) {
+    return (
+      <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
+        <EmptyState
+          title="No Patients Found"
+          description="You don't have any patients assigned yet. Add a patient to generate clinical reports."
+        />
+      </div>
+    );
+  }
 
   const patient = DEMO_PATIENTS.find((p) => p.id === selectedPatientId) || DEMO_PATIENTS[0];
 

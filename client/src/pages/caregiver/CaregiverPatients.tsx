@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   ExternalLink,
 } from 'lucide-react';
+import { toast } from 'sonner';
 
 export function CaregiverPatients() {
   const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
@@ -58,7 +59,7 @@ export function CaregiverPatients() {
         </div>
 
         <button
-          onClick={() => alert('New patient invitation sent to family')}
+          onClick={() => toast.success('New patient invitation sent to family')}
           className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm rounded-xl shadow-xs transition-colors flex items-center gap-2 self-start sm:self-auto"
         >
           <UserPlus className="w-4 h-4" />

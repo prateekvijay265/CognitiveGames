@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { ALL_COGNITIVE_GAMES } from '../../features/games';
 import { MEMORY_CARDS, OBJECT_RECOGNITION_ITEMS, STORIES } from '../../data/gameContent';
+import { toast } from 'sonner';
 
 
 export function AdminContent() {
@@ -162,7 +163,7 @@ export function AdminContent() {
 
                     <td className="py-4 px-6 text-right">
                       <button
-                        onClick={() => alert(`Configuring ${game.name}`)}
+                        onClick={() => toast.success(`Configuring ${game.name}`)}
                         className="px-3 py-1.5 text-xs font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors inline-flex items-center gap-1"
                       >
                         <Sliders className="w-3.5 h-3.5" /> Parameters

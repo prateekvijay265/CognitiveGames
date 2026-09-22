@@ -38,6 +38,21 @@ export function DoctorPatientProfile() {
   const navigate = useNavigate();
 
   const patient = DEMO_PATIENTS.find((p) => p.id === patientId) || DEMO_PATIENTS[0];
+
+  if (!patient) {
+    return (
+      <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold text-stone-900 mb-2">Patient Not Found</h2>
+          <p className="text-stone-500 mb-6">We couldn't find the requested patient profile.</p>
+          <button onClick={() => navigate('/doctor/patients')} className="px-4 py-2 bg-teal-600 text-white rounded-xl font-medium hover:bg-teal-700">
+            Back to Patients
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const [activeTab, setActiveTab] = useState<'activity' | 'reminders' | 'notes' | 'reports'>('activity');
 
   const [notes, setNotes] = useState(DEMO_NOTES);
