@@ -26,7 +26,7 @@ export default function DataProvider({ children }: { children: React.ReactNode }
         if (user.role === 'patient') {
           // Patients fetch their own detailed profile using 'me' alias
           const [patientRes, sessionsRes, remindersRes] = await Promise.all([
-            api.get(`/patients/me`).catch(() => ({ data: { data: { id: user.id, name: user.name, emergencyContact: {} } } })),
+            api.get(`/patients/me`).catch(() => ({ data: { data: { id: user.id, name: user.name, emergencyContact: {}, difficultyProfile: {} } } })),
             api.get('/game-sessions').catch(() => ({ data: { data: [] } })),
             api.get('/reminders').catch(() => ({ data: { data: [] } }))
           ]);
@@ -37,7 +37,7 @@ export default function DataProvider({ children }: { children: React.ReactNode }
             memoryBookData = patientRes.data.data.memoryBookEntries || [];
             alertsData = patientRes.data.data.alerts || [];
           } else {
-            patientsData = [{ id: user.id, name: user.name, emergencyContact: {} } as any];
+            patientsData = [{ id: user.id, name: user.name, emergencyContact: {}, difficultyProfile: {} } as any];
           }
           gameSessionsData = sessionsRes.data?.data || [];
           remindersData = remindersRes.data?.data || [];

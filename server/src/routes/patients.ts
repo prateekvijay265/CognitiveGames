@@ -101,7 +101,21 @@ router.get('/:id', authenticate, async (req: AuthRequest, res: Response, next) =
       return next(createError('Patient not found.', 404));
     }
 
-    res.json({ success: true, data: patient });
+    const mappedPatient = {
+      ...patient,
+      name: patient.user.name,
+      email: patient.user.email,
+      language: patient.user.language,
+      emergencyContact: patient.emergencyContactName ? {
+        name: patient.emergencyContactName,
+        relationship: patient.emergencyContactRelationship,
+        phone: patient.emergencyContactPhone,
+      } : null,
+      accessibilitySettings: JSON.parse(patient.accessibilityJson || '{}'),
+      difficultyProfile: JSON.parse(patient.difficultyJson || '{}'),
+    };
+
+    res.json({ success: true, data: mappedPatient });
   } catch (error) {
     next(error);
   }
