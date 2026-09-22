@@ -84,7 +84,7 @@ export default function PatientGames() {
                     <p className="text-[11px] font-semibold opacity-60 text-stone-700">{cat.count} games</p>
                     <ChevronRight className="w-4 h-4 text-stone-400 opacity-60" />
                   </div>
-                </button>
+                </motion.button>
               ))}
             </div>
           </motion.div>
