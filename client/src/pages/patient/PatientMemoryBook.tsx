@@ -1,30 +1,44 @@
 import { useAppDataStore } from '@/store/appDataStore';
+import { useAuthStore } from '@/store/authStore';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, HelpCircle, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookImage, HelpCircle, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { voiceService } from '@/services/voice';
 import { Card, CardBody } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { VoiceButton } from '@/components/ui/VoiceButton';
-
+import { EmptyState } from '@/components/ui/EmptyState';
 
 const EMOJI_MAP: Record<string, string> = {
-  Priya: '👩',
-  Rohan: '👦',
-  'The Old Tea Garden': '🌿',
-  Default: '🌸',
+  Priya: '👩🏽',
+  Rahul: '👨🏽',
+  Mantu: '👴🏽',
+  Asha: '👵🏽',
+  Deepa: '👩🏽',
+  Default: '👤',
 };
 
 export default function PatientMemoryBook() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
-
   const { t } = useTranslation();
-  const memories = DEMO_MEMORY_BOOK;
+  const { user } = useAuthStore();
+  const { memoryBook } = useAppDataStore();
+  
+  const memories = memoryBook.filter((m) => m.patientId === user?.id);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isQuizMode, setIsQuizMode] = useState(false);
   const [quizAnswered, setQuizAnswered] = useState<string | null>(null);
+
+  if (memories.length === 0) {
+    return (
+      <EmptyState
+        icon={<BookImage className="w-12 h-12 text-stone-300" />}
+        title={t('memory_book.title', 'My Memories')}
+        description={t('memory_book.no_entries', 'Your caregiver will add memories here.')}
+      />
+    );
+  }
 
   const currentMemory = memories[currentIndex] ?? memories[0];
   const emoji = EMOJI_MAP[currentMemory.personName] || EMOJI_MAP.Default;
