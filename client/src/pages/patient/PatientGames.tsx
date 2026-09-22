@@ -93,7 +93,7 @@ export default function PatientGames() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
               key={game.id}
-              onClick={() => navigate(`/patient/games/${game.id}`)}
+              onClick={() => navigate(`/patient/game/${game.id}`)}
               className="group flex flex-col text-left bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:shadow-[10px_10px_0_var(--color-ink)] hover:-translate-y-2 transition-all relative overflow-hidden focus:outline-none"
             >
               {/* Difficulty Banner */}

@@ -1,10 +1,11 @@
 import { useAppDataStore } from '@/store/appDataStore';
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { db } from '@/lib/db';
 import { voiceService } from '@/services/voice';
+import * as sfx from '@/lib/audio';
 import type { GameDifficulty, GameSession, SupportedLanguage } from '@/types';
 import {
   MemoryMatch,
@@ -60,6 +61,12 @@ export default function GamePlayer() {
   const profileKey = gameId ? difficultyMap[gameId] : undefined;
   const difficulty: GameDifficulty = profileKey ? (patient.difficultyProfile as any)[profileKey] || 'medium' : 'medium';
 
+  const [muted, setMuted] = useState(false);
+  const handleMute = useCallback(() => setMuted(m => !m), []);
+  useEffect(() => {
+    sfx.setMuted(muted);
+  }, [muted]);
+
   const handleExit = useCallback(() => {
     navigate('/patient/games');
   }, [navigate]);
@@ -110,15 +117,15 @@ export default function GamePlayer() {
       case 'story-memory':
         return <StoryMemory {...commonProps} />;
       case 'chess':
-        return <Chess onExit={handleExit} muted={false} onMute={() => {}} />;
+        return <Chess onExit={handleExit} muted={muted} onMute={handleMute} />;
       case 'match3':
-        return <Match3 onExit={handleExit} muted={false} onMute={() => {}} />;
+        return <Match3 onExit={handleExit} muted={muted} onMute={handleMute} />;
       case 'memory-game':
         return <MemoryGame onExit={handleExit} />;
       case 'sudoku':
         return <Sudoku onExit={handleExit} />;
       case 'jigsaw':
-        return <JigsawGame onExit={handleExit} muted={false} onMute={() => {}} />;
+        return <JigsawGame onExit={handleExit} muted={muted} onMute={handleMute} />;
       default:
         return (
           <div className="min-h-screen flex items-center justify-center p-6">
@@ -141,23 +148,12 @@ export default function GamePlayer() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 bg-[#FDFBF7] overflow-y-auto patient-mode select-none flex flex-col"
+      className="fixed inset-0 z-50 bg-felt overflow-y-auto patient-mode select-none flex flex-col"
     >
       <div className="flex-1 relative z-10 pb-32">
          {renderGame()}
       </div>
 
-      {/* Persistent Landscape Footer */}
-      <div className="fixed bottom-0 left-0 right-0 h-32 pointer-events-none z-0 overflow-hidden">
-         {/* Light Green Hill (Back) */}
-         <div className="absolute bottom-6 -left-4 w-48 h-24 bg-[#75A586] rounded-t-full rotate-[-15deg] opacity-60"></div>
-         
-         {/* Medium Green Hill (Right) */}
-         <div className="absolute -bottom-4 -right-12 w-64 h-32 bg-[#5E947A] rounded-t-full rotate-[10deg] opacity-80"></div>
-         
-         {/* Dark Green Ground (Front) */}
-         <div className="absolute -bottom-10 -left-10 right-0 h-24 bg-[#3E705C] rounded-t-[50%] scale-x-125"></div>
-      </div>
     </motion.div>
   );
 }

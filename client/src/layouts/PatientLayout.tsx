@@ -7,6 +7,7 @@ import { useAuthStore } from '../store/authStore';
 import { cn } from '../lib/utils';
 
 export default function PatientLayout() {
+  const { i18n } = useTranslation();
   const { fontSize } = useUIStore();
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
@@ -76,6 +77,29 @@ export default function PatientLayout() {
                 )}
               </NavLink>
             ))}
+            
+            {/* Language Selector */}
+            <div className="ml-4 border-l-2 border-ink/20 pl-6 flex items-center">
+              <div className="relative">
+                <select 
+                  className="appearance-none bg-kraft2 border-[3px] border-ink px-4 py-2 pr-10 font-mono font-bold text-sm uppercase tracking-widest text-ink shadow-[2px_2px_0_var(--color-ink)] hover:bg-ochre/30 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
+                  value={i18n.language}
+                  onChange={(e) => i18n.changeLanguage(e.target.value)}
+                >
+                  <option value="en">EN</option>
+                  <option value="hi">HI</option>
+                  <option value="as">AS</option>
+                  <option value="mni">MNI</option>
+                  <option value="kha">KHA</option>
+                  <option value="lus">LUS</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-ink">
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="3" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
           </nav>
         </div>
       </header>

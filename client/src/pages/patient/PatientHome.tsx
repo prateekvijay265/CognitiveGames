@@ -68,7 +68,7 @@ export default function PatientHome() {
             ].map(game => (
               <button
                 key={game.id}
-                onClick={() => navigate(`/patient/games/${game.id}`)}
+                onClick={() => navigate(`/patient/game/${game.id}`)}
                 className="group flex flex-col items-center bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:shadow-[8px_8px_0_var(--color-ink)] hover:-translate-y-1 transition-all"
               >
                 <div className={`w-full aspect-square ${game.color} border-b-[3px] border-ink flex items-center justify-center text-7xl group-hover:scale-105 transition-transform`}>
