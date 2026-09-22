@@ -18,6 +18,7 @@ const PatientHome = React.lazy(() => import('./pages/patient/PatientHome'));
 const PatientGames = React.lazy(() => import('./pages/patient/PatientGames'));
 const PatientReminders = React.lazy(() => import('./pages/patient/PatientReminders'));
 const PatientProgress = React.lazy(() => import('./pages/patient/PatientProgress'));
+const PatientProfile = React.lazy(() => import('./pages/patient/PatientProfile'));
 const PatientHelp = React.lazy(() => import('./pages/patient/PatientHelp'));
 const PatientRoutine = React.lazy(() => import('./pages/patient/PatientRoutine'));
 const PatientMemoryBook = React.lazy(() => import('./pages/patient/PatientMemoryBook'));
@@ -131,6 +132,7 @@ function AppRoutes() {
         <Route path="games" element={<PatientGames />} />
         <Route path="reminders" element={<PatientReminders />} />
         <Route path="progress" element={<PatientProgress />} />
+        <Route path="settings" element={<PatientProfile />} />
         <Route path="help" element={<PatientHelp />} />
         <Route path="routine" element={<PatientRoutine />} />
         <Route path="memory-book" element={<PatientMemoryBook />} />
