@@ -207,7 +207,7 @@ export function CaregiverDashboard() {
                 <div className="flex-1">
                   <h4 className="font-bold text-[15px] text-stone-900 leading-tight">{patient.name}</h4>
                   <p className="text-[12px] font-medium text-stone-500 mt-0.5">
-                    Age {patient.age} • {patient.condition}
+                    Age {patient.age} • Language: {patient.language ? patient.language.toUpperCase() : 'EN'}
                   </p>
                 </div>
                 <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center text-stone-400">

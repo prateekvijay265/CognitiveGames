@@ -56,10 +56,10 @@ export default function DataProvider({ children }: { children: React.ReactNode }
           // HACKATHON DEMO FALLBACK: Inject dummy patients if empty
           if (patientsData.length === 0) {
             patientsData = [
-              { id: 'demo-1', name: 'Ramesh Sharma', age: 72, condition: 'Mild Cognitive Impairment', language: 'Hindi' },
-              { id: 'demo-2', name: 'Lata Devi', age: 68, condition: 'Early Stage Alzheimer\'s', language: 'Assamese' },
-              { id: 'demo-3', name: 'Ashok Kumar', age: 75, condition: 'Healthy Aging', language: 'English' }
-            ];
+              { id: 'demo-1', name: 'Ramesh Sharma', age: 72, language: 'hi' },
+              { id: 'demo-2', name: 'Lata Devi', age: 68, language: 'as' },
+              { id: 'demo-3', name: 'Ashok Kumar', age: 75, language: 'en' }
+            ] as any[];
           }
         }
 
