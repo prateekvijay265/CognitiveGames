@@ -55,30 +55,21 @@
 ```mermaid
 flowchart TD
     subgraph Frontend ["📱 Client Application (PWA)"]
-        A["React + TypeScript UI"]
-        B[("IndexedDB (Offline Cache)")]
-        A <-->|"Reads/Writes offline data"| B
+        A["React UI"] <-->|"Reads/Writes"| B[("IndexedDB Cache")]
     end
 
-    subgraph Backend ["☁️ Cloud Services & API"]
-        C{"Background Sync Engine"}
-        D["Node.js / Express API"]
-    end
-
-    subgraph Database ["🗄️ Secure Storage"]
-        E[("PostgreSQL Database")]
+    subgraph Backend ["☁️ Cloud API & Storage"]
+        C{"Sync Engine"} <-->|"Routes"| D["Node.js + PostgreSQL"]
     end
 
     subgraph Portals ["📊 Web Dashboards"]
-        F["👨‍⚕️ Caregiver Portal"]
-        G["🏥 Clinical Dashboard"]
+        E["👨‍⚕️ Caregiver Portal"]
+        F["🏥 Clinical Dashboard"]
     end
 
     B <-->|"Auto-syncs when online"| C
-    C <-->|"Routes Data"| D
-    D <-->|"Queries"| E
-    E -->|"Real-time Alerts"| F
-    E -->|"Aggregated Reports"| G
+    D -->|"Real-time Alerts"| E
+    D -->|"Cognitive Reports"| F
 ```
 
 **Speaker Notes (What to say):**
