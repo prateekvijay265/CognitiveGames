@@ -56,9 +56,8 @@ export default function RegisterPage() {
       <div className="hidden lg:flex lg:w-1/2 felt-surface p-12 flex-col justify-between text-kraft relative overflow-hidden">
         <div className="relative z-10">
           <div className="flex items-center gap-6 mb-16">
-            <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover bg-vermilion border-2 border-ink shadow-[2px_2px_0px_rgba(26,21,18,1)]" />
-            <div className="font-display font-bold text-2xl uppercase tracking-widest text-kraft drop-shadow-md">
-              Neuro Mind
+            <div className="font-display font-black text-3xl uppercase tracking-tighter text-kraft leading-none">
+              NEURO<br/>MIND
             </div>
           </div>
           <h1 className="font-display text-5xl lg:text-6xl uppercase tracking-widest leading-[1.1] mb-6">
@@ -99,18 +98,20 @@ export default function RegisterPage() {
               <p className="font-mono text-sand mb-8">Who are you joining as?</p>
 
               <div className="space-y-8">
-                {ROLES.map(({ value, label, icon: Icon, desc }) => (
+                {ROLES.map(({ value, label, desc }, i) => (
                   <button
                     key={value}
                     onClick={() => handleRoleSelect(value)}
-                    className="arcade-card w-full p-6 flex items-center gap-6 text-left hover-lift bg-white"
+                    className="w-full flex items-center text-left bg-paper border-[3px] border-ink border-t-[8px] hover:bg-[#e3decf] transition-colors relative overflow-hidden cursor-pointer"
                   >
-                    <div className="w-12 h-12 bg-ochre border-2 border-ink flex items-center justify-center flex-shrink-0">
-                      <Icon size={24} className="text-ink" />
+                    <div className="w-16 h-full flex flex-col items-center justify-center border-r-[3px] border-ink bg-[#f5f0e6]">
+                      <span className="font-mono text-xl font-bold tracking-widest text-ink transform -rotate-90 origin-center whitespace-nowrap pt-8">
+                        0{i + 1}
+                      </span>
                     </div>
-                    <div>
-                      <div className="font-display font-bold text-ink uppercase tracking-widest">{label}</div>
-                      <div className="font-mono text-sm text-sand">{desc}</div>
+                    <div className="p-5 flex-1">
+                      <div className="font-display font-bold text-3xl text-ink uppercase tracking-tight">{label}</div>
+                      <div className="font-mono text-xs uppercase tracking-widest text-accent-red mt-2">{desc}</div>
                     </div>
                   </button>
                 ))}

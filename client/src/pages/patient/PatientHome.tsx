@@ -1,124 +1,113 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronRight, Target, Sparkles, Brain, Clock, Bell, Map, Phone } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 
 export default function PatientHome() {
   const navigate = useNavigate();
   const { user } = useAuthStore();
-  const firstName = user?.name?.split(' ')[0] || 'Asha';
-
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Good morning';
-    if (hour < 17) return 'Good afternoon';
-    return 'Good evening';
-  };
+  const firstName = user?.name?.split(' ')[0] || 'User';
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="w-full h-full font-sans flex flex-col gap-12"
+      className="w-full min-h-screen bg-paper text-ink p-4 sm:p-8 md:p-12"
     >
-      {/* 🚀 Massive Desktop Header */}
-      <header className="flex items-end justify-between border-b-[3px] border-ink pb-6">
-        <div>
-          <h2 className="font-mono text-lg font-bold tracking-widest text-sand uppercase mb-2 flex items-center gap-2">
-            <Sparkles size={18} className="text-vermilion" /> {getGreeting()}
-          </h2>
-          <h1 className="text-6xl font-display font-black text-ink uppercase tracking-wider">
-            {firstName} <span className="inline-block origin-bottom-right animate-wave text-5xl">👋</span>
-          </h1>
-        </div>
-        <div className="text-right">
-          <p className="font-mono text-sand text-lg font-bold uppercase tracking-widest mb-2">Daily Progress</p>
-          <div className="flex items-center gap-4">
-            <div className="w-64 h-6 bg-kraft2 border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] overflow-hidden">
-              <div className="h-full bg-vermilion border-r-[3px] border-ink w-[60%]" />
-            </div>
-            <span className="font-display font-bold text-2xl text-ink">60%</span>
-          </div>
-        </div>
-      </header>
+      {/* Top Header Bar */}
+      <div className="flex justify-between items-center font-mono text-[11px] tracking-[0.15em] uppercase font-semibold border-b-[3px] border-ink pb-3 mb-8">
+        <div>COGNITIVE SUITE · DAILY REGIMEN</div>
+        <div>PROGRESS · 60%</div>
+      </div>
 
-      {/* 📜 Desktop Grid Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      {/* Main Title Area */}
+      <div className="mb-16 border-b-[3px] border-ink pb-12">
+        <div className="mono-tag mb-4">NEURO MIND · DAILY REGIMEN</div>
+        <h1 className="font-display text-6xl sm:text-8xl md:text-[9rem] leading-[0.85] tracking-tight uppercase">
+          WELCOME<br />{firstName}
+        </h1>
+        <p className="font-sans text-lg sm:text-xl max-w-2xl mt-8 leading-relaxed font-medium">
+          Continue your cognitive exercises, review your memory book, 
+          and check your daily routine. Everything you need is right here.
+        </p>
+      </div>
+
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        {/* LEFT COLUMN: Games */}
-        <div className="lg:col-span-2 flex flex-col gap-8">
-          <div className="flex items-center justify-between">
-            <h3 className="font-display font-bold text-3xl uppercase tracking-widest text-ink flex items-center gap-3">
-              <Brain size={32} className="text-vermilion stroke-[2.5]" />
-              Quick Games
-            </h3>
+        {/* Left Column: Quick Actions */}
+        <div className="lg:col-span-2 flex flex-col gap-6">
+          <div className="flex justify-between items-end mb-2">
+            <h2 className="font-display text-4xl uppercase tracking-tight">Activities</h2>
             <button 
               onClick={() => navigate('/patient/games')}
-              className="font-mono font-bold uppercase tracking-widest text-sm bg-kraft2 border-[3px] border-ink px-6 py-3 shadow-[4px_4px_0_var(--color-ink)] hover:bg-vermilion hover:text-kraft hover:translate-x-1 transition-all flex items-center gap-2"
+              className="font-mono text-xs uppercase font-bold tracking-widest hover:text-accent-red transition-colors"
             >
-              View Arcade <ChevronRight size={18} />
+              VIEW ALL &rarr;
             </button>
           </div>
-
-          <div className="grid grid-cols-3 gap-6">
+          
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { id: 'match3', name: 'Match 3', icon: '/logo_match3.jpg', color: 'bg-vermilion', stat: 'Processing' },
-              { id: 'sudoku', name: 'Sudoku', icon: '/logo_sudoku.jpg', color: 'bg-ochre', stat: 'Logic' },
-              { id: 'jigsaw', name: 'Jigsaw', icon: '/logo_jigsaw.jpg', color: 'bg-blue-500', stat: 'Visual' }
-            ].map(game => (
+              { id: 'match3', name: 'GEMS', tag: 'Processing', color: 'border-accent-yellow', image: '/assets/images/match3_aesthetic_1790111755965.jpg' },
+              { id: 'sudoku', name: 'SUDOKU', tag: 'Reasoning', color: 'border-ink', image: '/assets/images/sudoku_aesthetic_1790111745958.jpg' },
+              { id: 'jigsaw', name: 'DIE-CUT', tag: 'Orientation', color: 'border-accent-red', image: '/assets/images/jigsaw_aesthetic_1790111765563.jpg' }
+            ].map((game, i) => (
               <button
                 key={game.id}
                 onClick={() => navigate(`/patient/game/${game.id}`)}
-                className="group flex flex-col items-center bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:shadow-[8px_8px_0_var(--color-ink)] hover:-translate-y-1 transition-all"
+                className={`group flex flex-col text-left bg-paper border-[3px] border-ink border-t-[8px] ${game.color} hover:bg-[#e3decf] transition-colors relative overflow-hidden cursor-pointer`}
               >
-                <div className={`w-full aspect-square overflow-hidden ${game.color} border-b-[3px] border-ink flex items-center justify-center`}>
-                  <img src={game.icon} alt={game.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                <div className="flex justify-between items-start p-4 border-b-2 border-ink">
+                  <span className="font-mono text-sm tracking-widest font-semibold">0 {i+1}</span>
+                  <div className="w-10 h-10 border-2 border-ink overflow-hidden group-hover:scale-105 transition-transform">
+                    <img src={game.image} alt={game.name} className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0" />
+                  </div>
                 </div>
-                <div className="p-4 w-full text-center">
-                  <div className="font-display font-bold text-xl uppercase tracking-widest text-ink mb-1">{game.name}</div>
-                  <div className="font-mono font-bold text-xs uppercase tracking-widest text-sand">{game.stat}</div>
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-tight mb-2 mt-auto">{game.name}</h3>
+                  <div className="mono-tag text-accent-red">{game.tag}</div>
                 </div>
               </button>
             ))}
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Explore */}
-        <div className="flex flex-col gap-8">
-          <h3 className="font-display font-bold text-3xl uppercase tracking-widest text-ink flex items-center gap-3">
-            <Target size={32} className="text-ochre stroke-[2.5]" />
-            Your Day
-          </h3>
+        {/* Right Column: Routine & Reminders */}
+        <div className="flex flex-col gap-6">
+          <h2 className="font-display text-4xl uppercase tracking-tight mb-2">Schedule</h2>
           
-          <div className="flex flex-col gap-6">
-            <button className="w-full flex items-center gap-6 p-6 bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:-translate-y-1 transition-all text-left group">
-              <div className="w-16 h-16 bg-blue-400 border-[3px] border-ink flex items-center justify-center text-3xl shadow-[4px_4px_0_var(--color-ink)] group-hover:bg-vermilion transition-colors">
-                🌅
-              </div>
+          <div className="flex flex-col gap-0 border-[3px] border-ink bg-paper">
+            <button 
+              onClick={() => navigate('/patient/routine')}
+              className="w-full flex items-center justify-between p-5 border-b-2 border-ink hover:bg-[#e3decf] transition-colors text-left group"
+            >
               <div>
-                <div className="font-display font-bold text-2xl uppercase tracking-widest text-ink">My Day</div>
-                <div className="font-mono text-sm font-bold tracking-widest text-sand uppercase">Daily Routine</div>
+                <div className="font-display text-2xl uppercase mb-1">Daily Routine</div>
+                <div className="font-mono text-xs text-ink/70 uppercase tracking-widest">Morning tea, medicines</div>
               </div>
+              <span className="font-mono text-lg">&rarr;</span>
             </button>
 
-            <button className="w-full flex items-center gap-6 p-6 bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:-translate-y-1 transition-all text-left group">
-              <div className="w-16 h-16 bg-pink-400 border-[3px] border-ink flex items-center justify-center text-3xl shadow-[4px_4px_0_var(--color-ink)] group-hover:bg-vermilion transition-colors">
-                📸
-              </div>
+            <button 
+              onClick={() => navigate('/patient/memory-book')}
+              className="w-full flex items-center justify-between p-5 border-b-2 border-ink hover:bg-[#e3decf] transition-colors text-left group"
+            >
               <div>
-                <div className="font-display font-bold text-2xl uppercase tracking-widest text-ink">Memories</div>
-                <div className="font-mono text-sm font-bold tracking-widest text-sand uppercase">View Photo Album</div>
+                <div className="font-display text-2xl uppercase mb-1">Memory Book</div>
+                <div className="font-mono text-xs text-ink/70 uppercase tracking-widest">Photos & Stories</div>
               </div>
+              <span className="font-mono text-lg">&rarr;</span>
             </button>
 
-            <button className="w-full flex items-center gap-6 p-6 bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:-translate-y-1 transition-all text-left group">
-              <div className="w-16 h-16 bg-emerald-400 border-[3px] border-ink flex items-center justify-center text-3xl shadow-[4px_4px_0_var(--color-ink)] group-hover:bg-vermilion transition-colors">
-                <Bell size={28} className="text-ink stroke-[2.5]" />
-              </div>
+            <button 
+              onClick={() => navigate('/patient/reminders')}
+              className="w-full flex items-center justify-between p-5 hover:bg-[#e3decf] transition-colors text-left group"
+            >
               <div>
-                <div className="font-display font-bold text-2xl uppercase tracking-widest text-ink">Alerts</div>
-                <div className="font-mono text-sm font-bold tracking-widest text-sand uppercase">2 Reminders</div>
+                <div className="font-display text-2xl uppercase mb-1">Reminders</div>
+                <div className="font-mono text-xs text-ink/70 uppercase tracking-widest">Active Alerts</div>
               </div>
+              <span className="font-mono text-lg">&rarr;</span>
             </button>
           </div>
         </div>

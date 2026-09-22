@@ -16,7 +16,7 @@ export interface MemoryMatchProps {
 interface CardItem {
   uid: string; // unique card id in game instance
   dataId: string;
-  emoji: string;
+  image: string;
   name: string;
   isFlipped: boolean;
   isMatched: boolean;
@@ -67,7 +67,7 @@ export const MemoryMatch: React.FC<MemoryMatchProps> = ({
       paired.push({
         uid: `${item.id}-a-${idx}`,
         dataId: item.id,
-        emoji: item.emoji,
+        image: item.image,
         name: item.name,
         isFlipped: false,
         isMatched: false,
@@ -75,7 +75,7 @@ export const MemoryMatch: React.FC<MemoryMatchProps> = ({
       paired.push({
         uid: `${item.id}-b-${idx}`,
         dataId: item.id,
-        emoji: item.emoji,
+        image: item.image,
         name: item.name,
         isFlipped: false,
         isMatched: false,
@@ -255,7 +255,7 @@ export const MemoryMatch: React.FC<MemoryMatchProps> = ({
                     animate={{ scale: 1, opacity: 1 }}
                     className="flex flex-col items-center text-center"
                   >
-                    <span className="text-3xl sm:text-4xl mb-1">{card.emoji}</span>
+                    <img src={card.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                     <span className="text-[11px] sm:text-xs font-semibold text-stone-800 dark:text-stone-200 leading-tight">
                       {card.name}
                     </span>

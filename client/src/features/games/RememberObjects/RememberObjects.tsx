@@ -202,7 +202,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                   animate={{ scale: 1, opacity: 1 }}
                   className="w-24 sm:w-28 h-28 sm:h-32 bg-kraft border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] flex flex-col items-center justify-center p-2 text-center"
                 >
-                  <span className="text-4xl sm:text-5xl mb-1">{item.emoji}</span>
+                  <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                   <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-ink line-clamp-1">
                     {item.name}
                   </span>
@@ -252,7 +252,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                         <Check className="w-4 h-4 stroke-[3]" />
                       </div>
                     )}
-                    <span className="text-4xl mb-2">{item.emoji}</span>
+                    <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                     <span className="text-xs sm:text-sm text-center">
                       {item.name}
                     </span>
@@ -300,8 +300,8 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                         : 'bg-kraft text-ink'
                     }`}
                   >
-                    <span className="text-3xl mb-1">{item.emoji}</span>
-                    <span className="text-xs">{item.name}</span>
+                    <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
+                    <img src={item.name} className="w-12 h-12 object-cover border-2 border-ink" />
                     <span className="text-[10px] mt-1">
                       {wasFound ? '✓ Remembered' : '○ Missed'}
                     </span>

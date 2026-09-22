@@ -3,66 +3,66 @@
 
 export interface MemoryCardData {
   id: string;
-  emoji: string;
+  image: string;
   name: string;
   assameseName?: string;
   category: 'nature' | 'food' | 'culture' | 'daily';
 }
 
 export const MEMORY_CARDS: MemoryCardData[] = [
-  { id: 'tea-cup', emoji: '🍵', name: 'Tea Cup', assameseName: 'চাহ কাপ', category: 'daily' },
-  { id: 'bamboo', emoji: '🎋', name: 'Bamboo', assameseName: 'বাঁহ', category: 'nature' },
-  { id: 'orange', emoji: '🍊', name: 'Orange', assameseName: 'কমলা', category: 'food' },
-  { id: 'rice', emoji: '🍚', name: 'Rice', assameseName: 'ভাত', category: 'food' },
-  { id: 'flower', emoji: '🌸', name: 'Flower', assameseName: 'ফুল', category: 'nature' },
-  { id: 'home', emoji: '🏡', name: 'Home', assameseName: 'ঘৰ', category: 'daily' },
-  { id: 'rain', emoji: '🌧', name: 'Rain', assameseName: 'বৰষুণ', category: 'nature' },
-  { id: 'elephant', emoji: '🐘', name: 'Elephant', assameseName: 'হাতী', category: 'nature' },
-  { id: 'peacock', emoji: '🦚', name: 'Peacock', assameseName: 'ম’ৰা', category: 'nature' },
-  { id: 'leaf', emoji: '🌿', name: 'Tea Leaf', assameseName: 'চাহ পাত', category: 'nature' },
-  { id: 'lemon', emoji: '🍋', name: 'Kaji Nemu (Lemon)', assameseName: 'কাজী নেমু', category: 'food' },
-  { id: 'teapot', emoji: '🫖', name: 'Teapot', assameseName: 'চাহদানি', category: 'daily' },
-  { id: 'paddy', emoji: '🌾', name: 'Paddy Field', assameseName: 'ধাননি পথাৰ', category: 'nature' },
-  { id: 'banyan', emoji: '🌳', name: 'Banyan Tree', assameseName: 'বট গছ', category: 'nature' },
-  { id: 'fish', emoji: '🐟', name: 'Rohu Fish', assameseName: 'ৰৌ মাছ', category: 'food' },
-  { id: 'diya', emoji: '🪔', name: 'Diya Lamp', assameseName: 'চাকি', category: 'culture' },
-  { id: 'hibiscus', emoji: '🌺', name: 'Jaba (Hibiscus)', assameseName: 'জবা ফুল', category: 'nature' },
-  { id: 'coconut', emoji: '🥥', name: 'Coconut', assameseName: 'নাৰিকল', category: 'food' },
-  { id: 'corn', emoji: '🌽', name: 'Maize', assameseName: 'মাকৈ', category: 'food' },
-  { id: 'music', emoji: '🎵', name: 'Bihu Dhol & Pepa', assameseName: 'ঢোল-পেঁপা', category: 'culture' },
+  { id: 'tea-cup', image: '/assets/images/tea_cup.jpg', name: 'Tea Cup', assameseName: 'চাহ কাপ', category: 'daily' },
+  { id: 'bamboo', image: '/assets/images/bamboo.jpg', name: 'Bamboo', assameseName: 'বাঁহ', category: 'nature' },
+  { id: 'orange', image: '/assets/images/orange.jpg', name: 'Orange', assameseName: 'কমলা', category: 'food' },
+  { id: 'rice', image: '/assets/images/rice.jpg', name: 'Rice', assameseName: 'ভাত', category: 'food' },
+  { id: 'flower', image: '/assets/images/flower.jpg', name: 'Flower', assameseName: 'ফুল', category: 'nature' },
+  { id: 'home', image: '/assets/images/house.jpg', name: 'Home', assameseName: 'ঘৰ', category: 'daily' },
+  { id: 'rain', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', name: 'Rain', assameseName: 'বৰষুণ', category: 'nature' },
+  { id: 'elephant', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', name: 'Elephant', assameseName: 'হাতী', category: 'nature' },
+  { id: 'peacock', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', name: 'Peacock', assameseName: 'ম’ৰা', category: 'nature' },
+  { id: 'leaf', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', name: 'Tea Leaf', assameseName: 'চাহ পাত', category: 'nature' },
+  { id: 'lemon', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', name: 'Kaji Nemu (Lemon)', assameseName: 'কাজী নেমু', category: 'food' },
+  { id: 'teapot', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', name: 'Teapot', assameseName: 'চাহদানি', category: 'daily' },
+  { id: 'paddy', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', name: 'Paddy Field', assameseName: 'ধাননি পথাৰ', category: 'nature' },
+  { id: 'banyan', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', name: 'Banyan Tree', assameseName: 'বট গছ', category: 'nature' },
+  { id: 'fish', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', name: 'Rohu Fish', assameseName: 'ৰৌ মাছ', category: 'food' },
+  { id: 'diya', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', name: 'Diya Lamp', assameseName: 'চাকি', category: 'culture' },
+  { id: 'hibiscus', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', name: 'Jaba (Hibiscus)', assameseName: 'জবা ফুল', category: 'nature' },
+  { id: 'coconut', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', name: 'Coconut', assameseName: 'নাৰিকল', category: 'food' },
+  { id: 'corn', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Maize', name: 'Maize', assameseName: 'মাকৈ', category: 'food' },
+  { id: 'music', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Music', name: 'Bihu Dhol & Pepa', assameseName: 'ঢোল-পেঁপা', category: 'culture' },
 ];
 
 export interface RememberObjectItem {
   id: string;
-  emoji: string;
+  image: string;
   name: string;
   category: string;
 }
 
 export const REMEMBER_OBJECT_POOL: RememberObjectItem[] = [
-  { id: 'umbrella', emoji: '☂️', name: 'Umbrella', category: 'daily' },
-  { id: 'bell', emoji: '🔔', name: 'Temple Bell', category: 'culture' },
-  { id: 'hat', emoji: '👒', name: 'Jaapi (Hat)', category: 'culture' },
-  { id: 'lantern', emoji: '🏮', name: 'Lantern', category: 'daily' },
-  { id: 'boat', emoji: '🛶', name: 'River Boat', category: 'daily' },
-  { id: 'pot', emoji: '🏺', name: 'Clay Pot', category: 'culture' },
-  { id: 'mango', emoji: '🥭', name: 'Ripe Mango', category: 'food' },
-  { id: 'banana', emoji: '🍌', name: 'Malbhog Banana', category: 'food' },
-  { id: 'deer', emoji: '🦌', name: 'Swamp Deer', category: 'nature' },
-  { id: 'fan', emoji: '🪭', name: 'Hand Fan', category: 'daily' },
-  { id: 'bird', emoji: '🐦', name: 'Myna Bird', category: 'nature' },
-  { id: 'butterfly', emoji: '🦋', name: 'Butterfly', category: 'nature' },
-  { id: 'guitar', emoji: '🎸', name: 'Ektara / Dhol', category: 'culture' },
-  { id: 'apple', emoji: '🍎', name: 'Red Apple', category: 'food' },
-  { id: 'sun', emoji: '☀️', name: 'Morning Sun', category: 'nature' },
-  { id: 'clock', emoji: '⏰', name: 'Alarm Clock', category: 'daily' },
+  { id: 'umbrella', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Umbrella', name: 'Umbrella', category: 'daily' },
+  { id: 'bell', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Bell', name: 'Temple Bell', category: 'culture' },
+  { id: 'hat', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hat', name: 'Jaapi (Hat)', category: 'culture' },
+  { id: 'lantern', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lantern', name: 'Lantern', category: 'daily' },
+  { id: 'boat', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Boat', name: 'River Boat', category: 'daily' },
+  { id: 'pot', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Pot', name: 'Clay Pot', category: 'culture' },
+  { id: 'mango', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Mango', name: 'Ripe Mango', category: 'food' },
+  { id: 'banana', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Banana', name: 'Malbhog Banana', category: 'food' },
+  { id: 'deer', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Deer', name: 'Swamp Deer', category: 'nature' },
+  { id: 'fan', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fan', name: 'Hand Fan', category: 'daily' },
+  { id: 'bird', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Bird', name: 'Myna Bird', category: 'nature' },
+  { id: 'butterfly', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Butterfly', name: 'Butterfly', category: 'nature' },
+  { id: 'guitar', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Guitar', name: 'Ektara / Dhol', category: 'culture' },
+  { id: 'apple', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Apple', name: 'Red Apple', category: 'food' },
+  { id: 'sun', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', name: 'Morning Sun', category: 'nature' },
+  { id: 'clock', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Clock', name: 'Alarm Clock', category: 'daily' },
 ];
 
 export interface SequenceData {
   id: string;
   title: string;
   description: string;
-  items: { id: string; emoji: string; name: string; step: number }[];
+  items: { id: string; image: string; name: string; step: number }[];
 }
 
 export const SEQUENCE_SETS: Record<'easy' | 'medium' | 'hard', SequenceData[]> = {
@@ -72,9 +72,9 @@ export const SEQUENCE_SETS: Record<'easy' | 'medium' | 'hard', SequenceData[]> =
       title: 'Making Morning Assam Tea',
       description: 'Remember the 3 steps to brew morning tea',
       items: [
-        { id: 'boil', emoji: '🫖', name: 'Boil Water', step: 1 },
-        { id: 'leaves', emoji: '🌿', name: 'Add Tea Leaves', step: 2 },
-        { id: 'cup', emoji: '🍵', name: 'Pour into Cup', step: 3 },
+        { id: 'boil', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', name: 'Boil Water', step: 1 },
+        { id: 'leaves', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', name: 'Add Tea Leaves', step: 2 },
+        { id: 'cup', image: '/assets/images/tea_cup.jpg', name: 'Pour into Cup', step: 3 },
       ],
     },
     {
@@ -82,9 +82,9 @@ export const SEQUENCE_SETS: Record<'easy' | 'medium' | 'hard', SequenceData[]> =
       title: 'Growing Rice Paddy',
       description: 'The natural cycle of paddy cultivation',
       items: [
-        { id: 'seed', emoji: '🌱', name: 'Plant Seedlings', step: 1 },
-        { id: 'rain', emoji: '🌧', name: 'Monsoon Rain', step: 2 },
-        { id: 'harvest', emoji: '🌾', name: 'Golden Paddy', step: 3 },
+        { id: 'seed', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Seed', name: 'Plant Seedlings', step: 1 },
+        { id: 'rain', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', name: 'Monsoon Rain', step: 2 },
+        { id: 'harvest', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', name: 'Golden Paddy', step: 3 },
       ],
     },
     {
@@ -92,9 +92,9 @@ export const SEQUENCE_SETS: Record<'easy' | 'medium' | 'hard', SequenceData[]> =
       title: 'Waking Up Routine',
       description: 'First steps of a peaceful morning',
       items: [
-        { id: 'sun', emoji: '☀️', name: 'Sunrise', step: 1 },
-        { id: 'wash', emoji: '🚿', name: 'Wash Face', step: 2 },
-        { id: 'prayer', emoji: '🪔', name: 'Morning Diya', step: 3 },
+        { id: 'sun', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', name: 'Sunrise', step: 1 },
+        { id: 'wash', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Wash', name: 'Wash Face', step: 2 },
+        { id: 'prayer', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', name: 'Morning Diya', step: 3 },
       ],
     },
   ],
@@ -104,11 +104,11 @@ export const SEQUENCE_SETS: Record<'easy' | 'medium' | 'hard', SequenceData[]> =
       title: 'Going to the Village Haat (Market)',
       description: 'Step-by-step village market trip',
       items: [
-        { id: 'basket', emoji: '🧺', name: 'Take Bamboo Basket', step: 1 },
-        { id: 'walk', emoji: '🚶', name: 'Walk to Market', step: 2 },
-        { id: 'fish', emoji: '🐟', name: 'Choose Fresh Fish', step: 3 },
-        { id: 'vegetables', emoji: '🥬', name: 'Buy Green Leaves', step: 4 },
-        { id: 'home', emoji: '🏡', name: 'Return Home', step: 5 },
+        { id: 'basket', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Basket', name: 'Take Bamboo Basket', step: 1 },
+        { id: 'walk', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Walk', name: 'Walk to Market', step: 2 },
+        { id: 'fish', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', name: 'Choose Fresh Fish', step: 3 },
+        { id: 'vegetables', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaves', name: 'Buy Green Leaves', step: 4 },
+        { id: 'home', image: '/assets/images/house.jpg', name: 'Return Home', step: 5 },
       ],
     },
     {
@@ -116,11 +116,11 @@ export const SEQUENCE_SETS: Record<'easy' | 'medium' | 'hard', SequenceData[]> =
       title: 'Preparing for Rongali Bihu',
       description: 'Traditional steps to celebrate Rongali Bihu',
       items: [
-        { id: 'clean', emoji: '🧹', name: 'Sweep Courtyard', step: 1 },
-        { id: 'pitha', emoji: '🥟', name: 'Make Rice Pitha', step: 2 },
-        { id: 'gamosa', emoji: '🧣', name: 'Wear New Gamosa', step: 3 },
-        { id: 'dhol', emoji: '🥁', name: 'Play Dhol Beats', step: 4 },
-        { id: 'bless', emoji: '🙏', name: 'Elders Blessing', step: 5 },
+        { id: 'clean', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sweep', name: 'Sweep Courtyard', step: 1 },
+        { id: 'pitha', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Pitha', name: 'Make Rice Pitha', step: 2 },
+        { id: 'gamosa', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Gamosa', name: 'Wear New Gamosa', step: 3 },
+        { id: 'dhol', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Dhol', name: 'Play Dhol Beats', step: 4 },
+        { id: 'bless', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Bless', name: 'Elders Blessing', step: 5 },
       ],
     },
   ],
@@ -130,13 +130,13 @@ export const SEQUENCE_SETS: Record<'easy' | 'medium' | 'hard', SequenceData[]> =
       title: 'Full Day in the Assam Countryside',
       description: 'From dawn to peaceful nightfall',
       items: [
-        { id: 'dawn', emoji: '🌅', name: 'Rooster Crow at Dawn', step: 1 },
-        { id: 'tea', emoji: '🍵', name: 'First Cup of Red Tea', step: 2 },
-        { id: 'garden', emoji: '🌿', name: 'Tend the Home Garden', step: 3 },
-        { id: 'lunch', emoji: '🍚', name: 'Warm Rice & Dhekia Xaak', step: 4 },
-        { id: 'rest', emoji: '🪑', name: 'Veranda Rest & Chat', step: 5 },
-        { id: 'dusk', emoji: '🪔', name: 'Light Tulsi Diya', step: 6 },
-        { id: 'night', emoji: '🌙', name: 'Sweet Restful Sleep', step: 7 },
+        { id: 'dawn', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Dawn', name: 'Rooster Crow at Dawn', step: 1 },
+        { id: 'tea', image: '/assets/images/tea_cup.jpg', name: 'First Cup of Red Tea', step: 2 },
+        { id: 'garden', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', name: 'Tend the Home Garden', step: 3 },
+        { id: 'lunch', image: '/assets/images/rice.jpg', name: 'Warm Rice & Dhekia Xaak', step: 4 },
+        { id: 'rest', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rest', name: 'Veranda Rest & Chat', step: 5 },
+        { id: 'dusk', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', name: 'Light Tulsi Diya', step: 6 },
+        { id: 'night', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Night', name: 'Sweet Restful Sleep', step: 7 },
       ],
     },
   ],
@@ -146,7 +146,7 @@ export interface DailyActivityItem {
   id: string;
   title: string;
   timeLabel: string;
-  emoji: string;
+  image: string;
   order: number;
   period: 'morning' | 'afternoon' | 'evening' | 'night';
 }
@@ -156,14 +156,14 @@ export const SORT_MY_DAY_SETS: { id: string; name: string; activities: DailyActi
     id: 'standard-day',
     name: 'A Peaceful Daily Routine',
     activities: [
-      { id: 'act-1', title: 'Wake up with Morning Sun', timeLabel: '6:30 AM', emoji: '☀️', order: 1, period: 'morning' },
-      { id: 'act-2', title: 'Enjoy Warm Lal Saah (Red Tea)', timeLabel: '7:30 AM', emoji: '🍵', order: 2, period: 'morning' },
-      { id: 'act-3', title: 'Gentle Walk in Courtyard', timeLabel: '9:00 AM', emoji: '🚶', order: 3, period: 'morning' },
-      { id: 'act-4', title: 'Wholesome Lunch with Family', timeLabel: '1:00 PM', emoji: '🍚', order: 4, period: 'afternoon' },
-      { id: 'act-5', title: 'Quiet Afternoon Nap', timeLabel: '2:30 PM', emoji: '🛏️', order: 5, period: 'afternoon' },
-      { id: 'act-6', title: 'Evening Diya & Prayer', timeLabel: '6:00 PM', emoji: '🪔', order: 6, period: 'evening' },
-      { id: 'act-7', title: 'Light Dinner & Medicines', timeLabel: '8:00 PM', emoji: '🍲', order: 7, period: 'night' },
-      { id: 'act-8', title: 'Relaxing Good Night Sleep', timeLabel: '9:30 PM', emoji: '🌙', order: 8, period: 'night' },
+      { id: 'act-1', title: 'Wake up with Morning Sun', timeLabel: '6:30 AM', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', order: 1, period: 'morning' },
+      { id: 'act-2', title: 'Enjoy Warm Lal Saah (Red Tea)', timeLabel: '7:30 AM', image: '/assets/images/tea_cup.jpg', order: 2, period: 'morning' },
+      { id: 'act-3', title: 'Gentle Walk in Courtyard', timeLabel: '9:00 AM', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Walk', order: 3, period: 'morning' },
+      { id: 'act-4', title: 'Wholesome Lunch with Family', timeLabel: '1:00 PM', image: '/assets/images/rice.jpg', order: 4, period: 'afternoon' },
+      { id: 'act-5', title: 'Quiet Afternoon Nap', timeLabel: '2:30 PM', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Nap', order: 5, period: 'afternoon' },
+      { id: 'act-6', title: 'Evening Diya & Prayer', timeLabel: '6:00 PM', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', order: 6, period: 'evening' },
+      { id: 'act-7', title: 'Light Dinner & Medicines', timeLabel: '8:00 PM', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Stew', order: 7, period: 'night' },
+      { id: 'act-8', title: 'Relaxing Good Night Sleep', timeLabel: '9:30 PM', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Night', order: 8, period: 'night' },
     ],
   },
 ];
@@ -186,19 +186,19 @@ export const FIND_DIFFERENCE_SCENES: Record<'easy' | 'medium' | 'hard', Differen
       gridRows: 3,
       gridCols: 3,
       sceneLeft: [
-        ['🌿', '🍵', '🌿'],
-        ['🏡', '🦚', '🌳'],
-        ['🌾', '🌧', '🍚'],
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', '/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf'],
+        ['/assets/images/house.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree'],
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', '/assets/images/rice.jpg'],
       ],
       sceneRight: [
-        ['🌿', '🫖', '🌿'], // diff (0,1): 🍵 vs 🫖
-        ['🏡', '🦚', '🎋'], // diff (1,2): 🌳 vs 🎋
-        ['🌾', '☀️', '🍚'], // diff (2,1): 🌧 vs ☀️
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf'], // diff (0,1): 🍵 vs 🫖
+        ['/assets/images/house.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', '/assets/images/bamboo.jpg'], // diff (1,2): 🌳 vs 🎋
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', '/assets/images/rice.jpg'], // diff (2,1): 🌧 vs ☀️
       ],
       differences: [
-        { row: 0, col: 1, left: '🍵', right: '🫖', hint: 'Look at the tea item in the top row' },
-        { row: 1, col: 2, left: '🌳', right: '🎋', hint: 'Look at the plant on the right side' },
-        { row: 2, col: 1, left: '🌧', right: '☀️', hint: 'Notice the weather in the bottom row' },
+        { row: 0, col: 1, left: '/assets/images/tea_cup.jpg', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', hint: 'Look at the tea item in the top row' },
+        { row: 1, col: 2, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', right: '/assets/images/bamboo.jpg', hint: 'Look at the plant on the right side' },
+        { row: 2, col: 1, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', hint: 'Notice the weather in the bottom row' },
       ],
     },
     {
@@ -207,19 +207,19 @@ export const FIND_DIFFERENCE_SCENES: Record<'easy' | 'medium' | 'hard', Differen
       gridRows: 3,
       gridCols: 3,
       sceneLeft: [
-        ['🌸', '🌺', '🌸'],
-        ['🐘', '🏡', '🦚'],
-        ['🍊', '🥥', '🍋'],
+        ['/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', '/assets/images/flower.jpg'],
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', '/assets/images/house.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock'],
+        ['/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon'],
       ],
       sceneRight: [
-        ['🌸', '🌼', '🌸'], // diff (0,1): 🌺 vs 🌼
-        ['🦏', '🏡', '🦚'], // diff (1,0): 🐘 vs 🦏
-        ['🍊', '🥥', '🍉'], // diff (2,2): 🍋 vs 🍉
+        ['/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Daisy', '/assets/images/flower.jpg'], // diff (0,1): 🌺 vs 🌼
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rhino', '/assets/images/house.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock'], // diff (1,0): 🐘 vs 🦏
+        ['/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Watermelon'], // diff (2,2): 🍋 vs 🍉
       ],
       differences: [
-        { row: 0, col: 1, left: '🌺', right: '🌼', hint: 'Look at the flower in the middle of top row' },
-        { row: 1, col: 0, left: '🐘', right: '🦏', hint: 'Check the gentle animal on the left' },
-        { row: 2, col: 2, left: '🍋', right: '🍉', hint: 'Spot the fruit in the bottom right corner' },
+        { row: 0, col: 1, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Daisy', hint: 'Look at the flower in the middle of top row' },
+        { row: 1, col: 0, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rhino', hint: 'Check the gentle animal on the left' },
+        { row: 2, col: 2, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Watermelon', hint: 'Spot the fruit in the bottom right corner' },
       ],
     },
   ],
@@ -230,22 +230,22 @@ export const FIND_DIFFERENCE_SCENES: Record<'easy' | 'medium' | 'hard', Differen
       gridRows: 3,
       gridCols: 4,
       sceneLeft: [
-        ['🌾', '🪔', '🌾', '🎵'],
-        ['🍚', '🐟', '🍵', '🏡'],
-        ['🎋', '🍋', '🐘', '🦚'],
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Music'],
+        ['/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', '/assets/images/tea_cup.jpg', '/assets/images/house.jpg'],
+        ['/assets/images/bamboo.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock'],
       ],
       sceneRight: [
-        ['🌾', '🕯️', '🌾', '🎵'], // diff (0,1)
-        ['🍚', '🐟', '🫖', '🏡'], // diff (1,2)
-        ['🎋', '🍊', '🐘', '🦜'], // diff (2,1), diff (2,3)
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Candle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Music'], // diff (0,1)
+        ['/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', '/assets/images/house.jpg'], // diff (1,2)
+        ['/assets/images/bamboo.jpg', '/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Parrot'], // diff (2,1), diff (2,3)
         // plus 1 more:
       ],
       differences: [
-        { row: 0, col: 1, left: '🪔', right: '🕯️', hint: 'Look closely at the ceremonial light' },
-        { row: 1, col: 2, left: '🍵', right: '🫖', hint: 'Notice the vessel in the center' },
-        { row: 2, col: 1, left: '🍋', right: '🍊', hint: 'Check the citrus fruit' },
-        { row: 2, col: 3, left: '🦚', right: '🦜', hint: 'Look at the bird on the bottom right' },
-        { row: 0, col: 3, left: '🎵', right: '🎶', hint: 'Notice the musical symbol' },
+        { row: 0, col: 1, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Candle', hint: 'Look closely at the ceremonial light' },
+        { row: 1, col: 2, left: '/assets/images/tea_cup.jpg', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', hint: 'Notice the vessel in the center' },
+        { row: 2, col: 1, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', right: '/assets/images/orange.jpg', hint: 'Check the citrus fruit' },
+        { row: 2, col: 3, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Parrot', hint: 'Look at the bird on the bottom right' },
+        { row: 0, col: 3, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Music', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Music', hint: 'Notice the musical symbol' },
       ],
     },
   ],
@@ -256,25 +256,25 @@ export const FIND_DIFFERENCE_SCENES: Record<'easy' | 'medium' | 'hard', Differen
       gridRows: 4,
       gridCols: 4,
       sceneLeft: [
-        ['🌧', '🌿', '🐘', '🌳'],
-        ['🛶', '🐟', '🌾', '🏡'],
-        ['🌸', '🌺', '🦚', '🍋'],
-        ['🪔', '🍵', '🎋', '🥥'],
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree'],
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Boat', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', '/assets/images/house.jpg'],
+        ['/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon'],
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', '/assets/images/tea_cup.jpg', '/assets/images/bamboo.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut'],
       ],
       sceneRight: [
-        ['☀️', '🌿', '🐘', '🌲'], // (0,0), (0,3)
-        ['🛶', '🐠', '🌾', '🏡'], // (1,1)
-        ['🌸', '🌼', '🦚', '🍊'], // (2,1), (2,3)
-        ['🪔', '🫖', '🎋', '🍍'], // (3,1), (3,3)
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Pine'], // (0,0), (0,3)
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Boat', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish2', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', '/assets/images/house.jpg'], // (1,1)
+        ['/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Daisy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', '/assets/images/orange.jpg'], // (2,1), (2,3)
+        ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', '/assets/images/bamboo.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Pineapple'], // (3,1), (3,3)
       ],
       differences: [
-        { row: 0, col: 0, left: '🌧', right: '☀️', hint: 'Sky weather in top left' },
-        { row: 0, col: 3, left: '🌳', right: '🌲', hint: 'Tree in top right' },
-        { row: 1, col: 1, left: '🐟', right: '🐠', hint: 'Water fish in row 2' },
-        { row: 2, col: 1, left: '🌺', right: '🌼', hint: 'Bright flower in row 3' },
-        { row: 2, col: 3, left: '🍋', right: '🍊', hint: 'Fruit in row 3' },
-        { row: 3, col: 1, left: '🍵', right: '🫖', hint: 'Warm beverage utensil in bottom row' },
-        { row: 3, col: 3, left: '🥥', right: '🍍', hint: 'Tropical fruit at the bottom corner' },
+        { row: 0, col: 0, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', hint: 'Sky weather in top left' },
+        { row: 0, col: 3, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Pine', hint: 'Tree in top right' },
+        { row: 1, col: 1, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish2', hint: 'Water fish in row 2' },
+        { row: 2, col: 1, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Daisy', hint: 'Bright flower in row 3' },
+        { row: 2, col: 3, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', right: '/assets/images/orange.jpg', hint: 'Fruit in row 3' },
+        { row: 3, col: 1, left: '/assets/images/tea_cup.jpg', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', hint: 'Warm beverage utensil in bottom row' },
+        { row: 3, col: 3, left: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', right: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Pineapple', hint: 'Tropical fruit at the bottom corner' },
       ],
     },
   ],
@@ -282,14 +282,14 @@ export const FIND_DIFFERENCE_SCENES: Record<'easy' | 'medium' | 'hard', Differen
 
 // Fix the right grid for medium 1 to match exactly 5 diffs
 FIND_DIFFERENCE_SCENES.medium[0].sceneRight = [
-  ['🌾', '🕯️', '🌾', '🎶'], // diff (0,1), diff (0,3)
-  ['🍚', '🐟', '🫖', '🏡'], // diff (1,2)
-  ['🎋', '🍊', '🐘', '🦜'], // diff (2,1), diff (2,3)
+  ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Candle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Music'], // diff (0,1), diff (0,3)
+  ['/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', '/assets/images/house.jpg'], // diff (1,2)
+  ['/assets/images/bamboo.jpg', '/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Parrot'], // diff (2,1), diff (2,3)
 ];
 
 export interface ObjectRecognitionItem {
   id: string;
-  emoji: string;
+  image: string;
   correctName: string;
   options: string[];
   hint: string;
@@ -299,7 +299,7 @@ export interface ObjectRecognitionItem {
 export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   {
     id: 'rec-1',
-    emoji: '🍵',
+    image: '/assets/images/tea_cup.jpg',
     correctName: 'Assam Tea Cup',
     options: ['Assam Tea Cup', 'Fruit Bowl', 'Water Jug', 'Clay Lamp'],
     hint: 'A comforting hot drink enjoyed every morning across Assam.',
@@ -307,7 +307,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-2',
-    emoji: '🐘',
+    image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant',
     correctName: 'Wild Elephant',
     options: ['Horse', 'Wild Elephant', 'Buffalo', 'Rhino'],
     hint: 'A majestic gentle giant found in Kaziranga National Park.',
@@ -315,7 +315,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-3',
-    emoji: '🌾',
+    image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy',
     correctName: 'Paddy / Rice Field',
     options: ['Wheat Grass', 'Bamboo Grove', 'Paddy / Rice Field', 'Sugarcane'],
     hint: 'Golden crops harvested during Magh Bihu.',
@@ -323,7 +323,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-4',
-    emoji: '🪔',
+    image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya',
     correctName: 'Earthen Diya (Chaki)',
     options: ['Incense Holder', 'Earthen Diya (Chaki)', 'Flower Vase', 'Teacup'],
     hint: 'Lit every evening with mustard oil beside the sacred Tulsi plant.',
@@ -331,7 +331,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-5',
-    emoji: '🎋',
+    image: '/assets/images/bamboo.jpg',
     correctName: 'Bamboo (Baah)',
     options: ['Bamboo (Baah)', 'Sugar Cane', 'Palm Frond', 'Oak Twig'],
     hint: 'Used to build sturdy stilt houses, fishing nets, and delicate baskets.',
@@ -339,7 +339,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-6',
-    emoji: '🦚',
+    image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock',
     correctName: 'Peacock (Mora)',
     options: ['Kingfisher', 'Parrot', 'Peacock (Mora)', 'Duck'],
     hint: 'A colourful bird that dances during the coming of sweet monsoon rains.',
@@ -347,7 +347,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-7',
-    emoji: '🛶',
+    image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Boat',
     correctName: 'River Naao (Boat)',
     options: ['Bridge', 'River Naao (Boat)', 'Fishing Net', 'Water Wheel'],
     hint: 'Gently ferries people and goods across the mighty Brahmaputra river.',
@@ -355,7 +355,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-8',
-    emoji: '🍋',
+    image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon',
     correctName: 'Kaji Nemu (Assam Lemon)',
     options: ['Orange', 'Kaji Nemu (Assam Lemon)', 'Green Guava', 'Amala'],
     hint: 'An oblong, highly fragrant citrus that brightens any fish curry.',
@@ -363,7 +363,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-9',
-    emoji: '🐟',
+    image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish',
     correctName: 'Fresh River Fish',
     options: ['River Fish', 'River Turtle', 'Fresh Crab', 'Prawn'],
     hint: 'Caught fresh in local rivers and cooked with tender bamboo shoots.',
@@ -371,7 +371,7 @@ export const OBJECT_RECOGNITION_ITEMS: ObjectRecognitionItem[] = [
   },
   {
     id: 'rec-10',
-    emoji: '🌺',
+    image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus',
     correctName: 'Jaba (Red Hibiscus)',
     options: ['Marigold', 'Rose', 'Lotus', 'Jaba (Red Hibiscus)'],
     hint: 'Bright crimson flower offered in morning prayers.',
@@ -391,216 +391,216 @@ export const PATTERN_QUESTIONS: Record<'easy' | 'medium' | 'hard', PatternQuesti
   easy: [
     {
       id: 'pat-e-1',
-      sequence: ['🔴', '🔵', '🔴', '🔵', '?'],
-      options: ['🔴', '🔵', '🟡', '🟢'],
-      correctAnswer: '🔴',
+      sequence: ['https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/446e8c/446e8c.png', 'https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/446e8c/446e8c.png', '?'],
+      options: ['https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/446e8c/446e8c.png', 'https://placehold.co/200x200/e49e37/e49e37.png', 'https://placehold.co/200x200/386f5c/386f5c.png'],
+      correctAnswer: 'https://placehold.co/200x200/da4c31/da4c31.png',
       explanation: 'Red and blue alternate one after the other.',
     },
     {
       id: 'pat-e-2',
-      sequence: ['🌸', '🌿', '🌸', '🌿', '?'],
-      options: ['🌸', '🌾', '🌿', '🍊'],
-      correctAnswer: '🌸',
+      sequence: ['/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', '/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', '?'],
+      options: ['/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', '/assets/images/orange.jpg'],
+      correctAnswer: '/assets/images/flower.jpg',
       explanation: 'Flower and leaf alternate: Flower, Leaf, Flower, Leaf, then Flower!',
     },
     {
       id: 'pat-e-3',
-      sequence: ['🍵', '🫖', '🍵', '🫖', '?'],
-      options: ['🍚', '🍵', '🫖', '🍋'],
-      correctAnswer: '🍵',
+      sequence: ['/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', '/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', '?'],
+      options: ['/assets/images/rice.jpg', '/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon'],
+      correctAnswer: '/assets/images/tea_cup.jpg',
       explanation: 'Tea cup follows teapot every time.',
     },
     {
       id: 'pat-e-4',
-      sequence: ['☀️', '🌧', '☀️', '🌧', '?'],
-      options: ['🌧', '☀️', '⚡', '🌙'],
-      correctAnswer: '☀️',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lightning', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Night'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun',
       explanation: 'Sun follows rain in this pleasant weather pattern.',
     },
     {
       id: 'pat-e-5',
-      sequence: ['🐘', '🦚', '🐘', '🦚', '?'],
-      options: ['🐘', '🦚', '🐟', '🦌'],
-      correctAnswer: '🐘',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Deer'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant',
       explanation: 'Elephant alternates with Peacock.',
     },
     {
       id: 'pat-e-6',
-      sequence: ['🟡', '🟢', '🟡', '🟢', '?'],
-      options: ['🟢', '🟡', '🔴', '🔵'],
-      correctAnswer: '🟡',
+      sequence: ['https://placehold.co/200x200/e49e37/e49e37.png', 'https://placehold.co/200x200/386f5c/386f5c.png', 'https://placehold.co/200x200/e49e37/e49e37.png', 'https://placehold.co/200x200/386f5c/386f5c.png', '?'],
+      options: ['https://placehold.co/200x200/386f5c/386f5c.png', 'https://placehold.co/200x200/e49e37/e49e37.png', 'https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/446e8c/446e8c.png'],
+      correctAnswer: 'https://placehold.co/200x200/e49e37/e49e37.png',
       explanation: 'Yellow comes next after green.',
     },
     {
       id: 'pat-e-7',
-      sequence: ['🪔', '🕯️', '🪔', '🕯️', '?'],
-      options: ['🪔', '🕯️', '✨', '☀️'],
-      correctAnswer: '🪔',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Candle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Candle', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Candle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sparkle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya',
       explanation: 'Diya comes back after candle.',
     },
     {
       id: 'pat-e-8',
-      sequence: ['🍊', '🍋', '🍊', '🍋', '?'],
-      options: ['🍋', '🍊', '🥥', '🍌'],
-      correctAnswer: '🍊',
+      sequence: ['/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', '/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', '/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Banana'],
+      correctAnswer: '/assets/images/orange.jpg',
       explanation: 'Orange follows lemon.',
     },
     {
       id: 'pat-e-9',
-      sequence: ['🏡', '🌳', '🏡', '🌳', '?'],
-      options: ['🏡', '🌳', '🎋', '🌾'],
-      correctAnswer: '🏡',
+      sequence: ['/assets/images/house.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', '/assets/images/house.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', '?'],
+      options: ['/assets/images/house.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', '/assets/images/bamboo.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy'],
+      correctAnswer: '/assets/images/house.jpg',
       explanation: 'Home comes after tree.',
     },
     {
       id: 'pat-e-10',
-      sequence: ['🍚', '🐟', '🍚', '🐟', '?'],
-      options: ['🍚', '🐟', '🍵', '🌿'],
-      correctAnswer: '🍚',
+      sequence: ['/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', '/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', '?'],
+      options: ['/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', '/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf'],
+      correctAnswer: '/assets/images/rice.jpg',
       explanation: 'Rice comes after fish in our lunch rhythm.',
     },
   ],
   medium: [
     {
       id: 'pat-m-1',
-      sequence: ['🔴', '🔵', '🟢', '🔴', '🔵', '?'],
-      options: ['🔴', '🔵', '🟢', '🟡'],
-      correctAnswer: '🟢',
+      sequence: ['https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/446e8c/446e8c.png', 'https://placehold.co/200x200/386f5c/386f5c.png', 'https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/446e8c/446e8c.png', '?'],
+      options: ['https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/446e8c/446e8c.png', 'https://placehold.co/200x200/386f5c/386f5c.png', 'https://placehold.co/200x200/e49e37/e49e37.png'],
+      correctAnswer: 'https://placehold.co/200x200/386f5c/386f5c.png',
       explanation: 'Three color cycle: Red, Blue, Green repeated.',
     },
     {
       id: 'pat-m-2',
-      sequence: ['🌱', '🌿', '🌳', '🌱', '🌿', '?'],
-      options: ['🌱', '🌳', '🌾', '🍂'],
-      correctAnswer: '🌳',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Seed', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Seed', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Seed', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fall'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree',
       explanation: 'Sprout, Leaves, then Tree.',
     },
     {
       id: 'pat-m-3',
-      sequence: ['🍵', '🍵', '🫖', '🍵', '🍵', '?'],
-      options: ['🍵', '🫖', '🍋', '🍶'],
-      correctAnswer: '🫖',
+      sequence: ['/assets/images/tea_cup.jpg', '/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', '/assets/images/tea_cup.jpg', '/assets/images/tea_cup.jpg', '?'],
+      options: ['/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', '🍶'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot',
       explanation: 'Two cups, then one teapot: Cup, Cup, Teapot.',
     },
     {
       id: 'pat-m-4',
-      sequence: ['☀️', '☀️', '🌧', '☀️', '☀️', '?'],
-      options: ['🌧', '☀️', '🌈', '🌙'],
-      correctAnswer: '🌧',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rainbow', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Night'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain',
       explanation: 'Two suns followed by rain.',
     },
     {
       id: 'pat-m-5',
-      sequence: ['🌸', '🌺', '🌼', '🌸', '🌺', '?'],
-      options: ['🌸', '🌺', '🌼', '🌿'],
-      correctAnswer: '🌼',
+      sequence: ['/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Daisy', '/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', '?'],
+      options: ['/assets/images/flower.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Daisy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Daisy',
       explanation: 'Three flowers repeat: Cherry, Hibiscus, Daisy.',
     },
     {
       id: 'pat-m-6',
-      sequence: ['🐘', '🐘', '🦚', '🐘', '🐘', '?'],
-      options: ['🐘', '🦚', '🦌', '🦜'],
-      correctAnswer: '🦚',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Deer', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Parrot'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock',
       explanation: 'Two elephants then one peacock.',
     },
     {
       id: 'pat-m-7',
-      sequence: ['🌾', '🍚', '🍲', '🌾', '🍚', '?'],
-      options: ['🍲', '🌾', '🍚', '🥣'],
-      correctAnswer: '🍲',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', '/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Stew', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', '/assets/images/rice.jpg', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Stew', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', '/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Bowl'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Stew',
       explanation: 'Paddy becomes rice, rice becomes warm food.',
     },
     {
       id: 'pat-m-8',
-      sequence: ['🔺', '🔷', '🔶', '🔺', '🔷', '?'],
-      options: ['🔺', '🔷', '🔶', '⭐'],
-      correctAnswer: '🔶',
+      sequence: ['https://placehold.co/200x200/da4c31/da4c31.png?text=^', 'https://placehold.co/200x200/446e8c/446e8c.png?text=<>', 'https://placehold.co/200x200/e49e37/e49e37.png?text=<>', 'https://placehold.co/200x200/da4c31/da4c31.png?text=^', 'https://placehold.co/200x200/446e8c/446e8c.png?text=<>', '?'],
+      options: ['https://placehold.co/200x200/da4c31/da4c31.png?text=^', 'https://placehold.co/200x200/446e8c/446e8c.png?text=<>', 'https://placehold.co/200x200/e49e37/e49e37.png?text=<>', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=*'],
+      correctAnswer: 'https://placehold.co/200x200/e49e37/e49e37.png?text=<>',
       explanation: 'Triangle, Blue Diamond, Orange Diamond.',
     },
     {
       id: 'pat-m-9',
-      sequence: ['🍊', '🍋', '🥥', '🍊', '🍋', '?'],
-      options: ['🥥', '🍊', '🍋', '🍉'],
-      correctAnswer: '🥥',
+      sequence: ['/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', '/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', '/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Watermelon'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut',
       explanation: 'Orange, Lemon, then Coconut completes the fruit triad.',
     },
     {
       id: 'pat-m-10',
-      sequence: ['🎋', '🎋', '🌿', '🎋', '🎋', '?'],
-      options: ['🎋', '🌿', '🌳', '🌾'],
-      correctAnswer: '🌿',
+      sequence: ['/assets/images/bamboo.jpg', '/assets/images/bamboo.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', '/assets/images/bamboo.jpg', '/assets/images/bamboo.jpg', '?'],
+      options: ['/assets/images/bamboo.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf',
       explanation: 'Two bamboos then one leaf.',
     },
   ],
   hard: [
     {
       id: 'pat-h-1',
-      sequence: ['🔴', '🔺', '🔵', '🔷', '🟢', '?'],
-      options: ['🟢', '🟩', '🔴', '🟡'],
-      correctAnswer: '🟩',
+      sequence: ['https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/da4c31/da4c31.png?text=^', 'https://placehold.co/200x200/446e8c/446e8c.png', 'https://placehold.co/200x200/446e8c/446e8c.png?text=<>', 'https://placehold.co/200x200/386f5c/386f5c.png', '?'],
+      options: ['https://placehold.co/200x200/386f5c/386f5c.png', 'https://placehold.co/200x200/386f5c/386f5c.png', 'https://placehold.co/200x200/da4c31/da4c31.png', 'https://placehold.co/200x200/e49e37/e49e37.png'],
+      correctAnswer: 'https://placehold.co/200x200/386f5c/386f5c.png',
       explanation: 'Color circle is paired with its shape match: Red circle/triangle, Blue circle/diamond, Green circle/green square.',
     },
     {
       id: 'pat-h-2',
-      sequence: ['1️⃣', '2️⃣', '3️⃣', '1️⃣', '2️⃣', '?'],
-      options: ['1️⃣', '3️⃣', '4️⃣', '2️⃣'],
-      correctAnswer: '3️⃣',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=1', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=2', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=3', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=1', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=2', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=1', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=3', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=4', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=2'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=3',
       explanation: 'Numbers 1, 2, 3 cycle continually.',
     },
     {
       id: 'pat-h-3',
-      sequence: ['🌅', '☀️', '🌇', '🌙', '🌅', '☀️', '?'],
-      options: ['🌇', '🌙', '☀️', '⭐'],
-      correctAnswer: '🌇',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Dawn', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sunset', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Night', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Dawn', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sunset', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Night', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=*'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sunset',
       explanation: 'Cycle of the day: Dawn, Midday, Sunset, Night.',
     },
     {
       id: 'pat-h-4',
-      sequence: ['🌱', '🌿', '🌸', '🍊', '🌱', '🌿', '🌸', '?'],
-      options: ['🍊', '🌱', '🌿', '🌳'],
-      correctAnswer: '🍊',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Seed', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', '/assets/images/flower.jpg', '/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Seed', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', '/assets/images/flower.jpg', '?'],
+      options: ['/assets/images/orange.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Seed', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree'],
+      correctAnswer: '/assets/images/orange.jpg',
       explanation: 'Plant growth cycle: Sprout, Leaf, Flower, Fruit.',
     },
     {
       id: 'pat-h-5',
-      sequence: ['⭐', '⭐⭐', '⭐', '⭐⭐', '⭐', '?'],
-      options: ['⭐', '⭐⭐', '✨', '⭐⭐⭐'],
-      correctAnswer: '⭐⭐',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=*', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=**', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=*', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=**', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=*', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=*', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=**', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sparkle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=***'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=**',
       explanation: 'One star, then two stars, alternating.',
     },
     {
       id: 'pat-h-6',
-      sequence: ['🪔', '🪔', '✨', '🪔', '🪔', '✨', '🪔', '?'],
-      options: ['🪔', '✨', '🕯️', '☀️'],
-      correctAnswer: '🪔',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sparkle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sparkle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sparkle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Candle', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya',
       explanation: 'Two diyas followed by sparkles.',
     },
     {
       id: 'pat-h-7',
-      sequence: ['🍵', '☕', '🍵', '☕', '🍵', '?'],
-      options: ['☕', '🍵', '🥛', '🫖'],
-      correctAnswer: '☕',
+      sequence: ['/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coffee', '/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coffee', '/assets/images/tea_cup.jpg', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coffee', '/assets/images/tea_cup.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Milk', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coffee',
       explanation: 'Green cup and brown cup alternate.',
     },
     {
       id: 'pat-h-8',
-      sequence: ['🐟', '🐟', '🌊', '🐟', '🐟', '?'],
-      options: ['🌊', '🐟', '🛶', '🐚'],
-      correctAnswer: '🌊',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Wave', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Wave', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Boat', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Shell'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Wave',
       explanation: 'Two fish swimming, then one river wave.',
     },
     {
       id: 'pat-h-9',
-      sequence: ['🌾', '🌾', '🌾', '🍚', '🌾', '🌾', '🌾', '?'],
-      options: ['🍚', '🌾', '🥣', '🌾'],
-      correctAnswer: '🍚',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', '/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', '?'],
+      options: ['/assets/images/rice.jpg', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Bowl', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy'],
+      correctAnswer: '/assets/images/rice.jpg',
       explanation: 'Three stalks of paddy yield one bowl of rice.',
     },
     {
       id: 'pat-h-10',
-      sequence: ['🌧', '🌧', '🌈', '🌧', '🌧', '?'],
-      options: ['🌈', '🌧', '☀️', '⚡'],
-      correctAnswer: '🌈',
+      sequence: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rainbow', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', '?'],
+      options: ['https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rainbow', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lightning'],
+      correctAnswer: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rainbow',
       explanation: 'Two rain clouds are followed by a rainbow.',
     },
   ],
@@ -611,7 +611,7 @@ export interface AttentionTapRound {
   instruction: string;
   targetCategory: string;
   ruleDescription: string;
-  gridItems: { id: string; emoji: string; name: string; isTarget: boolean }[];
+  gridItems: { id: string; image: string; name: string; isTarget: boolean }[];
 }
 
 export const ATTENTION_TAP_ROUNDS: Record<'easy' | 'medium' | 'hard', AttentionTapRound[]> = {
@@ -622,15 +622,15 @@ export const ATTENTION_TAP_ROUNDS: Record<'easy' | 'medium' | 'hard', AttentionT
       targetCategory: 'fruits',
       ruleDescription: 'Find every tasty fresh fruit',
       gridItems: [
-        { id: '1', emoji: '🍊', name: 'Orange', isTarget: true },
-        { id: '2', emoji: '🏡', name: 'Home', isTarget: false },
-        { id: '3', emoji: '🍋', name: 'Lemon', isTarget: true },
-        { id: '4', emoji: '🍵', name: 'Tea Cup', isTarget: false },
-        { id: '5', emoji: '🥥', name: 'Coconut', isTarget: true },
-        { id: '6', emoji: '🌾', name: 'Paddy', isTarget: false },
-        { id: '7', emoji: '🍌', name: 'Banana', isTarget: true },
-        { id: '8', emoji: '🐘', name: 'Elephant', isTarget: false },
-        { id: '9', emoji: '🍎', name: 'Apple', isTarget: true },
+        { id: '1', image: '/assets/images/orange.jpg', name: 'Orange', isTarget: true },
+        { id: '2', image: '/assets/images/house.jpg', name: 'Home', isTarget: false },
+        { id: '3', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', name: 'Lemon', isTarget: true },
+        { id: '4', image: '/assets/images/tea_cup.jpg', name: 'Tea Cup', isTarget: false },
+        { id: '5', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', name: 'Coconut', isTarget: true },
+        { id: '6', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Paddy', name: 'Paddy', isTarget: false },
+        { id: '7', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Banana', name: 'Banana', isTarget: true },
+        { id: '8', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', name: 'Elephant', isTarget: false },
+        { id: '9', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Apple', name: 'Apple', isTarget: true },
       ],
     },
     {
@@ -639,15 +639,15 @@ export const ATTENTION_TAP_ROUNDS: Record<'easy' | 'medium' | 'hard', AttentionT
       targetCategory: 'flowers',
       ruleDescription: 'Find all blooming flowers',
       gridItems: [
-        { id: '1', emoji: '🌸', name: 'Pink Flower', isTarget: true },
-        { id: '2', emoji: '🐟', name: 'Fish', isTarget: false },
-        { id: '3', emoji: '🌺', name: 'Hibiscus', isTarget: true },
-        { id: '4', emoji: '🎋', name: 'Bamboo', isTarget: false },
-        { id: '5', emoji: '🌼', name: 'Daisy', isTarget: true },
-        { id: '6', emoji: '🍚', name: 'Rice', isTarget: false },
-        { id: '7', emoji: '🌻', name: 'Sunflower', isTarget: true },
-        { id: '8', emoji: '🪔', name: 'Diya', isTarget: false },
-        { id: '9', emoji: '🌷', name: 'Tulip', isTarget: true },
+        { id: '1', image: '/assets/images/flower.jpg', name: 'Pink Flower', isTarget: true },
+        { id: '2', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', name: 'Fish', isTarget: false },
+        { id: '3', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Hibiscus', name: 'Hibiscus', isTarget: true },
+        { id: '4', image: '/assets/images/bamboo.jpg', name: 'Bamboo', isTarget: false },
+        { id: '5', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Daisy', name: 'Daisy', isTarget: true },
+        { id: '6', image: '/assets/images/rice.jpg', name: 'Rice', isTarget: false },
+        { id: '7', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sunflower', name: 'Sunflower', isTarget: true },
+        { id: '8', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', name: 'Diya', isTarget: false },
+        { id: '9', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tulip', name: 'Tulip', isTarget: true },
       ],
     },
   ],
@@ -658,18 +658,18 @@ export const ATTENTION_TAP_ROUNDS: Record<'easy' | 'medium' | 'hard', AttentionT
       targetCategory: 'animals',
       ruleDescription: 'Tap living creatures of nature',
       gridItems: [
-        { id: '1', emoji: '🐘', name: 'Elephant', isTarget: true },
-        { id: '2', emoji: '🌿', name: 'Tea Leaf', isTarget: false },
-        { id: '3', emoji: '🦚', name: 'Peacock', isTarget: true },
-        { id: '4', emoji: '🫖', name: 'Teapot', isTarget: false },
-        { id: '5', emoji: '🦌', name: 'Deer', isTarget: true },
-        { id: '6', emoji: '🍊', name: 'Orange', isTarget: false },
-        { id: '7', emoji: '🐟', name: 'Fish', isTarget: true },
-        { id: '8', emoji: '🏡', name: 'House', isTarget: false },
-        { id: '9', emoji: '🐦', name: 'Bird', isTarget: true },
-        { id: '10', emoji: '🍚', name: 'Rice', isTarget: false },
-        { id: '11', emoji: '🦋', name: 'Butterfly', isTarget: true },
-        { id: '12', emoji: '🌧', name: 'Rain', isTarget: false },
+        { id: '1', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', name: 'Elephant', isTarget: true },
+        { id: '2', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Leaf', name: 'Tea Leaf', isTarget: false },
+        { id: '3', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', name: 'Peacock', isTarget: true },
+        { id: '4', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', name: 'Teapot', isTarget: false },
+        { id: '5', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Deer', name: 'Deer', isTarget: true },
+        { id: '6', image: '/assets/images/orange.jpg', name: 'Orange', isTarget: false },
+        { id: '7', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', name: 'Fish', isTarget: true },
+        { id: '8', image: '/assets/images/house.jpg', name: 'House', isTarget: false },
+        { id: '9', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Bird', name: 'Bird', isTarget: true },
+        { id: '10', image: '/assets/images/rice.jpg', name: 'Rice', isTarget: false },
+        { id: '11', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Butterfly', name: 'Butterfly', isTarget: true },
+        { id: '12', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', name: 'Rain', isTarget: false },
       ],
     },
   ],
@@ -680,22 +680,22 @@ export const ATTENTION_TAP_ROUNDS: Record<'easy' | 'medium' | 'hard', AttentionT
       targetCategory: 'kitchen',
       ruleDescription: 'Identify foods, drinks, and utensils',
       gridItems: [
-        { id: '1', emoji: '🍵', name: 'Tea Cup', isTarget: true },
-        { id: '2', emoji: '🐘', name: 'Elephant', isTarget: false },
-        { id: '3', emoji: '🍚', name: 'Rice', isTarget: true },
-        { id: '4', emoji: '🦚', name: 'Peacock', isTarget: false },
-        { id: '5', emoji: '🫖', name: 'Teapot', isTarget: true },
-        { id: '6', emoji: '🌳', name: 'Tree', isTarget: false },
-        { id: '7', emoji: '🍋', name: 'Lemon', isTarget: true },
-        { id: '8', emoji: '🌧', name: 'Cloud', isTarget: false },
-        { id: '9', emoji: '🐟', name: 'Fish', isTarget: true },
-        { id: '10', emoji: '🛶', name: 'Boat', isTarget: false },
-        { id: '11', emoji: '🥥', name: 'Coconut', isTarget: true },
-        { id: '12', emoji: '🎋', name: 'Bamboo', isTarget: false },
-        { id: '13', emoji: '🍲', name: 'Stew Pot', isTarget: true },
-        { id: '14', emoji: '🏡', name: 'Cottage', isTarget: false },
-        { id: '15', emoji: '🍊', name: 'Orange', isTarget: true },
-        { id: '16', emoji: '🪔', name: 'Diya', isTarget: false },
+        { id: '1', image: '/assets/images/tea_cup.jpg', name: 'Tea Cup', isTarget: true },
+        { id: '2', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Elephant', name: 'Elephant', isTarget: false },
+        { id: '3', image: '/assets/images/rice.jpg', name: 'Rice', isTarget: true },
+        { id: '4', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Peacock', name: 'Peacock', isTarget: false },
+        { id: '5', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Teapot', name: 'Teapot', isTarget: true },
+        { id: '6', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Tree', name: 'Tree', isTarget: false },
+        { id: '7', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lemon', name: 'Lemon', isTarget: true },
+        { id: '8', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', name: 'Cloud', isTarget: false },
+        { id: '9', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fish', name: 'Fish', isTarget: true },
+        { id: '10', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Boat', name: 'Boat', isTarget: false },
+        { id: '11', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Coconut', name: 'Coconut', isTarget: true },
+        { id: '12', image: '/assets/images/bamboo.jpg', name: 'Bamboo', isTarget: false },
+        { id: '13', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Stew', name: 'Stew Pot', isTarget: true },
+        { id: '14', image: '/assets/images/house.jpg', name: 'Cottage', isTarget: false },
+        { id: '15', image: '/assets/images/orange.jpg', name: 'Orange', isTarget: true },
+        { id: '16', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Diya', name: 'Diya', isTarget: false },
       ],
     },
   ],
@@ -707,7 +707,7 @@ export interface SoundQuestion {
   soundDescription: string;
   toneFrequency: number;
   toneType: OscillatorType;
-  options: { id: string; emoji: string; label: string; isCorrect: boolean }[];
+  options: { id: string; image: string; label: string; isCorrect: boolean }[];
   hint: string;
 }
 
@@ -719,9 +719,9 @@ export const SOUND_QUESTIONS: SoundQuestion[] = [
     toneFrequency: 220,
     toneType: 'triangle',
     options: [
-      { id: 'rain', emoji: '🌧', label: 'Rain Shower', isCorrect: true },
-      { id: 'sun', emoji: '☀️', label: 'Bright Sunshine', isCorrect: false },
-      { id: 'fire', emoji: '🔥', label: 'Campfire', isCorrect: false },
+      { id: 'rain', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Rain', label: 'Rain Shower', isCorrect: true },
+      { id: 'sun', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Sun', label: 'Bright Sunshine', isCorrect: false },
+      { id: 'fire', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fire', label: 'Campfire', isCorrect: false },
     ],
     hint: 'Think of cool drops falling from grey sky.',
   },
@@ -732,9 +732,9 @@ export const SOUND_QUESTIONS: SoundQuestion[] = [
     toneFrequency: 880,
     toneType: 'sine',
     options: [
-      { id: 'drum', emoji: '🥁', label: 'Bihu Dhol', isCorrect: false },
-      { id: 'bell', emoji: '🔔', label: 'Temple Bell', isCorrect: true },
-      { id: 'whistle', emoji: '🚂', label: 'Train Whistle', isCorrect: false },
+      { id: 'drum', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Dhol', label: 'Bihu Dhol', isCorrect: false },
+      { id: 'bell', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Bell', label: 'Temple Bell', isCorrect: true },
+      { id: 'whistle', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Train', label: 'Train Whistle', isCorrect: false },
     ],
     hint: 'Heard at morning prayer near the Namghar or temple.',
   },
@@ -745,9 +745,9 @@ export const SOUND_QUESTIONS: SoundQuestion[] = [
     toneFrequency: 1200,
     toneType: 'sine',
     options: [
-      { id: 'bird', emoji: '🐦', label: 'Singing Bird', isCorrect: true },
-      { id: 'frog', emoji: '🐸', label: 'Croaking Frog', isCorrect: false },
-      { id: 'cow', emoji: '🐄', label: 'Cow Mooing', isCorrect: false },
+      { id: 'bird', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Bird', label: 'Singing Bird', isCorrect: true },
+      { id: 'frog', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Frog', label: 'Croaking Frog', isCorrect: false },
+      { id: 'cow', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Cow', label: 'Cow Mooing', isCorrect: false },
     ],
     hint: 'Feathered friend greeting the sunrise from a branch.',
   },
@@ -758,9 +758,9 @@ export const SOUND_QUESTIONS: SoundQuestion[] = [
     toneFrequency: 587.33,
     toneType: 'sine',
     options: [
-      { id: 'car', emoji: '🚗', label: 'Car Horn', isCorrect: false },
-      { id: 'thunder', emoji: '⚡', label: 'Thunder Clap', isCorrect: false },
-      { id: 'flute', emoji: '🪈', label: 'Bamboo Flute', isCorrect: true },
+      { id: 'car', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Car', label: 'Car Horn', isCorrect: false },
+      { id: 'thunder', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Lightning', label: 'Thunder Clap', isCorrect: false },
+      { id: 'flute', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Flute', label: 'Bamboo Flute', isCorrect: true },
     ],
     hint: 'Crafted from tender bamboo, producing a tranquil melody.',
   },
@@ -771,9 +771,9 @@ export const SOUND_QUESTIONS: SoundQuestion[] = [
     toneFrequency: 300,
     toneType: 'triangle',
     options: [
-      { id: 'river', emoji: '🌊', label: 'River Waves', isCorrect: true },
-      { id: 'clock', emoji: '⏰', label: 'Clock Ticking', isCorrect: false },
-      { id: 'fan', emoji: '🪭', label: 'Paper Fan', isCorrect: false },
+      { id: 'river', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Wave', label: 'River Waves', isCorrect: true },
+      { id: 'clock', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Clock', label: 'Clock Ticking', isCorrect: false },
+      { id: 'fan', image: 'https://placehold.co/200x200/e8e3d8/1a1918.png?text=Fan', label: 'Paper Fan', isCorrect: false },
     ],
     hint: 'Water flowing steadily towards the sea.',
   },

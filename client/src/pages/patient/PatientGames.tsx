@@ -1,143 +1,105 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Play, Sparkles, Gamepad2, Brain, Zap, Target } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { cn } from '../../lib/utils';
 
 interface GameInfo {
   id: string;
   name: string;
+  subtitle: string;
   domain: string;
   time: string;
   difficulty: 'easy' | 'medium' | 'hard';
+  image: string;
   color: string;
-  icon: string;
 }
 
-const DOMAIN_ICONS: Record<string, React.ElementType> = {
-  'Memory': Brain,
-  'Attention': Target,
-  'Orientation': Sparkles,
-  'Reasoning': Zap,
-  'Processing': Gamepad2,
-  'Language': Sparkles,
-};
-
 const GAMES_LIST: GameInfo[] = [
-  { id: 'memory-match', name: 'Memory Match', domain: 'Memory', time: '5m', difficulty: 'easy', color: 'bg-emerald-500', icon: '/logo_memory_match.jpg' },
-  { id: 'remember-objects', name: 'Picture Memory', domain: 'Memory', time: '4m', difficulty: 'easy', color: 'bg-emerald-400', icon: '/logo_remember_objects.jpg' },
-  { id: 'sequence-memory', name: 'Number Match', domain: 'Attention', time: '2m', difficulty: 'easy', color: 'bg-amber-400', icon: '/logo_sequence_memory.jpg' },
-  { id: 'find-difference', name: 'Find Difference', domain: 'Attention', time: '5m', difficulty: 'medium', color: 'bg-amber-500', icon: '/logo_find_difference.jpg' },
-  { id: 'sort-my-day', name: 'Sort My Day', domain: 'Orientation', time: '4m', difficulty: 'easy', color: 'bg-blue-400', icon: '/logo_sort_my_day.jpg' },
-  { id: 'pattern-builder', name: 'Pattern Builder', domain: 'Reasoning', time: '4m', difficulty: 'medium', color: 'bg-purple-500', icon: '/logo_pattern_builder.jpg' },
-  { id: 'attention-tap', name: 'Attention Tap', domain: 'Processing', time: '3m', difficulty: 'easy', color: 'bg-vermilion', icon: '/logo_attention_tap.jpg' },
-  { id: 'sound-memory', name: 'Sound Memory', domain: 'Memory', time: '5m', difficulty: 'medium', color: 'bg-emerald-600', icon: '/logo_sound_memory.jpg' },
-  { id: 'story-memory', name: 'Story Memory', domain: 'Language', time: '6m', difficulty: 'medium', color: 'bg-pink-500', icon: '/logo_story_memory.jpg' },
-  { id: 'object-recognition', name: 'Word Match', domain: 'Language', time: '4m', difficulty: 'easy', color: 'bg-pink-400', icon: '/logo_object_recognition.jpg' },
-  { id: 'chess', name: 'Chess', domain: 'Reasoning', time: '10m', difficulty: 'hard', color: 'bg-slate-700', icon: '/logo_chess.jpg' },
-  { id: 'match3', name: 'Match 3', domain: 'Processing', time: '5m', difficulty: 'medium', color: 'bg-fuchsia-500', icon: '/logo_match3.jpg' },
-  { id: 'memory-game', name: 'Card Memory', domain: 'Memory', time: '3m', difficulty: 'easy', color: 'bg-emerald-500', icon: '/logo_memory_game.jpg' },
-  { id: 'sudoku', name: 'Sudoku', domain: 'Reasoning', time: '10m', difficulty: 'hard', color: 'bg-ochre', icon: '/logo_sudoku.jpg' },
-  { id: 'jigsaw', name: 'Jigsaw Puzzle', domain: 'Orientation', time: '5m', difficulty: 'medium', color: 'bg-blue-500', icon: '/logo_jigsaw.jpg' },
+  { id: 'memory-match', name: 'MEM MATCH', subtitle: 'Pair hidden cards', domain: 'Memory', time: '5 min', difficulty: 'easy', image: '/assets/images/memory_match_aesthetic_1790111728403.jpg', color: 'border-accent-blue' },
+  { id: 'remember-objects', name: 'PIC MEMORY', subtitle: 'Recall items', domain: 'Memory', time: '4 min', difficulty: 'easy', image: '/assets/images/attention_aesthetic_1790111804475.jpg', color: 'border-accent-blue' },
+  { id: 'sequence-memory', name: 'NUM MATCH', subtitle: 'Digit orders', domain: 'Attention', time: '2 min', difficulty: 'easy', image: '/assets/images/sudoku_aesthetic_1790111745958.jpg', color: 'border-accent-yellow' },
+  { id: 'find-difference', name: 'FIND DIFF', subtitle: 'Spot details', domain: 'Attention', time: '5 min', difficulty: 'medium', image: '/assets/images/attention_aesthetic_1790111804475.jpg', color: 'border-accent-yellow' },
+  { id: 'sort-my-day', name: 'SORT DAY', subtitle: 'Daily routines', domain: 'Orientation', time: '4 min', difficulty: 'easy', image: '/assets/images/jigsaw_aesthetic_1790111765563.jpg', color: 'border-accent-green' },
+  { id: 'pattern-builder', name: 'PATTERN', subtitle: 'Geometric seq', domain: 'Reasoning', time: '4 min', difficulty: 'medium', image: '/assets/images/jigsaw_aesthetic_1790111765563.jpg', color: 'border-ink' },
+  { id: 'attention-tap', name: 'ATTN TAP', subtitle: 'Visual reaction', domain: 'Processing', time: '3 min', difficulty: 'easy', image: '/assets/images/attention_aesthetic_1790111804475.jpg', color: 'border-accent-red' },
+  { id: 'sound-memory', name: 'SOUND MEM', subtitle: 'Audio tones', domain: 'Memory', time: '5 min', difficulty: 'medium', image: '/assets/images/memory_match_aesthetic_1790111728403.jpg', color: 'border-accent-blue' },
+  { id: 'story-memory', name: 'STORY MEM', subtitle: 'Read & recall', domain: 'Language', time: '6 min', difficulty: 'medium', image: '/assets/images/language_aesthetic_1790111791920.jpg', color: 'border-accent-red' },
+  { id: 'object-recognition', name: 'WORD MATCH', subtitle: 'Connect words', domain: 'Language', time: '4 min', difficulty: 'easy', image: '/assets/images/language_aesthetic_1790111791920.jpg', color: 'border-accent-red' },
+  { id: 'chess', name: 'CHESS', subtitle: 'Spatial tactics', domain: 'Reasoning', time: '10 min', difficulty: 'hard', image: '/assets/images/chess_aesthetic_1790111775100.jpg', color: 'border-ink' },
+  { id: 'match3', name: 'GEM MATCH', subtitle: 'Swap jewels', domain: 'Processing', time: '5 min', difficulty: 'medium', image: '/assets/images/match3_aesthetic_1790111755965.jpg', color: 'border-accent-yellow' },
+  { id: 'memory-game', name: 'CARD MEM', subtitle: 'Vintage recall', domain: 'Memory', time: '3 min', difficulty: 'easy', image: '/assets/images/memory_match_aesthetic_1790111728403.jpg', color: 'border-accent-blue' },
+  { id: 'sudoku', name: 'SUDOKU', subtitle: 'Logic numbers', domain: 'Reasoning', time: '10 min', difficulty: 'hard', image: '/assets/images/sudoku_aesthetic_1790111745958.jpg', color: 'border-ink' },
+  { id: 'jigsaw', name: 'JIGSAW', subtitle: 'Piece pictures', domain: 'Orientation', time: '5 min', difficulty: 'medium', image: '/assets/images/jigsaw_aesthetic_1790111765563.jpg', color: 'border-accent-green' },
 ];
 
 export default function PatientGames() {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState<string>('all');
-  
-  const domains = ['all', ...Array.from(new Set(GAMES_LIST.map(g => g.domain)))];
-  
-  const filteredGames = filter === 'all' 
-    ? GAMES_LIST 
-    : GAMES_LIST.filter(g => g.domain === filter);
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="w-full h-full font-sans flex flex-col gap-10"
+      className="w-full min-h-screen bg-paper text-ink p-4 sm:p-8 md:p-12"
     >
-      <header className="flex flex-col gap-6 border-b-[3px] border-ink pb-8">
-        <h1 className="text-5xl font-display font-black text-ink uppercase tracking-wider flex items-center gap-4">
-          <Gamepad2 size={48} className="text-vermilion" /> 
-          Arcade Hub
+      {/* Top Header Bar */}
+      <div className="flex justify-between items-center font-mono text-[11px] tracking-[0.15em] uppercase font-semibold border-b-[3px] border-ink pb-3 mb-8">
+        <div>NEURO MIND · CLINICAL ACTIVITIES</div>
+        <div>SELECT A GAME</div>
+      </div>
+
+      {/* Main Title Area */}
+      <div className="mb-16">
+        <div className="mono-tag mb-4">A CATALOG OF COGNITIVE EXERCISES</div>
+        <h1 className="font-display text-6xl sm:text-8xl md:text-[9rem] leading-[0.85] tracking-tight uppercase">
+          NEURO<br />MIND
         </h1>
-        
-        {/* Domain Filters */}
-        <div className="flex flex-wrap gap-4">
-          {domains.map(domain => (
-            <button
-              key={domain}
-              onClick={() => setFilter(domain)}
-              className={cn(
-                'font-mono font-bold uppercase tracking-widest text-sm px-6 py-2 border-[3px] border-ink transition-all',
-                filter === domain 
-                  ? 'bg-ink text-kraft shadow-[4px_4px_0_var(--color-vermilion)] -translate-y-1' 
-                  : 'bg-kraft2 text-ink shadow-[4px_4px_0_var(--color-ink)] hover:-translate-y-1 hover:bg-kraft hover:shadow-[6px_6px_0_var(--color-ink)]'
-              )}
-            >
-              {domain}
-            </button>
-          ))}
-        </div>
-      </header>
+        <p className="font-sans text-lg sm:text-xl max-w-2xl mt-8 leading-relaxed font-medium">
+          A collection of cognitive exercises designed for you. From matching cards to 
+          reasoning with numbers. Every score and progress metric stays on this device.
+        </p>
+      </div>
 
-      {/* Arcade Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 pb-12">
-        {filteredGames.map((game, i) => {
-          const DomainIcon = DOMAIN_ICONS[game.domain] || Sparkles;
-          return (
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              key={game.id}
-              onClick={() => navigate(`/patient/game/${game.id}`)}
-              className="group flex flex-col text-left bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:shadow-[10px_10px_0_var(--color-ink)] hover:-translate-y-2 transition-all relative overflow-hidden focus:outline-none"
-            >
-              {/* Difficulty Banner */}
-              <div className={cn(
-                'absolute top-0 right-0 px-3 py-1 border-b-[3px] border-l-[3px] border-ink font-mono font-bold text-[10px] uppercase tracking-widest z-10',
-                game.difficulty === 'easy' ? 'bg-emerald-400' :
-                game.difficulty === 'medium' ? 'bg-amber-400' : 'bg-vermilion text-kraft'
-              )}>
-                {game.difficulty}
+      {/* Games Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+        {GAMES_LIST.map((game, i) => (
+          <button
+            key={game.id}
+            onClick={() => navigate(`/patient/game/${game.id}`)}
+            className={`group flex flex-col text-left bg-paper border-[3px] border-ink border-t-[8px] ${game.color} hover:bg-[#e3decf] transition-colors relative overflow-hidden cursor-pointer`}
+          >
+            {/* Top row: Number and Image */}
+            <div className="flex justify-between items-start p-5">
+              <div className="font-mono text-sm tracking-widest font-semibold">
+                {String(i + 1).padStart(2, '0')}
               </div>
-
-              {/* Game Icon Area */}
-              <div className={cn(
-                'w-full aspect-[4/3] flex items-center justify-center border-b-[3px] border-ink relative overflow-hidden',
-                game.color
-              )}>
+              <div className="w-14 h-14 border-2 border-ink overflow-hidden group-hover:scale-105 transition-transform">
                 <img 
-                  src={game.icon} 
+                  src={game.image} 
                   alt={game.name} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" 
+                  className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 transition-all duration-300"
                 />
-                
-                {/* Hover overlay with PLAY */}
-                <div className="absolute inset-0 bg-ink/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-                  <div className="bg-vermilion text-kraft border-2 border-kraft p-4 rounded-full flex items-center justify-center translate-y-4 group-hover:translate-y-0 transition-transform">
-                    <Play size={32} className="ml-1" />
-                  </div>
-                </div>
               </div>
+            </div>
 
-              {/* Info Area */}
-              <div className="p-5 flex flex-col flex-1 bg-kraft">
-                <h3 className="font-display font-bold text-xl uppercase tracking-widest text-ink leading-tight mb-3">
-                  {game.name}
-                </h3>
-                
-                <div className="mt-auto flex items-center justify-between font-mono text-xs font-bold text-sand uppercase tracking-widest">
-                  <span className="flex items-center gap-1.5"><DomainIcon size={14} /> {game.domain}</span>
-                  <span>{game.time}</span>
-                </div>
+            {/* Title & Description */}
+            <div className="px-5 pb-5 flex-1 flex flex-col justify-end">
+              <h3 className="font-display text-3xl sm:text-4xl uppercase tracking-tight mb-2">
+                {game.name}
+              </h3>
+              <div className="mono-tag text-accent-red mb-3">
+                {game.domain} · {game.difficulty}
               </div>
-            </motion.button>
-          );
-        })}
+              <p className="font-sans text-sm leading-relaxed opacity-80 h-10 line-clamp-2">
+                {game.subtitle}. Enjoy {game.time} of focus.
+              </p>
+            </div>
+
+            {/* Bottom Stats */}
+            <div className="border-t-2 border-ink px-5 py-3 font-mono text-[10px] tracking-widest uppercase flex justify-between items-center opacity-70 group-hover:opacity-100 transition-opacity">
+              <span>No scores yet</span>
+              <span>Level 1</span>
+            </div>
+          </button>
+        ))}
       </div>
     </motion.div>
   );

@@ -8,11 +8,18 @@ import { useUIStore } from '../../store/uiStore';
 
 type UserRole = 'patient' | 'caregiver' | 'doctor' | 'admin';
 
+const ROLE_DEMO_ACCOUNTS: Record<UserRole, { email: string; password: string; name: string }> = {
+  patient:   { email: 'patient-easy@demo.com', password: 'Demo@1234', name: 'Asha Devi' },
+  caregiver: { email: 'caregiver@demo.com',    password: 'Demo@1234', name: 'Priya Sharma' },
+  doctor:    { email: 'doctor@demo.com',       password: 'Demo@1234', name: 'Dr. Ananya Das' },
+  admin:     { email: 'admin@demo.com',        password: 'Demo@1234', name: 'Rajiv Borah' },
+};
+
 const ROLE_TILES: { role: UserRole; emoji: string; label: string; hint: string }[] = [
-  { role: 'patient',   emoji: '🧠', label: 'Patient',   hint: 'Memory activities' },
-  { role: 'caregiver', emoji: '💚', label: 'Caregiver',  hint: 'Care dashboard' },
-  { role: 'doctor',    emoji: '🩺', label: 'Clinician',  hint: 'Clinical portal' },
-  { role: 'admin',     emoji: '⚡', label: 'Admin',      hint: 'System control' },
+  { role: 'patient',   emoji: '01', label: 'Patient',   hint: 'Memory activities' },
+  { role: 'caregiver', emoji: '02', label: 'Caregiver',  hint: 'Care dashboard' },
+  { role: 'doctor',    emoji: '03', label: 'Clinician',  hint: 'Clinical portal' },
+  { role: 'admin',     emoji: '04', label: 'Admin',      hint: 'System control' },
 ];
 
 const FEATURES = ['15 Cognitive Games', '6 NE Languages', 'Offline-First PWA', 'Voice Guided'];
@@ -23,10 +30,10 @@ export default function LoginPage() {
   const { setPatientMode } = useUIStore();
   const navigate = useNavigate();
 
-  const [email, setEmail]               = useState('');
-  const [password, setPassword]         = useState('');
+  const [email, setEmail]               = useState('patient-easy@demo.com');
+  const [password, setPassword]         = useState('Demo@1234');
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
+  const [selectedRole, setSelectedRole] = useState<UserRole>('patient');
 
   const navigateByRole = (role: UserRole) => {
     const routes: Record<UserRole, string> = {
@@ -35,112 +42,126 @@ export default function LoginPage() {
     navigate(routes[role] ?? '/');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleRoleSelect = (role: UserRole) => {
+    setSelectedRole(role);
+    clearError();
+    const demo = ROLE_DEMO_ACCOUNTS[role];
+    if (demo) {
+      setEmail(demo.email);
+      setPassword(demo.password);
+    }
+  };
+
+  const performLogin = async (loginEmail: string, loginPass: string, roleHint?: UserRole) => {
     clearError();
     try {
-      await login(email, password);
+      await login(loginEmail, loginPass);
       const { user } = useAuthStore.getState();
       if (user) {
         setPatientMode(user.role === 'patient');
-        navigateByRole(user.role as UserRole);
+        navigateByRole((user.role as UserRole) || roleHint || 'patient');
       }
     } catch { /* error handled in store */ }
   };
 
-  return (
-    <div className="min-h-screen flex flex-col lg:flex-row felt-surface font-sans">
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await performLogin(email, password, selectedRole);
+  };
 
-      {/* ── LEFT: Brand Panel ──────────────────────────── */}
-      <div className="hidden lg:flex lg:w-[42%] xl:w-[38%] flex-col justify-between border-r-2 border-kraft/15 p-10 relative overflow-hidden flex-shrink-0">
-        {/* Felt texture overlay */}
-        <div className="absolute inset-0 feltsurface opacity-80 pointer-events-none" />
+  const handleQuickLogin = async (role: UserRole) => {
+    handleRoleSelect(role);
+    const demo = ROLE_DEMO_ACCOUNTS[role];
+    await performLogin(demo.email, demo.password, role);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#f4f0e6] font-sans">
+
+      {/* ── LEFT: Notebook Cover / Editorial Brand Panel ──────────────────────────── */}
+      <div className="hidden lg:flex lg:w-[42%] xl:w-[38%] flex-col justify-between bg-[#231f1d] text-[#fbf9f4] p-12 relative overflow-hidden flex-shrink-0 border-r border-[#38322e]">
         
-        {/* Decorative chess-board corner */}
-        <div className="absolute -bottom-20 -left-20 w-64 h-64 opacity-[0.06]">
-          <div className="grid grid-cols-8 w-full h-full">
-            {Array.from({ length: 64 }).map((_, i) => (
-              <div
-                key={i}
-                className={`${(Math.floor(i / 8) + i) % 2 === 0 ? 'bg-kraft' : 'bg-transparent'}`}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Subtle notebook ruled texture lines */}
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 28px)'
+        }} />
 
         <div className="relative z-10">
           {/* Logo */}
-          <div className="flex items-center gap-6 mb-12">
-            <img src="/logo.jpg" alt="Neuro Mind" className="w-14 h-14 object-cover bg-vermilion border-2 border-kraft shadow-[4px_4px_0_var(--color-kraft)]" />
+          <div className="flex items-center gap-4 mb-12">
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-13 h-13 object-cover rounded-2xl border border-white/20 shadow-md" />
             <div>
-              <div className="font-display font-bold text-kraft text-xl uppercase tracking-widest">Neuro Mind</div>
-              <div className="smallcaps text-kraft/50">Memory Companion</div>
+              <div className="font-display font-bold text-white text-2xl tracking-tight">Neuro Mind</div>
+              <div className="font-mono text-[0.7rem] uppercase tracking-widest text-[#a89e90]">Memory Companion</div>
             </div>
           </div>
 
           {/* Tagline */}
-          <h1 className="font-display font-black text-kraft text-[clamp(2rem,3.5vw,3rem)] leading-tight uppercase mb-4">
-            Helping<br />memories<br />stay<br />connected.
+          <h1 className="font-display font-black text-white text-[clamp(2.2rem,3.5vw,3.2rem)] leading-[1.15] tracking-tight mb-6">
+            Helping<br />memories<br />stay<br /><span className="text-vermilion">connected.</span>
           </h1>
-          <p className="text-kraft/60 text-sm leading-relaxed font-mono max-w-xs">
-            AI-assisted cognitive wellness and daily memory support platform for families across North-Eastern India.
+          <p className="text-[#c7beaf] text-sm leading-relaxed font-sans max-w-sm">
+            AI-assisted cognitive wellness and daily memory support platform tailored for families and care teams.
           </p>
         </div>
 
         {/* Feature chips */}
-        <div className="relative z-10 grid grid-cols-2 gap-6">
+        <div className="relative z-10 grid grid-cols-2 gap-3 pt-8 border-t border-white/10">
           {FEATURES.map((f) => (
-            <div key={f} className="border border-kraft/25 px-3 py-2.5 flex items-center gap-6">
-              <div className="w-2 h-2 bg-vermilion flex-shrink-0" />
-              <span className="smallcaps text-kraft/70">{f}</span>
+            <div key={f} className="bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 flex items-center gap-2.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-vermilion flex-shrink-0" />
+              <span className="font-mono text-xs text-[#ded7cb]">{f}</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ── RIGHT: Login Form ─────────────────────────── */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6 lg:p-12 paper grain relative overflow-y-auto">
+      {/* ── RIGHT: Login Form (Clean Paper Journal Card) ─────────────────────────── */}
+      <div className="flex-1 flex flex-col items-center justify-center p-6 lg:p-12 relative overflow-y-auto">
 
         {/* Mobile brand header */}
-        <div className="flex items-center gap-6 mb-8 lg:hidden self-start">
-          <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover bg-vermilion border-2 border-ink shadow-[3px_3px_0_var(--color-ink)]" />
+        <div className="flex items-center gap-3.5 mb-8 lg:hidden self-start">
+          <img src="/logo.jpg" alt="Neuro Mind" className="w-11 h-11 object-cover rounded-xl border border-ink/20 shadow-xs" />
           <div>
-            <div className="font-display font-bold text-ink text-lg uppercase tracking-widest">Neuro Mind</div>
-            <div className="smallcaps text-sand">Memory Companion</div>
+            <div className="font-display font-bold text-ink text-xl">Neuro Mind</div>
+            <div className="font-mono text-[0.65rem] uppercase tracking-wider text-sand">Memory Companion</div>
           </div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.2, 1, 0.4, 1] }}
-          className="w-full max-w-md"
+          transition={{ duration: 0.4, ease: [0.2, 1, 0.4, 1] }}
+          className="w-full max-w-md bg-white p-8 sm:p-10 rounded-3xl border border-[#e2d9cc] shadow-[0_4px_24px_rgba(45,35,20,0.05),0_1px_3px_rgba(45,35,20,0.06)]"
         >
           {/* Header */}
-          <div className="mb-7">
-            <h2 className="font-display font-bold text-ink text-2xl uppercase tracking-wider mb-1">
+          <div className="mb-6">
+            <h2 className="font-display font-bold text-ink text-3xl tracking-tight mb-1">
               Sign In
             </h2>
-            <p className="smallcaps text-sand">Enter your credentials to continue</p>
+            <p className="font-sans text-sm text-sand">Select your role or enter credentials to continue</p>
           </div>
 
           {/* Role selector */}
           <div className="mb-6">
-            <p className="smallcaps text-sand mb-3">I am a —</p>
+            <div className="flex items-center justify-between mb-2.5">
+              <p className="font-mono text-xs font-bold uppercase tracking-wider text-sand">Choose Role:</p>
+              <span className="text-[0.65rem] font-mono text-vermilion font-semibold">Auto-fills Demo</span>
+            </div>
             <div className="grid grid-cols-4 gap-2">
               {ROLE_TILES.map(({ role, emoji, label }) => (
                   <button
                     key={role}
                     type="button"
-                    onClick={() => setSelectedRole(role)}
-                    className={`flex flex-col items-center justify-center gap-1 p-2 sm:p-3 border-2 transition-all hover-lift ${
+                    onClick={() => handleRoleSelect(role)}
+                    className={`flex flex-col items-center justify-center gap-1.5 p-2.5 rounded-2xl border transition-all cursor-pointer ${
                       selectedRole === role
-                        ? 'border-ink bg-ink text-kraft shadow-[3px_3px_0_var(--color-vermilion)]'
-                        : 'border-kraft3 bg-kraft2 text-ink hover:border-ink hover:shadow-[2px_2px_0_var(--color-ink)]'
+                        ? 'border-vermilion bg-vermilion/10 text-ink shadow-xs font-bold ring-2 ring-vermilion/30'
+                        : 'border-[#e2d9cc] bg-[#fbf9f4] text-stone-700 hover:border-stone-400 hover:bg-white'
                     }`}
                   >
-                    <span className="text-xl sm:text-2xl">{emoji}</span>
-                    <span className="font-mono text-[0.6rem] sm:text-xs font-bold uppercase tracking-widest text-center leading-none mt-1">{label}</span>
+                    <span className="text-2xl sm:text-3xl font-display font-black tracking-tighter">{emoji}</span>
+                    <span className="font-sans text-[0.72rem] font-semibold tracking-tight text-center leading-none uppercase">{label}</span>
                   </button>
               ))}
             </div>
@@ -153,17 +174,17 @@ export default function LoginPage() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="border-2 border-vermilion bg-vermilion/10 text-vermilion p-3 mb-4 text-sm font-mono"
+                className="border border-red-200 bg-red-50 text-red-700 rounded-xl p-3 mb-4 text-xs font-mono"
               >
                 {error}
               </motion.div>
             )}
           </AnimatePresence>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-4.5">
             {/* Email */}
             <div>
-              <label className="smallcaps text-sand block mb-2">Email</label>
+              <label className="block font-mono text-xs font-bold uppercase tracking-wider text-sand mb-1.5">Email Address</label>
               <input
                 type="email"
                 value={email}
@@ -177,9 +198,9 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="smallcaps text-sand">Password</label>
-                <Link to="/forgot-password" className="smallcaps text-vermilion hover:underline">
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="font-mono text-xs font-bold uppercase tracking-wider text-sand">Password</label>
+                <Link to="/forgot-password" className="font-mono text-xs text-vermilion hover:underline">
                   Forgot?
                 </Link>
               </div>
@@ -191,14 +212,14 @@ export default function LoginPage() {
                   required
                   autoComplete="current-password"
                   placeholder="••••••••"
-                  className="arcade-input w-full pr-12"
+                  className="arcade-input w-full pr-11"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-sand hover:text-ink transition-colors p-1"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 transition-colors p-1"
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
@@ -207,7 +228,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn btn-primary w-full mt-2 disabled:opacity-60"
+              className="btn btn-primary w-full mt-3 disabled:opacity-60 cursor-pointer shadow-xs py-3 rounded-xl text-sm"
             >
               {isLoading ? (
                 <>
@@ -215,12 +236,33 @@ export default function LoginPage() {
                   Signing in...
                 </>
               ) : (
-                'Sign In →'
+                `Sign In as ${ROLE_TILES.find(r => r.role === selectedRole)?.label || 'User'} →`
               )}
             </button>
           </form>
 
-          <p className="text-center font-mono text-sm text-sand mt-6">
+          {/* 1-Click Fast Login Section */}
+          <div className="mt-6 pt-5 border-t border-stone-200/80">
+            <p className="text-[0.68rem] font-mono uppercase tracking-widest text-center text-sand mb-3 font-semibold">
+              ⚡ Instant 1-Click Demo Login
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              {ROLE_TILES.map(({ role, emoji, label }) => (
+                <button
+                  key={`quick-${role}`}
+                  type="button"
+                  disabled={isLoading}
+                  onClick={() => handleQuickLogin(role)}
+                  className="text-xs font-sans py-2 px-3 bg-[#fbf9f4] hover:bg-stone-100 border border-[#e2d9cc] rounded-xl transition-all text-left flex items-center gap-2 cursor-pointer disabled:opacity-50 text-stone-800"
+                >
+                  <span className="font-display font-black text-ink">{emoji}</span>
+                  <span className="truncate font-semibold text-[0.78rem] uppercase">Login {label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <p className="text-center font-sans text-xs text-stone-500 mt-6">
             New here?{' '}
             <Link to="/register" className="text-vermilion font-bold hover:underline">
               Create account
@@ -228,11 +270,11 @@ export default function LoginPage() {
           </p>
 
           {/* Language selector */}
-          <div className="mt-8 flex justify-center">
+          <div className="mt-5 flex justify-center">
             <select
               value={i18n.language}
               onChange={(e) => i18n.changeLanguage(e.target.value)}
-              className="arcade-select text-xs"
+              className="arcade-select text-xs py-1.5 px-3 rounded-lg"
             >
               <option value="en">English</option>
               <option value="hi">हिन्दी</option>

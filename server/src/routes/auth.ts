@@ -38,7 +38,22 @@ router.post('/login', async (req: Request, res: Response, next) => {
     }
 
     const { email, password } = body.data;
-    const user = await prisma.user.findUnique({ where: { email: email.toLowerCase() } });
+    const cleanEmail = email.toLowerCase().trim();
+    let user = await prisma.user.findUnique({ where: { email: cleanEmail } });
+
+    // If not found, check demo aliases
+    if (!user) {
+      const aliasMap: Record<string, string> = {
+        'patient@demo.smriticare.in': 'patient-easy@demo.com',
+        'patient@demo.com': 'patient-easy@demo.com',
+        'caregiver@demo.smriticare.in': 'caregiver@demo.com',
+        'doctor@demo.smriticare.in': 'doctor@demo.com',
+        'admin@demo.smriticare.in': 'admin@demo.com',
+      };
+      if (aliasMap[cleanEmail]) {
+        user = await prisma.user.findUnique({ where: { email: aliasMap[cleanEmail] } });
+      }
+    }
 
     if (!user || !user.isActive) {
       return next(createError('Invalid credentials.', 401));

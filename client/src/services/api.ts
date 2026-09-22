@@ -33,11 +33,18 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('Neuro Mind-auth');
-      window.location.href = '/login';
+      const url = error.config?.url || '';
+      const isAuthEndpoint = url.includes('/auth/login') || url.includes('/auth/register') || url.includes('/auth/patient-pin');
+      if (!isAuthEndpoint) {
+        localStorage.removeItem('Neuro Mind-auth');
+        if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+      }
     }
     const message =
       error.response?.data?.message ||
+      error.response?.data?.error ||
       error.message ||
       'Something went wrong. Let\'s try again.';
     return Promise.reject(new Error(message));

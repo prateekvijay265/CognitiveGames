@@ -185,7 +185,7 @@ export const SortMyDay: React.FC<SortMyDayProps> = ({
                   <span className={`w-8 h-8 flex items-center justify-center text-xs font-bold border-[2px] border-ink ${isCorrectPosition ? 'bg-kraft text-ink' : 'bg-ink text-kraft'}`}>
                     {index + 1}
                   </span>
-                  <span className="text-2xl sm:text-3xl">{act.emoji}</span>
+                  <img src={act.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                   <div>
                     <h4 className={`text-sm sm:text-base font-bold ${isCorrectPosition ? 'text-kraft' : 'text-ink'}`}>
                       {act.title}

@@ -191,7 +191,7 @@ export default function Sudoku({ onExit }: { onExit: () => void }) {
                           setSelected([r, c]);
                         }
                       }}
-                      className={`relative flex items-center justify-center border border-ink/15 transition ${
+                      className={`relative flex items-center justify-center border border-ink/15 ${
                         selectedHere ? "bg-ochre/50" : sameRow || sameCol ? "bg-ochre/15" : sameBlock ? "bg-ochre/10" : ""
                       } ${isFixed ? "" : "hover:bg-ochre/20"} ${isDone ? "bg-vermilion/10" : ""}`}
                     >

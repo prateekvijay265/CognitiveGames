@@ -40,8 +40,8 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [phase, setPhase] = useState<'SHOWING' | 'RECALLING' | 'FEEDBACK'>('SHOWING');
   const [activeStepIndex, setActiveStepIndex] = useState(0);
-  const [selectedItems, setSelectedItems] = useState<{ id: string; emoji: string; name: string }[]>([]);
-  const [scrambledOptions, setScrambledOptions] = useState<{ id: string; emoji: string; name: string }[]>([]);
+  const [selectedItems, setSelectedItems] = useState<{ id: string; image: string; name: string }[]>([]);
+  const [scrambledOptions, setScrambledOptions] = useState<{ id: string; image: string; name: string }[]>([]);
 
   const stepTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const currentSequence: SequenceData = availableSets[currentSetIndex] || availableSets[0];
@@ -82,7 +82,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
   }, [phase, activeStepIndex, currentSequence.items.length, sessionEngine.gameState]);
 
   // Tap an option from the scrambled bank
-  const handleSelectOption = (item: { id: string; emoji: string; name: string }) => {
+  const handleSelectOption = (item: { id: string; image: string; name: string }) => {
     if (phase !== 'RECALLING') return;
     if (selectedItems.some((s) => s.id === item.id)) return;
 
@@ -212,7 +212,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
                       <span className="text-[10px] sm:text-xs mb-1">
                         Step {item.step}
                       </span>
-                      <span className="text-3xl sm:text-4xl mb-1">{item.emoji}</span>
+                      <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                       <span className="text-[10px] sm:text-xs leading-tight line-clamp-2">
                         {item.name}
                       </span>
@@ -261,7 +261,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
                           <span className="text-[10px] sm:text-xs mb-0.5">
                             Step {slotIdx + 1}
                           </span>
-                          <span className="text-3xl mb-1">{itemInSlot.emoji}</span>
+                          <img src={itemInSlot.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                           <span className="text-[9px] sm:text-[10px] leading-tight line-clamp-1">
                             {itemInSlot.name}
                           </span>
@@ -296,7 +296,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
                           : 'bg-kraft text-ink shadow-[4px_4px_0_var(--color-ink)] hover:bg-ochre hover:-translate-y-1 hover:translate-x-1 hover:shadow-[6px_6px_0_var(--color-ink)]'
                       }`}
                     >
-                      <span className="text-3xl sm:text-4xl mb-1">{item.emoji}</span>
+                      <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                       <span className="text-[10px] sm:text-xs leading-tight line-clamp-2">
                         {item.name}
                       </span>
@@ -330,7 +330,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
                   <span className="text-[10px] sm:text-xs mb-0.5">
                     Step {idx + 1}
                   </span>
-                  <span className="text-3xl mb-1">{item.emoji}</span>
+                  <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                   <span className="text-[9px] sm:text-[10px] text-center line-clamp-1">
                     {item.name}
                   </span>

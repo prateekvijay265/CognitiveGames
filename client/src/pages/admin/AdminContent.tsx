@@ -253,7 +253,7 @@ export function AdminContent() {
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-6">
             {MEMORY_CARDS.map((c) => (
               <div key={c.id} className="p-3 bg-kraft2 border-2 border-ink flex flex-col items-center text-center hover-lift">
-                <span className="text-4xl mb-2">{c.emoji}</span>
+                <span className="text-4xl mb-2">{c.image}</span>
                 <span className="font-bold text-ink text-sm">{c.name}</span>
                 <span className="font-mono text-xs text-sand mt-1">{c.assameseName}</span>
               </div>

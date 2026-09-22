@@ -212,7 +212,7 @@ export const AttentionTap: React.FC<AttentionTapProps> = ({
                     <Check className="w-4 h-4 stroke-[3]" />
                   </div>
                 )}
-                <span className="text-4xl sm:text-5xl mb-1">{item.emoji}</span>
+                <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                 <span className="text-xs font-semibold text-stone-700 dark:text-stone-300 text-center line-clamp-1">
                   {item.name}
                 </span>

@@ -164,7 +164,7 @@ export const ObjectRecognition: React.FC<ObjectRecognitionProps> = ({
             animate={{ scale: 1, opacity: 1 }}
             className="w-36 h-36 sm:w-44 sm:h-44 bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] flex items-center justify-center mb-6"
           >
-            <span className="text-7xl sm:text-8xl select-none">{currentItem.emoji}</span>
+            <img src={currentItem.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
           </motion.div>
 
           {/* Options Grid */}

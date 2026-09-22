@@ -64,22 +64,22 @@ export default function DashboardLayout({ role }: { role: Role }) {
   };
 
   const SidebarContent = ({ compact = false }) => (
-    <div className="flex flex-col h-full bg-felt-surface">
+    <div className="flex flex-col h-full bg-white">
       {/* Brand */}
       <div className={cn(
-        'border-b-[3px] border-ink flex-shrink-0 bg-kraft',
-        compact ? 'p-4' : 'px-6 py-8',
+        'border-b border-[#e2d9cc] flex-shrink-0 bg-[#fbf9f4]',
+        compact ? 'p-3' : 'px-5 py-6',
       )}>
         {compact ? (
           <div className="flex flex-col items-center gap-2">
-            <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] bg-vermilion" />
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-10 h-10 object-cover rounded-xl border border-ink/20 shadow-xs" />
           </div>
         ) : (
-          <div className="flex items-center gap-4">
-            <img src="/logo.jpg" alt="Neuro Mind" className="w-16 h-16 object-cover border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] flex-shrink-0 bg-vermilion" />
+          <div className="flex items-center gap-3.5">
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover rounded-xl border border-ink/20 shadow-xs flex-shrink-0" />
             <div>
-              <div className="font-display font-black text-ink text-2xl leading-tight uppercase tracking-widest">Neuro Mind</div>
-              <div className="font-mono text-ink/70 font-bold uppercase tracking-widest text-xs mt-1">{meta.tag}</div>
+              <div className="font-display font-bold text-ink text-xl leading-tight">Neuro Mind</div>
+              <div className="font-mono text-sand font-bold uppercase tracking-widest text-[0.65rem] mt-0.5">{meta.tag}</div>
             </div>
           </div>
         )}
@@ -87,23 +87,24 @@ export default function DashboardLayout({ role }: { role: Role }) {
 
       {/* User card */}
       {!compact && (
-        <div className="mx-6 my-6 p-4 bg-kraft2 border-[3px] border-ink flex-shrink-0 shadow-[4px_4px_0_var(--color-ink)]">
-          <div className="flex items-center gap-4">
+        <div className="mx-4 my-4 p-3.5 bg-[#fbf9f4] border border-[#e2d9cc] rounded-xl flex-shrink-0 shadow-xs">
+          <div className="flex items-center gap-3">
             <div
-              className="w-12 h-12 flex-shrink-0 border-[3px] border-ink flex items-center justify-center font-display font-black text-ink text-xl shadow-[2px_2px_0_var(--color-ink)] bg-kraft"
+              className="w-10 h-10 flex-shrink-0 rounded-lg border border-ink/20 flex items-center justify-center font-display font-bold text-white text-base shadow-xs"
+              style={{ backgroundColor: meta.accent }}
             >
               {user?.name?.charAt(0) ?? 'U'}
             </div>
             <div className="min-w-0">
-              <div className="font-display font-bold text-ink text-lg truncate leading-tight uppercase tracking-wider">{user?.name ?? 'User'}</div>
-              <div className="font-mono text-sand font-bold uppercase tracking-widest text-xs truncate mt-1">{meta.label}</div>
+              <div className="font-sans font-bold text-ink text-sm truncate">{user?.name ?? 'User'}</div>
+              <div className="font-mono text-sand text-[0.68rem] truncate uppercase tracking-wider">{meta.label}</div>
             </div>
           </div>
         </div>
       )}
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-1">
+      <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-1.5">
         {navItems.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={to}
@@ -112,16 +113,18 @@ export default function DashboardLayout({ role }: { role: Role }) {
             replace
             onClick={() => setMobileOpen(false)}
             className={({ isActive }) => cn(
-              'nav-item',
-              isActive && 'active',
+              'flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all',
+              isActive 
+                ? 'bg-vermilion text-white shadow-xs font-semibold' 
+                : 'text-stone-600 hover:text-ink hover:bg-stone-100',
               compact && 'justify-center !px-2',
             )}
           >
             {({ isActive }) => (
               <>
-                <Icon size={compact ? 20 : 17} strokeWidth={isActive ? 2.5 : 2} className="flex-shrink-0" />
+                <Icon size={compact ? 20 : 18} strokeWidth={isActive ? 2.5 : 2} className="flex-shrink-0" />
                 {!compact && <span className="flex-1 truncate">{label}</span>}
-                {!compact && isActive && <ChevronRight size={12} className="text-kraft/40 flex-shrink-0" />}
+                {!compact && isActive && <ChevronRight size={14} className="text-white/70 flex-shrink-0" />}
               </>
             )}
           </NavLink>
@@ -130,17 +133,17 @@ export default function DashboardLayout({ role }: { role: Role }) {
 
       {/* Bottom */}
       <div className={cn(
-        'border-t-2 border-kraft/20 flex-shrink-0',
-        compact ? 'px-2 py-3' : 'px-2 py-3',
+        'border-t border-[#e2d9cc] flex-shrink-0 bg-[#fbf9f4]',
+        compact ? 'px-2 py-3' : 'px-3 py-3',
       )}>
         <button
           onClick={handleLogout}
           className={cn(
-            'nav-item w-full hover:!text-vermilion hover:!bg-vermilion/10',
+            'flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm text-stone-600 hover:text-red-600 hover:bg-red-50 w-full transition-all cursor-pointer',
             compact && 'justify-center !px-2',
           )}
         >
-          <LogOut size={compact ? 20 : 17} />
+          <LogOut size={compact ? 20 : 18} />
           {!compact && <span>Sign Out</span>}
         </button>
       </div>
@@ -148,11 +151,11 @@ export default function DashboardLayout({ role }: { role: Role }) {
   );
 
   return (
-    <div className="min-h-screen flex felt-surface font-sans">
+    <div className="min-h-screen flex bg-[#f4f0e6] font-sans">
       {/* Desktop Sidebar */}
       <aside className={cn(
-        'hidden lg:flex flex-col border-r-2 border-kraft/15 flex-shrink-0 transition-all duration-300',
-        sidebarOpen ? 'w-64' : 'w-[60px]',
+        'hidden lg:flex flex-col border-r border-[#e2d9cc] flex-shrink-0 transition-all duration-300 shadow-xs',
+        sidebarOpen ? 'w-64' : 'w-[68px]',
       )}>
         <SidebarContent compact={!sidebarOpen} />
       </aside>
@@ -160,8 +163,8 @@ export default function DashboardLayout({ role }: { role: Role }) {
       {/* Mobile Overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
-          <div className="absolute left-0 top-0 bottom-0 w-72 flex flex-col border-r-2 border-kraft/20" style={{ backgroundColor: '#0f2920' }}>
+          <div className="absolute inset-0 bg-ink/40 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
+          <div className="absolute left-0 top-0 bottom-0 w-72 flex flex-col border-r border-[#e2d9cc] bg-white shadow-xl">
             <SidebarContent compact={false} />
           </div>
         </div>
@@ -170,7 +173,7 @@ export default function DashboardLayout({ role }: { role: Role }) {
       {/* Main content area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top bar */}
-        <header className="paper grain border-b-2 border-ink px-4 lg:px-6 py-3 flex items-center gap-4 sticky top-0 z-40 flex-shrink-0">
+        <header className="bg-white/90 backdrop-blur-md border-b border-[#e2d9cc] px-4 lg:px-8 py-3.5 flex items-center gap-4 sticky top-0 z-40 flex-shrink-0 shadow-xs">
           {/* Menu toggle */}
           <button
             onClick={() => {
@@ -185,16 +188,16 @@ export default function DashboardLayout({ role }: { role: Role }) {
 
           {/* Role label */}
           <div className="flex-1 min-w-0 flex items-center gap-3">
-            <span className="smallcaps text-sand hidden sm:block">{meta.label} Portal</span>
-            <span className="h-4 border-l-2 border-ink/20 hidden sm:block" />
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-sand hidden sm:block">{meta.label} Portal</span>
+            <span className="h-4 border-l border-stone-300 hidden sm:block" />
             <SyncIndicator />
           </div>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-2">
-            <div className="smallcaps text-sand hidden md:block">{user?.name}</div>
+          <div className="flex items-center gap-3">
+            <div className="font-sans text-sm font-semibold text-ink hidden md:block">{user?.name}</div>
             <div
-              className="w-9 h-9 border-2 border-ink flex items-center justify-center font-display font-bold text-kraft text-sm shadow-[2px_2px_0_var(--color-ink)]"
+              className="w-9 h-9 rounded-xl border border-ink/20 flex items-center justify-center font-display font-bold text-white text-sm shadow-xs"
               style={{ backgroundColor: meta.accent }}
             >
               {user?.name?.charAt(0) ?? 'U'}
@@ -203,8 +206,10 @@ export default function DashboardLayout({ role }: { role: Role }) {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-4 lg:p-6">
-          <Outlet />
+        <main className="flex-1 overflow-y-auto p-4 lg:p-8">
+          <div className="max-w-[1800px] mx-auto">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

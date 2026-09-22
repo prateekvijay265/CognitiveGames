@@ -234,7 +234,7 @@ export const SoundMemory: React.FC<SoundMemoryProps> = ({
                 disabled={showFeedback}
                 className={`p-4 border-[3px] border-ink flex flex-col items-center justify-center transition-all shadow-[4px_4px_0_var(--color-ink)] font-mono uppercase tracking-widest ${cardStyle}`}
               >
-                <span className="text-4xl sm:text-5xl mb-2">{option.emoji}</span>
+                <img src={option.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                 <span className="text-sm font-bold text-center">
                   {option.label}
                 </span>

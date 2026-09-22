@@ -173,7 +173,11 @@ export const FindDifference: React.FC<FindDifferenceProps> = ({
                           : 'bg-kraft border-ink hover:bg-ochre'
                       }`}
                     >
-                      {emoji}
+                      {emoji.startsWith('/') || emoji.startsWith('http') ? (
+                        <img src={emoji} className="w-10 h-10 object-cover" />
+                      ) : (
+                        emoji
+                      )}
                       {isFound && (
                         <div className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center">
                           <Check className="w-3 h-3 stroke-[3]" />
@@ -210,7 +214,11 @@ export const FindDifference: React.FC<FindDifferenceProps> = ({
                           : 'bg-kraft border-ink hover:bg-ochre'
                       }`}
                     >
-                      {emoji}
+                      {emoji.startsWith('/') || emoji.startsWith('http') ? (
+                        <img src={emoji} className="w-10 h-10 object-cover" />
+                      ) : (
+                        emoji
+                      )}
                       {isFound && (
                         <div className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center">
                           <Check className="w-3 h-3 stroke-[3]" />
