@@ -5,10 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, BookImage, HelpCircle, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { voiceService } from '@/services/voice';
-import { Card, CardBody } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { VoiceButton } from '@/components/ui/VoiceButton';
-import { EmptyState } from '@/components/ui/EmptyState';
 
 const EMOJI_MAP: Record<string, string> = {
   Priya: '👩🏽',
@@ -32,11 +28,11 @@ export default function PatientMemoryBook() {
 
   if (memories.length === 0) {
     return (
-      <EmptyState
-        icon={<BookImage className="w-12 h-12 text-stone-300" />}
-        title={t('memory_book.title', 'My Memories')}
-        description={t('memory_book.no_entries', 'Your caregiver will add memories here.')}
-      />
+      <div className="flex flex-col items-center justify-center p-12 text-ink">
+        <BookImage className="w-16 h-16 mb-4" />
+        <h2 className="text-2xl font-display uppercase tracking-widest">{t('memory_book.title', 'My Memories')}</h2>
+        <p className="font-mono mt-2">{t('memory_book.no_entries', 'Your caregiver will add memories here.')}</p>
+      </div>
     );
   }
 
@@ -67,43 +63,31 @@ export default function PatientMemoryBook() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="max-w-2xl mx-auto px-4 py-6 sm:py-8 space-y-6 patient-mode"
+      className="max-w-4xl mx-auto p-4 lg:p-6 space-y-6"
     >
-      {/* HEADER */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-sm">
-        <div className="space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">
-            {t('nav.notes', 'Memory Album')}
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight pt-1">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+          <div className="smallcaps text-sand mb-1">{t('nav.notes', 'Memory Album')}</div>
+          <h1 className="font-display font-bold text-ink text-2xl lg:text-3xl uppercase tracking-widest">
             {t('memory_book.title', 'My Memories')}
           </h1>
-          <p className="text-lg text-stone-600 font-medium">
+          <p className="font-mono text-sand/70 text-sm mt-1">
             Memory {currentIndex + 1} of {memories.length}
           </p>
         </div>
-
-        <div className="flex items-center gap-3">
-          <Button
-            variant={isQuizMode ? 'primary' : 'secondary'}
-            size="md"
+        <div className="flex gap-2">
+          <button 
+            className={`btn ${isQuizMode ? 'btn-primary' : 'btn-ghost'}`}
             onClick={() => {
               setIsQuizMode(!isQuizMode);
               setQuizAnswered(null);
             }}
-            className="font-bold text-sm min-h-[3rem]"
           >
-            <HelpCircle className="w-5 h-5 mr-1.5" />
-            <span>{isQuizMode ? 'Read Mode' : t('memory_book.who_is_this', 'Quiz Mode')}</span>
-          </Button>
-
-          <VoiceButton
-            size="lg"
-            textToSpeak={spokenText}
-            showLabel
-            label={t('help.repeat', 'Listen')}
-          />
+            <HelpCircle className="w-5 h-5 mr-1" />
+            {isQuizMode ? 'Read Mode' : t('memory_book.who_is_this', 'Quiz Mode')}
+          </button>
+          <button className="btn btn-ochre" onClick={() => voiceService.speak(spokenText)}>Listen</button>
         </div>
       </div>
 
@@ -116,123 +100,97 @@ export default function PatientMemoryBook() {
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.25 }}
         >
-          <Card
-            variant="elevated"
-            padding="xl"
-            className="border-2 border-rose-100 shadow-md overflow-hidden bg-gradient-to-b from-white via-white to-rose-50/30"
-          >
-            <CardBody className="pt-0 flex flex-col items-center text-center space-y-6">
-              {/* Photo / Emoji Frame */}
-              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-rose-50 border-4 border-rose-200 flex items-center justify-center text-7xl sm:text-8xl shadow-sm select-none">
-                {emoji}
+          <div className="arcade-card p-6 md:p-12 flex flex-col items-center text-center">
+            {/* Photo / Emoji Frame */}
+            <div className="w-32 h-32 sm:w-40 sm:h-40 bg-white border-4 border-ink flex items-center justify-center text-7xl sm:text-8xl shadow-[4px_4px_0px_rgba(26,21,18,1)] mb-8 select-none">
+              {emoji}
+            </div>
+
+            {!isQuizMode ? (
+              <div className="space-y-4 max-w-lg">
+                <div>
+                  <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink uppercase tracking-widest">
+                    {currentMemory.personName}
+                  </h2>
+                  <span className="badge badge-vermilion mt-3 inline-block">
+                    {currentMemory.relationship}
+                  </span>
+                </div>
+                <p className="text-xl sm:text-2xl text-ink font-mono pt-4 leading-relaxed">
+                  "{currentMemory.story}"
+                </p>
               </div>
-
-              {!isQuizMode ? (
-                /* READ STORY MODE */
-                <div className="space-y-4 max-w-lg">
-                  <div>
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
-                      {currentMemory.personName}
-                    </h2>
-                    <span className="inline-block mt-1 text-lg sm:text-xl font-bold text-teal-800 bg-teal-50 px-4 py-1 rounded-full border border-teal-200">
-                      {currentMemory.relationship}
-                    </span>
-                  </div>
-
-                  <p className="text-xl sm:text-2xl text-stone-700 leading-relaxed font-normal pt-2">
-                    "{currentMemory.story}"
+            ) : (
+              <div className="space-y-6 w-full max-w-md">
+                <div className="space-y-2">
+                  <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink uppercase tracking-widest">
+                    {t('memory_book.who_is_this', 'Who is this?')}
+                  </h2>
+                  <p className="font-mono text-ink font-bold">
+                    Relationship: {currentMemory.relationship}
                   </p>
                 </div>
-              ) : (
-                /* QUIZ MODE ("Who is this?") */
-                <div className="space-y-6 w-full max-w-md">
-                  <div className="space-y-2">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900">
-                      {t('memory_book.who_is_this', 'Who is this?')}
-                    </h2>
-                    <p className="text-base text-stone-500 font-medium">
-                      Relationship: {currentMemory.relationship}
-                    </p>
-                  </div>
 
-                  <div className="grid grid-cols-1 gap-3">
-                    {quizOptions.map((name) => {
-                      const isCorrect = name === currentMemory.personName;
-                      const isChosen = quizAnswered === name;
+                <div className="grid grid-cols-1 gap-4">
+                  {quizOptions.map((name) => {
+                    const isCorrect = name === currentMemory.personName;
+                    const isChosen = quizAnswered === name;
+                    let btnClass = 'btn btn-ghost w-full justify-between';
+                    
+                    if (quizAnswered) {
+                      if (isCorrect) btnClass = 'btn btn-primary w-full justify-between';
+                      else if (isChosen) btnClass = 'btn btn-danger w-full justify-between';
+                    }
 
-                      let btnStyle = 'border-stone-200 hover:border-teal-400 bg-white text-stone-900';
-                      if (quizAnswered) {
-                        if (isCorrect) {
-                          btnStyle = 'border-emerald-500 bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500/20';
-                        } else if (isChosen) {
-                          btnStyle = 'border-red-400 bg-red-50 text-red-900';
-                        }
-                      }
-
-                      return (
-                        <button
-                          key={name}
-                          type="button"
-                          onClick={() => {
-                            if (!quizAnswered) {
-                              setQuizAnswered(name);
-                              if (isCorrect) {
-                                voiceService.speak(`Yes! That's ${name}! Well done.`);
-                              } else {
-                                voiceService.speak(`Good try! That is ${currentMemory.personName}.`);
-                              }
+                    return (
+                      <button
+                        key={name}
+                        className={btnClass}
+                        onClick={() => {
+                          if (!quizAnswered) {
+                            setQuizAnswered(name);
+                            if (isCorrect) {
+                              voiceService.speak(`Yes! That's ${name}! Well done.`);
+                            } else {
+                              voiceService.speak(`Good try! That is ${currentMemory.personName}.`);
                             }
-                          }}
-                          className={`p-4 sm:p-5 rounded-2xl border-2 text-xl font-bold transition-all shadow-xs cursor-pointer min-h-[3.75rem] flex items-center justify-between ${btnStyle}`}
-                        >
-                          <span>{name}</span>
-                          {quizAnswered && isCorrect && (
-                            <CheckCircle2 className="w-6 h-6 text-emerald-600 stroke-[2.5]" />
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {quizAnswered && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="p-4 rounded-2xl bg-teal-50 border border-teal-200 text-teal-900"
-                    >
-                      <p className="text-lg font-medium leading-relaxed">
-                        "{currentMemory.story}"
-                      </p>
-                    </motion.div>
-                  )}
+                          }
+                        }}
+                      >
+                        <span className="text-lg">{name}</span>
+                        {quizAnswered && isCorrect && <CheckCircle2 className="w-6 h-6" />}
+                      </button>
+                    );
+                  })}
                 </div>
-              )}
-            </CardBody>
-          </Card>
+
+                {quizAnswered && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 border-2 border-ink bg-ochre mt-6 shadow-[2px_2px_0px_rgba(26,21,18,1)] text-ink"
+                  >
+                    <p className="text-lg font-mono font-bold leading-relaxed">
+                      "{currentMemory.story}"
+                    </p>
+                  </motion.div>
+                )}
+              </div>
+            )}
+          </div>
         </motion.div>
       </AnimatePresence>
 
       {/* NAVIGATION CONTROLS */}
-      <div className="flex items-center justify-between gap-4 pt-2">
-        <Button
-          variant="secondary"
-          size="lg"
-          onClick={handlePrev}
-          className="text-lg min-h-[3.5rem] px-6 flex-1 shadow-sm font-bold"
-        >
+      <div className="flex items-center justify-between gap-4 max-w-4xl pt-4">
+        <button className="btn btn-ghost flex-1" onClick={handlePrev}>
           <ArrowLeft className="w-5 h-5 mr-2" />
-          <span>Previous</span>
-        </Button>
-
-        <Button
-          variant="primary"
-          size="lg"
-          onClick={handleNext}
-          className="text-lg min-h-[3.5rem] px-6 flex-1 shadow-md font-bold"
-        >
-          <span>Next Memory</span>
+          Previous
+        </button>
+        <button className="btn btn-primary flex-1" onClick={handleNext}>
+          Next Memory
           <ArrowRight className="w-5 h-5 ml-2" />
-        </Button>
+        </button>
       </div>
     </motion.div>
   );

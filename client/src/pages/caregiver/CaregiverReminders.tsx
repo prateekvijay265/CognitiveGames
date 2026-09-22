@@ -1,48 +1,33 @@
 import { useAppDataStore } from '@/store/appDataStore';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-  Bell,
-  Clock,
-  Plus,
-  Trash2,
-  CheckCircle2,
-  Volume2,
-  Vibrate,
-  ShieldCheck,
-  User,
-} from 'lucide-react';
+import { Plus, Trash2, Clock, Volume2, Vibrate, ShieldCheck, User } from 'lucide-react';
 import { EmptyState } from '@/components/ui/EmptyState';
 import type { Reminder, ReminderType } from '../../types';
 
-
 export function CaregiverReminders() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
+  const { patients: DEMO_PATIENTS, reminders: DEMO_REMINDERS } = useAppDataStore();
 
   const [selectedPatientId, setSelectedPatientId] = useState(DEMO_PATIENTS[0]?.id || '');
   const [reminders, setReminders] = useState<Reminder[]>(DEMO_REMINDERS);
   const [showAddForm, setShowAddForm] = useState(false);
 
-  // New reminder form fields
   const [newTitle, setNewTitle] = useState('');
   const [newType, setNewType] = useState<ReminderType>('medicine');
   const [newTime, setNewTime] = useState('08:00');
   const [newDesc, setNewDesc] = useState('');
   const [voiceEnabled, setVoiceEnabled] = useState(true);
-
-  if (DEMO_PATIENTS.length === 0) {
-    return (
-      <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
-        <EmptyState
-          title="No Patients Found"
-          description="You don't have any patients assigned yet. Add a patient to start managing reminders."
-        />
-      </div>
-    );
-  }
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [vibrationEnabled, setVibrationEnabled] = useState(true);
   const [caregiverNotify, setCaregiverNotify] = useState(true);
+
+  if (DEMO_PATIENTS.length === 0) {
+    return (
+      <div className="flex-1 p-4 flex items-center justify-center">
+        <EmptyState title="NO PATIENTS" description="Add a patient to start managing reminders." />
+      </div>
+    );
+  }
 
   const patientReminders = reminders.filter((r) => r.patientId === selectedPatientId);
 
@@ -78,208 +63,128 @@ export function CaregiverReminders() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-7xl mx-auto space-y-6"
+      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
     >
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight">
-            Reminders & Daily Schedule
+          <div className="smallcaps text-sand mb-1">Caregiver • Schedule</div>
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
+            Reminders
           </h1>
-          <p className="text-stone-500 text-sm mt-1">
-            Configure time-sensitive prompts for medication, hydration, and gentle activity.
+          <p className="font-mono text-sand/70 text-sm mt-1">
+            Configure time-sensitive prompts.
           </p>
         </div>
-
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="px-4 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-2 self-start sm:self-auto"
+          className="btn btn-primary btn-sm flex items-center gap-2 self-start sm:self-auto"
         >
-          <Plus className="w-4 h-4" />
-          {showAddForm ? 'Cancel' : 'New Reminder'}
+          <Plus size={16} /> {showAddForm ? 'CANCEL' : 'NEW REMINDER'}
         </button>
       </div>
 
-      {/* Patient Selector Filter */}
-      <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs flex items-center gap-3">
-        <User className="w-4 h-4 text-stone-400" />
-        <span className="text-xs font-bold uppercase tracking-wider text-stone-500">
-          Viewing Patient:
-        </span>
+      <div className="arcade-card p-4 bg-kraft2 flex items-center gap-3">
+        <User size={16} className="text-ink" />
+        <span className="smallcaps text-ink">PATIENT:</span>
         <select
           value={selectedPatientId}
           onChange={(e) => setSelectedPatientId(e.target.value)}
-          className="px-3 py-1.5 text-sm font-semibold bg-stone-50 border border-stone-200 rounded-xl text-stone-800 focus:outline-hidden"
+          className="arcade-select py-1 min-w-[200px]"
         >
           {DEMO_PATIENTS.map((p) => (
             <option key={p.id} value={p.id}>
-              {p.name} (Age {p.age})
+              {p.name.toUpperCase()} (AGE {p.age})
             </option>
           ))}
         </select>
       </div>
 
-      {/* Add Reminder Form */}
       {showAddForm && (
         <motion.form
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           onSubmit={handleCreateReminder}
-          className="bg-white p-6 rounded-3xl border-2 border-teal-500/30 shadow-md space-y-4"
+          className="arcade-card p-6 bg-kraft overflow-hidden space-y-4 border-l-4 border-l-vermilion"
         >
-          <h3 className="font-bold text-stone-900 text-base">Schedule New Reminder</h3>
+          <h3 className="font-display font-bold text-ink uppercase tracking-widest mb-4">Schedule Reminder</h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="text-xs font-semibold text-stone-600 block mb-1">Title</label>
-              <input
-                type="text"
-                placeholder="e.g. Afternoon Water"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                required
-                className="w-full p-2.5 text-sm rounded-xl border border-stone-200 focus:outline-hidden focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
-              />
+              <label className="smallcaps text-sand block mb-1">TITLE</label>
+              <input type="text" required value={newTitle} onChange={(e) => setNewTitle(e.target.value)} className="arcade-input w-full" placeholder="e.g. WATER" />
             </div>
-
             <div>
-              <label className="text-xs font-semibold text-stone-600 block mb-1">Category</label>
-              <select
-                value={newType}
-                onChange={(e) => setNewType(e.target.value as ReminderType)}
-                className="w-full p-2.5 text-sm rounded-xl border border-stone-200 focus:outline-hidden"
-              >
-                <option value="medicine">Medicine</option>
-                <option value="hydration">Hydration</option>
-                <option value="activity">Activity / Brain Game</option>
-                <option value="meal">Meal</option>
-                <option value="exercise">Exercise / Walk</option>
-                <option value="sleep">Sleep / Rest</option>
+              <label className="smallcaps text-sand block mb-1">TYPE</label>
+              <select value={newType} onChange={(e) => setNewType(e.target.value as ReminderType)} className="arcade-select w-full">
+                <option value="medicine">MEDICINE</option>
+                <option value="hydration">HYDRATION</option>
+                <option value="activity">ACTIVITY</option>
+                <option value="meal">MEAL</option>
+                <option value="exercise">EXERCISE</option>
+                <option value="sleep">SLEEP</option>
               </select>
             </div>
-
             <div>
-              <label className="text-xs font-semibold text-stone-600 block mb-1">Time (HH:MM)</label>
-              <input
-                type="time"
-                value={newTime}
-                onChange={(e) => setNewTime(e.target.value)}
-                required
-                className="w-full p-2.5 text-sm rounded-xl border border-stone-200 focus:outline-hidden"
-              />
+              <label className="smallcaps text-sand block mb-1">TIME</label>
+              <input type="time" required value={newTime} onChange={(e) => setNewTime(e.target.value)} className="arcade-input w-full" />
             </div>
           </div>
-
           <div>
-            <label className="text-xs font-semibold text-stone-600 block mb-1">
-              Instructions or Details (optional)
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. Take 1 tablet with warm water"
-              value={newDesc}
-              onChange={(e) => setNewDesc(e.target.value)}
-              className="w-full p-2.5 text-sm rounded-xl border border-stone-200 focus:outline-hidden"
-            />
+            <label className="smallcaps text-sand block mb-1">NOTES</label>
+            <input type="text" value={newDesc} onChange={(e) => setNewDesc(e.target.value)} className="arcade-input w-full" placeholder="Optional details..." />
           </div>
-
-          {/* Accessibility & Notification Toggles */}
-          <div className="flex flex-wrap items-center gap-6 pt-2 text-xs font-semibold text-stone-700">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={voiceEnabled}
-                onChange={(e) => setVoiceEnabled(e.target.checked)}
-                className="rounded text-teal-600"
-              />
-              <Volume2 className="w-4 h-4 text-stone-500" /> Voice Readout
+          
+          <div className="flex flex-wrap gap-4 pt-4 border-t-2 border-ink/20">
+            <label className="flex items-center gap-2 cursor-pointer font-mono text-sm text-ink uppercase">
+              <input type="checkbox" checked={voiceEnabled} onChange={e => setVoiceEnabled(e.target.checked)} className="accent-vermilion" />
+              <Volume2 size={16} /> VOICE
             </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={vibrationEnabled}
-                onChange={(e) => setVibrationEnabled(e.target.checked)}
-                className="rounded text-teal-600"
-              />
-              <Vibrate className="w-4 h-4 text-stone-500" /> Vibration Alert
+            <label className="flex items-center gap-2 cursor-pointer font-mono text-sm text-ink uppercase">
+              <input type="checkbox" checked={vibrationEnabled} onChange={e => setVibrationEnabled(e.target.checked)} className="accent-vermilion" />
+              <Vibrate size={16} /> VIBRATE
             </label>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={caregiverNotify}
-                onChange={(e) => setCaregiverNotify(e.target.checked)}
-                className="rounded text-teal-600"
-              />
-              <ShieldCheck className="w-4 h-4 text-stone-500" /> Notify Caregiver if Missed
+            <label className="flex items-center gap-2 cursor-pointer font-mono text-sm text-ink uppercase">
+              <input type="checkbox" checked={caregiverNotify} onChange={e => setCaregiverNotify(e.target.checked)} className="accent-vermilion" />
+              <ShieldCheck size={16} /> NOTIFY ME
             </label>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
-            <button
-              type="button"
-              onClick={() => setShowAddForm(false)}
-              className="px-4 py-2 text-xs font-semibold text-stone-600 hover:bg-stone-100 rounded-xl"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-5 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs"
-            >
-              Save Reminder
-            </button>
+          <div className="flex justify-end gap-3 pt-4">
+            <button type="button" onClick={() => setShowAddForm(false)} className="btn btn-ghost">CANCEL</button>
+            <button type="submit" className="btn btn-primary">SAVE</button>
           </div>
         </motion.form>
       )}
 
-      {/* Reminder List Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {patientReminders.map((rem) => (
-          <div
-            key={rem.id}
-            className="bg-white p-5 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition-all"
-          >
+        {patientReminders.map((rem, i) => (
+          <div key={rem.id} className="arcade-card p-5 flex flex-col justify-between animate-fade-up bg-kraft" style={{ animationDelay: `${i*100}ms` }}>
             <div>
-              <div className="flex items-start justify-between">
-                <span className="text-[10px] uppercase font-bold text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-md">
-                  {rem.type}
-                </span>
-                <button
-                  onClick={() => handleDeleteReminder(rem.id)}
-                  className="text-stone-300 hover:text-rose-600 p-1 transition-colors"
-                  title="Delete Reminder"
-                >
-                  <Trash2 className="w-4 h-4" />
+              <div className="flex items-start justify-between mb-3">
+                <span className="badge badge-ochre">{rem.type}</span>
+                <button onClick={() => handleDeleteReminder(rem.id)} className="text-sand hover:text-vermilion transition-colors">
+                  <Trash2 size={16} />
                 </button>
               </div>
-
-              <h3 className="font-bold text-stone-900 text-base mt-2">{rem.title}</h3>
-              {rem.description && (
-                <p className="text-xs text-stone-500 mt-1">{rem.description}</p>
-              )}
+              <h3 className="font-display font-bold text-ink text-lg uppercase tracking-widest">{rem.title}</h3>
+              {rem.description && <p className="font-mono text-sand text-sm mt-2">{rem.description}</p>}
             </div>
 
-            <div className="pt-4 border-t border-stone-100 mt-4 flex items-center justify-between text-xs font-semibold text-stone-600">
-              <div className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4 text-stone-400" />
-                <span>{rem.scheduledTime}</span>
+            <div className="mt-4 pt-4 border-t-2 border-dashed border-ink/20 flex items-center justify-between font-mono text-sm">
+              <div className="flex items-center gap-2 text-ink font-bold">
+                <Clock size={14} /> {rem.scheduledTime}
               </div>
-
-              <div className="flex items-center gap-2 text-stone-400">
-                {rem.voiceEnabled && <Volume2 className="w-3.5 h-3.5 text-teal-600" />}
-                {rem.vibrationEnabled && <Vibrate className="w-3.5 h-3.5 text-teal-600" />}
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <div className="flex items-center gap-2 text-vermilion">
+                {rem.voiceEnabled && <Volume2 size={14} />}
+                {rem.vibrationEnabled && <Vibrate size={14} />}
               </div>
             </div>
           </div>
         ))}
-
-        {patientReminders.length === 0 && (
-          <div className="col-span-3 text-center py-12 bg-white rounded-2xl border border-stone-200 text-stone-400">
-            No reminders scheduled for this patient yet.
+        {patientReminders.length === 0 && !showAddForm && (
+          <div className="col-span-full arcade-card p-8 text-center bg-kraft2">
+            <p className="font-mono text-sand">No reminders scheduled for this patient.</p>
           </div>
         )}
       </div>

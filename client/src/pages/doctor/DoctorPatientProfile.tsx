@@ -1,11 +1,8 @@
 import { useAppDataStore } from '@/store/appDataStore';
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
- useParams, useNavigate } from 'react-router-dom';
-import {
- motion } from 'framer-motion';
-import {
-
   ArrowLeft,
   Activity,
   Bell,
@@ -13,13 +10,8 @@ import {
   FileText,
   Info,
   Download,
-  CheckCircle2,
-  Calendar,
-  Clock,
-  Send,
 } from 'lucide-react';
 import {
-
   ResponsiveContainer,
   LineChart,
   Line,
@@ -32,8 +24,7 @@ import {
 } from 'recharts';
 
 export function DoctorPatientProfile() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
-
+  const { patients: DEMO_PATIENTS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
   const { patientId } = useParams<{ patientId: string }>();
   const navigate = useNavigate();
 
@@ -41,12 +32,12 @@ export function DoctorPatientProfile() {
 
   if (!patient) {
     return (
-      <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-xl font-semibold text-stone-900 mb-2">Patient Not Found</h2>
-          <p className="text-stone-500 mb-6">We couldn't find the requested patient profile.</p>
-          <button onClick={() => navigate('/doctor/patients')} className="px-4 py-2 bg-teal-600 text-white rounded-xl font-medium hover:bg-teal-700">
-            Back to Patients
+      <div className="flex-1 p-4 lg:p-8 flex items-center justify-center min-h-[60vh]">
+        <div className="arcade-card p-8 text-center max-w-md">
+          <h2 className="font-display text-2xl font-bold text-ink mb-4 uppercase">Patient Not Found</h2>
+          <p className="font-mono text-sand mb-6">We couldn't find the requested patient profile.</p>
+          <button onClick={() => navigate('/doctor/patients')} className="btn btn-primary">
+            Back to Registry
           </button>
         </div>
       </div>
@@ -54,7 +45,6 @@ export function DoctorPatientProfile() {
   }
 
   const [activeTab, setActiveTab] = useState<'activity' | 'reminders' | 'notes' | 'reports'>('activity');
-
   const [notes, setNotes] = useState(DEMO_NOTES);
   const [newNote, setNewNote] = useState('');
 
@@ -154,31 +144,29 @@ This report summarizes platform activity and is not a medical diagnosis.
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-7xl mx-auto space-y-6"
+      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
     >
       <button
         onClick={() => navigate('/doctor/patients')}
-        className="text-stone-500 hover:text-stone-800 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+        className="nav-item flex items-center gap-2 w-fit text-kraft hover:text-white"
       >
-        <ArrowLeft className="w-4 h-4" /> Back to Patient Registry
+        <ArrowLeft className="w-4 h-4" /> Back to Registry
       </button>
 
       {/* Header Banner */}
-      <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="arcade-card p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-center gap-5">
-          <div className="w-20 h-20 rounded-3xl bg-blue-100 text-blue-800 font-extrabold text-2xl flex items-center justify-center">
+          <div className="w-20 h-20 bg-[#7c3aed] border-4 border-ink flex items-center justify-center font-display font-bold text-white text-3xl shadow-[4px_4px_0px_rgba(26,21,18,1)]">
             {patient.name.split(' ').map((n) => n[0]).join('')}
           </div>
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl sm:text-3xl font-bold text-stone-900">{patient.name}</h1>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-600 uppercase">
-                {patient.language}
-              </span>
+              <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink uppercase tracking-widest">{patient.name}</h1>
+              <span className="badge bg-kraft2 text-ink uppercase">{patient.language}</span>
             </div>
-            <p className="text-stone-500 text-sm mt-0.5">
+            <p className="font-mono text-sand text-sm mt-2">
               Age: {patient.age} • Enrolled: July 2025 • Caregiver: Priya Sharma
             </p>
           </div>
@@ -186,33 +174,34 @@ This report summarizes platform activity and is not a medical diagnosis.
 
         <button
           onClick={handleDownloadReport}
-          className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-2"
+          className="btn"
+          style={{ backgroundColor: '#7c3aed', color: 'white' }}
         >
-          <Download className="w-4 h-4" /> Download Clinical Summary
+          <Download className="w-4 h-4 inline mr-2" /> Download Summary
         </button>
       </div>
 
       {/* Disclaimer strip */}
-      <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-xl flex items-center gap-2.5 text-xs text-stone-700">
-        <Info className="w-4 h-4 text-amber-600 shrink-0" />
+      <div className="bg-amber-100 border-2 border-amber-400 p-3 flex items-center gap-3 text-xs text-ink font-mono uppercase">
+        <Info className="w-5 h-5 text-amber-600 shrink-0" />
         <span>This report summarizes platform activity and is not a medical diagnosis.</span>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-stone-200 space-x-6">
+      <div className="flex border-b-4 border-ink/20 overflow-x-auto no-scrollbar">
         {[
-          { id: 'activity', label: 'Activity Overview', icon: Activity },
-          { id: 'reminders', label: 'Reminder Adherence', icon: Bell },
-          { id: 'notes', label: 'Clinical Observations', icon: MessageSquare },
-          { id: 'reports', label: 'Generate Report', icon: FileText },
+          { id: 'activity', label: 'Activity', icon: Activity },
+          { id: 'reminders', label: 'Reminders', icon: Bell },
+          { id: 'notes', label: 'Notes', icon: MessageSquare },
+          { id: 'reports', label: 'Report', icon: FileText },
         ].map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setActiveTab(id as typeof activeTab)}
-            className={`py-3 text-sm font-bold flex items-center gap-2 border-b-2 transition-all ${
+            className={`py-3 px-6 font-display font-bold uppercase tracking-widest flex items-center gap-2 border-b-4 transition-all whitespace-nowrap ${
               activeTab === id
-                ? 'border-blue-600 text-blue-700'
-                : 'border-transparent text-stone-500 hover:text-stone-800'
+                ? 'border-[#7c3aed] text-kraft'
+                : 'border-transparent text-sand hover:text-kraft'
             }`}
           >
             <Icon className="w-4 h-4" />
@@ -224,53 +213,55 @@ This report summarizes platform activity and is not a medical diagnosis.
       {/* Tab 1: Activity Overview */}
       {activeTab === 'activity' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
-            <h3 className="font-bold text-stone-900 text-base mb-1">Cognitive Activity Trend</h3>
-            <p className="text-xs text-stone-500 mb-6">
+          <div className="arcade-card p-6">
+            <h3 className="font-display font-bold text-ink text-lg uppercase tracking-widest mb-1">Cognitive Activity Trend</h3>
+            <p className="font-mono text-xs text-sand mb-6">
               4-week observed accuracy over sequential cognitive gaming sessions.
             </p>
 
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={activityTrendData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="day" tick={{ fill: '#78716c', fontSize: 12 }} />
-                  <YAxis domain={[40, 100]} tick={{ fill: '#78716c', fontSize: 12 }} />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,21,18,0.1)" vertical={false} />
+                  <XAxis dataKey="day" tick={{ fill: '#675b4c', fontSize: 12, fontFamily: 'monospace' }} />
+                  <YAxis domain={[40, 100]} tick={{ fill: '#675b4c', fontSize: 12, fontFamily: 'monospace' }} />
+                  <Tooltip contentStyle={{ background: '#e7dcc6', border: '2px solid #1a1512', borderRadius: 0, fontFamily: 'monospace', fontSize: 12 }} />
                   <Line
                     type="monotone"
                     dataKey="observedAccuracy"
-                    stroke="#2563eb"
-                    strokeWidth={3}
-                    dot={{ r: 4 }}
+                    stroke="#7c3aed"
+                    strokeWidth={4}
+                    dot={{ fill: '#7c3aed', r: 5, strokeWidth: 2, stroke: '#1a1512' }}
                   />
                   <Line
                     type="monotone"
                     dataKey="benchmark"
-                    stroke="#94a3b8"
+                    stroke="#d99a2b"
+                    strokeWidth={2}
                     strokeDasharray="4 4"
+                    dot={false}
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
-            <h3 className="font-bold text-stone-900 text-base mb-1">
+          <div className="arcade-card p-6">
+            <h3 className="font-display font-bold text-ink text-lg uppercase tracking-widest mb-1">
               Observed Performance by Domain
             </h3>
-            <p className="text-xs text-stone-500 mb-6">
+            <p className="font-mono text-xs text-sand mb-6">
               Aggregated accuracy percentages across individual domains.
             </p>
 
             <div className="h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={domainData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="domain" tick={{ fill: '#78716c', fontSize: 12 }} />
-                  <YAxis domain={[0, 100]} tick={{ fill: '#78716c', fontSize: 12 }} />
-                  <Tooltip />
-                  <Bar dataKey="observedLevel" fill="#2563eb" radius={[8, 8, 0, 0]} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,21,18,0.1)" vertical={false} />
+                  <XAxis dataKey="domain" tick={{ fill: '#675b4c', fontSize: 12, fontFamily: 'monospace' }} />
+                  <YAxis domain={[0, 100]} tick={{ fill: '#675b4c', fontSize: 12, fontFamily: 'monospace' }} />
+                  <Tooltip contentStyle={{ background: '#e7dcc6', border: '2px solid #1a1512', borderRadius: 0, fontFamily: 'monospace', fontSize: 12 }} />
+                  <Bar dataKey="observedLevel" fill="#e0451f" stroke="#1a1512" strokeWidth={2} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -281,20 +272,20 @@ This report summarizes platform activity and is not a medical diagnosis.
       {/* Tab 2: Reminders */}
       {activeTab === 'reminders' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
-            <h3 className="font-bold text-stone-900 text-base mb-1">7-Day Adherence Percentage</h3>
-            <p className="text-xs text-stone-500 mb-6">
+          <div className="arcade-card p-6">
+            <h3 className="font-display font-bold text-ink text-lg uppercase tracking-widest mb-1">7-Day Adherence Percentage</h3>
+            <p className="font-mono text-xs text-sand mb-6">
               Daily percentage of scheduled prompts acknowledged by patient.
             </p>
 
             <div className="h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={reminderAdherenceData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="day" tick={{ fill: '#78716c', fontSize: 12 }} />
-                  <YAxis domain={[0, 100]} tick={{ fill: '#78716c', fontSize: 12 }} />
-                  <Tooltip />
-                  <Bar dataKey="adherence" fill="#059669" radius={[8, 8, 0, 0]} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,21,18,0.1)" vertical={false} />
+                  <XAxis dataKey="day" tick={{ fill: '#675b4c', fontSize: 12, fontFamily: 'monospace' }} />
+                  <YAxis domain={[0, 100]} tick={{ fill: '#675b4c', fontSize: 12, fontFamily: 'monospace' }} />
+                  <Tooltip contentStyle={{ background: '#e7dcc6', border: '2px solid #1a1512', borderRadius: 0, fontFamily: 'monospace', fontSize: 12 }} />
+                  <Bar dataKey="adherence" fill="#d99a2b" stroke="#1a1512" strokeWidth={2} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -307,39 +298,40 @@ This report summarizes platform activity and is not a medical diagnosis.
         <div className="space-y-6">
           <form
             onSubmit={handleAddObservation}
-            className="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs space-y-3"
+            className="arcade-card p-6 space-y-4"
           >
-            <h3 className="font-bold text-stone-900 text-sm">Add Clinical Observation</h3>
+            <h3 className="font-display font-bold text-ink text-lg uppercase tracking-widest">Add Clinical Observation</h3>
             <textarea
               rows={3}
               value={newNote}
               onChange={(e) => setNewNote(e.target.value)}
-              placeholder="Record clinical impression, routine adjustments, or observed response times..."
-              className="w-full p-3 text-sm rounded-xl border border-stone-200 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              placeholder="Record clinical impression, routine adjustments..."
+              className="arcade-input w-full p-3 font-mono text-sm resize-none"
             />
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl shadow-xs"
+              className="btn"
+              style={{ backgroundColor: '#7c3aed', color: 'white' }}
             >
-              Post Clinical Observation
+              Post Observation
             </button>
           </form>
 
           <div className="space-y-4">
             {notes.map((note) => (
-              <div key={note.id} className="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-stone-900 text-sm">{note.authorName}</span>
-                    <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-stone-100 text-stone-600">
+              <div key={note.id} className="arcade-card p-5 space-y-3">
+                <div className="flex items-center justify-between border-b-2 border-ink border-dashed pb-2">
+                  <div className="flex items-center gap-3">
+                    <span className="font-display font-bold text-ink uppercase">{note.authorName}</span>
+                    <span className="badge bg-kraft2 text-ink">
                       {note.authorRole}
                     </span>
                   </div>
-                  <span className="text-xs text-stone-400">
+                  <span className="font-mono text-xs text-sand">
                     {new Date(note.createdAt).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-sm text-stone-700">{note.content}</p>
+                <p className="font-mono text-sm text-ink leading-relaxed">{note.content}</p>
               </div>
             ))}
           </div>
@@ -348,30 +340,43 @@ This report summarizes platform activity and is not a medical diagnosis.
 
       {/* Tab 4: Reports */}
       {activeTab === 'reports' && (
-        <div className="bg-white p-8 rounded-3xl border border-stone-200 shadow-xs space-y-6">
-          <div className="border-b border-stone-200 pb-4 flex justify-between items-center">
+        <div className="paper grain border-4 border-ink p-8 shadow-[8px_8px_0px_rgba(26,21,18,1)] space-y-6">
+          <div className="border-b-4 border-ink pb-4 flex justify-between items-end">
             <div>
-              <h3 className="font-bold text-stone-900 text-lg">Platform Clinical Summary</h3>
-              <p className="text-xs text-stone-500">
+              <h3 className="font-display font-bold text-ink text-2xl uppercase tracking-widest">Platform Clinical Summary</h3>
+              <p className="font-mono text-sm text-sand mt-1">
                 Print-ready documentation for patient medical files.
               </p>
             </div>
             <button
               onClick={handleDownloadReport}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs flex items-center gap-2"
+              className="btn"
+              style={{ backgroundColor: '#7c3aed', color: 'white' }}
             >
-              <Download className="w-4 h-4" /> Download Text Report
+              <Download className="w-4 h-4 inline mr-2" /> Download Text Report
             </button>
           </div>
 
-          <div className="p-4 bg-stone-50 rounded-2xl space-y-3 text-xs text-stone-700 font-mono">
-            <div>Patient: {patient.name} (Age {patient.age})</div>
-            <div>Observation Period: Past 4 Weeks</div>
-            <div>Platform Activities: 48 sessions recorded</div>
-            <div>Average Domain Accuracy: 82% (Consistent)</div>
-            <div>Reminder Adherence: 92% (High)</div>
-            <div>Attending Clinician: Dr. Ananya Das</div>
-            <div className="pt-2 text-stone-500">
+          <div className="p-6 bg-kraft2 border-2 border-ink font-mono text-sm text-ink space-y-4">
+            <div className="flex justify-between border-b-2 border-ink/20 pb-2">
+              <span className="font-bold">Patient:</span> <span>{patient.name} (Age {patient.age})</span>
+            </div>
+            <div className="flex justify-between border-b-2 border-ink/20 pb-2">
+              <span className="font-bold">Observation Period:</span> <span>Past 4 Weeks</span>
+            </div>
+            <div className="flex justify-between border-b-2 border-ink/20 pb-2">
+              <span className="font-bold">Platform Activities:</span> <span>48 sessions recorded</span>
+            </div>
+            <div className="flex justify-between border-b-2 border-ink/20 pb-2">
+              <span className="font-bold">Average Domain Accuracy:</span> <span>82% (Consistent)</span>
+            </div>
+            <div className="flex justify-between border-b-2 border-ink/20 pb-2">
+              <span className="font-bold">Reminder Adherence:</span> <span>92% (High)</span>
+            </div>
+            <div className="flex justify-between border-b-2 border-ink/20 pb-2">
+              <span className="font-bold">Attending Clinician:</span> <span>Dr. Ananya Das</span>
+            </div>
+            <div className="pt-4 text-xs text-sand uppercase">
               Disclaimer: This report summarizes platform activity and is not a medical diagnosis.
             </div>
           </div>

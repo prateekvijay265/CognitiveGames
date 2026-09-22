@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard, Users, Bell, BarChart3, AlertCircle,
   FileText, Settings, LogOut, Menu, X, ShieldCheck,
-  Stethoscope, Activity, UserCog, ChevronRight
+  Stethoscope, Activity, UserCog, ChevronRight, Zap,
 } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import { useUIStore } from '../store/uiStore';
@@ -22,36 +22,35 @@ interface NavItem {
 function getNavItems(role: Role): NavItem[] {
   const base: Record<Role, NavItem[]> = {
     caregiver: [
-      { to: '/caregiver', label: 'Dashboard', icon: LayoutDashboard },
-      { to: '/caregiver/patients', label: 'Patients', icon: Users },
-      { to: '/caregiver/reminders', label: 'Reminders', icon: Bell },
-      { to: '/caregiver/alerts', label: 'Alerts', icon: AlertCircle },
-      { to: '/caregiver/reports', label: 'Reports', icon: FileText },
-      { to: '/caregiver/settings', label: 'Settings', icon: Settings },
+      { to: '/caregiver',          label: 'Dashboard', icon: LayoutDashboard },
+      { to: '/caregiver/patients', label: 'Patients',  icon: Users           },
+      { to: '/caregiver/reminders',label: 'Reminders', icon: Bell            },
+      { to: '/caregiver/alerts',   label: 'Alerts',    icon: AlertCircle     },
+      { to: '/caregiver/reports',  label: 'Reports',   icon: FileText        },
+      { to: '/caregiver/settings', label: 'Settings',  icon: Settings        },
     ],
     doctor: [
-      { to: '/doctor', label: 'Dashboard', icon: LayoutDashboard },
-      { to: '/doctor/patients', label: 'Patients', icon: Users },
-      { to: '/doctor/reports', label: 'Reports', icon: FileText },
+      { to: '/doctor',             label: 'Dashboard', icon: LayoutDashboard },
+      { to: '/doctor/patients',    label: 'Patients',  icon: Users           },
+      { to: '/doctor/reports',     label: 'Reports',   icon: FileText        },
     ],
     admin: [
-      { to: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-      { to: '/admin/users', label: 'Users', icon: UserCog },
-      { to: '/admin/content', label: 'Content', icon: Activity },
-      { to: '/admin/audit', label: 'Audit Logs', icon: ShieldCheck },
+      { to: '/admin',              label: 'Dashboard', icon: LayoutDashboard },
+      { to: '/admin/users',        label: 'Users',     icon: UserCog         },
+      { to: '/admin/content',      label: 'Content',   icon: Activity        },
+      { to: '/admin/audit',        label: 'Audit',     icon: ShieldCheck     },
     ],
   };
   return base[role] ?? [];
 }
 
 const ROLE_META = {
-  caregiver: { label: 'Caregiver', icon: Users, color: 'teal' },
-  doctor: { label: 'Clinical', icon: Stethoscope, color: 'blue' },
-  admin: { label: 'Admin', icon: ShieldCheck, color: 'purple' },
+  caregiver: { label: 'Caregiver',  icon: Users,       accent: '#2563eb',  tag: 'CARE HUB'   },
+  doctor:    { label: 'Clinician',  icon: Stethoscope, accent: '#7c3aed',  tag: 'CLINIC'     },
+  admin:     { label: 'Admin',      icon: ShieldCheck, accent: '#d97706',  tag: 'CONTROL'    },
 };
 
 export default function DashboardLayout({ role }: { role: Role }) {
-  const { t } = useTranslation();
   const { logout, user } = useAuthStore();
   const { sidebarOpen, toggleSidebar } = useUIStore();
   const navigate = useNavigate();
@@ -64,36 +63,52 @@ export default function DashboardLayout({ role }: { role: Role }) {
     navigate('/login');
   };
 
-  const SidebarContent = () => (
-    <>
-      {/* Logo */}
-      <div className="px-6 py-6 border-b border-stone-100">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
-            S
+  const SidebarContent = ({ compact = false }) => (
+    <div className="flex flex-col h-full">
+      {/* Brand */}
+      <div className={cn(
+        'border-b-2 border-kraft/20 flex-shrink-0',
+        compact ? 'p-3' : 'px-5 py-5',
+      )}>
+        {compact ? (
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-10 h-10 bg-vermilion border-2 border-kraft flex items-center justify-center shadow-[2px_2px_0_var(--color-kraft)]">
+              <span className="font-display font-black text-kraft text-lg">S</span>
+            </div>
           </div>
-          <div>
-            <div className="font-bold text-stone-900 text-lg leading-tight">Smriti Care</div>
-            <div className="text-xs text-stone-400">{meta.label} Portal</div>
+        ) : (
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-vermilion border-2 border-kraft flex items-center justify-center shadow-[3px_3px_0_var(--color-kraft)] flex-shrink-0">
+              <span className="font-display font-black text-kraft text-xl">S</span>
+            </div>
+            <div>
+              <div className="font-display font-bold text-kraft text-lg leading-tight uppercase tracking-wide">Smriti Care</div>
+              <div className="smallcaps text-kraft/50 mt-0.5">{meta.tag}</div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
-      {/* User info */}
-      <div className="px-4 py-4 mx-2 mt-3 bg-stone-50 rounded-xl">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-teal-100 flex items-center justify-center text-teal-700 font-semibold text-sm">
-            {user?.name?.charAt(0) ?? 'U'}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="font-semibold text-stone-900 text-sm truncate">{user?.name}</div>
-            <div className="text-xs text-stone-400 truncate">{user?.email}</div>
+      {/* User card */}
+      {!compact && (
+        <div className="mx-4 my-4 p-3 bg-felt/30 border border-kraft/20 flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <div
+              className="w-9 h-9 flex-shrink-0 border-2 border-kraft flex items-center justify-center font-display font-bold text-kraft text-sm"
+              style={{ backgroundColor: meta.accent + '80' }}
+            >
+              {user?.name?.charAt(0) ?? 'U'}
+            </div>
+            <div className="min-w-0">
+              <div className="font-bold text-kraft text-sm truncate leading-tight">{user?.name ?? 'User'}</div>
+              <div className="smallcaps text-kraft/50 truncate mt-0.5">{meta.label}</div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      {/* Nav */}
+      <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-1">
         {navItems.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={to}
@@ -102,100 +117,94 @@ export default function DashboardLayout({ role }: { role: Role }) {
             replace
             onClick={() => setMobileOpen(false)}
             className={({ isActive }) => cn(
-              'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
-              isActive
-                ? 'bg-teal-50 text-teal-700 shadow-sm'
-                : 'text-stone-600 hover:bg-stone-50 hover:text-stone-900'
+              'nav-item',
+              isActive && 'active',
+              compact && 'justify-center !px-2',
             )}
           >
             {({ isActive }) => (
               <>
-                <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
-                <span className="flex-1">{label}</span>
-                {isActive && <ChevronRight size={14} className="text-teal-400" />}
+                <Icon size={compact ? 20 : 17} strokeWidth={isActive ? 2.5 : 2} className="flex-shrink-0" />
+                {!compact && <span className="flex-1 truncate">{label}</span>}
+                {!compact && isActive && <ChevronRight size={12} className="text-kraft/40 flex-shrink-0" />}
               </>
             )}
           </NavLink>
         ))}
       </nav>
 
-      {/* Bottom actions */}
-      <div className="px-3 pb-6 space-y-1 border-t border-stone-100 pt-4">
+      {/* Bottom */}
+      <div className={cn(
+        'border-t-2 border-kraft/20 flex-shrink-0',
+        compact ? 'px-2 py-3' : 'px-2 py-3',
+      )}>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+          className={cn(
+            'nav-item w-full hover:!text-vermilion hover:!bg-vermilion/10',
+            compact && 'justify-center !px-2',
+          )}
         >
-          <LogOut size={18} />
-          Sign Out
+          <LogOut size={compact ? 20 : 17} />
+          {!compact && <span>Sign Out</span>}
         </button>
       </div>
-    </>
+    </div>
   );
 
   return (
-    <div className="min-h-screen flex bg-[#f8f7f4]">
+    <div className="min-h-screen flex felt-surface font-sans">
       {/* Desktop Sidebar */}
       <aside className={cn(
-        'hidden lg:flex flex-col bg-white border-r border-stone-100 transition-all duration-300 flex-shrink-0',
-        sidebarOpen ? 'w-64' : 'w-16'
+        'hidden lg:flex flex-col border-r-2 border-kraft/15 flex-shrink-0 transition-all duration-300',
+        sidebarOpen ? 'w-64' : 'w-[60px]',
       )}>
-        {sidebarOpen ? (
-          <SidebarContent />
-        ) : (
-          <div className="flex flex-col items-center py-4 gap-4">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center text-white font-bold">
-              S
-            </div>
-            {navItems.map(({ to, icon: Icon }) => (
-              <NavLink
-                key={to}
-                to={to}
-                end={to.split('/').length <= 2}
-                replace
-                className={({ isActive }) => cn(
-                  'w-10 h-10 flex items-center justify-center rounded-xl transition-colors',
-                  isActive ? 'bg-teal-50 text-teal-700' : 'text-stone-400 hover:text-stone-700 hover:bg-stone-50'
-                )}
-              >
-                {({ isActive }) => <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />}
-              </NavLink>
-            ))}
-          </div>
-        )}
+        <SidebarContent compact={!sidebarOpen} />
       </aside>
 
-      {/* Mobile Sidebar Overlay */}
+      {/* Mobile Overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
-          <div className="absolute left-0 top-0 bottom-0 w-72 bg-white flex flex-col shadow-2xl">
-            <SidebarContent />
+          <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+          <div className="absolute left-0 top-0 bottom-0 w-72 flex flex-col border-r-2 border-kraft/20" style={{ backgroundColor: '#0f2920' }}>
+            <SidebarContent compact={false} />
           </div>
         </div>
       )}
 
-      {/* Main */}
-      <div className="flex-1 flex flex-col min-w-0">
+      {/* Main content area */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top bar */}
-        <header className="bg-white border-b border-stone-100 px-4 lg:px-6 py-3 flex items-center gap-4 sticky top-0 z-40">
-          {/* Sidebar toggle */}
+        <header className="paper grain border-b-2 border-ink px-4 lg:px-6 py-3 flex items-center gap-4 sticky top-0 z-40 flex-shrink-0">
+          {/* Menu toggle */}
           <button
             onClick={() => {
               if (window.innerWidth < 1024) setMobileOpen(!mobileOpen);
               else toggleSidebar();
             }}
-            className="p-2 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-50 transition-colors"
+            className="icon-btn"
+            aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
 
-          <div className="flex-1 min-w-0">
-            <h1 className="font-semibold text-stone-900 text-base truncate">
-              {meta.label} Portal
-            </h1>
+          {/* Role label */}
+          <div className="flex-1 min-w-0 flex items-center gap-3">
+            <span className="smallcaps text-sand hidden sm:block">{meta.label} Portal</span>
+            <span className="h-4 border-l-2 border-ink/20 hidden sm:block" />
+            <SyncIndicator />
           </div>
 
-          <SyncIndicator />
+          {/* Right side actions */}
+          <div className="flex items-center gap-2">
+            <div className="smallcaps text-sand hidden md:block">{user?.name}</div>
+            <div
+              className="w-9 h-9 border-2 border-ink flex items-center justify-center font-display font-bold text-kraft text-sm shadow-[2px_2px_0_var(--color-ink)]"
+              style={{ backgroundColor: meta.accent }}
+            >
+              {user?.name?.charAt(0) ?? 'U'}
+            </div>
+          </div>
         </header>
 
         {/* Page content */}

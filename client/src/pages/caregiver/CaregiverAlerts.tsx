@@ -1,20 +1,11 @@
 import { useAppDataStore } from '@/store/appDataStore';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-  AlertTriangle,
-  CheckCircle2,
-  Filter,
-  User,
-  Clock,
-  ShieldCheck,
-  Check,
-} from 'lucide-react';
+import { AlertTriangle, CheckCircle2, User, Check } from 'lucide-react';
 import type { Alert } from '../../types';
 
-
 export function CaregiverAlerts() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
+  const { patients: DEMO_PATIENTS, alerts: DEMO_ALERTS } = useAppDataStore();
 
   const [alerts, setAlerts] = useState<Alert[]>(DEMO_ALERTS);
   const [activeTab, setActiveTab] = useState<'unread' | 'all' | 'resolved'>('unread');
@@ -37,33 +28,33 @@ export function CaregiverAlerts() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-7xl mx-auto space-y-6"
+      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
     >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight">
+          <div className="smallcaps text-sand mb-1">Caregiver • Inbox</div>
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
             Patient Alerts
           </h1>
-          <p className="text-stone-500 text-sm mt-1">
+          <p className="font-mono text-sand/70 text-sm mt-1">
             System notices regarding missed reminders, reduced activity, or routine shifts.
           </p>
         </div>
 
-        {/* Patient Filter */}
-        <div className="flex items-center gap-2">
-          <User className="w-4 h-4 text-stone-400" />
+        <div className="flex items-center gap-2 arcade-card p-2 bg-kraft2 self-start sm:self-auto">
+          <User className="w-4 h-4 text-ink ml-1" />
           <select
             value={selectedPatientId}
             onChange={(e) => setSelectedPatientId(e.target.value)}
-            className="px-3 py-1.5 text-xs font-semibold bg-white border border-stone-200 rounded-xl text-stone-700 shadow-xs focus:outline-hidden"
+            className="arcade-select text-sm py-1 border-none bg-transparent"
           >
-            <option value="all">All Patients</option>
+            <option value="all">ALL PATIENTS</option>
             {DEMO_PATIENTS.map((p) => (
               <option key={p.id} value={p.id}>
-                {p.name}
+                {p.name.toUpperCase()}
               </option>
             ))}
           </select>
@@ -71,19 +62,19 @@ export function CaregiverAlerts() {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-stone-200 space-x-6">
+      <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-hide border-b-2 border-kraft/30">
         {[
-          { id: 'unread', label: 'Unresolved / Attention' },
-          { id: 'all', label: 'All Alerts' },
-          { id: 'resolved', label: 'Resolved History' },
+          { id: 'unread', label: 'UNRESOLVED' },
+          { id: 'all', label: 'ALL ALERTS' },
+          { id: 'resolved', label: 'RESOLVED' },
         ].map(({ id, label }) => (
           <button
             key={id}
             onClick={() => setActiveTab(id as typeof activeTab)}
-            className={`py-3 text-sm font-bold border-b-2 transition-all ${
+            className={`px-4 py-2 flex items-center gap-2 font-mono text-sm uppercase transition-all whitespace-nowrap ${
               activeTab === id
-                ? 'border-teal-600 text-teal-700'
-                : 'border-transparent text-stone-500 hover:text-stone-800'
+                ? 'bg-vermilion text-kraft border-2 border-vermilion'
+                : 'bg-transparent text-kraft border-2 border-transparent hover:border-kraft/30'
             }`}
           >
             {label}
@@ -91,44 +82,41 @@ export function CaregiverAlerts() {
         ))}
       </div>
 
-      {/* Alert List */}
-      <div className="space-y-3">
-        {filteredAlerts.map((alert) => {
+      {/* List */}
+      <div className="space-y-4">
+        {filteredAlerts.map((alert, idx) => {
           const patient = DEMO_PATIENTS.find((p) => p.id === alert.patientId);
-
-          const severityStyles = {
-            urgent: 'bg-rose-50 border-rose-200 text-rose-800',
-            attention: 'bg-amber-50 border-amber-200 text-amber-800',
-            info: 'bg-blue-50 border-blue-200 text-blue-800',
-          }[alert.severity];
+          
+          let badgeClass = 'badge-ochre';
+          if (alert.severity === 'urgent') badgeClass = 'badge-vermilion';
+          if (alert.severity === 'info') badgeClass = 'bg-blue-600 text-kraft border-blue-800';
 
           return (
             <div
               key={alert.id}
-              className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-                alert.isResolved ? 'bg-white border-stone-200 opacity-60' : severityStyles
+              className={`arcade-card p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fade-up ${
+                alert.isResolved ? 'opacity-70 bg-kraft2' : 'bg-kraft'
               }`}
+              style={{ animationDelay: `${idx * 100}ms` }}
             >
-              <div className="flex items-start gap-3">
-                <AlertTriangle
-                  className={`w-5 h-5 shrink-0 mt-0.5 ${
-                    alert.isResolved ? 'text-stone-400' : 'text-amber-600'
-                  }`}
-                />
+              <div className="flex items-start gap-4">
+                <div className={`mt-1 ${alert.isResolved ? 'text-sand' : 'text-vermilion'}`}>
+                  <AlertTriangle size={20} />
+                </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                      {patient?.name}
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <span className="font-mono font-bold text-ink uppercase">
+                      {patient?.name || 'UNKNOWN'}
                     </span>
-                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-white/80 border border-stone-200">
+                    <span className={`badge ${badgeClass}`}>
                       {alert.severity}
                     </span>
                   </div>
-                  <h3 className="text-sm sm:text-base font-bold text-stone-900 mt-1">
+                  <h3 className="font-display font-bold text-ink text-base sm:text-lg uppercase">
                     {alert.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-stone-600 mt-0.5">{alert.message}</p>
-                  <span className="text-xs text-stone-400 block mt-2">
+                  <p className="font-mono text-sand text-sm mt-1">{alert.message}</p>
+                  <span className="smallcaps text-sand block mt-3">
                     {new Date(alert.createdAt).toLocaleString()}
                   </span>
                 </div>
@@ -137,28 +125,24 @@ export function CaregiverAlerts() {
               {!alert.isResolved ? (
                 <button
                   onClick={() => handleResolveAlert(alert.id)}
-                  className="px-4 py-2 bg-white hover:bg-stone-50 border border-stone-200 text-stone-800 text-xs font-bold rounded-xl shadow-xs transition-colors self-start sm:self-auto flex items-center gap-1.5"
+                  className="btn btn-sm self-start sm:self-center flex items-center gap-2 bg-kraft2"
                 >
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  Mark Resolved
+                  <Check size={14} /> RESOLVE
                 </button>
               ) : (
-                <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" /> Resolved
+                <span className="smallcaps text-sand flex items-center gap-1 self-start sm:self-center bg-kraft3 px-2 py-1 border-2 border-ink">
+                  <CheckCircle2 size={14} /> RESOLVED
                 </span>
               )}
             </div>
           );
         })}
 
-        {/* Empty state */}
         {filteredAlerts.length === 0 && (
-          <div className="bg-white rounded-3xl p-12 text-center border border-stone-200 shadow-xs">
-            <span className="text-4xl block mb-2">🌿</span>
-            <h3 className="text-lg font-bold text-stone-900">Everything looks calm.</h3>
-            <p className="text-stone-500 text-sm mt-1">
-              No active alerts require attention for this filter.
-            </p>
+          <div className="arcade-card p-12 text-center bg-kraft2">
+            <span className="text-4xl block mb-4">👾</span>
+            <h3 className="font-display font-bold uppercase text-ink tracking-widest text-xl mb-2">ALL CLEAR</h3>
+            <p className="font-mono text-sand">No active alerts match this filter.</p>
           </div>
         )}
       </div>

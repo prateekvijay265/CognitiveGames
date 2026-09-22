@@ -1,9 +1,7 @@
 import { useAppDataStore } from '@/store/appDataStore';
 import React from 'react';
+import { motion } from 'framer-motion';
 import {
- motion } from 'framer-motion';
-import {
-
   Users,
   ShieldCheck,
   Server,
@@ -16,7 +14,6 @@ import {
   FileText,
 } from 'lucide-react';
 import {
-
   ResponsiveContainer,
   PieChart,
   Pie,
@@ -42,10 +39,10 @@ export function AdminDashboard() {
 
   // Pie chart data: User distribution by role
   const roleDistribution = [
-    { name: 'Patients', value: 25, color: '#0d9488' },
-    { name: 'Caregivers', value: 14, color: '#2563eb' },
-    { name: 'Clinicians', value: 6, color: '#7c3aed' },
-    { name: 'Admins', value: 3, color: '#d97706' },
+    { name: 'Patients', value: 25, color: '#1a1512' }, // ink
+    { name: 'Caregivers', value: 14, color: '#675b4c' }, // sand
+    { name: 'Clinicians', value: 6, color: '#e0451f' }, // vermilion
+    { name: 'Admins', value: 3, color: '#d99a2b' }, // ochre
   ];
 
   // Bar chart data: Language distribution
@@ -69,76 +66,67 @@ export function AdminDashboard() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-7xl mx-auto space-y-8"
+      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-purple-700 text-xs font-bold uppercase tracking-wider mb-1">
-            <ShieldCheck className="w-4 h-4" /> System Administration
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight">
-            SMRITI CARE Platform Infrastructure
+          <div className="smallcaps text-sand mb-1">Administrator • Dashboard</div>
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest flex items-center gap-2">
+            <ShieldCheck className="w-6 h-6 text-ochre" /> System Admin
           </h1>
-          <p className="text-stone-500 text-sm mt-0.5">
-            System health, active database metrics, user distribution, and security audit logs.
+          <p className="font-mono text-sand/70 text-sm mt-1">
+            System health, metrics, and global administration.
           </p>
         </div>
 
-        {/* System Health Indicators (All Green) */}
-        <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3.5 py-2 rounded-2xl text-xs font-bold text-emerald-800 self-start sm:self-auto shadow-2xs">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-          <span>All Services Operational: API • DB • Sync • PWA</span>
+        <div className="badge badge-green self-start">
+          <CheckCircle2 className="w-3 h-3 inline mr-1" />
+          All Services Operational
         </div>
       </div>
 
-      {/* Stats Cards Row (6 stats) */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-        <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs">
-          <span className="text-[11px] font-bold uppercase text-stone-400">Total Users</span>
-          <div className="text-2xl font-black text-stone-900 mt-1">{totalUsers}</div>
-          <span className="text-[10px] text-emerald-600 font-semibold">+8 this month</span>
+      {/* Stats Cards Row */}
+      <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
+        <div className="stat-card animate-card-in">
+          <div className="stat-value">{totalUsers}</div>
+          <div className="stat-label">Total Users</div>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs">
-          <span className="text-[11px] font-bold uppercase text-stone-400">Patients</span>
-          <div className="text-2xl font-black text-teal-600 mt-1">{totalPatients}</div>
-          <span className="text-[10px] text-stone-500 font-medium">All active</span>
+        <div className="stat-card animate-card-in animation-delay-200">
+          <div className="stat-value text-vermilion">{totalPatients}</div>
+          <div className="stat-label">Patients</div>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs">
-          <span className="text-[11px] font-bold uppercase text-stone-400">Caregivers</span>
-          <div className="text-2xl font-black text-blue-600 mt-1">{totalCaregivers}</div>
-          <span className="text-[10px] text-stone-500 font-medium">Verified credentials</span>
+        <div className="stat-card animate-card-in animation-delay-200">
+          <div className="stat-value">{totalCaregivers}</div>
+          <div className="stat-label">Caregivers</div>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs">
-          <span className="text-[11px] font-bold uppercase text-stone-400">Doctors</span>
-          <div className="text-2xl font-black text-purple-600 mt-1">{totalDoctors}</div>
-          <span className="text-[10px] text-stone-500 font-medium">Clinical observers</span>
+        <div className="stat-card animate-card-in animation-delay-400">
+          <div className="stat-value">{totalDoctors}</div>
+          <div className="stat-label">Doctors</div>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs">
-          <span className="text-[11px] font-bold uppercase text-stone-400">Game Sessions</span>
-          <div className="text-2xl font-black text-amber-600 mt-1">{totalSessions}</div>
-          <span className="text-[10px] text-emerald-600 font-semibold">100% synced</span>
+        <div className="stat-card animate-card-in animation-delay-400">
+          <div className="stat-value text-ochre">{totalSessions}</div>
+          <div className="stat-label">Sessions</div>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs">
-          <span className="text-[11px] font-bold uppercase text-stone-400">Languages</span>
-          <div className="text-2xl font-black text-rose-600 mt-1">{supportedLanguagesCount}</div>
-          <span className="text-[10px] text-stone-500 font-medium">NE Regional</span>
+        <div className="stat-card animate-card-in animation-delay-400">
+          <div className="stat-value">{supportedLanguagesCount}</div>
+          <div className="stat-label">Languages</div>
         </div>
       </div>
 
-      {/* Charts Grid: User Distribution Pie + Language Usage Bar */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Charts Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* User Distribution PieChart */}
-        <div className="bg-white p-6 rounded-3xl border border-stone-200/80 shadow-xs">
-          <h2 className="text-base font-bold text-stone-900 mb-1">User Role Distribution</h2>
-          <p className="text-xs text-stone-500 mb-4">Breakdown of platform accounts by security role</p>
+        <div className="arcade-card p-5">
+          <h2 className="smallcaps text-ink mb-1">User Role Distribution</h2>
+          <p className="font-mono text-sand text-xs mb-4">Breakdown of platform accounts by security role</p>
 
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -151,31 +139,35 @@ export function AdminDashboard() {
                   outerRadius={85}
                   paddingAngle={5}
                   dataKey="value"
+                  stroke="#1a1512"
+                  strokeWidth={2}
                 >
                   {roleDistribution.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip />
-                <Legend />
+                <Tooltip 
+                  contentStyle={{ background: '#e7dcc6', border: '2px solid #1a1512', borderRadius: 0, fontFamily: 'IBM Plex Mono', fontSize: 12 }}
+                />
+                <Legend wrapperStyle={{ fontFamily: 'IBM Plex Mono', fontSize: 12, color: '#1a1512' }}/>
               </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Language Usage BarChart */}
-        <div className="bg-white p-6 rounded-3xl border border-stone-200/80 shadow-xs">
-          <h2 className="text-base font-bold text-stone-900 mb-1">Language Dialect Distribution</h2>
-          <p className="text-xs text-stone-500 mb-4">Patient active preferences across North-Eastern languages</p>
+        <div className="arcade-card p-5">
+          <h2 className="smallcaps text-ink mb-1">Language Dialect Distribution</h2>
+          <p className="font-mono text-sand text-xs mb-4">Patient active preferences across North-Eastern languages</p>
 
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={languageData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="language" tick={{ fill: '#78716c', fontSize: 11 }} />
-                <YAxis tick={{ fill: '#78716c', fontSize: 11 }} />
-                <Tooltip />
-                <Bar dataKey="users" fill="#7c3aed" radius={[6, 6, 0, 0]} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,21,18,0.08)" vertical={false} />
+                <XAxis dataKey="language" tick={{ fill: '#675b4c', fontSize: 11, fontFamily: 'IBM Plex Mono' }} />
+                <YAxis tick={{ fill: '#675b4c', fontSize: 11, fontFamily: 'IBM Plex Mono' }} />
+                <Tooltip contentStyle={{ background: '#e7dcc6', border: '2px solid #1a1512', borderRadius: 0, fontFamily: 'IBM Plex Mono', fontSize: 12 }} />
+                <Bar dataKey="users" fill="#d99a2b" stroke="#1a1512" strokeWidth={2} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -183,10 +175,10 @@ export function AdminDashboard() {
       </div>
 
       {/* System Health Indicators Strip & Audit Preview */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Health Details */}
-        <div className="bg-white p-6 rounded-3xl border border-stone-200/80 shadow-xs space-y-4">
-          <h2 className="text-base font-bold text-stone-900">Service Infrastructure Health</h2>
+        <div className="arcade-card p-5 space-y-4">
+          <h2 className="smallcaps text-ink">Service Infrastructure Health</h2>
           <div className="space-y-3">
             {[
               { name: 'Core API Gateway', latency: '42ms', status: 'Healthy', icon: Server },
@@ -196,16 +188,16 @@ export function AdminDashboard() {
             ].map((srv) => (
               <div
                 key={srv.name}
-                className="p-3 bg-stone-50 rounded-2xl border border-stone-100 flex items-center justify-between"
+                className="p-3 bg-kraft2 border-2 border-ink flex items-center justify-between"
               >
                 <div className="flex items-center gap-3">
-                  <srv.icon className="w-4 h-4 text-stone-500" />
+                  <srv.icon className="w-5 h-5 text-ink" />
                   <div>
-                    <h4 className="text-xs font-bold text-stone-800">{srv.name}</h4>
-                    <span className="text-[10px] text-stone-400">Response: {srv.latency}</span>
+                    <h4 className="font-bold text-ink text-sm">{srv.name}</h4>
+                    <span className="font-mono text-xs text-sand">Ping: {srv.latency}</span>
                   </div>
                 </div>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                <span className="badge badge-green">
                   {srv.status}
                 </span>
               </div>
@@ -213,24 +205,24 @@ export function AdminDashboard() {
           </div>
         </div>
 
-        {/* Recent Audit Log Preview (2 cols) */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-3xl border border-stone-200/80 shadow-xs space-y-4">
-          <div className="flex items-center justify-between">
+        {/* Recent Audit Log Preview */}
+        <div className="lg:col-span-2 arcade-card p-5 space-y-4">
+          <div className="flex items-center justify-between border-b-2 border-ink/10 pb-2">
             <div>
-              <h2 className="text-base font-bold text-stone-900">Recent Security Audit Events</h2>
-              <p className="text-xs text-stone-500">Live operational audit stream</p>
+              <h2 className="smallcaps text-ink">Recent Security Audit Events</h2>
+              <p className="font-mono text-sand text-xs">Live operational stream</p>
             </div>
-            <span className="text-xs font-bold text-purple-700">Audit Active</span>
+            <span className="badge badge-vermilion animate-pulse">Live</span>
           </div>
 
-          <div className="divide-y divide-stone-100">
+          <div className="divide-y-2 divide-ink/5">
             {recentAudit.map((log) => (
-              <div key={log.id} className="py-2.5 flex items-center justify-between text-xs">
+              <div key={log.id} className="py-2 flex items-center justify-between">
                 <div>
-                  <span className="font-mono font-bold text-stone-800 block">{log.action}</span>
-                  <span className="text-stone-500 text-[11px]">{log.actor}</span>
+                  <span className="font-mono font-bold text-ink text-sm block">{log.action}</span>
+                  <span className="text-sand text-xs font-bold">{log.actor}</span>
                 </div>
-                <span className="text-stone-400 text-[11px] whitespace-nowrap">{log.time}</span>
+                <span className="font-mono text-sand text-xs whitespace-nowrap">{log.time}</span>
               </div>
             ))}
           </div>

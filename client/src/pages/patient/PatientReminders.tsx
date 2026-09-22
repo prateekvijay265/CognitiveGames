@@ -6,11 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { db } from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 import { voiceService } from '@/services/voice';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import { VoiceButton } from '@/components/ui/VoiceButton';
 import { toast } from 'sonner';
-
 
 type ReminderStatus = 'pending' | 'done' | 'snoozed';
 
@@ -44,8 +40,7 @@ function formatReminderTime(timeStr: string): string {
 }
 
 export default function PatientReminders() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
-
+  const { reminders: DEMO_REMINDERS } = useAppDataStore();
   const { t } = useTranslation();
   const todayFormatted = formatDate(new Date());
 
@@ -56,7 +51,6 @@ export default function PatientReminders() {
       title: rem.title,
       description: rem.description || '',
       scheduledTime: rem.scheduledTime,
-      // Mark earlier morning reminder done as realistic demo state
       status: idx === 0 ? 'done' : 'pending',
     }))
   );
@@ -108,35 +102,26 @@ export default function PatientReminders() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="max-w-3xl mx-auto px-4 py-6 sm:py-8 space-y-6 patient-mode"
+      className="max-w-7xl mx-auto p-4 lg:p-6 space-y-6"
     >
-      {/* HEADER */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-sm">
-        <div className="space-y-1">
-          <span className="text-sm font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-            {todayFormatted}
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight pt-1">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+          <div className="smallcaps text-sand mb-1">{todayFormatted}</div>
+          <h1 className="font-display font-bold text-ink text-2xl lg:text-3xl uppercase tracking-widest">
             {t('reminders.title', 'My Reminders')}
           </h1>
-          <p className="text-lg text-stone-600 font-medium">
+          <p className="font-mono text-sand/70 text-sm mt-1">
             {pendingCount === 0
               ? t('reminders.all_done', 'All reminders completed!')
               : `${pendingCount} ${pendingCount === 1 ? 'item' : 'items'} remaining today`}
           </p>
         </div>
-
-        <VoiceButton
-          size="lg"
-          onClick={speakAllPending}
-          showLabel
-          label={t('help.repeat', 'Listen')}
-        />
+        <button className="btn btn-primary" onClick={speakAllPending}>Listen</button>
       </div>
 
       {/* REMINDER ITEMS LIST */}
-      <div className="space-y-4">
+      <div className="space-y-4 max-w-3xl">
         <AnimatePresence>
           {reminders.map((reminder) => {
             const icon = TYPE_ICONS[reminder.type] || '🔔';
@@ -149,20 +134,14 @@ export default function PatientReminders() {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                className={`p-5 sm:p-7 rounded-3xl border-2 transition-all duration-200 shadow-xs ${
-                  isDone
-                    ? 'bg-stone-50/80 border-stone-200 opacity-80'
-                    : 'bg-white border-teal-200/80 hover:border-teal-300'
-                }`}
+                className={`arcade-card p-5 ${isDone ? 'opacity-60 bg-kraft2' : ''}`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
                   {/* Left: Icon, Time, Title */}
                   <div className="flex items-start gap-4 sm:gap-5">
                     <div
-                      className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center shrink-0 border text-4xl sm:text-5xl select-none ${
-                        isDone
-                          ? 'bg-emerald-50 border-emerald-200 text-emerald-600'
-                          : 'bg-teal-50/70 border-teal-200 text-teal-800'
+                      className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center shrink-0 border-2 border-ink text-4xl sm:text-5xl select-none ${
+                        isDone ? 'bg-kraft3' : 'bg-ochre'
                       }`}
                     >
                       {isDone ? '✅' : icon}
@@ -170,27 +149,25 @@ export default function PatientReminders() {
 
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-xl sm:text-2xl font-extrabold text-teal-800 flex items-center gap-1.5">
-                          <Clock className="w-5 h-5 text-teal-600" />
+                        <span className="font-mono font-bold text-ink flex items-center gap-1.5">
+                          <Clock className="w-4 h-4" />
                           {formatReminderTime(reminder.scheduledTime)}
                         </span>
                         {reminder.status === 'snoozed' && (
-                          <Badge variant="warning" size="sm">
-                            Snoozed
-                          </Badge>
+                          <span className="badge badge-sand">Snoozed</span>
                         )}
                       </div>
 
                       <h2
-                        className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${
-                          isDone ? 'line-through text-stone-400' : 'text-stone-900'
+                        className={`text-xl sm:text-2xl font-bold font-display uppercase tracking-widest ${
+                          isDone ? 'line-through text-ink/70' : 'text-ink'
                         }`}
                       >
                         {reminder.title}
                       </h2>
 
                       {reminder.description && (
-                        <p className="text-base sm:text-lg text-stone-500 font-normal">
+                        <p className="text-base font-mono text-sand font-normal">
                           {reminder.description}
                         </p>
                       )}
@@ -200,31 +177,27 @@ export default function PatientReminders() {
                   {/* Right: Actions */}
                   <div className="flex flex-row sm:flex-col items-center justify-end gap-3 shrink-0 pt-2 sm:pt-0">
                     {isDone ? (
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-100/70 text-emerald-800 font-bold text-lg">
-                        <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                      <div className="flex items-center gap-2 px-4 py-2 font-mono font-bold text-ink">
+                        <CheckCircle2 className="w-5 h-5" />
                         <span>Done!</span>
                       </div>
                     ) : (
                       <>
-                        <Button
-                          variant="primary"
-                          size="lg"
+                        <button
                           onClick={() => handleMarkDone(reminder.id, reminder.title)}
-                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg min-h-[3.5rem] px-6 shadow-md active:scale-95 flex-1 sm:flex-initial w-full"
+                          className="btn btn-primary w-full sm:w-auto"
                         >
-                          <Check className="w-6 h-6 mr-1.5 stroke-[3]" />
-                          <span>{t('reminders.done', 'Done')}</span>
-                        </Button>
+                          <Check className="w-5 h-5 mr-1" />
+                          {t('reminders.done', 'Done')}
+                        </button>
 
-                        <Button
-                          variant="secondary"
-                          size="md"
+                        <button
                           onClick={() => handleSnooze(reminder.id, reminder.title)}
-                          className="text-amber-800 border-amber-300 hover:bg-amber-50 font-semibold text-base min-h-[3rem] px-4 flex-1 sm:flex-initial w-full"
+                          className="btn btn-ghost w-full sm:w-auto"
                         >
-                          <RotateCcw className="w-4 h-4 mr-1.5" />
-                          <span>{t('reminders.remind_later', 'Remind Later')}</span>
-                        </Button>
+                          <RotateCcw className="w-4 h-4 mr-1" />
+                          {t('reminders.remind_later', 'Remind Later')}
+                        </button>
                       </>
                     )}
                   </div>

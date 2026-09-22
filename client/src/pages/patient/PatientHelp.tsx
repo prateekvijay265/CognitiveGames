@@ -3,15 +3,11 @@ import { motion } from 'framer-motion';
 import { Phone, HelpCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Card, CardBody } from '@/components/ui/Card';
-import { VoiceButton } from '@/components/ui/VoiceButton';
-import { Button } from '@/components/ui/Button';
 import { useAuthStore } from '@/store/authStore';
-
+import { voiceService } from '@/services/voice';
 
 export default function PatientHelp() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
-
+  const { patients: DEMO_PATIENTS } = useAppDataStore();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { logout } = useAuthStore();
@@ -47,157 +43,107 @@ export default function PatientHelp() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="max-w-3xl mx-auto px-4 py-6 sm:py-8 space-y-6 patient-mode"
+      className="max-w-4xl mx-auto p-4 lg:p-6 space-y-6"
     >
-      {/* HEADER */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-sm">
-        <div className="space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-            {t('help.title', 'Help & Support')}
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight pt-1">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+          <div className="smallcaps text-sand mb-1">{t('help.title', 'Help & Support')}</div>
+          <h1 className="font-display font-bold text-ink text-2xl lg:text-3xl uppercase tracking-widest">
             We are Here For You
           </h1>
-          <p className="text-lg text-stone-600 font-medium">
+          <p className="font-mono text-sand/70 text-sm mt-1">
             Contact your loved ones or learn how to use the app
           </p>
         </div>
-
-        <VoiceButton
-          size="lg"
-          textToSpeak={spokenHelp}
-          showLabel
-          label={t('help.repeat', 'Listen')}
-        />
+        <button className="btn btn-ochre" onClick={() => voiceService.speak(spokenHelp)}>Listen</button>
       </div>
 
       {/* EMERGENCY CAREGIVER CARD */}
-      <Card
-        variant="elevated"
-        padding="lg"
-        className="border-2 border-teal-200 bg-gradient-to-br from-teal-50 via-white to-blue-50/50 shadow-md"
-      >
-        <CardBody className="pt-0 space-y-5">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center shrink-0">
-              <Phone className="w-6 h-6 fill-current" />
-            </div>
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900">
-                {t('help.call_caregiver', 'Call My Caregiver')}
-              </h2>
-              <p className="text-base text-stone-600 font-medium">
-                {contact.name} ({contact.relationship})
-              </p>
-            </div>
+      <div className="arcade-card p-6 bg-ochre/20">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-14 h-14 bg-vermilion text-kraft flex items-center justify-center border-2 border-ink shadow-[2px_2px_0px_rgba(26,21,18,1)]">
+            <Phone className="w-7 h-7" />
           </div>
+          <div>
+            <h2 className="text-2xl font-display font-bold text-ink uppercase tracking-widest">
+              {t('help.call_caregiver', 'Call My Caregiver')}
+            </h2>
+            <p className="font-mono text-ink font-bold">
+              {contact.name} ({contact.relationship})
+            </p>
+          </div>
+        </div>
 
-          <a
-            href={`tel:${contact.phone}`}
-            className="w-full inline-flex items-center justify-center gap-3 h-16 rounded-2xl bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white font-extrabold text-2xl shadow-lg active:scale-[0.98] transition-all cursor-pointer select-none"
-          >
-            <Phone className="w-7 h-7 fill-current" />
-            <span>Call {contact.name}</span>
-          </a>
+        <a
+          href={`tel:${contact.phone}`}
+          className="btn btn-primary w-full text-xl h-16 flex items-center justify-center gap-3 mb-4"
+        >
+          <Phone className="w-6 h-6" />
+          Call {contact.name}
+        </a>
 
-          <p className="text-center text-sm font-semibold text-stone-500">
-            Phone: {contact.phone}
-          </p>
-        </CardBody>
-      </Card>
+        <p className="text-center text-sm font-mono font-bold text-ink/70">
+          Phone: {contact.phone}
+        </p>
+      </div>
 
       {/* HOW TO PLAY GUIDE */}
-      <Card variant="default" padding="lg">
-        <CardBody className="pt-0 space-y-4">
-          <div className="flex items-center gap-2">
-            <HelpCircle className="w-6 h-6 text-teal-600" />
-            <h2 className="text-2xl font-bold text-stone-900">
-              {t('help.how_to_play', 'How to Play & Use Smriti Care')}
-            </h2>
-          </div>
+      <div className="arcade-card p-6">
+        <div className="flex items-center gap-3 mb-6">
+          <HelpCircle className="w-6 h-6 text-vermilion" />
+          <h2 className="text-2xl font-display font-bold text-ink uppercase tracking-widest">
+            {t('help.how_to_play', 'How to Play & Use')}
+          </h2>
+        </div>
 
-          <div className="space-y-3.5 pt-2">
-            {[
-              {
-                step: '1',
-                title: 'Choose Any Fun Activity',
-                desc: 'Tap "Play & Exercise" on your home screen to see gentle memory and attention games.',
-              },
-              {
-                step: '2',
-                title: 'Go At Your Own Pace',
-                desc: 'There are no time limits or penalties. Take as long as you want on each step.',
-              },
-              {
-                step: '3',
-                title: 'Tap Speaker to Hear Instructions',
-                desc: 'Look for the circular gold speaker button to have instructions read to you out loud.',
-              },
-              {
-                step: '4',
-                title: 'Take A Break Anytime',
-                desc: 'You can pause or exit an activity whenever you feel like resting.',
-              },
-            ].map((item) => (
-              <div
-                key={item.step}
-                className="flex items-start gap-4 p-4 rounded-2xl bg-stone-50 border border-stone-200/80"
-              >
-                <span className="w-10 h-10 rounded-xl bg-teal-600 text-white font-extrabold text-lg flex items-center justify-center shrink-0">
-                  {item.step}
-                </span>
-                <div>
-                  <h3 className="text-xl font-bold text-stone-900">{item.title}</h3>
-                  <p className="text-base text-stone-600 font-medium leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
+        <div className="space-y-4">
+          {[
+            { step: '1', title: 'Choose Any Fun Activity', desc: 'Tap "Play & Exercise" on your home screen.' },
+            { step: '2', title: 'Go At Your Own Pace', desc: 'There are no time limits or penalties.' },
+            { step: '3', title: 'Tap Speaker to Hear', desc: 'Look for the speaker button to hear text.' },
+            { step: '4', title: 'Take A Break Anytime', desc: 'You can pause or exit an activity whenever.' },
+          ].map((item) => (
+            <div key={item.step} className="flex gap-4 border-b-2 border-ink/10 pb-4 last:border-0 last:pb-0">
+              <span className="w-10 h-10 bg-ink text-kraft flex items-center justify-center font-display font-bold text-xl shrink-0">
+                {item.step}
+              </span>
+              <div>
+                <h3 className="font-display font-bold text-ink uppercase tracking-widest text-lg">{item.title}</h3>
+                <p className="font-mono text-ink/80 mt-1">{item.desc}</p>
               </div>
-            ))}
-          </div>
-        </CardBody>
-      </Card>
+            </div>
+          ))}
+        </div>
+      </div>
 
-      {/* FREQUENTLY ASKED QUESTIONS */}
-      <Card variant="default" padding="lg">
-        <CardBody className="pt-0 space-y-4">
-          <h2 className="text-2xl font-bold text-stone-900">Frequently Asked Questions</h2>
-
-          <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <div
-                key={i}
-                className="p-5 rounded-2xl border border-stone-200 bg-white space-y-2 shadow-2xs"
-              >
-                <h3 className="text-xl font-bold text-stone-900">{faq.q}</h3>
-                <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </CardBody>
-      </Card>
+      {/* FAQs */}
+      <div className="arcade-card p-6">
+        <h2 className="text-2xl font-display font-bold text-ink uppercase tracking-widest mb-6">FAQs</h2>
+        <div className="space-y-6">
+          {faqs.map((faq, i) => (
+            <div key={i}>
+              <h3 className="font-bold text-ink text-lg mb-1">{faq.q}</h3>
+              <p className="font-mono text-ink/80">{faq.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* APP MANAGEMENT */}
-      <Card variant="default" padding="lg">
-        <CardBody className="pt-0 space-y-4">
-          <h2 className="text-2xl font-bold text-stone-900">App Management</h2>
-          <p className="text-base text-stone-600">For caregivers or shared devices, you can securely sign out.</p>
-          <Button
-            variant="danger"
-            size="lg"
-            className="w-full text-lg font-bold min-h-[4rem]"
-            onClick={() => {
-              logout();
-              navigate('/login');
-            }}
-          >
-            Sign Out of Smriti Care
-          </Button>
-        </CardBody>
-      </Card>
+      <div className="arcade-card p-6">
+        <h2 className="text-2xl font-display font-bold text-ink uppercase tracking-widest mb-2">Sign Out</h2>
+        <p className="font-mono text-ink/80 mb-6">For caregivers or shared devices, you can securely sign out.</p>
+        <button
+          className="btn btn-danger w-full"
+          onClick={() => {
+            logout();
+            navigate('/login');
+          }}
+        >
+          Sign Out of Smriti Care
+        </button>
+      </div>
     </motion.div>
   );
 }

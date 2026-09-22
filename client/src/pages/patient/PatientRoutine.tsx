@@ -5,40 +5,33 @@ import { Check, Clock, CheckCircle2, Sun, Sunset, Moon, Coffee } from 'lucide-re
 import { useTranslation } from 'react-i18next';
 import { formatDate } from '@/lib/utils';
 import { voiceService } from '@/services/voice';
-import { Button } from '@/components/ui/Button';
-import { VoiceButton } from '@/components/ui/VoiceButton';
 import { toast } from 'sonner';
-
 
 type Period = 'morning' | 'afternoon' | 'evening' | 'night';
 
 const PERIOD_CONFIG: Record<
   Period,
-  { label: string; icon: React.ReactNode; color: string; bg: string }
+  { label: string; icon: React.ReactNode; bg: string }
 > = {
   morning: {
     label: 'Morning',
-    icon: <Sun className="w-6 h-6 text-amber-500" />,
-    color: 'text-amber-900',
-    bg: 'bg-amber-50 border-amber-200',
+    icon: <Sun className="w-6 h-6" />,
+    bg: 'bg-ochre',
   },
   afternoon: {
     label: 'Afternoon',
-    icon: <Coffee className="w-6 h-6 text-orange-500" />,
-    color: 'text-orange-900',
-    bg: 'bg-orange-50 border-orange-200',
+    icon: <Coffee className="w-6 h-6" />,
+    bg: 'bg-vermilion',
   },
   evening: {
     label: 'Evening',
-    icon: <Sunset className="w-6 h-6 text-indigo-500" />,
-    color: 'text-indigo-900',
-    bg: 'bg-indigo-50 border-indigo-200',
+    icon: <Sunset className="w-6 h-6" />,
+    bg: 'bg-sand',
   },
   night: {
     label: 'Night',
-    icon: <Moon className="w-6 h-6 text-purple-500" />,
-    color: 'text-purple-900',
-    bg: 'bg-purple-50 border-purple-200',
+    icon: <Moon className="w-6 h-6" />,
+    bg: 'bg-ink',
   },
 };
 
@@ -52,14 +45,11 @@ function formatTime(timeStr: string): string {
 }
 
 export default function PatientRoutine() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
-
+  const { routines: DEMO_ROUTINE } = useAppDataStore();
   const { t } = useTranslation();
   const todayFormatted = formatDate(new Date());
 
-  // Store completed item IDs in state
   const [completedIds, setCompletedIds] = useState<Set<string>>(() => {
-    // Default the first 2 morning items as completed for realistic demo
     return new Set(['r-1', 'r-2']);
   });
 
@@ -79,7 +69,7 @@ export default function PatientRoutine() {
   const periods: Period[] = ['morning', 'afternoon', 'evening', 'night'];
 
   const speakRoutine = () => {
-    const text = `Today is ${todayFormatted}. You have completed ${completedIds.size} of ${DEMO_ROUTINE.length} routine steps. Keep up the wonderful flow!`;
+    const text = `Today is ${todayFormatted}. You have completed ${completedIds.size} of ${DEMO_ROUTINE.length} routine steps.`;
     voiceService.speak(text);
   };
 
@@ -87,80 +77,70 @@ export default function PatientRoutine() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="max-w-3xl mx-auto px-4 py-6 sm:py-8 space-y-6 patient-mode"
+      className="max-w-7xl mx-auto p-4 lg:p-6 space-y-6"
     >
-      {/* HEADER */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-sm">
-        <div className="space-y-1">
-          <span className="text-sm font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-            {todayFormatted}
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight pt-1">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+          <div className="smallcaps text-sand mb-1">{todayFormatted}</div>
+          <h1 className="font-display font-bold text-ink text-2xl lg:text-3xl uppercase tracking-widest">
             {t('routine.title', 'My Day')}
           </h1>
-          <p className="text-lg text-stone-600 font-medium">
+          <p className="font-mono text-sand/70 text-sm mt-1">
             {completedIds.size} of {DEMO_ROUTINE.length} routine steps completed
           </p>
         </div>
-
-        <VoiceButton
-          size="lg"
-          onClick={speakRoutine}
-          showLabel
-          label={t('help.repeat', 'Listen')}
-        />
+        <button className="btn btn-primary" onClick={speakRoutine}>Listen</button>
       </div>
 
       {/* TIMELINE PERIODS */}
-      <div className="space-y-6">
+      <div className="space-y-8 max-w-3xl">
         {periods.map((period) => {
           const items = DEMO_ROUTINE.filter((r) => r.category === period);
           if (items.length === 0) return null;
 
           const config = PERIOD_CONFIG[period];
           const periodLabel = t(`routine.${period}`, config.label);
+          const headerTextColor = period === 'night' ? 'text-kraft' : 'text-ink';
 
           return (
-            <div key={period} className="space-y-3">
+            <div key={period} className="space-y-4">
               {/* Period Header */}
               <div
-                className={`flex items-center gap-2.5 px-4 py-2 rounded-2xl border ${config.bg} w-fit`}
+                className={`flex items-center gap-3 px-4 py-2 border-2 border-ink shadow-[2px_2px_0px_rgba(26,21,18,1)] w-fit ${config.bg} ${headerTextColor}`}
               >
                 {config.icon}
-                <h2 className={`text-xl font-bold tracking-tight ${config.color}`}>
+                <h2 className="text-xl font-bold font-display uppercase tracking-widest">
                   {periodLabel}
                 </h2>
               </div>
 
               {/* Routine Items */}
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {items.map((item) => {
                   const isDone = completedIds.has(item.id);
 
                   return (
                     <div
                       key={item.id}
-                      className={`p-5 rounded-2xl border-2 transition-all flex items-center justify-between gap-4 ${
-                        isDone
-                          ? 'bg-stone-50 border-stone-200 opacity-75'
-                          : 'bg-white border-stone-200/80 hover:border-teal-300 shadow-xs'
+                      className={`arcade-card p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${
+                        isDone ? 'opacity-70 bg-kraft2' : 'bg-kraft'
                       }`}
                     >
                       <div className="flex items-center gap-4">
-                        <span className="text-4xl select-none" role="img" aria-label={item.title}>
+                        <span className="w-12 h-12 flex items-center justify-center border-2 border-ink bg-white text-2xl shadow-[2px_2px_0px_rgba(26,21,18,1)]" role="img" aria-label={item.title}>
                           {item.icon}
                         </span>
 
                         <div className="space-y-0.5">
-                          <span className="text-base font-bold text-teal-800 flex items-center gap-1.5">
-                            <Clock className="w-4 h-4 text-teal-600" />
+                          <span className="font-mono font-bold text-ink flex items-center gap-1.5">
+                            <Clock className="w-4 h-4" />
                             {formatTime(item.scheduledTime)}
                           </span>
 
                           <h3
-                            className={`text-2xl font-extrabold tracking-tight ${
-                              isDone ? 'line-through text-stone-400' : 'text-stone-900'
+                            className={`text-xl font-bold font-display uppercase tracking-widest ${
+                              isDone ? 'line-through text-ink/70' : 'text-ink'
                             }`}
                           >
                             {item.title}
@@ -169,26 +149,24 @@ export default function PatientRoutine() {
                       </div>
 
                       {/* Action Button */}
-                      <div>
+                      <div className="w-full sm:w-auto">
                         {isDone ? (
                           <button
                             type="button"
                             onClick={() => toggleDone(item.id, item.title)}
-                            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-100/80 text-emerald-800 font-bold text-base cursor-pointer hover:bg-emerald-200 transition-colors"
+                            className="btn btn-ghost w-full sm:w-auto flex items-center justify-center gap-2"
                           >
-                            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                            <CheckCircle2 className="w-5 h-5" />
                             <span>Done</span>
                           </button>
                         ) : (
-                          <Button
-                            variant="primary"
-                            size="md"
+                          <button
                             onClick={() => toggleDone(item.id, item.title)}
-                            className="font-bold text-base min-h-[3rem] px-5"
+                            className="btn btn-primary w-full sm:w-auto"
                           >
-                            <Check className="w-5 h-5 mr-1 stroke-[3]" />
-                            <span>{t('routine.mark_done', 'Mark Done')}</span>
-                          </Button>
+                            <Check className="w-5 h-5 mr-1" />
+                            {t('routine.mark_done', 'Mark Done')}
+                          </button>
                         )}
                       </div>
                     </div>

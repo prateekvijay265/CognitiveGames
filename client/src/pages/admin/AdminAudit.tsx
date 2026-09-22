@@ -52,7 +52,7 @@ export function AdminAudit() {
       action: 'ADAPTIVE_DIFFICULTY_EVALUATED',
       category: 'clinical',
       details: 'Adjusted Memory Match difficulty for Lalhmingmawii Sailo to easy.',
-      ipAddress: '127.0.0.1 (Internal Engine)',
+      ipAddress: '127.0.0.1 (Internal)',
     },
     {
       id: 'aud-4',
@@ -130,43 +130,41 @@ export function AdminAudit() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-7xl mx-auto space-y-6"
+      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-purple-700 text-xs font-bold uppercase tracking-wider mb-1">
-            <ShieldCheck className="w-4 h-4" /> Compliance & Integrity
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight">
-            Security & Operational Audit Log
+          <div className="smallcaps text-sand mb-1">Administrator • Audit</div>
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
+            Audit Log
           </h1>
-          <p className="text-stone-500 text-sm mt-0.5">
-            Immutable audit trail of patient data synchronizations, clinical observations, and admin actions.
+          <p className="font-mono text-sand/70 text-sm mt-1">
+            Immutable trail of system events and admin actions.
           </p>
         </div>
 
         <button
           onClick={handleExportCSV}
-          className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-1.5 self-start sm:self-auto"
+          className="btn btn-primary btn-sm flex items-center gap-2 self-start"
         >
           <Download className="w-4 h-4" />
-          Export Audit Trail (CSV)
+          Export CSV
         </button>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+      <div className="arcade-card p-4 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-ink absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search audit actions, actors, or keywords..."
+            placeholder="Search actions or actors..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-sm rounded-xl border border-stone-200 focus:outline-hidden focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+            className="arcade-input w-full pl-10"
           />
         </div>
 
@@ -174,65 +172,67 @@ export function AdminAudit() {
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="px-3 py-2 text-xs font-semibold bg-stone-50 border border-stone-200 rounded-xl text-stone-700 focus:outline-hidden"
+            className="arcade-select"
           >
-            <option value="all">All Event Categories</option>
-            <option value="auth">Authentication & Access</option>
-            <option value="sync">Offline / Online Sync</option>
-            <option value="clinical">Clinical & Cognitive</option>
-            <option value="settings">System & Settings</option>
+            <option value="all">All Categories</option>
+            <option value="auth">Auth & Access</option>
+            <option value="sync">Offline Sync</option>
+            <option value="clinical">Clinical</option>
+            <option value="settings">Settings</option>
           </select>
         </div>
       </div>
 
       {/* Audit Log Table */}
-      <div className="bg-white rounded-2xl border border-stone-200/80 shadow-xs overflow-hidden">
+      <div className="arcade-card overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-stone-600">
-            <thead className="bg-stone-50/80 font-bold uppercase tracking-wider text-stone-400 border-b border-stone-200">
+          <table className="arcade-table w-full">
+            <thead>
               <tr>
-                <th className="py-3.5 px-6">Timestamp</th>
-                <th className="py-3.5 px-4">Action Event</th>
-                <th className="py-3.5 px-4">Actor</th>
-                <th className="py-3.5 px-4">Category</th>
-                <th className="py-3.5 px-6">Details</th>
-                <th className="py-3.5 px-4">Origin IP</th>
+                <th>Timestamp</th>
+                <th>Action Event</th>
+                <th>Actor</th>
+                <th>Category</th>
+                <th>Details</th>
+                <th>IP Address</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100">
+            <tbody>
               {filteredLogs.map((log) => {
-                const categoryStyles = {
-                  auth: 'bg-amber-50 text-amber-800 border-amber-200',
-                  sync: 'bg-teal-50 text-teal-800 border-teal-200',
-                  clinical: 'bg-blue-50 text-blue-800 border-blue-200',
-                  settings: 'bg-purple-50 text-purple-800 border-purple-200',
-                }[log.category];
+                const getCategoryBadge = (cat: string) => {
+                  switch(cat) {
+                    case 'auth': return 'badge-ochre';
+                    case 'sync': return 'badge-green';
+                    case 'clinical': return 'badge-vermilion';
+                    default: return 'badge-sand';
+                  }
+                };
 
                 return (
-                  <tr key={log.id} className="hover:bg-stone-50/70">
-                    <td className="py-3.5 px-6 text-stone-500 whitespace-nowrap">
+                  <tr key={log.id}>
+                    <td className="font-mono text-xs text-sand whitespace-nowrap">
                       {new Date(log.timestamp).toLocaleString()}
                     </td>
 
-                    <td className="py-3.5 px-4 font-mono font-bold text-stone-900">
+                    <td className="font-mono font-bold text-ink text-xs">
                       {log.action}
                     </td>
 
-                    <td className="py-3.5 px-4 font-semibold text-stone-800 whitespace-nowrap">
+                    <td className="font-bold text-ink text-sm whitespace-nowrap">
                       {log.actor}
                     </td>
 
-                    <td className="py-3.5 px-4">
-                      <span
-                        className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase border ${categoryStyles}`}
-                      >
+                    <td>
+                      <span className={`badge ${getCategoryBadge(log.category)}`}>
                         {log.category}
                       </span>
                     </td>
 
-                    <td className="py-3.5 px-6 text-stone-700 max-w-sm">{log.details}</td>
+                    <td className="text-ink text-sm max-w-sm">
+                      {log.details}
+                    </td>
 
-                    <td className="py-3.5 px-4 font-mono text-stone-400 whitespace-nowrap">
+                    <td className="font-mono text-xs text-sand whitespace-nowrap">
                       {log.ipAddress}
                     </td>
                   </tr>

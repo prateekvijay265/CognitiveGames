@@ -1,29 +1,22 @@
 import { useAppDataStore } from '@/store/appDataStore';
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
- useNavigate } from 'react-router-dom';
-import {
- motion } from 'framer-motion';
-import {
-
   Search,
   LayoutGrid,
   List,
-  ChevronRight,
-  TrendingUp,
-  TrendingDown,
-  Info,
   ExternalLink,
+  Users
 } from 'lucide-react';
 
 export function DoctorPatients() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
-
+  const { patients: DEMO_PATIENTS } = useAppDataStore();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [languageFilter, setLanguageFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
+  const [viewMode, setViewMode] = useState<'table' | 'cards'>('cards');
 
   const filteredPatients = useMemo(() => {
     return DEMO_PATIENTS.filter((p) => {
@@ -41,38 +34,41 @@ export function DoctorPatients() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-7xl mx-auto space-y-6"
+      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight">
+          <div className="smallcaps text-sand mb-1 flex items-center gap-2">
+            <Users className="w-4 h-4" /> Patient Management
+          </div>
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
             Patient Registry
           </h1>
-          <p className="text-stone-500 text-sm mt-0.5">
-            Clinical registry of patients enrolled in the SMRITI CARE cognitive monitoring program.
+          <p className="font-mono text-sand/70 text-sm mt-1">
+            Clinical registry of patients enrolled in the SMRITI CARE program.
           </p>
         </div>
 
-        <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl self-start sm:self-auto">
+        <div className="flex items-center gap-1 bg-ink/20 border-2 border-kraft/30 p-1 rounded-none self-start sm:self-auto">
           <button
             onClick={() => setViewMode('table')}
-            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ${
+            className={`p-2 font-mono text-xs uppercase font-bold flex items-center gap-2 ${
               viewMode === 'table'
-                ? 'bg-white text-stone-800 shadow-2xs'
-                : 'text-stone-500 hover:text-stone-800'
+                ? 'bg-kraft text-ink shadow-[2px_2px_0px_rgba(26,21,18,1)]'
+                : 'text-kraft hover:bg-kraft/10'
             }`}
           >
             <List className="w-4 h-4" /> Table
           </button>
           <button
             onClick={() => setViewMode('cards')}
-            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ${
+            className={`p-2 font-mono text-xs uppercase font-bold flex items-center gap-2 ${
               viewMode === 'cards'
-                ? 'bg-white text-stone-800 shadow-2xs'
-                : 'text-stone-500 hover:text-stone-800'
+                ? 'bg-kraft text-ink shadow-[2px_2px_0px_rgba(26,21,18,1)]'
+                : 'text-kraft hover:bg-kraft/10'
             }`}
           >
             <LayoutGrid className="w-4 h-4" /> Cards
@@ -81,15 +77,15 @@ export function DoctorPatients() {
       </div>
 
       {/* Filters Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+      <div className="arcade-card p-4 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-ink absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search by patient name..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-sm rounded-xl border border-stone-200 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+            className="arcade-input w-full pl-9"
           />
         </div>
 
@@ -97,7 +93,7 @@ export function DoctorPatients() {
           <select
             value={languageFilter}
             onChange={(e) => setLanguageFilter(e.target.value)}
-            className="px-3 py-2 text-xs font-semibold bg-stone-50 border border-stone-200 rounded-xl text-stone-700 focus:outline-hidden"
+            className="arcade-select"
           >
             <option value="all">All Languages</option>
             <option value="en">English (en)</option>
@@ -109,7 +105,7 @@ export function DoctorPatients() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 text-xs font-semibold bg-stone-50 border border-stone-200 rounded-xl text-stone-700 focus:outline-hidden"
+            className="arcade-select"
           >
             <option value="all">All Statuses</option>
             <option value="active">Active & Stable</option>
@@ -120,47 +116,44 @@ export function DoctorPatients() {
 
       {/* Table View */}
       {viewMode === 'table' ? (
-        <div className="bg-white rounded-2xl border border-stone-200/80 shadow-xs overflow-hidden">
-          <table className="w-full text-left text-sm text-stone-600">
-            <thead className="bg-stone-50/80 text-xs font-bold uppercase tracking-wider text-stone-500 border-b border-stone-200">
+        <div className="arcade-card overflow-hidden">
+          <table className="arcade-table w-full text-left text-sm">
+            <thead>
               <tr>
-                <th className="py-3.5 px-6">Patient</th>
-                <th className="py-3.5 px-4">Language</th>
-                <th className="py-3.5 px-4">Observation Status</th>
-                <th className="py-3.5 px-4">Caregiver</th>
-                <th className="py-3.5 px-6 text-right">Actions</th>
+                <th className="py-3 px-4">Patient</th>
+                <th className="py-3 px-4">Language</th>
+                <th className="py-3 px-4">Status</th>
+                <th className="py-3 px-4">Caregiver</th>
+                <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100">
+            <tbody>
               {filteredPatients.map((p, idx) => {
-                const isReview = idx === 1 || idx === 2;
+                const isReview = p.id === 'pat-2' || p.id === 'pat-3';
                 return (
-                  <tr key={p.id} className="hover:bg-stone-50/70">
-                    <td className="py-4 px-6 font-bold text-stone-900">
+                  <tr key={p.id}>
+                    <td className="py-3 px-4 font-bold font-mono uppercase text-ink">
                       <div>{p.name}</div>
-                      <div className="text-xs text-stone-400 font-normal">Age: {p.age}</div>
+                      <div className="text-xs text-sand font-normal mt-1">Age: {p.age}</div>
                     </td>
-                    <td className="py-4 px-4 uppercase text-xs font-semibold text-stone-600">
+                    <td className="py-3 px-4 font-mono text-xs uppercase text-ink">
                       {p.language}
                     </td>
-                    <td className="py-4 px-4">
+                    <td className="py-3 px-4">
                       {isReview ? (
-                        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
-                          Needs Review
-                        </span>
+                        <span className="badge badge-vermilion">Review</span>
                       ) : (
-                        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                          Stable
-                        </span>
+                        <span className="badge bg-[#7c3aed] text-white border-2 border-ink">Stable</span>
                       )}
                     </td>
-                    <td className="py-4 px-4 text-xs font-medium text-stone-600">Priya Sharma</td>
-                    <td className="py-4 px-6 text-right">
+                    <td className="py-3 px-4 font-mono text-xs text-ink">Priya Sharma</td>
+                    <td className="py-3 px-4 text-right">
                       <button
                         onClick={() => navigate(`/doctor/patients/${p.id}`)}
-                        className="px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors inline-flex items-center gap-1"
+                        className="btn btn-sm"
+                        style={{ backgroundColor: '#7c3aed', color: 'white' }}
                       >
-                        Clinical Profile <ChevronRight className="w-3.5 h-3.5" />
+                        Profile
                       </button>
                     </td>
                   </tr>
@@ -171,43 +164,55 @@ export function DoctorPatients() {
         </div>
       ) : (
         /* Cards View */
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredPatients.map((p, idx) => {
-            const isReview = idx === 1 || idx === 2;
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPatients.map((p) => {
+            const isReview = p.id === 'pat-2' || p.id === 'pat-3';
             return (
               <div
                 key={p.id}
-                className="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs flex flex-col justify-between"
+                className="arcade-card p-5 flex flex-col justify-between hover-lift"
               >
                 <div>
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h3 className="font-bold text-stone-900 text-base">{p.name}</h3>
-                      <span className="text-xs text-stone-500">
-                        Age: {p.age} • Language: {p.language.toUpperCase()}
-                      </span>
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-[#7c3aed] border-2 border-ink flex items-center justify-center font-display font-bold text-white text-xl shadow-[2px_2px_0px_rgba(26,21,18,1)]">
+                        {p.name[0]}
+                      </div>
+                      <div>
+                        <h3 className="font-display font-bold text-ink uppercase tracking-wider">{p.name}</h3>
+                        <span className="smallcaps text-sand">
+                          Age: {p.age} • Lang: {p.language.toUpperCase()}
+                        </span>
+                      </div>
                     </div>
+                  </div>
+                  
+                  <div className="mb-4">
                     {isReview ? (
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                        Needs Review
-                      </span>
+                      <span className="badge badge-vermilion inline-flex items-center">Needs Review</span>
                     ) : (
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                        Stable
-                      </span>
+                      <span className="badge bg-[#7c3aed] text-white border-2 border-ink inline-flex items-center">Stable</span>
                     )}
                   </div>
-                  <div className="py-3 border-t border-stone-100 space-y-1 text-xs text-stone-600">
-                    <div>Caregiver: Priya Sharma</div>
-                    <div>Emergency Contact: {p.emergencyContact?.name}</div>
+                  
+                  <div className="py-3 border-t-2 border-ink border-dashed space-y-2 font-mono text-xs text-ink">
+                    <div className="flex justify-between">
+                      <span className="text-sand">Caregiver:</span>
+                      <span className="font-bold">Priya Sharma</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sand">Emergency:</span>
+                      <span className="font-bold">{p.emergencyContact?.name || 'N/A'}</span>
+                    </div>
                   </div>
                 </div>
 
                 <button
                   onClick={() => navigate(`/doctor/patients/${p.id}`)}
-                  className="w-full py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold text-xs transition-colors flex items-center justify-center gap-1 mt-3"
+                  className="btn w-full mt-4 flex items-center justify-center gap-2"
+                  style={{ backgroundColor: '#7c3aed', color: 'white' }}
                 >
-                  View Full Profile <ExternalLink className="w-3.5 h-3.5" />
+                  View Profile <ExternalLink className="w-4 h-4" />
                 </button>
               </div>
             );

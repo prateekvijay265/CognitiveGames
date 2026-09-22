@@ -1,24 +1,16 @@
 import { useAppDataStore } from '@/store/appDataStore';
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
- motion } from 'framer-motion';
-import {
-
   FileText,
   Download,
   Printer,
-  Calendar,
-  User,
-  CheckCircle2,
-  Sparkles,
   Info,
 } from 'lucide-react';
-
 import { EmptyState } from '@/components/ui/EmptyState';
 
 export function DoctorReports() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
-
+  const { patients: DEMO_PATIENTS } = useAppDataStore();
   const [selectedPatientId, setSelectedPatientId] = useState(DEMO_PATIENTS[0]?.id || '');
   const [dateRange, setDateRange] = useState<'30d' | '60d' | '90d'>('30d');
   const [reportType, setReportType] = useState<
@@ -28,11 +20,11 @@ export function DoctorReports() {
 
   if (DEMO_PATIENTS.length === 0) {
     return (
-      <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
-        <EmptyState
-          title="No Patients Found"
-          description="You don't have any patients assigned yet. Add a patient to generate clinical reports."
-        />
+      <div className="flex-1 p-4 lg:p-8 flex items-center justify-center min-h-[60vh]">
+        <div className="arcade-card p-8 max-w-md text-center">
+          <h2 className="font-display font-bold text-ink text-xl uppercase mb-2">No Patients Found</h2>
+          <p className="font-mono text-sand text-sm">You don't have any patients assigned yet.</p>
+        </div>
       </div>
     );
   }
@@ -71,52 +63,56 @@ This report summarizes platform activity and is not a medical diagnosis.
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-5xl mx-auto space-y-6"
+      className="p-4 lg:p-6 max-w-5xl mx-auto space-y-6"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight">
-            Clinical Report Generation
+          <div className="smallcaps text-sand mb-1 flex items-center gap-2">
+            <FileText className="w-4 h-4" /> Reports
+          </div>
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
+            Clinical Dossier
           </h1>
-          <p className="text-stone-500 text-sm mt-0.5">
-            Compile structured observational dossiers and export documentation for medical records.
+          <p className="font-mono text-sand/70 text-sm mt-1">
+            Compile structured observational dossiers and export documentation.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => window.print()}
-            className="px-4 py-2 bg-white border border-stone-200 text-stone-700 font-semibold text-xs rounded-xl shadow-xs hover:bg-stone-50 transition-colors flex items-center gap-1.5"
+            className="btn btn-ghost bg-kraft text-ink"
           >
-            <Printer className="w-4 h-4 text-stone-500" />
+            <Printer className="w-4 h-4 inline mr-2" />
             Print
           </button>
           <button
             onClick={handleDownload}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
+            className="btn"
+            style={{ backgroundColor: '#7c3aed', color: 'white' }}
           >
-            <Download className="w-4 h-4" />
-            Export Dossier
+            <Download className="w-4 h-4 inline mr-2" />
+            Export
           </button>
         </div>
       </div>
 
       {/* Report Generator Controls */}
-      <div className="bg-white p-5 rounded-3xl border border-stone-200 shadow-xs space-y-4">
-        <h3 className="text-sm font-bold text-stone-900 uppercase tracking-wider">
+      <div className="arcade-card p-6 space-y-4">
+        <h3 className="font-display font-bold text-ink uppercase tracking-widest border-b-2 border-ink/20 pb-2">
           Configure Dossier Parameters
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
           <div>
-            <label className="text-xs font-semibold text-stone-600 block mb-1">Select Patient</label>
+            <label className="smallcaps text-sand block mb-2">Select Patient</label>
             <select
               value={selectedPatientId}
               onChange={(e) => setSelectedPatientId(e.target.value)}
-              className="w-full p-2.5 text-xs font-semibold rounded-xl border border-stone-200 bg-stone-50 focus:outline-hidden"
+              className="arcade-select w-full"
             >
               {DEMO_PATIENTS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -127,28 +123,28 @@ This report summarizes platform activity and is not a medical diagnosis.
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-stone-600 block mb-1">Observation Period</label>
+            <label className="smallcaps text-sand block mb-2">Observation Period</label>
             <select
               value={dateRange}
               onChange={(e) => setDateRange(e.target.value as typeof dateRange)}
-              className="w-full p-2.5 text-xs font-semibold rounded-xl border border-stone-200 bg-stone-50 focus:outline-hidden"
+              className="arcade-select w-full"
             >
-              <option value="30d">Past 30 Days (Standard)</option>
-              <option value="60d">Past 60 Days (Bimonthly)</option>
-              <option value="90d">Past 90 Days (Quarterly)</option>
+              <option value="30d">Past 30 Days</option>
+              <option value="60d">Past 60 Days</option>
+              <option value="90d">Past 90 Days</option>
             </select>
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-stone-600 block mb-1">Dossier Focus</label>
+            <label className="smallcaps text-sand block mb-2">Dossier Focus</label>
             <select
               value={reportType}
               onChange={(e) => setReportType(e.target.value as typeof reportType)}
-              className="w-full p-2.5 text-xs font-semibold rounded-xl border border-stone-200 bg-stone-50 focus:outline-hidden"
+              className="arcade-select w-full"
             >
-              <option value="comprehensive">Comprehensive Clinical Overview</option>
-              <option value="domain-breakdown">Cognitive Domain Breakdown</option>
-              <option value="adherence-summary">Reminder & Routine Adherence</option>
+              <option value="comprehensive">Comprehensive Overview</option>
+              <option value="domain-breakdown">Domain Breakdown</option>
+              <option value="adherence-summary">Adherence Summary</option>
             </select>
           </div>
         </div>
@@ -156,60 +152,60 @@ This report summarizes platform activity and is not a medical diagnosis.
 
       {/* Generated Report Canvas */}
       {generated && (
-        <div className="bg-white rounded-3xl p-8 border border-stone-200 shadow-sm space-y-6">
-          <div className="border-b border-stone-200 pb-4 flex justify-between items-start">
+        <div className="paper grain border-4 border-ink p-8 shadow-[8px_8px_0px_rgba(26,21,18,1)] space-y-6">
+          <div className="border-b-4 border-ink pb-6 flex justify-between items-start">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">
+              <span className="badge bg-kraft2 text-ink border-2 border-ink mb-3 block w-max">
                 Clinical Observation Dossier
               </span>
-              <h2 className="text-2xl font-bold text-stone-900 mt-2">{patient.name}</h2>
-              <p className="text-xs text-stone-500 mt-0.5">
-                Age: {patient.age} • Primary Language: {patient.language.toUpperCase()} • Generated:{' '}
-                {new Date().toLocaleDateString()}
+              <h2 className="font-display font-bold text-ink text-3xl uppercase tracking-widest">{patient.name}</h2>
+              <p className="font-mono text-sm text-sand mt-2">
+                Age: {patient.age} • Lang: {patient.language.toUpperCase()} • Date: {new Date().toLocaleDateString()}
               </p>
             </div>
-            <div className="text-right text-xs">
-              <span className="text-stone-400 block font-semibold">Attending Physician</span>
-              <span className="font-bold text-stone-800">Dr. Ananya Das</span>
+            <div className="text-right flex flex-col items-end">
+              <span className="smallcaps text-sand">Attending</span>
+              <span className="font-mono font-bold text-ink text-lg uppercase bg-[#7c3aed] text-white px-3 py-1 border-2 border-ink mt-1 shadow-[2px_2px_0px_rgba(26,21,18,1)]">
+                Dr. Ananya Das
+              </span>
             </div>
           </div>
 
-          <div className="p-4 bg-amber-50/70 border border-amber-200 rounded-2xl text-xs text-stone-700 flex items-center gap-2">
-            <Info className="w-4 h-4 text-amber-600 shrink-0" />
+          <div className="bg-amber-100 border-2 border-amber-400 p-3 flex items-center gap-3 text-xs text-ink font-mono uppercase">
+            <Info className="w-5 h-5 text-amber-600 shrink-0" />
             <span>
-              <strong>Clinical Observation Disclaimer:</strong> This summary details platform activity
-              and observed interaction trends. It does not constitute a diagnostic medical evaluation.
+              <strong>Disclaimer:</strong> This summary details platform activity and observed trends. It does not constitute a diagnostic evaluation.
             </span>
           </div>
 
-          <div className="space-y-4 text-xs text-stone-700 leading-relaxed">
+          <div className="space-y-8 font-mono text-sm text-ink leading-relaxed">
             <div>
-              <h4 className="font-bold text-stone-900 text-sm mb-1 uppercase tracking-wider">
-                1. Activity & Stability Summary
+              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-2">
+                <span className="w-6 h-6 bg-ink text-kraft flex items-center justify-center text-sm">1</span> Activity & Stability
               </h4>
-              <p>
-                Patient completed 52 sessions during the selected {dateRange} observation window.
+              <p className="pl-8">
+                Patient completed 52 sessions during the selected {dateRange} window.
                 Average observed accuracy across cognitive memory and attention activities was 81%,
                 which aligns with historical baseline performance for this patient.
               </p>
             </div>
 
             <div>
-              <h4 className="font-bold text-stone-900 text-sm mb-1 uppercase tracking-wider">
-                2. Domain Evaluation
+              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-2">
+                <span className="w-6 h-6 bg-ink text-kraft flex items-center justify-center text-sm">2</span> Domain Evaluation
               </h4>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Memory Matching & Sequence Recall: 82% accuracy, normal response latency.</li>
-                <li>Visual Attention & Detail Identification: 85% accuracy, steady focus.</li>
-                <li>Routine & Daily Sequencing: 90% accuracy, highly preserved routine memory.</li>
+              <ul className="list-disc pl-12 space-y-2">
+                <li><strong>Memory & Sequence:</strong> 82% accuracy, normal latency.</li>
+                <li><strong>Visual Attention:</strong> 85% accuracy, steady focus.</li>
+                <li><strong>Routine Sequencing:</strong> 90% accuracy, preserved routine memory.</li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold text-stone-900 text-sm mb-1 uppercase tracking-wider">
-                3. Medication & Hydration Adherence
+              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-2">
+                <span className="w-6 h-6 bg-ink text-kraft flex items-center justify-center text-sm">3</span> Adherence Summary
               </h4>
-              <p>
+              <p className="pl-8">
                 Adherence tracking indicates 92% timely prompt acknowledgments. Missed prompts were
                 isolated to weekend afternoons and followed up promptly by caregiver Priya Sharma.
               </p>

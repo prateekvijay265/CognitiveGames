@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Gamepad2, Clock, Brain, Eye, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDataStore } from '@/store/appDataStore';
 import {
@@ -9,21 +9,23 @@ import {
   Line,
   XAxis,
   Tooltip,
+  CartesianGrid,
+  YAxis
 } from 'recharts';
 
 export function CaregiverDashboard() {
   const [activeTab, setActiveTab] = useState('This Week');
-  const patients = useAppDataStore((state) => state.patients);
+  const { patients, alerts } = useAppDataStore();
   const navigate = useNavigate();
 
   // Dynamic chart data matching the mockup trend but varying by tab
   const getChartData = () => {
     if (activeTab === 'This Month') {
       return [
-        { day: 'Week 1', value: 30 },
-        { day: 'Week 2', value: 45 },
-        { day: 'Week 3', value: 65 },
-        { day: 'Week 4', value: 85 },
+        { day: 'W1', value: 30 },
+        { day: 'W2', value: 45 },
+        { day: 'W3', value: 65 },
+        { day: 'W4', value: 85 },
       ];
     }
     if (activeTab === 'All Time') {
@@ -48,172 +50,111 @@ export function CaregiverDashboard() {
   };
 
   const chartData = getChartData();
+  
+  const activeAlertsCount = alerts.filter(a => !a.isResolved).length;
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="px-5 pt-6 pb-28 font-sans bg-[#FDFBF7] min-h-screen"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
     >
-      {/* Header & Illustration */}
-      <div className="flex justify-between items-start mb-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-[26px] font-bold text-stone-900 leading-tight mb-1">
+          <div className="smallcaps text-sand mb-1">Caregiver • Dashboard</div>
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
             Caregiver Insights
           </h1>
-          <p className="text-stone-500 text-sm font-medium">Track progress and stay connected.</p>
+          <p className="font-mono text-sand/70 text-sm mt-1">Track progress and stay connected.</p>
         </div>
-        {/* Simple SVG Abstraction of Caregiver & Patient */}
-        <div className="w-16 h-16 shrink-0 relative flex items-end">
-           <div className="w-10 h-10 bg-[#E8C5B3] rounded-full absolute bottom-0 right-0 z-10 shadow-sm border-2 border-white"></div>
-           <div className="w-12 h-12 bg-[#D1D5DB] rounded-full absolute bottom-2 left-0 shadow-sm border-2 border-white"></div>
+        <button onClick={() => navigate('/caregiver/patients')} className="btn btn-primary btn-sm self-start">View Patients</button>
+      </div>
+
+      {/* Stats row */}
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="stat-card animate-card-in" style={{ backgroundColor: '#2563eb', color: '#e7dcc6' }}>
+          <div className="stat-value">{patients.length}</div>
+          <div className="stat-label" style={{ color: '#e7dcc6' }}>Total Patients</div>
+        </div>
+        <div className="stat-card animate-card-in animation-delay-200">
+          <div className="stat-value">{activeAlertsCount}</div>
+          <div className="stat-label">Active Alerts</div>
+        </div>
+        <div className="stat-card animate-card-in animation-delay-400">
+          <div className="stat-value">85%</div>
+          <div className="stat-label">Completion Rate</div>
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="flex p-1 bg-white rounded-full border border-stone-100 shadow-[0_2px_8px_rgba(0,0,0,0.03)] mb-8">
-        {['This Week', 'This Month', 'All Time'].map(tab => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`flex-1 text-[13px] font-bold py-2 rounded-full transition-all ${
-              activeTab === tab 
-                ? 'bg-stone-200 text-stone-900 shadow-sm' 
-                : 'text-stone-400 hover:text-stone-600'
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-3 mb-8">
-        {/* Stat 1 */}
-        <button onClick={() => navigate('/caregiver/reports')} className="text-left bg-white p-4 rounded-3xl border border-stone-100 shadow-[0_4px_16px_rgba(0,0,0,0.03)] active:scale-95 transition-transform">
-          <div className="flex items-center gap-2 mb-3">
-             <div className="w-7 h-7 rounded-full bg-teal-50 flex items-center justify-center text-teal-600">
-                <Gamepad2 className="w-4 h-4" />
-             </div>
-             <span className="text-[11px] font-bold text-stone-500">Games completed</span>
+      {/* Chart Section */}
+      <div className="arcade-card p-5 animate-card-in animation-delay-400">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-display uppercase tracking-widest font-bold text-ink">Progress Trend</h3>
+          <div className="flex gap-2">
+            {['This Week', 'This Month', 'All Time'].map(tab => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`text-xs font-mono uppercase px-2 py-1 border-2 border-ink ${
+                  activeTab === tab ? 'bg-vermilion text-kraft' : 'bg-transparent text-ink hover:bg-kraft2'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
-          <div className="flex items-end justify-between">
-             <span className="text-2xl font-bold text-stone-900 leading-none">18</span>
-             <span className="text-[11px] font-bold text-teal-500 bg-teal-50 px-1.5 py-0.5 rounded flex items-center">↑ 12%</span>
-          </div>
-        </button>
-
-        {/* Stat 2 */}
-        <button onClick={() => navigate('/caregiver/reports')} className="text-left bg-white p-4 rounded-3xl border border-stone-100 shadow-[0_4px_16px_rgba(0,0,0,0.03)] active:scale-95 transition-transform">
-          <div className="flex items-center gap-2 mb-3">
-             <div className="w-7 h-7 rounded-full bg-sky-50 flex items-center justify-center text-sky-600">
-                <Clock className="w-4 h-4" />
-             </div>
-             <span className="text-[11px] font-bold text-stone-500">Average session</span>
-          </div>
-          <div className="flex items-end justify-between">
-             <span className="text-2xl font-bold text-stone-900 leading-none">7 min</span>
-             <span className="text-[11px] font-bold text-teal-500 bg-teal-50 px-1.5 py-0.5 rounded flex items-center">↑ 8%</span>
-          </div>
-        </button>
-
-        {/* Stat 3 */}
-        <button onClick={() => navigate('/caregiver/reports')} className="text-left bg-white p-4 rounded-3xl border border-stone-100 shadow-[0_4px_16px_rgba(0,0,0,0.03)] active:scale-95 transition-transform">
-          <div className="flex items-center gap-2 mb-3">
-             <div className="w-7 h-7 rounded-full bg-rose-50 flex items-center justify-center text-rose-500">
-                <Brain className="w-4 h-4" />
-             </div>
-             <span className="text-[11px] font-bold text-stone-500 leading-tight">Memory activities</span>
-          </div>
-          <div className="flex items-end justify-between">
-             <span className="text-2xl font-bold text-stone-900 leading-none">6</span>
-             <span className="text-[11px] font-bold text-orange-500 bg-orange-50 px-1.5 py-0.5 rounded flex items-center">↑ 15%</span>
-          </div>
-        </button>
-
-        {/* Stat 4 */}
-        <button onClick={() => navigate('/caregiver/reports')} className="text-left bg-white p-4 rounded-3xl border border-stone-100 shadow-[0_4px_16px_rgba(0,0,0,0.03)] active:scale-95 transition-transform">
-          <div className="flex items-center gap-2 mb-3">
-             <div className="w-7 h-7 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
-                <Eye className="w-4 h-4" />
-             </div>
-             <span className="text-[11px] font-bold text-stone-500 leading-tight">Attention activities</span>
-          </div>
-          <div className="flex items-end justify-between">
-             <span className="text-2xl font-bold text-stone-900 leading-none">5</span>
-             <span className="text-[11px] font-bold text-teal-500 bg-teal-50 px-1.5 py-0.5 rounded flex items-center">↑ 10%</span>
-          </div>
-        </button>
-      </div>
-
-      {/* Progress Trend Chart */}
-      <div className="mb-10">
-        <h3 className="font-bold text-[15px] text-stone-900 mb-4 px-1">Progress Trend</h3>
-        <div className="h-40 w-full">
+        </div>
+        <div className="h-64 w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
-              <XAxis 
-                dataKey="day" 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: '#A8A29E', fontSize: 11, fontWeight: 600 }}
-                dy={10}
-              />
-              <Tooltip 
-                contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
-                cursor={{ stroke: '#4A856E', strokeWidth: 1, strokeDasharray: '4 4' }}
-              />
+            <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,21,18,0.08)" />
+              <XAxis dataKey="day" tick={{ fontSize: 10, fill: '#675b4c', fontFamily: 'IBM Plex Mono' }} />
+              <YAxis tick={{ fontSize: 10, fill: '#675b4c', fontFamily: 'IBM Plex Mono' }} />
+              <Tooltip contentStyle={{ background: '#e7dcc6', border: '2px solid #1a1512', borderRadius: 0, fontFamily: 'IBM Plex Mono', fontSize: 12 }} />
               <Line 
                 type="monotone" 
                 dataKey="value" 
-                stroke="#4A856E" 
-                strokeWidth={3}
-                dot={{ r: 4, fill: '#4A856E', strokeWidth: 2, stroke: '#fff' }}
-                activeDot={{ r: 6, fill: '#4A856E', stroke: '#fff', strokeWidth: 2 }}
+                stroke="#e0451f" 
+                strokeWidth={3} 
+                dot={{ fill: '#e0451f', r: 4, strokeWidth: 0 }} 
+                activeDot={{ r: 6, fill: '#e0451f', stroke: '#1a1512', strokeWidth: 2 }}
               />
             </LineChart>
           </ResponsiveContainer>
         </div>
       </div>
 
-      {/* My Patients Section */}
+      {/* Patient List */}
       <div>
-        <div className="flex items-center justify-between mb-4 px-1">
-          <h3 className="font-bold text-[15px] text-stone-900">My Patients</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-display uppercase tracking-widest font-bold text-kraft">My Patients</h3>
           <Link
             to="/caregiver/patients"
-            className="text-[11px] font-bold text-[#4A856E] flex items-center gap-0.5 active:opacity-70"
+            className="smallcaps text-sand hover:text-vermilion transition-colors flex items-center gap-1"
           >
-            View All <ArrowRight size={14} className="stroke-[2.5]" />
+            View All <ArrowRight size={14} />
           </Link>
         </div>
         
-        <div className="space-y-3">
-          {patients.map((patient) => {
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {patients.map((patient, i) => {
             const initials = patient.name
               .split(' ')
               .map((n) => n[0])
               .join('');
 
             return (
-              <Link
-                key={patient.id}
-                to={`/caregiver/patient/${patient.id}`}
-                className="bg-white p-4 rounded-3xl border border-stone-100 shadow-[0_4px_16px_rgba(0,0,0,0.03)] flex items-center gap-4 active:scale-[0.98] transition-transform"
-              >
-                <div className="w-12 h-12 rounded-full bg-[#E8C5B3]/30 flex items-center justify-center text-[#A67C65] font-bold shrink-0 border-2 border-white shadow-sm">
+              <div key={patient.id} className={`arcade-card p-4 flex items-center justify-between gap-3 animate-fade-up`} style={{ animationDelay: `${i * 100}ms` }}>
+                <div className="w-12 h-12 border-2 border-ink flex items-center justify-center font-display font-bold text-kraft flex-shrink-0" style={{ backgroundColor: '#2563eb' }}>
                   {initials}
                 </div>
-                <div className="flex-1">
-                  <h4 className="font-bold text-[15px] text-stone-900 leading-tight">{patient.name}</h4>
-                  <p className="text-[12px] font-medium text-stone-500 mt-0.5">
-                    Age {patient.age} • Language: {patient.language ? patient.language.toUpperCase() : 'EN'}
-                  </p>
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-ink font-mono uppercase truncate">{patient.name}</div>
+                  <div className="smallcaps text-sand mt-1">Age {patient.age} • {patient.language?.toUpperCase() || 'EN'}</div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center text-stone-400">
-                  <ArrowRight size={16} />
-                </div>
-              </Link>
+                <button onClick={() => navigate(`/caregiver/patients/${patient.id}`)} className="btn btn-sm btn-ghost">View →</button>
+              </div>
             );
           })}
         </div>

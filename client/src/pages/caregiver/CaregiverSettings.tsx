@@ -1,48 +1,30 @@
 import { useAppDataStore } from '@/store/appDataStore';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-  SlidersHorizontal,
-  Volume2,
-  Eye,
-  Type,
-  Languages,
-  Check,
-  Bell,
-  Save,
-  User,
-} from 'lucide-react';
+import { SlidersHorizontal, Eye, Save, User, Check } from 'lucide-react';
 import { EmptyState } from '@/components/ui/EmptyState';
 import type { GameDifficulty, SupportedLanguage } from '../../types';
 
-
 export function CaregiverSettings() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
-
+  const { patients: DEMO_PATIENTS } = useAppDataStore();
   const [selectedPatientId, setSelectedPatientId] = useState(DEMO_PATIENTS[0]?.id || '');
 
   if (DEMO_PATIENTS.length === 0) {
     return (
       <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
-        <EmptyState
-          title="No Patients Found"
-          description="You don't have any patients assigned yet. Add a patient to configure their settings."
-        />
+        <EmptyState title="NO PATIENTS" description="Add a patient to configure settings." />
       </div>
     );
   }
 
   const patient = DEMO_PATIENTS.find((p) => p.id === selectedPatientId) || DEMO_PATIENTS[0];
 
-  const [fontSize, setFontSize] = useState<'normal' | 'large' | 'x-large'>(
-    patient.accessibilitySettings.fontSize || 'large'
-  );
+  const [fontSize, setFontSize] = useState<'normal' | 'large' | 'x-large'>(patient.accessibilitySettings.fontSize || 'large');
   const [highContrast, setHighContrast] = useState(patient.accessibilitySettings.highContrast);
   const [voiceEnabled, setVoiceEnabled] = useState(patient.accessibilitySettings.voiceEnabled);
   const [soundEnabled, setSoundEnabled] = useState(patient.accessibilitySettings.soundEnabled);
   const [language, setLanguage] = useState<SupportedLanguage>(patient.language);
 
-  // Per-game difficulty profile
   const [gameDifficulties, setGameDifficulties] = useState<Record<string, GameDifficulty>>({
     memoryMatch: patient.difficultyProfile.memoryMatch || 'easy',
     rememberObjects: patient.difficultyProfile.rememberObjects || 'easy',
@@ -83,60 +65,48 @@ export function CaregiverSettings() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-4xl mx-auto space-y-6"
+      className="p-4 lg:p-6 max-w-4xl mx-auto space-y-6"
     >
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900 tracking-tight">
-            Patient Settings & Preferences
+          <div className="smallcaps text-sand mb-1">Caregiver • Preferences</div>
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
+            Patient Settings
           </h1>
-          <p className="text-stone-500 text-sm mt-1">
-            Personalize accessibility options, language dialect, and per-game difficulty profiles.
-          </p>
         </div>
-
-        <div className="flex items-center gap-2">
-          <User className="w-4 h-4 text-stone-400" />
+        <div className="arcade-card p-2 bg-kraft2 flex items-center gap-2 self-start sm:self-auto">
+          <User size={16} className="text-ink ml-2" />
           <select
             value={selectedPatientId}
             onChange={(e) => setSelectedPatientId(e.target.value)}
-            className="px-3 py-1.5 text-xs font-semibold bg-white border border-stone-200 rounded-xl text-stone-800 shadow-xs focus:outline-hidden"
+            className="arcade-select py-1 text-sm border-none bg-transparent"
           >
             {DEMO_PATIENTS.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name}
-              </option>
+              <option key={p.id} value={p.id}>{p.name.toUpperCase()}</option>
             ))}
           </select>
         </div>
       </div>
 
       <form onSubmit={handleSave} className="space-y-6">
-        {/* Accessibility Panel */}
-        <div className="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs space-y-5">
-          <h2 className="text-base font-bold text-stone-900 flex items-center gap-2">
-            <Eye className="w-5 h-5 text-teal-600" /> Accessibility & Interface
+        <div className="arcade-card p-6">
+          <h2 className="font-display font-bold uppercase tracking-widest text-ink flex items-center gap-2 mb-6">
+            <Eye size={20} className="text-vermilion" /> ACCESSIBILITY
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
-            {/* Font Size Selection */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
-              <label className="text-xs font-bold text-stone-700 block mb-2">
-                Patient Text Size
-              </label>
-              <div className="grid grid-cols-3 gap-2">
+              <label className="smallcaps text-sand block mb-2">TEXT SIZE</label>
+              <div className="flex gap-2">
                 {(['normal', 'large', 'x-large'] as const).map((size) => (
                   <button
                     key={size}
                     type="button"
                     onClick={() => setFontSize(size)}
-                    className={`py-2 px-3 text-xs font-bold rounded-xl border capitalize transition-all ${
-                      fontSize === size
-                        ? 'bg-teal-50 border-teal-500 text-teal-800 shadow-2xs'
-                        : 'border-stone-200 text-stone-600 hover:bg-stone-50'
+                    className={`flex-1 py-2 font-mono uppercase text-sm border-2 ${
+                      fontSize === size ? 'bg-vermilion text-kraft border-ink' : 'bg-kraft2 text-ink border-ink hover:bg-kraft3'
                     }`}
                   >
                     {size}
@@ -144,87 +114,53 @@ export function CaregiverSettings() {
                 ))}
               </div>
             </div>
-
-            {/* Language Dialect */}
             <div>
-              <label className="text-xs font-bold text-stone-700 block mb-2">
-                Primary Audio & UI Language
-              </label>
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value as SupportedLanguage)}
-                className="w-full p-2.5 text-xs font-semibold rounded-xl border border-stone-200 bg-stone-50 focus:outline-hidden"
-              >
-                <option value="en">English (India)</option>
-                <option value="as">Assamese (অসমীয়া)</option>
-                <option value="hi">Hindi (हिन्दी)</option>
-                <option value="mni">Manipuri (মৈতৈলোন্)</option>
-                <option value="lus">Mizo (Mizo ṭawng)</option>
-                <option value="kha">Khasi (Ka Ktien Khasi)</option>
+              <label className="smallcaps text-sand block mb-2">LANGUAGE</label>
+              <select value={language} onChange={(e) => setLanguage(e.target.value as SupportedLanguage)} className="arcade-select w-full">
+                <option value="en">ENGLISH (EN)</option>
+                <option value="as">ASSAMESE (AS)</option>
+                <option value="hi">HINDI (HI)</option>
+                <option value="mni">MANIPURI (MNI)</option>
+                <option value="lus">MIZO (LUS)</option>
+                <option value="kha">KHASI (KHA)</option>
               </select>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-stone-100">
-            <label className="flex items-center gap-2.5 cursor-pointer text-xs font-semibold text-stone-700">
-              <input
-                type="checkbox"
-                checked={highContrast}
-                onChange={(e) => setHighContrast(e.target.checked)}
-                className="rounded text-teal-600"
-              />
-              High Contrast Palette
+          <div className="flex flex-wrap gap-6 pt-6 border-t-2 border-ink/20 font-mono text-sm uppercase">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked={highContrast} onChange={e => setHighContrast(e.target.checked)} className="accent-vermilion" />
+              HIGH CONTRAST
             </label>
-
-            <label className="flex items-center gap-2.5 cursor-pointer text-xs font-semibold text-stone-700">
-              <input
-                type="checkbox"
-                checked={voiceEnabled}
-                onChange={(e) => setVoiceEnabled(e.target.checked)}
-                className="rounded text-teal-600"
-              />
-              Read Instructions Aloud
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked={voiceEnabled} onChange={e => setVoiceEnabled(e.target.checked)} className="accent-vermilion" />
+              VOICE ASSIST
             </label>
-
-            <label className="flex items-center gap-2.5 cursor-pointer text-xs font-semibold text-stone-700">
-              <input
-                type="checkbox"
-                checked={soundEnabled}
-                onChange={(e) => setSoundEnabled(e.target.checked)}
-                className="rounded text-teal-600"
-              />
-              Gentle Audio Chimes
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked={soundEnabled} onChange={e => setSoundEnabled(e.target.checked)} className="accent-vermilion" />
+              SFX CHIMES
             </label>
           </div>
         </div>
 
-        {/* Per-Game Difficulty Profile Panel */}
-        <div className="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs space-y-4">
-          <h2 className="text-base font-bold text-stone-900 flex items-center gap-2">
-            <SlidersHorizontal className="w-5 h-5 text-teal-600" /> Per-Activity Challenge Levels
+        <div className="arcade-card p-6">
+          <h2 className="font-display font-bold uppercase tracking-widest text-ink flex items-center gap-2 mb-2">
+            <SlidersHorizontal size={20} className="text-vermilion" /> GAME DIFFICULTY
           </h2>
-          <p className="text-xs text-stone-500">
-            Activities automatically scale with our adaptive engine, but you can pin baseline
-            levels here anytime.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <p className="font-mono text-sand text-sm mb-6">Pin baseline difficulty levels per activity.</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {gameList.map(({ key, name }) => (
-              <div
-                key={key}
-                className="p-3 bg-stone-50 rounded-2xl border border-stone-100 flex items-center justify-between"
-              >
-                <span className="text-xs font-bold text-stone-800">{name}</span>
+              <div key={key} className="p-3 bg-kraft2 border-2 border-ink flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <span className="font-mono font-bold text-ink uppercase">{name}</span>
                 <div className="flex gap-1">
                   {(['easy', 'medium', 'hard'] as const).map((diff) => (
                     <button
                       key={diff}
                       type="button"
                       onClick={() => handleDifficultyChange(key, diff)}
-                      className={`px-2.5 py-1 text-[11px] font-bold rounded-lg border capitalize transition-all ${
-                        gameDifficulties[key] === diff
-                          ? 'bg-teal-600 border-teal-600 text-white'
-                          : 'bg-white border-stone-200 text-stone-500 hover:bg-stone-100'
+                      className={`px-3 py-1 font-mono text-xs uppercase border-2 ${
+                        gameDifficulties[key] === diff ? 'bg-ink text-kraft border-ink' : 'bg-kraft border-ink text-ink hover:bg-kraft3'
                       }`}
                     >
                       {diff}
@@ -236,18 +172,10 @@ export function CaregiverSettings() {
           </div>
         </div>
 
-        {/* Save Bar */}
-        <div className="flex items-center justify-end gap-3 pt-2">
-          {isSaved && (
-            <span className="text-xs font-bold text-emerald-600 flex items-center gap-1">
-              <Check className="w-4 h-4" /> Preferences Saved!
-            </span>
-          )}
-          <button
-            type="submit"
-            className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-2"
-          >
-            <Save className="w-4 h-4" /> Save All Preferences
+        <div className="flex items-center justify-end gap-4">
+          {isSaved && <span className="font-mono font-bold text-vermilion flex items-center gap-2"><Check size={16} /> SAVED!</span>}
+          <button type="submit" className="btn btn-primary flex items-center gap-2">
+            <Save size={16} /> SAVE PREFERENCES
           </button>
         </div>
       </form>
