@@ -22,24 +22,13 @@ export default function PatientLayout() {
 
   return (
     <div className={cn(
-      'min-h-screen flex flex-col bg-hope-gradient patient-mode font-sans relative overflow-hidden',
+      'min-h-[100dvh] flex flex-col bg-felt text-ink patient-mode font-sans relative overflow-hidden',
       fontSize === 'large' && 'text-lg',
       fontSize === 'x-large' && 'text-xl',
     )}>
-      {/* Animated Organic Background Blobs */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-72 h-72 bg-amber-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-        <div className="absolute top-[20%] right-[-10%] w-72 h-72 bg-sky-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-[-10%] left-[20%] w-72 h-72 bg-rose-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
-      </div>
-
-      {/* Sync status header */}
-      <div className="flex justify-end px-4 pt-2 relative z-10">
-        <SyncIndicator />
-      </div>
-
-      {/* Main content */}
-      <main className="flex-1 overflow-y-auto pb-24 relative z-10">
+      
+      {/* Main Content Area */}
+      <main className="flex-1 overflow-y-auto pb-[76px] paper grain relative z-10 w-full max-w-[860px] mx-auto shadow-2xl">
         <Outlet />
       </main>
 

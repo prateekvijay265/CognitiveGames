@@ -49,13 +49,7 @@ export default function PatientGames() {
     : [];
 
   return (
-    <div className="px-5 pt-6 pb-24 font-sans bg-hope-gradient min-h-screen relative overflow-hidden">
-      {/* Background blobs for games screen */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-5%] right-[-10%] w-64 h-64 bg-teal-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-        <div className="absolute bottom-[20%] left-[-10%] w-64 h-64 bg-sky-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-      </div>
-
+    <div className="px-5 pt-6 pb-24 font-sans min-h-screen relative overflow-hidden">
       <div className="relative z-10">
         <AnimatePresence mode="wait">
           {!selectedCategory ? (
@@ -66,10 +60,10 @@ export default function PatientGames() {
               exit={{ opacity: 0, x: -20 }}
             >
               <div className="mb-6">
-                <h1 className="text-[26px] font-bold text-stone-900 leading-tight mb-1">
-                  Cognitive Areas
+                <h1 className="text-[26px] font-display font-bold text-ink leading-tight mb-1 uppercase tracking-widest">
+                  Arcade
                 </h1>
-                <p className="text-stone-500 text-sm font-medium">Choose an area to focus on today.</p>
+                <p className="text-sand text-sm font-bold smallcaps">Choose a cognitive area</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -80,18 +74,17 @@ export default function PatientGames() {
                     transition={{ delay: idx * 0.05 }}
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`relative p-5 rounded-[1.25rem] border ${cat.color} glass text-left hover-lift hover-shimmer shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden group`}
+                    className="relative p-5 text-left group btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] transition-all flex flex-col items-start bg-kraft2/30"
                   >
-                    <div className="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div className="text-3xl mb-4 relative z-10 group-hover:scale-110 transition-transform origin-bottom-left">{cat.icon}</div>
-                  <h3 className="font-bold text-stone-900 text-[15px] leading-tight mb-1">{cat.title}</h3>
-                  <div className="flex justify-between items-center w-full">
-                    <p className="text-[11px] font-semibold opacity-60 text-stone-700">{cat.count} games</p>
-                    <ChevronRight className="w-4 h-4 text-stone-400 opacity-60" />
-                  </div>
-                </motion.button>
-              ))}
-            </div>
+                    <h3 className="font-bold text-ink text-[15px] leading-tight mb-1">{cat.title}</h3>
+                    <div className="flex justify-between items-center w-full">
+                      <p className="smallcaps text-sand">{cat.count} games</p>
+                      <ChevronRight className="w-4 h-4 text-ink opacity-60" />
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
           </motion.div>
         ) : (
           <motion.div
@@ -104,16 +97,16 @@ export default function PatientGames() {
             <div className="flex items-center gap-3 mb-6">
               <button 
                 onClick={() => setSelectedCategory(null)}
-                className="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-600 active:bg-stone-100 shadow-sm"
+                className="btn btn-ghost !p-2 !border-ink shadow-[2px_2px_0_var(--color-ink)]"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="text-[22px] font-bold text-stone-900 leading-tight">{selectedCategory} Games</h1>
+                <h1 className="text-[22px] font-display font-bold text-ink leading-tight uppercase tracking-widest">{selectedCategory} Games</h1>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-4">
               {filteredGames.length > 0 ? filteredGames.map((game, idx) => (
                 <motion.button
                   initial={{ opacity: 0, y: 10 }}
@@ -121,21 +114,21 @@ export default function PatientGames() {
                   transition={{ delay: idx * 0.1 }}
                   key={game.id}
                   onClick={() => navigate(`/patient/game/${game.id}`)}
-                  className="glass rounded-[1.25rem] p-4 shadow-[0_4px_16px_rgba(0,0,0,0.03)] flex items-center justify-between hover-lift hover-shimmer group text-left relative overflow-hidden"
+                  className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] flex w-full items-center justify-between text-left relative overflow-hidden bg-kraft2/50"
                 >
-                  <div className="relative z-10">
-                    <h4 className="font-bold text-stone-900 text-[15px] mb-1.5">{game.name}</h4>
+                  <div className="relative z-10 flex-1">
+                    <h4 className="font-display font-bold text-ink text-[16px] mb-1.5">{game.name}</h4>
                     <div className="flex gap-2">
-                       <span className="text-[10px] font-bold px-2 py-0.5 bg-stone-100 text-stone-500 rounded-md uppercase tracking-wider shadow-inner">{game.difficulty}</span>
-                       <span className="text-[10px] font-semibold text-stone-400 py-0.5">⏱ {game.time}</span>
+                       <span className="smallcaps text-sand">{game.difficulty}</span>
+                       <span className="smallcaps text-sand">⏱ {game.time}</span>
                     </div>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-50 to-emerald-100 text-teal-600 flex items-center justify-center shrink-0 border border-teal-200 shadow-md group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300 relative z-10">
+                  <div className="w-10 h-10 rounded-full border-2 border-ink text-ink flex items-center justify-center shrink-0 shadow-[2px_2px_0_var(--color-ink)] group-hover:bg-vermilion group-hover:text-kraft transition-all duration-300 relative z-10">
                     <Play className="w-4 h-4 ml-0.5 fill-current" />
                   </div>
                 </motion.button>
               )) : (
-                <p className="text-center text-stone-500 text-sm py-10">More games coming soon!</p>
+                <p className="text-center text-sand text-sm py-10 font-mono">More games coming soon!</p>
               )}
             </div>
           </motion.div>
