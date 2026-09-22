@@ -16,6 +16,7 @@ import {
   ChevronRight,
   ArrowRight,
   Sparkles,
+  Activity,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
