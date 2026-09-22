@@ -392,7 +392,6 @@ export const PATTERN_QUESTIONS: Record<'easy' | 'medium' | 'hard', PatternQuesti
     {
       id: 'pat-e-1',
       sequence: ['https://loremflickr.com/200/200/red', 'https://loremflickr.com/200/200/blue', 'https://loremflickr.com/200/200/red', 'https://loremflickr.com/200/200/blue', '?'],
-      options: ['https://loremflickr.com/200/200/leaf', '/assets/images/flower.jpg', 'https://loremflickr.com/200/200/leaf', '?'],
       options: ['/assets/images/flower.jpg', 'https://loremflickr.com/200/200/paddy', 'https://loremflickr.com/200/200/leaf', '/assets/images/orange.jpg'],
       correctAnswer: '/assets/images/flower.jpg',
       explanation: 'Flower and leaf alternate: Flower, Leaf, Flower, Leaf, then Flower!',
@@ -421,7 +420,6 @@ export const PATTERN_QUESTIONS: Record<'easy' | 'medium' | 'hard', PatternQuesti
     {
       id: 'pat-e-6',
       sequence: ['https://loremflickr.com/200/200/yellow', 'https://loremflickr.com/200/200/green', 'https://loremflickr.com/200/200/yellow', 'https://loremflickr.com/200/200/green', '?'],
-      options: ['https://loremflickr.com/200/200/diya', 'https://loremflickr.com/200/200/candle', 'https://loremflickr.com/200/200/diya', 'https://loremflickr.com/200/200/candle', '?'],
       options: ['https://loremflickr.com/200/200/diya', 'https://loremflickr.com/200/200/candle', 'https://loremflickr.com/200/200/sparkle', 'https://loremflickr.com/200/200/sun'],
       correctAnswer: 'https://loremflickr.com/200/200/diya',
       explanation: 'Diya comes back after candle.',
@@ -452,7 +450,6 @@ export const PATTERN_QUESTIONS: Record<'easy' | 'medium' | 'hard', PatternQuesti
     {
       id: 'pat-m-1',
       sequence: ['https://loremflickr.com/200/200/red', 'https://loremflickr.com/200/200/blue', 'https://loremflickr.com/200/200/green', 'https://loremflickr.com/200/200/red', 'https://loremflickr.com/200/200/blue', '?'],
-      options: ['https://loremflickr.com/200/200/seed', 'https://loremflickr.com/200/200/leaf', 'https://loremflickr.com/200/200/tree', 'https://loremflickr.com/200/200/seed', 'https://loremflickr.com/200/200/leaf', '?'],
       options: ['https://loremflickr.com/200/200/seed', 'https://loremflickr.com/200/200/tree', 'https://loremflickr.com/200/200/paddy', 'https://loremflickr.com/200/200/fall'],
       correctAnswer: 'https://loremflickr.com/200/200/tree',
       explanation: 'Sprout, Leaves, then Tree.',
@@ -518,7 +515,6 @@ export const PATTERN_QUESTIONS: Record<'easy' | 'medium' | 'hard', PatternQuesti
     {
       id: 'pat-h-1',
       sequence: ['https://loremflickr.com/200/200/up', 'https://loremflickr.com/200/200/arrows', 'https://loremflickr.com/200/200/green', '?'],
-      options: ['https://loremflickr.com/200/200/1', 'https://loremflickr.com/200/200/2', 'https://loremflickr.com/200/200/3', 'https://loremflickr.com/200/200/1', 'https://loremflickr.com/200/200/2', '?'],
       options: ['https://loremflickr.com/200/200/1', 'https://loremflickr.com/200/200/3', 'https://loremflickr.com/200/200/4', 'https://loremflickr.com/200/200/2'],
       correctAnswer: 'https://loremflickr.com/200/200/3',
       explanation: 'Numbers 1, 2, 3 cycle continually.',

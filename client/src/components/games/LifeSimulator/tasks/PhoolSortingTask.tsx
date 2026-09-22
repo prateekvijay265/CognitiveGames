@@ -273,7 +273,7 @@ export const PhoolSortingTask: React.FC = () => {
                         : 'bg-stone-50 border-stone-300 hover:border-rose-300'
                     }`}
                   >
-                    <img src={flower.image} className=\"w-12 h-12 object-cover\" />
+                    <img src={flower.image} className="w-12 h-12 object-cover" />
                     <span>{isHindi ? flower.hindiName : flower.name}</span>
                   </motion.button>
                 );
@@ -304,7 +304,7 @@ export const PhoolSortingTask: React.FC = () => {
               }`}
             >
               <div>
-                <img src={b.image} className=\"w-12 h-12 object-cover block mb-1 mx-auto\" />
+                <img src={b.image} className="w-12 h-12 object-cover block mb-1 mx-auto" />
                 <span className="font-extrabold text-xs sm:text-sm block leading-tight">{b.name}</span>
               </div>
 

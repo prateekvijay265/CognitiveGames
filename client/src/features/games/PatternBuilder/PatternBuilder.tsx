@@ -196,7 +196,7 @@ export const PatternBuilder: React.FC<PatternBuilderProps> = ({
                   onClick={() => handleSelectOption(option)}
                   disabled={showFeedback}
                   className={`p-4 border-[3px] border-ink flex items-center justify-center text-4xl sm:text-5xl transition-all shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] font-mono font-bold uppercase tracking-widest ${btnClass}`}
-                > {option.startswith("http") || option.startswith("/") ? <img src={option} className="w-12 h-12 object-cover" /> : option} </button>
+                > {option.startsWith("http") || option.startsWith("/") ? <img src={option} className="w-12 h-12 object-cover" /> : option} </button>
               );
             })}
           </div>
