@@ -62,17 +62,17 @@ export default function PatientHome() {
 
           <div className="grid grid-cols-3 gap-6">
             {[
-              { id: 'match3', name: 'Match 3', icon: '💎', color: 'bg-vermilion', stat: 'Processing' },
-              { id: 'sudoku', name: 'Sudoku', icon: '🔢', color: 'bg-ochre', stat: 'Logic' },
-              { id: 'jigsaw', name: 'Jigsaw', icon: '🧩', color: 'bg-blue-500', stat: 'Visual' }
+              { id: 'match3', name: 'Match 3', icon: '/logo_match3.jpg', color: 'bg-vermilion', stat: 'Processing' },
+              { id: 'sudoku', name: 'Sudoku', icon: '/logo_sudoku.jpg', color: 'bg-ochre', stat: 'Logic' },
+              { id: 'jigsaw', name: 'Jigsaw', icon: '/logo_jigsaw.jpg', color: 'bg-blue-500', stat: 'Visual' }
             ].map(game => (
               <button
                 key={game.id}
                 onClick={() => navigate(`/patient/game/${game.id}`)}
                 className="group flex flex-col items-center bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:shadow-[8px_8px_0_var(--color-ink)] hover:-translate-y-1 transition-all"
               >
-                <div className={`w-full aspect-square ${game.color} border-b-[3px] border-ink flex items-center justify-center text-7xl group-hover:scale-105 transition-transform`}>
-                  {game.icon}
+                <div className={`w-full aspect-square overflow-hidden ${game.color} border-b-[3px] border-ink flex items-center justify-center`}>
+                  <img src={game.icon} alt={game.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="p-4 w-full text-center">
                   <div className="font-display font-bold text-xl uppercase tracking-widest text-ink mb-1">{game.name}</div>

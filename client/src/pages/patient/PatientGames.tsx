@@ -25,21 +25,21 @@ const DOMAIN_ICONS: Record<string, React.ElementType> = {
 };
 
 const GAMES_LIST: GameInfo[] = [
-  { id: 'memory-match', name: 'Memory Match', domain: 'Memory', time: '5m', difficulty: 'easy', color: 'bg-emerald-500', icon: '🧠' },
-  { id: 'remember-objects', name: 'Picture Memory', domain: 'Memory', time: '4m', difficulty: 'easy', color: 'bg-emerald-400', icon: '🖼️' },
-  { id: 'sequence-memory', name: 'Number Match', domain: 'Attention', time: '2m', difficulty: 'easy', color: 'bg-amber-400', icon: '🔢' },
-  { id: 'find-difference', name: 'Find Difference', domain: 'Attention', time: '5m', difficulty: 'medium', color: 'bg-amber-500', icon: '🔍' },
-  { id: 'sort-my-day', name: 'Sort My Day', domain: 'Orientation', time: '4m', difficulty: 'easy', color: 'bg-blue-400', icon: '🌅' },
-  { id: 'pattern-builder', name: 'Pattern Builder', domain: 'Reasoning', time: '4m', difficulty: 'medium', color: 'bg-purple-500', icon: '🧩' },
-  { id: 'attention-tap', name: 'Attention Tap', domain: 'Processing', time: '3m', difficulty: 'easy', color: 'bg-vermilion', icon: '⚡' },
-  { id: 'sound-memory', name: 'Sound Memory', domain: 'Memory', time: '5m', difficulty: 'medium', color: 'bg-emerald-600', icon: '🎵' },
-  { id: 'story-memory', name: 'Story Memory', domain: 'Language', time: '6m', difficulty: 'medium', color: 'bg-pink-500', icon: '📖' },
-  { id: 'object-recognition', name: 'Word Match', domain: 'Language', time: '4m', difficulty: 'easy', color: 'bg-pink-400', icon: '📝' },
-  { id: 'chess', name: 'Chess', domain: 'Reasoning', time: '10m', difficulty: 'hard', color: 'bg-slate-700', icon: '♟️' },
-  { id: 'match3', name: 'Match 3', domain: 'Processing', time: '5m', difficulty: 'medium', color: 'bg-fuchsia-500', icon: '💎' },
-  { id: 'memory-game', name: 'Card Memory', domain: 'Memory', time: '3m', difficulty: 'easy', color: 'bg-emerald-500', icon: '🎴' },
-  { id: 'sudoku', name: 'Sudoku', domain: 'Reasoning', time: '10m', difficulty: 'hard', color: 'bg-ochre', icon: '3️⃣' },
-  { id: 'jigsaw', name: 'Jigsaw Puzzle', domain: 'Orientation', time: '5m', difficulty: 'medium', color: 'bg-blue-500', icon: '🖼️' },
+  { id: 'memory-match', name: 'Memory Match', domain: 'Memory', time: '5m', difficulty: 'easy', color: 'bg-emerald-500', icon: '/logo_memory_match.jpg' },
+  { id: 'remember-objects', name: 'Picture Memory', domain: 'Memory', time: '4m', difficulty: 'easy', color: 'bg-emerald-400', icon: '/logo_remember_objects.jpg' },
+  { id: 'sequence-memory', name: 'Number Match', domain: 'Attention', time: '2m', difficulty: 'easy', color: 'bg-amber-400', icon: '/logo_sequence_memory.jpg' },
+  { id: 'find-difference', name: 'Find Difference', domain: 'Attention', time: '5m', difficulty: 'medium', color: 'bg-amber-500', icon: '/logo_find_difference.jpg' },
+  { id: 'sort-my-day', name: 'Sort My Day', domain: 'Orientation', time: '4m', difficulty: 'easy', color: 'bg-blue-400', icon: '/logo_sort_my_day.jpg' },
+  { id: 'pattern-builder', name: 'Pattern Builder', domain: 'Reasoning', time: '4m', difficulty: 'medium', color: 'bg-purple-500', icon: '/logo_pattern_builder.jpg' },
+  { id: 'attention-tap', name: 'Attention Tap', domain: 'Processing', time: '3m', difficulty: 'easy', color: 'bg-vermilion', icon: '/logo_attention_tap.jpg' },
+  { id: 'sound-memory', name: 'Sound Memory', domain: 'Memory', time: '5m', difficulty: 'medium', color: 'bg-emerald-600', icon: '/logo_sound_memory.jpg' },
+  { id: 'story-memory', name: 'Story Memory', domain: 'Language', time: '6m', difficulty: 'medium', color: 'bg-pink-500', icon: '/logo_story_memory.jpg' },
+  { id: 'object-recognition', name: 'Word Match', domain: 'Language', time: '4m', difficulty: 'easy', color: 'bg-pink-400', icon: '/logo_object_recognition.jpg' },
+  { id: 'chess', name: 'Chess', domain: 'Reasoning', time: '10m', difficulty: 'hard', color: 'bg-slate-700', icon: '/logo_chess.jpg' },
+  { id: 'match3', name: 'Match 3', domain: 'Processing', time: '5m', difficulty: 'medium', color: 'bg-fuchsia-500', icon: '/logo_match3.jpg' },
+  { id: 'memory-game', name: 'Card Memory', domain: 'Memory', time: '3m', difficulty: 'easy', color: 'bg-emerald-500', icon: '/logo_memory_game.jpg' },
+  { id: 'sudoku', name: 'Sudoku', domain: 'Reasoning', time: '10m', difficulty: 'hard', color: 'bg-ochre', icon: '/logo_sudoku.jpg' },
+  { id: 'jigsaw', name: 'Jigsaw Puzzle', domain: 'Orientation', time: '5m', difficulty: 'medium', color: 'bg-blue-500', icon: '/logo_jigsaw.jpg' },
 ];
 
 export default function PatientGames() {
@@ -110,9 +110,11 @@ export default function PatientGames() {
                 'w-full aspect-[4/3] flex items-center justify-center border-b-[3px] border-ink relative overflow-hidden',
                 game.color
               )}>
-                <span className="text-7xl group-hover:scale-125 transition-transform duration-300 drop-shadow-md">
-                  {game.icon}
-                </span>
+                <img 
+                  src={game.icon} 
+                  alt={game.name} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" 
+                />
                 
                 {/* Hover overlay with PLAY */}
                 <div className="absolute inset-0 bg-ink/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">

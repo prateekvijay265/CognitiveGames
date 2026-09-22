@@ -39,16 +39,16 @@ export default function PatientLayout() {
 
       {/* 🚀 Desktop Top Navigation */}
       <header className="w-full bg-kraft border-b-[3px] border-ink shadow-[0_4px_0_var(--color-ink)] relative z-50">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="w-full px-8 lg:px-16 h-24 flex items-center justify-between">
           
           {/* Logo / Brand */}
-          <div className="flex items-center gap-3">
-            <img src="/logo.jpg" alt="Neuro Mind" className="w-10 h-10 object-cover bg-vermilion border-2 border-ink shadow-[2px_2px_0_var(--color-ink)]" />
-            <div className="font-display font-bold text-2xl uppercase tracking-widest text-ink mt-1">Neuro Mind</div>
+          <div className="flex items-center gap-4">
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover bg-vermilion border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)]" />
+            <div className="font-display font-black text-3xl uppercase tracking-widest text-ink mt-1">Neuro Mind</div>
           </div>
 
           {/* Nav Links */}
-          <nav className="flex items-center gap-8">
+          <nav className="flex items-center gap-10">
             {navItems.map(({ to, label, icon: Icon, exact }) => (
               <NavLink
                 key={to}
@@ -105,8 +105,8 @@ export default function PatientLayout() {
       </header>
 
       {/* 📜 Main Content Area (Full Desktop Grid) */}
-      <main className="flex-1 w-full max-w-7xl mx-auto p-8 relative z-10">
-        <div className="paper grain w-full min-h-full border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-8">
+      <main className="flex-1 w-full px-8 lg:px-16 py-8 relative z-10">
+        <div className="paper grain w-full min-h-full border-[4px] border-ink shadow-[12px_12px_0_var(--color-ink)] p-12">
           <Outlet />
         </div>
       </main>
