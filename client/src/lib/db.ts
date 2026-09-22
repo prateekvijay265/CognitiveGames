@@ -13,7 +13,7 @@ import type {
   CognitiveMetric,
 } from '../types';
 
-export class SmritiDB extends Dexie {
+export class NeuroMindDB extends Dexie {
   // Tables
   patients!: Table<Patient, string>;
   gameSessions!: Table<GameSession, string>;
@@ -29,7 +29,7 @@ export class SmritiDB extends Dexie {
   settings!: Table<{ key: string; value: unknown }, string>;
 
   constructor() {
-    super('SmritiCareDB');
+    super('Neuro MindCareDB');
 
     this.version(1).stores({
       patients: 'id, userId, language, lastActiveAt',
@@ -48,7 +48,7 @@ export class SmritiDB extends Dexie {
   }
 }
 
-export const db = new SmritiDB();
+export const db = new NeuroMindDB();
 
 // Sync Queue helpers
 export async function addToSyncQueue(

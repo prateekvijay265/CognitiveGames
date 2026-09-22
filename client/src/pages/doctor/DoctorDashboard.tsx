@@ -37,12 +37,12 @@ export function DoctorDashboard() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
-          <div className="smallcaps text-sand mb-1 flex items-center gap-2">
+          <div className="smallcaps text-sand mb-1 flex items-center gap-6">
             <Stethoscope className="w-4 h-4" /> Clinical Portal
           </div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -57,7 +57,7 @@ export function DoctorDashboard() {
         </div>
       </div>
 
-      <div className="bg-[#7c3aed]/10 border-2 border-[#7c3aed] p-3 rounded-none flex items-center gap-3 text-xs text-kraft font-mono">
+      <div className="bg-[#7c3aed]/10 border-2 border-[#7c3aed] p-3 rounded-none flex items-center gap-6 text-xs text-kraft font-mono">
         <Info className="w-4 h-4 text-[#7c3aed] shrink-0" />
         <span>
           CLINICAL NOTICE: Activity data represents observed platform interaction and engagement patterns. It is an auxiliary support tool and is not a medical diagnosis.
@@ -65,7 +65,7 @@ export function DoctorDashboard() {
       </div>
 
       {/* Stats Cards Row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="stat-card animate-card-in">
           <div className="stat-value">{totalPatients}</div>
           <div className="stat-label flex items-center gap-1"><Users className="w-3 h-3"/> Total Patients</div>
@@ -85,16 +85,16 @@ export function DoctorDashboard() {
       </div>
 
       {/* Patient Table as Arcade-Card List */}
-      <div className="space-y-4">
+      <div className="space-y-8">
         <h2 className="font-display font-bold text-kraft uppercase tracking-widest text-lg">Patient Cohort Overview</h2>
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-6">
           {DEMO_PATIENTS.map((p, idx) => {
             const isNeedsReview = idx === 1 || idx === 2;
             const adherence = idx === 1 ? '72%' : idx === 2 ? '65%' : '90%';
 
             return (
-              <div key={p.id} className="arcade-card p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover-lift">
-                <div className="flex items-center gap-4">
+              <div key={p.id} className="arcade-card p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 hover-lift">
+                <div className="flex items-center gap-6">
                   <div className="w-12 h-12 bg-[#7c3aed] border-2 border-ink flex items-center justify-center font-display font-bold text-white flex-shrink-0 text-xl shadow-[2px_2px_0px_rgba(26,21,18,1)]">
                     {p.name[0]}
                   </div>
@@ -104,7 +104,7 @@ export function DoctorDashboard() {
                   </div>
                 </div>
                 
-                <div className="flex flex-wrap sm:flex-nowrap items-center gap-4">
+                <div className="flex flex-wrap sm:flex-nowrap items-center gap-6">
                   <div className="flex flex-col items-center">
                     <span className="smallcaps text-sand">Trend</span>
                     {isNeedsReview ? (
@@ -128,7 +128,7 @@ export function DoctorDashboard() {
                     )}
                   </div>
                   
-                  <div className="flex items-center gap-2 mt-2 sm:mt-0">
+                  <div className="flex items-center gap-6 mt-2 sm:mt-0">
                     <button
                       onClick={() => setSelectedPatientForNote(p.id)}
                       className="btn btn-sm btn-ghost"
@@ -152,10 +152,10 @@ export function DoctorDashboard() {
 
       {/* Observation Modal */}
       {selectedPatientForNote && (
-        <div className="fixed inset-0 z-50 bg-ink/80 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-ink/80 flex items-center justify-center p-6">
           <form
             onSubmit={handleSaveObservation}
-            className="paper grain border-4 border-ink p-6 max-w-md w-full shadow-[8px_8px_0px_rgba(26,21,18,1)] space-y-4"
+            className="paper grain border-4 border-ink p-6 max-w-md w-full shadow-[8px_8px_0px_rgba(26,21,18,1)] space-y-8"
           >
             <h3 className="font-display font-bold text-ink text-xl uppercase tracking-widest border-b-2 border-ink pb-2">Record Observation</h3>
             <p className="font-mono text-xs text-sand">
@@ -169,7 +169,7 @@ export function DoctorDashboard() {
               onChange={(e) => setNoteContent(e.target.value)}
               className="arcade-input w-full p-3 font-mono text-sm resize-none"
             />
-            <div className="flex justify-end gap-3 pt-2">
+            <div className="flex justify-end gap-6 pt-2">
               <button
                 type="button"
                 onClick={() => setSelectedPatientForNote(null)}

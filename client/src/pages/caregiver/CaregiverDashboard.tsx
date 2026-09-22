@@ -57,10 +57,10 @@ export function CaregiverDashboard() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Caregiver Dashboard</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -72,7 +72,7 @@ export function CaregiverDashboard() {
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="stat-card animate-card-in" style={{ backgroundColor: '#2563eb', color: '#e7dcc6' }}>
           <div className="stat-value">{patients.length}</div>
           <div className="stat-label" style={{ color: '#e7dcc6' }}>Total Patients</div>
@@ -88,10 +88,10 @@ export function CaregiverDashboard() {
       </div>
 
       {/* Chart Section */}
-      <div className="arcade-card p-5 animate-card-in animation-delay-400">
+      <div className="arcade-card p-6 animate-card-in animation-delay-400">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-display uppercase tracking-widest font-bold text-ink">Progress Trend</h3>
-          <div className="flex gap-2">
+          <div className="flex gap-6">
             {['This Week', 'This Month', 'All Time'].map(tab => (
               <button
                 key={tab}
@@ -137,7 +137,7 @@ export function CaregiverDashboard() {
           </Link>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {patients.map((patient, i) => {
             const initials = patient.name
               .split(' ')
@@ -145,7 +145,7 @@ export function CaregiverDashboard() {
               .join('');
 
             return (
-              <div key={patient.id} className={`arcade-card p-4 flex items-center justify-between gap-3 animate-fade-up`} style={{ animationDelay: `${i * 100}ms` }}>
+              <div key={patient.id} className={`arcade-card p-6 flex items-center justify-between gap-6 animate-fade-up`} style={{ animationDelay: `${i * 100}ms` }}>
                 <div className="w-12 h-12 border-2 border-ink flex items-center justify-center font-display font-bold text-kraft flex-shrink-0" style={{ backgroundColor: '#2563eb' }}>
                   {initials}
                 </div>

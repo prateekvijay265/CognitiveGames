@@ -1,4 +1,4 @@
-// Core types for the SMRITI CARE platform
+// Core types for the Neuro Mind platform
 
 export type UserRole = 'patient' | 'caregiver' | 'doctor' | 'admin';
 
@@ -348,3 +348,4 @@ export interface VoiceConfig {
 }
 
 export type NotificationStatus = 'online' | 'offline' | 'syncing' | 'synced' | 'sync-error';
+

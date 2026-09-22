@@ -122,7 +122,7 @@ export function AdminAudit() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `smriti_audit_log_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `Neuro Mind_audit_log_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -132,10 +132,10 @@ export function AdminAudit() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Administrator • Audit</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -148,7 +148,7 @@ export function AdminAudit() {
 
         <button
           onClick={handleExportCSV}
-          className="btn btn-primary btn-sm flex items-center gap-2 self-start"
+          className="btn btn-primary btn-sm flex items-center gap-6 self-start"
         >
           <Download className="w-4 h-4" />
           Export CSV
@@ -156,7 +156,7 @@ export function AdminAudit() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="arcade-card p-4 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+      <div className="arcade-card p-6 flex flex-col md:flex-row gap-6 items-stretch md:items-center justify-between">
         <div className="relative flex-1">
           <Search className="w-4 h-4 text-ink absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -168,7 +168,7 @@ export function AdminAudit() {
           />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
@@ -247,3 +247,4 @@ export function AdminAudit() {
 }
 
 export default AdminAudit;
+

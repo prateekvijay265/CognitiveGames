@@ -25,7 +25,7 @@ i18n
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
-      lookupLocalStorage: 'smriti_language',
+      lookupLocalStorage: 'Neuro Mind_language',
     },
   });
 
@@ -39,3 +39,4 @@ export const LANGUAGE_OPTIONS = [
   { code: 'kha', name: 'Khasi', nativeName: 'Ka Ktien Khasi', region: 'Meghalaya' },
   { code: 'lus', name: 'Mizo', nativeName: 'Mizo ṭawng', region: 'Mizoram' },
 ] as const;
+

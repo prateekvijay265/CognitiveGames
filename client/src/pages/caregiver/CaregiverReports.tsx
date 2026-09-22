@@ -11,7 +11,7 @@ export function CaregiverReports() {
 
   if (DEMO_PATIENTS.length === 0) {
     return (
-      <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
+      <div className="flex-1 p-6 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
         <EmptyState title="NO PATIENTS" description="Add a patient to view their reports." />
       </div>
     );
@@ -35,7 +35,7 @@ export function CaregiverReports() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `smriti_report_${selectedPatient.name.replace(/\s+/g, '_')}.csv`);
+    link.setAttribute('download', `Neuro Mind_report_${selectedPatient.name.replace(/\s+/g, '_')}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -47,27 +47,27 @@ export function CaregiverReports() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-5xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-5xl mx-auto space-y-8"
     >
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 print:hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 print:hidden">
         <div>
           <div className="smallcaps text-sand mb-1">Caregiver • Reports</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
             Activity Reports
           </h1>
         </div>
-        <div className="flex gap-2">
-          <button onClick={handlePrint} className="btn btn-ghost btn-sm flex items-center gap-2">
+        <div className="flex gap-6">
+          <button onClick={handlePrint} className="btn btn-ghost btn-sm flex items-center gap-6">
             <Printer size={16} /> PRINT
           </button>
-          <button onClick={handleDownloadCSV} className="btn btn-primary btn-sm flex items-center gap-2">
+          <button onClick={handleDownloadCSV} className="btn btn-primary btn-sm flex items-center gap-6">
             <Download size={16} /> EXPORT CSV
           </button>
         </div>
       </div>
 
-      <div className="arcade-card p-4 bg-kraft2 flex flex-wrap gap-4 items-center print:hidden">
-        <div className="flex items-center gap-2">
+      <div className="arcade-card p-6 bg-kraft2 flex flex-wrap gap-6 items-center print:hidden">
+        <div className="flex items-center gap-6">
           <User size={16} className="text-ink" />
           <span className="smallcaps text-ink">PATIENT:</span>
           <select value={selectedPatientId} onChange={(e) => setSelectedPatientId(e.target.value)} className="arcade-select py-1">
@@ -76,7 +76,7 @@ export function CaregiverReports() {
             ))}
           </select>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <Calendar size={16} className="text-ink" />
           <span className="smallcaps text-ink">WINDOW:</span>
           <select value={dateRange} onChange={(e) => setDateRange(e.target.value as any)} className="arcade-select py-1">
@@ -91,7 +91,7 @@ export function CaregiverReports() {
       <div className="arcade-card p-6 md:p-8 bg-paper grain border-4 border-ink">
         <div className="border-b-4 border-ink pb-6 flex justify-between items-start mb-6">
           <div>
-            <div className="font-mono font-bold text-sm text-vermilion uppercase tracking-widest">SMRITI CARE REPORT</div>
+            <div className="font-mono font-bold text-sm text-vermilion uppercase tracking-widest">Neuro Mind REPORT</div>
             <h2 className="font-display font-bold text-3xl text-ink uppercase tracking-widest mt-2">{selectedPatient.name}</h2>
             <p className="font-mono text-sand text-sm mt-1 uppercase">AGE: {selectedPatient.age} • LANG: {selectedPatient.language}</p>
           </div>
@@ -101,7 +101,7 @@ export function CaregiverReports() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
           <div className="stat-card" style={{ padding: '1rem', minHeight: 'auto' }}>
             <div className="stat-label mb-1">SESSIONS</div>
             <div className="stat-value text-3xl">{sessions.length}</div>
@@ -116,7 +116,7 @@ export function CaregiverReports() {
           </div>
         </div>
 
-        <div className="p-4 border-2 border-dashed border-ochre bg-kraft2 text-sm font-mono text-ink mb-8">
+        <div className="p-6 border-2 border-dashed border-ochre bg-kraft2 text-sm font-mono text-ink mb-8">
           <strong>NOTE:</strong> This summary details platform activity for caregiver coordination. Not a medical diagnosis.
         </div>
 
@@ -153,3 +153,4 @@ export function CaregiverReports() {
 }
 
 export default CaregiverReports;
+

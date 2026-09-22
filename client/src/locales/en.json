@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Smriti Care",
+    "name": "Neuro Mind",
     "tagline": "Helping memories stay connected."
   },
   "nav": {
@@ -157,7 +157,7 @@
     "x_large": "Extra Large",
     "privacy": "Privacy",
     "help": "Help & Support",
-    "about": "About Smriti Care"
+    "about": "About Neuro Mind"
   },
   "caregiver": {
     "dashboard": "Caregiver Dashboard",
@@ -225,7 +225,7 @@
     "repeat": "Repeat Instructions"
   },
   "onboarding": {
-    "welcome": "Welcome to Smriti Care",
+    "welcome": "Welcome to Neuro Mind",
     "welcome_subtitle": "Your daily memory companion",
     "choose_language": "Choose Your Language",
     "choose_voice": "Would you like voice instructions?",

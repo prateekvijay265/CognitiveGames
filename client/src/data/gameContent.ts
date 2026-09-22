@@ -1,4 +1,4 @@
-// Cultural and cognitive game content for SMRITI CARE
+// Cultural and cognitive game content for Neuro Mind
 // Grounded in North-Eastern Indian cultural context (Assam, Meghalaya, Manipur, Mizoram, etc.)
 
 export interface MemoryCardData {
@@ -860,3 +860,4 @@ export const STORIES: StoryData[] = [
     ],
   },
 ];
+

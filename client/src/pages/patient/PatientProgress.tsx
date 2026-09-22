@@ -44,14 +44,14 @@ export default function PatientProgress() {
         <h3 className="font-display uppercase tracking-widest text-ink mb-4 font-bold text-sm">
           Cognitive Domains
         </h3>
-        <div className="grid grid-cols-1 gap-3">
+        <div className="grid grid-cols-1 gap-6">
           {DOMAINS.map((item, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: idx * 0.06 }}
-              className="arcade-card p-4 flex items-center gap-4"
+              className="arcade-card p-6 flex items-center gap-6"
             >
               <div
                 className={`w-12 h-12 flex-shrink-0 flex items-center justify-center text-2xl border-2 border-ink shadow-[2px_2px_0_var(--color-ink)] ${item.color}`}
@@ -76,7 +76,7 @@ export default function PatientProgress() {
       </div>
 
       {/* Weekly Activity Chart */}
-      <div className="arcade-card p-5">
+      <div className="arcade-card p-6">
         <div className="flex justify-between items-center mb-5">
           <h3 className="font-display uppercase tracking-widest text-ink font-bold text-sm">
             Activity This Week
@@ -118,13 +118,13 @@ export default function PatientProgress() {
       </div>
 
       {/* Summary Stats */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-6">
         {[
           { label: 'Streak',   value: '7',   unit: 'days'  },
           { label: 'Sessions', value: '24',  unit: 'total' },
           { label: 'Avg Score', value: '69', unit: '%'     },
         ].map((stat) => (
-          <div key={stat.label} className="arcade-card p-4 text-center">
+          <div key={stat.label} className="arcade-card p-6 text-center">
             <div className="font-display font-black text-ink text-3xl leading-none">{stat.value}</div>
             <div className="smallcaps text-sand mt-1">{stat.unit}</div>
             <div className="font-mono text-ink/50 text-[10px] mt-1">{stat.label}</div>

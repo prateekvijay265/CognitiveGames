@@ -36,7 +36,7 @@ export default function PatientHome() {
           </h1>
           <p className="text-sand text-xs font-bold font-mono">Ready to play?</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <button 
             onClick={() => navigate('/patient/settings')}
             className="w-10 h-10 rounded-full flex items-center justify-center text-ink border-2 border-ink shadow-[2px_2px_0_var(--color-ink)] bg-kraft2 active:translate-y-px active:shadow-[1px_1px_0_var(--color-ink)] transition-all"
@@ -53,7 +53,7 @@ export default function PatientHome() {
       </div>
 
       {/* BANNER (Today's Brain Journey) */}
-      <div className="paper rounded-[1.5rem] border-2 border-ink p-5 mb-8 shadow-[6px_6px_0_var(--color-ink)] flex flex-col justify-end group hover-lift cursor-pointer transition-all">
+      <div className="paper rounded-[1.5rem] border-2 border-ink p-6 mb-8 shadow-[6px_6px_0_var(--color-ink)] flex flex-col justify-end group hover-lift cursor-pointer transition-all">
         
         <div className="relative z-10 w-full">
           <div className="flex justify-between items-end">
@@ -88,12 +88,12 @@ export default function PatientHome() {
           </button>
         </div>
         
-        <div className="flex gap-4 overflow-x-auto pb-6 -mx-5 px-5 snap-x hide-scrollbar">
+        <div className="flex gap-6 overflow-x-auto pb-6 -mx-5 px-5 snap-x hide-scrollbar">
           
           {/* Card 1: Match 3 */}
           <button 
             onClick={() => navigate('/patient/game/match3')}
-            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-4 transition-all"
+            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-6 transition-all"
           >
             <div className="w-full aspect-square rounded-[1rem] bg-vermilion border-2 border-ink mb-3 flex items-center justify-center relative overflow-hidden shadow-inner group-hover:bg-ochre transition-all">
               <span className="text-3xl font-display text-kraft drop-shadow-md">💎</span>
@@ -108,7 +108,7 @@ export default function PatientHome() {
           {/* Card 2: Sudoku */}
           <button 
             onClick={() => navigate('/patient/game/sudoku')}
-            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-4 transition-all"
+            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-6 transition-all"
           >
             <div className="w-full aspect-square rounded-[1rem] bg-ochre border-2 border-ink mb-3 flex items-center justify-center relative overflow-hidden shadow-inner group-hover:bg-vermilion transition-all">
                <span className="text-3xl font-display text-kraft drop-shadow-md">🔢</span>
@@ -123,7 +123,7 @@ export default function PatientHome() {
           {/* Card 3: Jigsaw */}
           <button 
             onClick={() => navigate('/patient/game/jigsaw')}
-            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-4 transition-all"
+            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-6 transition-all"
           >
             <div className="w-full aspect-square rounded-[1rem] bg-sky-600 border-2 border-ink mb-3 flex items-center justify-center relative overflow-hidden shadow-inner group-hover:bg-indigo-600 transition-all">
                <span className="text-3xl font-display text-kraft drop-shadow-md">🧩</span>
@@ -140,11 +140,11 @@ export default function PatientHome() {
       {/* EXPLORE YOUR DAY (Restored Tabs) */}
       <div className="mb-6 relative z-10">
         <h3 className="font-display font-bold text-[17px] text-ink mb-4 uppercase tracking-widest">Explore Your Day</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-6">
           {/* Routine */}
           <button 
             onClick={() => navigate('/patient/routine')}
-            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-2 p-4 transition-all w-full"
+            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-6 p-6 transition-all w-full"
           >
             <div className="w-12 h-12 rounded-[1rem] bg-indigo-500 border-2 border-ink text-white flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">🌅</div>
             <h4 className="font-display font-bold text-[15px] text-ink">My Day</h4>
@@ -153,7 +153,7 @@ export default function PatientHome() {
           {/* Reminders */}
           <button 
             onClick={() => navigate('/patient/reminders')}
-            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-2 p-4 transition-all w-full"
+            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-6 p-6 transition-all w-full"
           >
             <div className="w-12 h-12 rounded-[1rem] bg-rose-500 border-2 border-ink text-white flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">🔔</div>
             <h4 className="font-display font-bold text-[15px] text-ink">Reminders</h4>
@@ -162,7 +162,7 @@ export default function PatientHome() {
           {/* Memory Book */}
           <button 
             onClick={() => navigate('/patient/memory')}
-            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-2 p-4 transition-all w-full"
+            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-6 p-6 transition-all w-full"
           >
             <div className="w-12 h-12 rounded-[1rem] bg-amber-500 border-2 border-ink text-white flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">📸</div>
             <h4 className="font-display font-bold text-[15px] text-ink">Memory Book</h4>
@@ -171,7 +171,7 @@ export default function PatientHome() {
           {/* Emergency / Help */}
           <button 
             onClick={() => navigate('/patient/help')}
-            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-2 p-4 transition-all w-full"
+            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-6 p-6 transition-all w-full"
           >
             <div className="w-12 h-12 rounded-[1rem] bg-emerald-500 border-2 border-ink text-white flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">❤️</div>
             <h4 className="font-display font-bold text-[15px] text-ink">Help</h4>

@@ -24,7 +24,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f7f4] flex flex-col justify-center items-center px-4 py-12">
+    <div className="min-h-screen bg-[#f8f7f4] flex flex-col justify-center items-center px-6 py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -33,12 +33,12 @@ export default function ForgotPasswordPage() {
       >
         {/* Logo and Brand Header */}
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 mb-3">
+          <Link to="/" className="inline-flex items-center gap-6 mb-3">
             <div className="w-12 h-12 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
               <Brain className="w-7 h-7" />
             </div>
             <span className="text-2xl font-bold text-stone-900 tracking-tight">
-              {t('app.name', 'Smriti Care')}
+              {t('app.name', 'Neuro Mind')}
             </span>
           </Link>
           <p className="text-stone-500 text-sm">
@@ -49,7 +49,7 @@ export default function ForgotPasswordPage() {
         <Card variant="elevated" padding="lg" className="border border-stone-200/80">
           <CardBody className="pt-0">
             {isSubmitted ? (
-              <div className="text-center py-4 space-y-4">
+              <div className="text-center py-6 space-y-8">
                 <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto text-emerald-600 border border-emerald-200">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>

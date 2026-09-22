@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Smriti Care",
+    "name": "Neuro Mind",
     "tagline": "Yarap ban pynneh ïa ki jingkynmaw."
   },
   "nav": {
@@ -157,7 +157,7 @@
     "x_large": "Heh shibun",
     "privacy": "Jingkyntang",
     "help": "Jingïarap",
-    "about": "Shaphang Smriti Care"
+    "about": "Shaphang Neuro Mind"
   },
   "caregiver": {
     "dashboard": "Caregiver Dashboard",
@@ -225,7 +225,7 @@
     "repeat": "Pule biang ki Jingbthah"
   },
   "onboarding": {
-    "welcome": "Pdiang sngewbha sha Smriti Care",
+    "welcome": "Pdiang sngewbha sha Neuro Mind",
     "welcome_subtitle": "U paralok ban kynmaw man ka sngi",
     "choose_language": "Jied ïa ka Ktien jong phi",
     "choose_voice": "Phi kwah sur kren jingbthah?",

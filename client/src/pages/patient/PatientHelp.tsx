@@ -31,7 +31,7 @@ export default function PatientHelp() {
     },
     {
       q: 'How do I listen to spoken instructions?',
-      a: 'Whenever you see a round gold speaker button, simply tap it once and Smriti Care will read the text aloud clearly in your language.',
+      a: 'Whenever you see a round gold speaker button, simply tap it once and Neuro Mind will read the text aloud clearly in your language.',
     },
     {
       q: 'Can my caregiver see how I am doing?',
@@ -43,10 +43,10 @@ export default function PatientHelp() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-4xl mx-auto p-4 lg:p-6 space-y-6"
+      className="max-w-4xl mx-auto p-6 lg:p-6 space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">{t('help.title', 'Help & Support')}</div>
           <h1 className="font-display font-bold text-ink text-2xl lg:text-3xl uppercase tracking-widest">
@@ -61,7 +61,7 @@ export default function PatientHelp() {
 
       {/* EMERGENCY CAREGIVER CARD */}
       <div className="arcade-card p-6 bg-ochre/20">
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex items-center gap-6 mb-6">
           <div className="w-14 h-14 bg-vermilion text-kraft flex items-center justify-center border-2 border-ink shadow-[2px_2px_0px_rgba(26,21,18,1)]">
             <Phone className="w-7 h-7" />
           </div>
@@ -77,7 +77,7 @@ export default function PatientHelp() {
 
         <a
           href={`tel:${contact.phone}`}
-          className="btn btn-primary w-full text-xl h-16 flex items-center justify-center gap-3 mb-4"
+          className="btn btn-primary w-full text-xl h-16 flex items-center justify-center gap-6 mb-4"
         >
           <Phone className="w-6 h-6" />
           Call {contact.name}
@@ -90,21 +90,21 @@ export default function PatientHelp() {
 
       {/* HOW TO PLAY GUIDE */}
       <div className="arcade-card p-6">
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-6 mb-6">
           <HelpCircle className="w-6 h-6 text-vermilion" />
           <h2 className="text-2xl font-display font-bold text-ink uppercase tracking-widest">
             {t('help.how_to_play', 'How to Play & Use')}
           </h2>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-8">
           {[
             { step: '1', title: 'Choose Any Fun Activity', desc: 'Tap "Play & Exercise" on your home screen.' },
             { step: '2', title: 'Go At Your Own Pace', desc: 'There are no time limits or penalties.' },
             { step: '3', title: 'Tap Speaker to Hear', desc: 'Look for the speaker button to hear text.' },
             { step: '4', title: 'Take A Break Anytime', desc: 'You can pause or exit an activity whenever.' },
           ].map((item) => (
-            <div key={item.step} className="flex gap-4 border-b-2 border-ink/10 pb-4 last:border-0 last:pb-0">
+            <div key={item.step} className="flex gap-6 border-b-2 border-ink/10 pb-4 last:border-0 last:pb-0">
               <span className="w-10 h-10 bg-ink text-kraft flex items-center justify-center font-display font-bold text-xl shrink-0">
                 {item.step}
               </span>
@@ -120,7 +120,7 @@ export default function PatientHelp() {
       {/* FAQs */}
       <div className="arcade-card p-6">
         <h2 className="text-2xl font-display font-bold text-ink uppercase tracking-widest mb-6">FAQs</h2>
-        <div className="space-y-6">
+        <div className="space-y-8">
           {faqs.map((faq, i) => (
             <div key={i}>
               <h3 className="font-bold text-ink text-lg mb-1">{faq.q}</h3>
@@ -141,7 +141,7 @@ export default function PatientHelp() {
             navigate('/login');
           }}
         >
-          Sign Out of Smriti Care
+          Sign Out of Neuro Mind
         </button>
       </div>
     </motion.div>

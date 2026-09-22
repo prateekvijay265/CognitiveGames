@@ -13,8 +13,8 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
         id: '/?source=pwa',
-        name: 'Smriti Care',
-        short_name: 'Smriti Care',
+        name: 'Neuro Mind',
+        short_name: 'Neuro Mind',
         description: 'AI Cognitive Wellness Platform for North-Eastern India',
         theme_color: '#0d9488', // teal-600
         background_color: '#f8f7f4',

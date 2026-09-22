@@ -3,7 +3,7 @@ import { useAppDataStore } from '../store/appDataStore';
 import { useAuthStore } from '../store/authStore';
 import { toast } from 'sonner';
 
-const NOTIFIED_KEY = 'smriti_notified_reminders';
+const NOTIFIED_KEY = 'Neuro Mind_notified_reminders';
 
 export function useReminderEngine() {
   const { user } = useAuthStore();
@@ -70,7 +70,7 @@ export function useReminderEngine() {
 
       // 2. OS Native Notification
       if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification('Smriti Care: ' + reminder.title, {
+        new Notification('Neuro Mind: ' + reminder.title, {
           body: reminder.description || `It's time for ${reminder.title}`,
           icon: '/pwa-192x192.png',
           // @ts-ignore - 'vibrate' works in Android Chrome but isn't always in the standard TS DOM types
@@ -97,3 +97,4 @@ export function useReminderEngine() {
     return () => clearInterval(interval);
   }, [user, reminders]);
 }
+

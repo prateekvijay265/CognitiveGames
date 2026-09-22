@@ -55,12 +55,10 @@ export default function RegisterPage() {
       {/* LEFT: Branding */}
       <div className="hidden lg:flex lg:w-1/2 felt-surface p-12 flex-col justify-between text-kraft relative overflow-hidden">
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-16">
-            <div className="w-10 h-10 bg-vermilion border-2 border-ink flex items-center justify-center font-display font-bold text-kraft text-xl shadow-[2px_2px_0px_rgba(26,21,18,1)]">
-              S
-            </div>
+          <div className="flex items-center gap-6 mb-16">
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover bg-vermilion border-2 border-ink shadow-[2px_2px_0px_rgba(26,21,18,1)]" />
             <div className="font-display font-bold text-2xl uppercase tracking-widest text-kraft drop-shadow-md">
-              Smriti Care
+              Neuro Mind
             </div>
           </div>
           <h1 className="font-display text-5xl lg:text-6xl uppercase tracking-widest leading-[1.1] mb-6">
@@ -100,12 +98,12 @@ export default function RegisterPage() {
               <h2 className="font-display font-bold text-ink text-3xl uppercase tracking-widest mb-2">Create Account</h2>
               <p className="font-mono text-sand mb-8">Who are you joining as?</p>
 
-              <div className="space-y-4">
+              <div className="space-y-8">
                 {ROLES.map(({ value, label, icon: Icon, desc }) => (
                   <button
                     key={value}
                     onClick={() => handleRoleSelect(value)}
-                    className="arcade-card w-full p-4 flex items-center gap-4 text-left hover-lift bg-white"
+                    className="arcade-card w-full p-6 flex items-center gap-6 text-left hover-lift bg-white"
                   >
                     <div className="w-12 h-12 bg-ochre border-2 border-ink flex items-center justify-center flex-shrink-0">
                       <Icon size={24} className="text-ink" />
@@ -182,7 +180,7 @@ export default function RegisterPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="btn btn-primary w-full mt-4 flex items-center justify-center gap-2"
+                  className="btn btn-primary w-full mt-4 flex items-center justify-center gap-6"
                 >
                   {isLoading ? <Loader2 size={18} className="animate-spin" /> : 'Create Account'}
                 </button>

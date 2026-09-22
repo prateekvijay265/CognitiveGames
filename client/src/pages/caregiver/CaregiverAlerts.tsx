@@ -30,10 +30,10 @@ export function CaregiverAlerts() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Caregiver • Inbox</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -44,7 +44,7 @@ export function CaregiverAlerts() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 arcade-card p-2 bg-kraft2 self-start sm:self-auto">
+        <div className="flex items-center gap-6 arcade-card p-2 bg-kraft2 self-start sm:self-auto">
           <User className="w-4 h-4 text-ink ml-1" />
           <select
             value={selectedPatientId}
@@ -62,7 +62,7 @@ export function CaregiverAlerts() {
       </div>
 
       {/* Tabs */}
-      <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-hide border-b-2 border-kraft/30">
+      <div className="flex overflow-x-auto gap-6 pb-2 scrollbar-hide border-b-2 border-kraft/30">
         {[
           { id: 'unread', label: 'UNRESOLVED' },
           { id: 'all', label: 'ALL ALERTS' },
@@ -71,7 +71,7 @@ export function CaregiverAlerts() {
           <button
             key={id}
             onClick={() => setActiveTab(id as typeof activeTab)}
-            className={`px-4 py-2 flex items-center gap-2 font-mono text-sm uppercase transition-all whitespace-nowrap ${
+            className={`px-6 py-2 flex items-center gap-6 font-mono text-sm uppercase transition-all whitespace-nowrap ${
               activeTab === id
                 ? 'bg-vermilion text-kraft border-2 border-vermilion'
                 : 'bg-transparent text-kraft border-2 border-transparent hover:border-kraft/30'
@@ -83,7 +83,7 @@ export function CaregiverAlerts() {
       </div>
 
       {/* List */}
-      <div className="space-y-4">
+      <div className="space-y-8">
         {filteredAlerts.map((alert, idx) => {
           const patient = DEMO_PATIENTS.find((p) => p.id === alert.patientId);
           
@@ -94,17 +94,17 @@ export function CaregiverAlerts() {
           return (
             <div
               key={alert.id}
-              className={`arcade-card p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fade-up ${
+              className={`arcade-card p-6 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 animate-fade-up ${
                 alert.isResolved ? 'opacity-70 bg-kraft2' : 'bg-kraft'
               }`}
               style={{ animationDelay: `${idx * 100}ms` }}
             >
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-6">
                 <div className={`mt-1 ${alert.isResolved ? 'text-sand' : 'text-vermilion'}`}>
                   <AlertTriangle size={20} />
                 </div>
                 <div>
-                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <div className="flex flex-wrap items-center gap-6 mb-1">
                     <span className="font-mono font-bold text-ink uppercase">
                       {patient?.name || 'UNKNOWN'}
                     </span>
@@ -125,7 +125,7 @@ export function CaregiverAlerts() {
               {!alert.isResolved ? (
                 <button
                   onClick={() => handleResolveAlert(alert.id)}
-                  className="btn btn-sm self-start sm:self-center flex items-center gap-2 bg-kraft2"
+                  className="btn btn-sm self-start sm:self-center flex items-center gap-6 bg-kraft2"
                 >
                   <Check size={14} /> RESOLVE
                 </button>

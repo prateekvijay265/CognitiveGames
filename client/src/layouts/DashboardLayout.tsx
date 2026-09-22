@@ -72,17 +72,13 @@ export default function DashboardLayout({ role }: { role: Role }) {
       )}>
         {compact ? (
           <div className="flex flex-col items-center gap-2">
-            <div className="w-10 h-10 bg-vermilion border-2 border-kraft flex items-center justify-center shadow-[2px_2px_0_var(--color-kraft)]">
-              <span className="font-display font-black text-kraft text-lg">S</span>
-            </div>
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-10 h-10 object-cover border-2 border-kraft shadow-[2px_2px_0_var(--color-kraft)] bg-vermilion" />
           </div>
         ) : (
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-vermilion border-2 border-kraft flex items-center justify-center shadow-[3px_3px_0_var(--color-kraft)] flex-shrink-0">
-              <span className="font-display font-black text-kraft text-xl">S</span>
-            </div>
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover border-2 border-kraft shadow-[3px_3px_0_var(--color-kraft)] flex-shrink-0 bg-vermilion" />
             <div>
-              <div className="font-display font-bold text-kraft text-lg leading-tight uppercase tracking-wide">Smriti Care</div>
+              <div className="font-display font-bold text-kraft text-lg leading-tight uppercase tracking-wide">Neuro Mind</div>
               <div className="smallcaps text-kraft/50 mt-0.5">{meta.tag}</div>
             </div>
           </div>

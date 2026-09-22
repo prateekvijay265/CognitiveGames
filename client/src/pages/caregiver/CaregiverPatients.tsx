@@ -31,10 +31,10 @@ export function CaregiverPatients() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Caregiver • Directory</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -46,14 +46,14 @@ export function CaregiverPatients() {
         </div>
         <button
           onClick={() => toast.success('New patient invitation sent to family')}
-          className="btn btn-primary btn-sm self-start flex items-center gap-2"
+          className="btn btn-primary btn-sm self-start flex items-center gap-6"
         >
           <UserPlus size={16} /> ADD PATIENT
         </button>
       </div>
 
       {/* Filters */}
-      <div className="arcade-card p-4 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between bg-kraft2">
+      <div className="arcade-card p-6 flex flex-col md:flex-row gap-6 items-stretch md:items-center justify-between bg-kraft2">
         <div className="relative flex-1">
           <Search className="w-4 h-4 text-ink absolute left-3 top-1/2 -translate-y-1/2" />
           <input
@@ -64,7 +64,7 @@ export function CaregiverPatients() {
             className="arcade-input pl-9 w-full"
           />
         </div>
-        <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex items-center gap-6 flex-wrap">
           <select
             value={languageFilter}
             onChange={(e) => setLanguageFilter(e.target.value)}
@@ -89,7 +89,7 @@ export function CaregiverPatients() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {filteredPatients.map((patient, idx) => {
           const hasAlert = DEMO_ALERTS.some(
             (a) => a.patientId === patient.id && !a.isResolved
@@ -100,8 +100,8 @@ export function CaregiverPatients() {
             .join('');
 
           return (
-            <div key={patient.id} className="arcade-card p-4 flex flex-col gap-4 animate-fade-up" style={{ animationDelay: `${idx * 100}ms` }}>
-              <div className="flex items-start justify-between gap-3">
+            <div key={patient.id} className="arcade-card p-6 flex flex-col gap-6 animate-fade-up" style={{ animationDelay: `${idx * 100}ms` }}>
+              <div className="flex items-start justify-between gap-6">
                 <div className="w-12 h-12 border-2 border-ink flex items-center justify-center font-display font-bold text-kraft text-xl shrink-0" style={{ backgroundColor: '#2563eb' }}>
                   {initials}
                 </div>

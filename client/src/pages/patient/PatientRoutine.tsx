@@ -77,10 +77,10 @@ export default function PatientRoutine() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-7xl mx-auto p-4 lg:p-6 space-y-6"
+      className="max-w-7xl mx-auto p-6 lg:p-6 space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">{todayFormatted}</div>
           <h1 className="font-display font-bold text-ink text-2xl lg:text-3xl uppercase tracking-widest">
@@ -104,10 +104,10 @@ export default function PatientRoutine() {
           const headerTextColor = period === 'night' ? 'text-kraft' : 'text-ink';
 
           return (
-            <div key={period} className="space-y-4">
+            <div key={period} className="space-y-8">
               {/* Period Header */}
               <div
-                className={`flex items-center gap-3 px-4 py-2 border-2 border-ink shadow-[2px_2px_0px_rgba(26,21,18,1)] w-fit ${config.bg} ${headerTextColor}`}
+                className={`flex items-center gap-6 px-6 py-2 border-2 border-ink shadow-[2px_2px_0px_rgba(26,21,18,1)] w-fit ${config.bg} ${headerTextColor}`}
               >
                 {config.icon}
                 <h2 className="text-xl font-bold font-display uppercase tracking-widest">
@@ -116,18 +116,18 @@ export default function PatientRoutine() {
               </div>
 
               {/* Routine Items */}
-              <div className="space-y-4">
+              <div className="space-y-8">
                 {items.map((item) => {
                   const isDone = completedIds.has(item.id);
 
                   return (
                     <div
                       key={item.id}
-                      className={`arcade-card p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${
+                      className={`arcade-card p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 ${
                         isDone ? 'opacity-70 bg-kraft2' : 'bg-kraft'
                       }`}
                     >
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-6">
                         <span className="w-12 h-12 flex items-center justify-center border-2 border-ink bg-white text-2xl shadow-[2px_2px_0px_rgba(26,21,18,1)]" role="img" aria-label={item.title}>
                           {item.icon}
                         </span>
@@ -154,7 +154,7 @@ export default function PatientRoutine() {
                           <button
                             type="button"
                             onClick={() => toggleDone(item.id, item.title)}
-                            className="btn btn-ghost w-full sm:w-auto flex items-center justify-center gap-2"
+                            className="btn btn-ghost w-full sm:w-auto flex items-center justify-center gap-6"
                           >
                             <CheckCircle2 className="w-5 h-5" />
                             <span>Done</span>

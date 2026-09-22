@@ -11,7 +11,7 @@ export function CaregiverSettings() {
 
   if (DEMO_PATIENTS.length === 0) {
     return (
-      <div className="flex-1 p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
+      <div className="flex-1 p-6 lg:p-8 overflow-y-auto mt-16 lg:mt-0 flex items-center justify-center">
         <EmptyState title="NO PATIENTS" description="Add a patient to configure settings." />
       </div>
     );
@@ -67,16 +67,16 @@ export function CaregiverSettings() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-4xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-4xl mx-auto space-y-8"
     >
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Caregiver • Preferences</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
             Patient Settings
           </h1>
         </div>
-        <div className="arcade-card p-2 bg-kraft2 flex items-center gap-2 self-start sm:self-auto">
+        <div className="arcade-card p-2 bg-kraft2 flex items-center gap-6 self-start sm:self-auto">
           <User size={16} className="text-ink ml-2" />
           <select
             value={selectedPatientId}
@@ -90,16 +90,16 @@ export function CaregiverSettings() {
         </div>
       </div>
 
-      <form onSubmit={handleSave} className="space-y-6">
+      <form onSubmit={handleSave} className="space-y-8">
         <div className="arcade-card p-6">
-          <h2 className="font-display font-bold uppercase tracking-widest text-ink flex items-center gap-2 mb-6">
+          <h2 className="font-display font-bold uppercase tracking-widest text-ink flex items-center gap-6 mb-6">
             <Eye size={20} className="text-vermilion" /> ACCESSIBILITY
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="smallcaps text-sand block mb-2">TEXT SIZE</label>
-              <div className="flex gap-2">
+              <div className="flex gap-6">
                 {(['normal', 'large', 'x-large'] as const).map((size) => (
                   <button
                     key={size}
@@ -128,15 +128,15 @@ export function CaregiverSettings() {
           </div>
 
           <div className="flex flex-wrap gap-6 pt-6 border-t-2 border-ink/20 font-mono text-sm uppercase">
-            <label className="flex items-center gap-2 cursor-pointer">
+            <label className="flex items-center gap-6 cursor-pointer">
               <input type="checkbox" checked={highContrast} onChange={e => setHighContrast(e.target.checked)} className="accent-vermilion" />
               HIGH CONTRAST
             </label>
-            <label className="flex items-center gap-2 cursor-pointer">
+            <label className="flex items-center gap-6 cursor-pointer">
               <input type="checkbox" checked={voiceEnabled} onChange={e => setVoiceEnabled(e.target.checked)} className="accent-vermilion" />
               VOICE ASSIST
             </label>
-            <label className="flex items-center gap-2 cursor-pointer">
+            <label className="flex items-center gap-6 cursor-pointer">
               <input type="checkbox" checked={soundEnabled} onChange={e => setSoundEnabled(e.target.checked)} className="accent-vermilion" />
               SFX CHIMES
             </label>
@@ -144,14 +144,14 @@ export function CaregiverSettings() {
         </div>
 
         <div className="arcade-card p-6">
-          <h2 className="font-display font-bold uppercase tracking-widest text-ink flex items-center gap-2 mb-2">
+          <h2 className="font-display font-bold uppercase tracking-widest text-ink flex items-center gap-6 mb-2">
             <SlidersHorizontal size={20} className="text-vermilion" /> GAME DIFFICULTY
           </h2>
           <p className="font-mono text-sand text-sm mb-6">Pin baseline difficulty levels per activity.</p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {gameList.map(({ key, name }) => (
-              <div key={key} className="p-3 bg-kraft2 border-2 border-ink flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div key={key} className="p-3 bg-kraft2 border-2 border-ink flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <span className="font-mono font-bold text-ink uppercase">{name}</span>
                 <div className="flex gap-1">
                   {(['easy', 'medium', 'hard'] as const).map((diff) => (
@@ -172,9 +172,9 @@ export function CaregiverSettings() {
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-4">
-          {isSaved && <span className="font-mono font-bold text-vermilion flex items-center gap-2"><Check size={16} /> SAVED!</span>}
-          <button type="submit" className="btn btn-primary flex items-center gap-2">
+        <div className="flex items-center justify-end gap-6">
+          {isSaved && <span className="font-mono font-bold text-vermilion flex items-center gap-6"><Check size={16} /> SAVED!</span>}
+          <button type="submit" className="btn btn-primary flex items-center gap-6">
             <Save size={16} /> SAVE PREFERENCES
           </button>
         </div>

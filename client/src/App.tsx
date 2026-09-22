@@ -66,7 +66,7 @@ function LoadingFallback() {
         <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center animate-pulse">
           <span className="text-3xl">🧠</span>
         </div>
-        <div className="text-stone-500 text-lg">Loading Smriti Care...</div>
+        <div className="text-stone-500 text-lg">Loading Neuro Mind...</div>
       </div>
     </div>
   );

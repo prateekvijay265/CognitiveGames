@@ -70,12 +70,10 @@ export default function LoginPage() {
 
         <div className="relative z-10">
           {/* Logo */}
-          <div className="flex items-center gap-3 mb-12">
-            <div className="w-14 h-14 bg-vermilion border-2 border-kraft flex items-center justify-center shadow-[4px_4px_0_var(--color-kraft)]">
-              <span className="font-display font-black text-kraft text-2xl">S</span>
-            </div>
+          <div className="flex items-center gap-6 mb-12">
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-14 h-14 object-cover bg-vermilion border-2 border-kraft shadow-[4px_4px_0_var(--color-kraft)]" />
             <div>
-              <div className="font-display font-bold text-kraft text-xl uppercase tracking-widest">Smriti Care</div>
+              <div className="font-display font-bold text-kraft text-xl uppercase tracking-widest">Neuro Mind</div>
               <div className="smallcaps text-kraft/50">Memory Companion</div>
             </div>
           </div>
@@ -90,9 +88,9 @@ export default function LoginPage() {
         </div>
 
         {/* Feature chips */}
-        <div className="relative z-10 grid grid-cols-2 gap-3">
+        <div className="relative z-10 grid grid-cols-2 gap-6">
           {FEATURES.map((f) => (
-            <div key={f} className="border border-kraft/25 px-3 py-2.5 flex items-center gap-2">
+            <div key={f} className="border border-kraft/25 px-3 py-2.5 flex items-center gap-6">
               <div className="w-2 h-2 bg-vermilion flex-shrink-0" />
               <span className="smallcaps text-kraft/70">{f}</span>
             </div>
@@ -104,12 +102,10 @@ export default function LoginPage() {
       <div className="flex-1 flex flex-col items-center justify-center p-6 lg:p-12 paper grain relative overflow-y-auto">
 
         {/* Mobile brand header */}
-        <div className="flex items-center gap-3 mb-8 lg:hidden self-start">
-          <div className="w-12 h-12 bg-vermilion border-2 border-ink flex items-center justify-center shadow-[3px_3px_0_var(--color-ink)]">
-            <span className="font-display font-black text-kraft text-xl">S</span>
-          </div>
+        <div className="flex items-center gap-6 mb-8 lg:hidden self-start">
+          <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover bg-vermilion border-2 border-ink shadow-[3px_3px_0_var(--color-ink)]" />
           <div>
-            <div className="font-display font-bold text-ink text-lg uppercase tracking-widest">Smriti Care</div>
+            <div className="font-display font-bold text-ink text-lg uppercase tracking-widest">Neuro Mind</div>
             <div className="smallcaps text-sand">Memory Companion</div>
           </div>
         </div>
@@ -131,7 +127,7 @@ export default function LoginPage() {
           {/* Role selector */}
           <div className="mb-6">
             <p className="smallcaps text-sand mb-3">I am a —</p>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 gap-6">
               {ROLE_TILES.map(({ role, emoji, label }) => (
                 <button
                   key={role}
@@ -164,7 +160,7 @@ export default function LoginPage() {
             )}
           </AnimatePresence>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-8">
             {/* Email */}
             <div>
               <label className="smallcaps text-sand block mb-2">Email</label>

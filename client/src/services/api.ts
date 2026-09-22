@@ -17,8 +17,8 @@ export const api = axios.create({
 // Request interceptor
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('smriti-auth')
-      ? JSON.parse(localStorage.getItem('smriti-auth')!).state?.token
+    const token = localStorage.getItem('Neuro Mind-auth')
+      ? JSON.parse(localStorage.getItem('Neuro Mind-auth')!).state?.token
       : null;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -33,7 +33,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('smriti-auth');
+      localStorage.removeItem('Neuro Mind-auth');
       window.location.href = '/login';
     }
     const message =
@@ -45,3 +45,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+

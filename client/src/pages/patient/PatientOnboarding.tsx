@@ -31,7 +31,7 @@ export default function PatientOnboarding() {
 
   const selectLanguage = (code: string) => {
     i18n.changeLanguage(code);
-    localStorage.setItem('smriti_language', code);
+    localStorage.setItem('Neuro Mind_language', code);
     handleNext();
   };
 
@@ -77,7 +77,7 @@ export default function PatientOnboarding() {
     <div className="min-h-screen bg-[#f8f7f4] flex flex-col justify-between items-center p-6 sm:p-10 patient-mode">
       {/* Top Header / Progress Dots */}
       <div className="w-full max-w-xl flex flex-col items-center pt-4">
-        <div className="flex items-center justify-center gap-3 mb-4" role="tablist">
+        <div className="flex items-center justify-center gap-6 mb-4" role="tablist">
           {Array.from({ length: totalSteps }).map((_, i) => (
             <div
               key={i}
@@ -109,7 +109,7 @@ export default function PatientOnboarding() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-              className="text-center space-y-6"
+              className="text-center space-y-8"
             >
               <div className="w-28 h-28 mx-auto rounded-3xl bg-teal-50 border-2 border-teal-200 flex items-center justify-center shadow-sm">
                 <span className="text-6xl" role="img" aria-label="brain">
@@ -118,7 +118,7 @@ export default function PatientOnboarding() {
               </div>
               <div className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight">
-                  {t('onboarding.welcome', 'Welcome to Smriti Care')}
+                  {t('onboarding.welcome', 'Welcome to Neuro Mind')}
                 </h1>
                 <p className="text-xl sm:text-2xl text-stone-600 font-medium">
                   {t('onboarding.welcome_subtitle', 'Your daily memory companion')}
@@ -147,7 +147,7 @@ export default function PatientOnboarding() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-              className="space-y-6"
+              className="space-y-8"
             >
               <div className="text-center space-y-2">
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900">
@@ -158,7 +158,7 @@ export default function PatientOnboarding() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6.5 pt-2">
                 {LANGUAGE_OPTIONS.map((lang) => {
                   const isSelected = i18n.language === lang.code;
                   return (
@@ -166,7 +166,7 @@ export default function PatientOnboarding() {
                       key={lang.code}
                       type="button"
                       onClick={() => selectLanguage(lang.code)}
-                      className={`p-4 sm:p-5 rounded-2xl border-2 text-left transition-all duration-150 flex items-center justify-between cursor-pointer min-h-[4rem] shadow-xs active:scale-[0.98] ${
+                      className={`p-6 sm:p-6 rounded-2xl border-2 text-left transition-all duration-150 flex items-center justify-between cursor-pointer min-h-[4rem] shadow-xs active:scale-[0.98] ${
                         isSelected
                           ? 'border-teal-600 bg-teal-50/80 ring-2 ring-teal-500/20'
                           : 'border-stone-200 bg-white hover:border-teal-300 hover:bg-stone-50'
@@ -201,7 +201,7 @@ export default function PatientOnboarding() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-              className="text-center space-y-6"
+              className="text-center space-y-8"
             >
               <div className="w-24 h-24 mx-auto rounded-3xl bg-amber-50 border-2 border-amber-200 flex items-center justify-center text-amber-600 shadow-sm">
                 <Volume2 className="w-12 h-12" />
@@ -212,16 +212,16 @@ export default function PatientOnboarding() {
                   {t('onboarding.choose_voice', 'Would you like voice instructions?')}
                 </h2>
                 <p className="text-lg text-stone-600 max-w-md mx-auto">
-                  Smriti Care can read reminders and game instructions aloud to you in your preferred language.
+                  Neuro Mind can read reminders and game instructions aloud to you in your preferred language.
                 </p>
               </div>
 
-              <div className="space-y-4 pt-4">
+              <div className="space-y-8 pt-4">
                 <Button
                   size="xl"
                   variant="primary"
                   onClick={() => selectVoice(true)}
-                  className="w-full text-xl min-h-[3.75rem] gap-3"
+                  className="w-full text-xl min-h-[3.75rem] gap-6"
                 >
                   <Volume2 className="w-6 h-6" />
                   <span>{t('onboarding.voice_yes', 'Yes, please')}</span>
@@ -231,7 +231,7 @@ export default function PatientOnboarding() {
                   size="xl"
                   variant="secondary"
                   onClick={() => selectVoice(false)}
-                  className="w-full text-xl min-h-[3.75rem] gap-3"
+                  className="w-full text-xl min-h-[3.75rem] gap-6"
                 >
                   <VolumeX className="w-6 h-6 text-stone-500" />
                   <span>{t('onboarding.voice_no', 'Not now')}</span>
@@ -249,7 +249,7 @@ export default function PatientOnboarding() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-              className="space-y-6"
+              className="space-y-8"
             >
               <div className="text-center space-y-2">
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900">
@@ -287,13 +287,13 @@ export default function PatientOnboarding() {
                       key={item.id}
                       type="button"
                       onClick={() => selectFontSize(item.id)}
-                      className={`w-full p-5 rounded-2xl border-2 text-left transition-all duration-150 flex items-center justify-between cursor-pointer shadow-xs active:scale-[0.98] ${
+                      className={`w-full p-6 rounded-2xl border-2 text-left transition-all duration-150 flex items-center justify-between cursor-pointer shadow-xs active:scale-[0.98] ${
                         isSelected
                           ? 'border-teal-600 bg-teal-50/80 ring-2 ring-teal-500/20'
                           : 'border-stone-200 bg-white hover:border-teal-300'
                       }`}
                     >
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-6">
                         <span
                           className={`w-14 h-14 rounded-xl bg-stone-100 flex items-center justify-center font-bold text-stone-900 ${item.fontSizePreview}`}
                         >
@@ -325,7 +325,7 @@ export default function PatientOnboarding() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-              className="text-center space-y-6"
+              className="text-center space-y-8"
             >
               <div className="w-28 h-28 mx-auto rounded-3xl bg-gradient-to-br from-amber-100 to-teal-100 border-2 border-amber-200 flex items-center justify-center shadow-md">
                 <span className="text-6xl" role="img" aria-label="cards">
@@ -383,3 +383,4 @@ export default function PatientOnboarding() {
     </div>
   );
 }
+

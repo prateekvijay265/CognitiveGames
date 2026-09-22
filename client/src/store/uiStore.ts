@@ -50,7 +50,7 @@ export const useUIStore = create<UIState & UIActions>()(
       setOnboardingComplete: (done) => set({ onboardingComplete: done }),
     }),
     {
-      name: 'smriti-ui',
+      name: 'Neuro Mind-ui',
       partialize: (state) => ({
         fontSize: state.fontSize,
         highContrast: state.highContrast,
@@ -60,3 +60,4 @@ export const useUIStore = create<UIState & UIActions>()(
     }
   )
 );
+

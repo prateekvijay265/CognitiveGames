@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Smriti Care",
+    "name": "Neuro Mind",
     "tagline": "Hriatrengnate vawnghim tura puihna."
   },
   "nav": {
@@ -157,7 +157,7 @@
     "x_large": "Lian lutuk",
     "privacy": "Fimkhurna",
     "help": "Tanpuina",
-    "about": "Smriti Care Chanchin"
+    "about": "Neuro Mind Chanchin"
   },
   "caregiver": {
     "dashboard": "Caregiver Dashboard",
@@ -225,7 +225,7 @@
     "repeat": "Kaihhruaina sawi nawn rawh"
   },
   "onboarding": {
-    "welcome": "Smriti Care-ah kan lo lawm a che",
+    "welcome": "Neuro Mind-ah kan lo lawm a che",
     "welcome_subtitle": "Ni tin i hriatrengna kawppui",
     "choose_language": "I Ṭawng Thlang Rawh",
     "choose_voice": "Aw hmanga kaihhruaina i duh em?",

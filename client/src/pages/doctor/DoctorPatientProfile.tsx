@@ -32,7 +32,7 @@ export function DoctorPatientProfile() {
 
   if (!patient) {
     return (
-      <div className="flex-1 p-4 lg:p-8 flex items-center justify-center min-h-[60vh]">
+      <div className="flex-1 p-6 lg:p-8 flex items-center justify-center min-h-[60vh]">
         <div className="arcade-card p-8 text-center max-w-md">
           <h2 className="font-display text-2xl font-bold text-ink mb-4 uppercase">Patient Not Found</h2>
           <p className="font-mono text-sand mb-6">We couldn't find the requested patient profile.</p>
@@ -96,7 +96,7 @@ export function DoctorPatientProfile() {
 
   const handleDownloadReport = () => {
     const reportText = `
-SMRITI CARE - CLINICAL ACTIVITY & ENGAGEMENT REPORT
+Neuro Mind - CLINICAL ACTIVITY & ENGAGEMENT REPORT
 ======================================================
 Patient Name: ${patient.name}
 Patient Age: ${patient.age}
@@ -146,23 +146,23 @@ This report summarizes platform activity and is not a medical diagnosis.
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       <button
         onClick={() => navigate('/doctor/patients')}
-        className="nav-item flex items-center gap-2 w-fit text-kraft hover:text-white"
+        className="nav-item flex items-center gap-6 w-fit text-kraft hover:text-white"
       >
         <ArrowLeft className="w-4 h-4" /> Back to Registry
       </button>
 
       {/* Header Banner */}
       <div className="arcade-card p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-6">
           <div className="w-20 h-20 bg-[#7c3aed] border-4 border-ink flex items-center justify-center font-display font-bold text-white text-3xl shadow-[4px_4px_0px_rgba(26,21,18,1)]">
             {patient.name.split(' ').map((n) => n[0]).join('')}
           </div>
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-6">
               <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink uppercase tracking-widest">{patient.name}</h1>
               <span className="badge bg-kraft2 text-ink uppercase">{patient.language}</span>
             </div>
@@ -182,7 +182,7 @@ This report summarizes platform activity and is not a medical diagnosis.
       </div>
 
       {/* Disclaimer strip */}
-      <div className="bg-amber-100 border-2 border-amber-400 p-3 flex items-center gap-3 text-xs text-ink font-mono uppercase">
+      <div className="bg-amber-100 border-2 border-amber-400 p-3 flex items-center gap-6 text-xs text-ink font-mono uppercase">
         <Info className="w-5 h-5 text-amber-600 shrink-0" />
         <span>This report summarizes platform activity and is not a medical diagnosis.</span>
       </div>
@@ -198,7 +198,7 @@ This report summarizes platform activity and is not a medical diagnosis.
           <button
             key={id}
             onClick={() => setActiveTab(id as typeof activeTab)}
-            className={`py-3 px-6 font-display font-bold uppercase tracking-widest flex items-center gap-2 border-b-4 transition-all whitespace-nowrap ${
+            className={`py-3 px-6 font-display font-bold uppercase tracking-widest flex items-center gap-6 border-b-4 transition-all whitespace-nowrap ${
               activeTab === id
                 ? 'border-[#7c3aed] text-kraft'
                 : 'border-transparent text-sand hover:text-kraft'
@@ -212,7 +212,7 @@ This report summarizes platform activity and is not a medical diagnosis.
 
       {/* Tab 1: Activity Overview */}
       {activeTab === 'activity' && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div className="arcade-card p-6">
             <h3 className="font-display font-bold text-ink text-lg uppercase tracking-widest mb-1">Cognitive Activity Trend</h3>
             <p className="font-mono text-xs text-sand mb-6">
@@ -271,7 +271,7 @@ This report summarizes platform activity and is not a medical diagnosis.
 
       {/* Tab 2: Reminders */}
       {activeTab === 'reminders' && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div className="arcade-card p-6">
             <h3 className="font-display font-bold text-ink text-lg uppercase tracking-widest mb-1">7-Day Adherence Percentage</h3>
             <p className="font-mono text-xs text-sand mb-6">
@@ -295,10 +295,10 @@ This report summarizes platform activity and is not a medical diagnosis.
 
       {/* Tab 3: Notes */}
       {activeTab === 'notes' && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           <form
             onSubmit={handleAddObservation}
-            className="arcade-card p-6 space-y-4"
+            className="arcade-card p-6 space-y-8"
           >
             <h3 className="font-display font-bold text-ink text-lg uppercase tracking-widest">Add Clinical Observation</h3>
             <textarea
@@ -317,11 +317,11 @@ This report summarizes platform activity and is not a medical diagnosis.
             </button>
           </form>
 
-          <div className="space-y-4">
+          <div className="space-y-8">
             {notes.map((note) => (
-              <div key={note.id} className="arcade-card p-5 space-y-3">
+              <div key={note.id} className="arcade-card p-6 space-y-3">
                 <div className="flex items-center justify-between border-b-2 border-ink border-dashed pb-2">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-6">
                     <span className="font-display font-bold text-ink uppercase">{note.authorName}</span>
                     <span className="badge bg-kraft2 text-ink">
                       {note.authorRole}
@@ -340,7 +340,7 @@ This report summarizes platform activity and is not a medical diagnosis.
 
       {/* Tab 4: Reports */}
       {activeTab === 'reports' && (
-        <div className="paper grain border-4 border-ink p-8 shadow-[8px_8px_0px_rgba(26,21,18,1)] space-y-6">
+        <div className="paper grain border-4 border-ink p-8 shadow-[8px_8px_0px_rgba(26,21,18,1)] space-y-8">
           <div className="border-b-4 border-ink pb-4 flex justify-between items-end">
             <div>
               <h3 className="font-display font-bold text-ink text-2xl uppercase tracking-widest">Platform Clinical Summary</h3>
@@ -357,7 +357,7 @@ This report summarizes platform activity and is not a medical diagnosis.
             </button>
           </div>
 
-          <div className="p-6 bg-kraft2 border-2 border-ink font-mono text-sm text-ink space-y-4">
+          <div className="p-6 bg-kraft2 border-2 border-ink font-mono text-sm text-ink space-y-8">
             <div className="flex justify-between border-b-2 border-ink/20 pb-2">
               <span className="font-bold">Patient:</span> <span>{patient.name} (Age {patient.age})</span>
             </div>
@@ -387,3 +387,4 @@ This report summarizes platform activity and is not a medical diagnosis.
 }
 
 export default DoctorPatientProfile;
+

@@ -20,7 +20,7 @@ export function DoctorReports() {
 
   if (DEMO_PATIENTS.length === 0) {
     return (
-      <div className="flex-1 p-4 lg:p-8 flex items-center justify-center min-h-[60vh]">
+      <div className="flex-1 p-6 lg:p-8 flex items-center justify-center min-h-[60vh]">
         <div className="arcade-card p-8 max-w-md text-center">
           <h2 className="font-display font-bold text-ink text-xl uppercase mb-2">No Patients Found</h2>
           <p className="font-mono text-sand text-sm">You don't have any patients assigned yet.</p>
@@ -33,7 +33,7 @@ export function DoctorReports() {
 
   const handleDownload = () => {
     const reportText = `
-SMRITI CARE - CLINICAL OBSERVATION DOSSIER
+Neuro Mind - CLINICAL OBSERVATION DOSSIER
 ======================================================
 Patient: ${patient.name} | Age: ${patient.age} | Language: ${patient.language}
 Report Type: ${reportType.toUpperCase()}
@@ -65,12 +65,12 @@ This report summarizes platform activity and is not a medical diagnosis.
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-5xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-5xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
-          <div className="smallcaps text-sand mb-1 flex items-center gap-2">
+          <div className="smallcaps text-sand mb-1 flex items-center gap-6">
             <FileText className="w-4 h-4" /> Reports
           </div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -81,7 +81,7 @@ This report summarizes platform activity and is not a medical diagnosis.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <button
             onClick={() => window.print()}
             className="btn btn-ghost bg-kraft text-ink"
@@ -101,7 +101,7 @@ This report summarizes platform activity and is not a medical diagnosis.
       </div>
 
       {/* Report Generator Controls */}
-      <div className="arcade-card p-6 space-y-4">
+      <div className="arcade-card p-6 space-y-8">
         <h3 className="font-display font-bold text-ink uppercase tracking-widest border-b-2 border-ink/20 pb-2">
           Configure Dossier Parameters
         </h3>
@@ -152,7 +152,7 @@ This report summarizes platform activity and is not a medical diagnosis.
 
       {/* Generated Report Canvas */}
       {generated && (
-        <div className="paper grain border-4 border-ink p-8 shadow-[8px_8px_0px_rgba(26,21,18,1)] space-y-6">
+        <div className="paper grain border-4 border-ink p-8 shadow-[8px_8px_0px_rgba(26,21,18,1)] space-y-8">
           <div className="border-b-4 border-ink pb-6 flex justify-between items-start">
             <div>
               <span className="badge bg-kraft2 text-ink border-2 border-ink mb-3 block w-max">
@@ -171,7 +171,7 @@ This report summarizes platform activity and is not a medical diagnosis.
             </div>
           </div>
 
-          <div className="bg-amber-100 border-2 border-amber-400 p-3 flex items-center gap-3 text-xs text-ink font-mono uppercase">
+          <div className="bg-amber-100 border-2 border-amber-400 p-3 flex items-center gap-6 text-xs text-ink font-mono uppercase">
             <Info className="w-5 h-5 text-amber-600 shrink-0" />
             <span>
               <strong>Disclaimer:</strong> This summary details platform activity and observed trends. It does not constitute a diagnostic evaluation.
@@ -180,7 +180,7 @@ This report summarizes platform activity and is not a medical diagnosis.
 
           <div className="space-y-8 font-mono text-sm text-ink leading-relaxed">
             <div>
-              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-2">
+              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-6">
                 <span className="w-6 h-6 bg-ink text-kraft flex items-center justify-center text-sm">1</span> Activity & Stability
               </h4>
               <p className="pl-8">
@@ -191,7 +191,7 @@ This report summarizes platform activity and is not a medical diagnosis.
             </div>
 
             <div>
-              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-2">
+              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-6">
                 <span className="w-6 h-6 bg-ink text-kraft flex items-center justify-center text-sm">2</span> Domain Evaluation
               </h4>
               <ul className="list-disc pl-12 space-y-2">
@@ -202,7 +202,7 @@ This report summarizes platform activity and is not a medical diagnosis.
             </div>
 
             <div>
-              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-2">
+              <h4 className="font-display font-bold text-lg uppercase tracking-widest mb-2 flex items-center gap-6">
                 <span className="w-6 h-6 bg-ink text-kraft flex items-center justify-center text-sm">3</span> Adherence Summary
               </h4>
               <p className="pl-8">
@@ -218,3 +218,4 @@ This report summarizes platform activity and is not a medical diagnosis.
 }
 
 export default DoctorReports;
+

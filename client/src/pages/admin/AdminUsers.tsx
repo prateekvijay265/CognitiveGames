@@ -65,10 +65,10 @@ export function AdminUsers() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Administrator • Users</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -81,14 +81,14 @@ export function AdminUsers() {
 
         <button
           onClick={() => toast.success('New user registration dialog coming soon.')}
-          className="btn btn-primary btn-sm self-start flex items-center gap-2"
+          className="btn btn-primary btn-sm self-start flex items-center gap-6"
         >
           <UserPlus className="w-4 h-4" /> Add User
         </button>
       </div>
 
       {/* Search & Role Filter Bar */}
-      <div className="arcade-card p-4 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+      <div className="arcade-card p-6 flex flex-col md:flex-row gap-6 items-stretch md:items-center justify-between">
         <div className="relative flex-1">
           <Search className="w-4 h-4 text-ink absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -100,7 +100,7 @@ export function AdminUsers() {
           />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
@@ -199,10 +199,10 @@ export function AdminUsers() {
 
       {/* Edit Role Modal */}
       {editingUser && (
-        <div className="fixed inset-0 z-50 bg-ink/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-ink/50 backdrop-blur-sm flex items-center justify-center p-6">
           <form
             onSubmit={handleSaveRole}
-            className="arcade-card p-6 max-w-sm w-full space-y-4 paper grain"
+            className="arcade-card p-6 max-w-sm w-full space-y-8 paper grain"
           >
             <div className="flex items-center justify-between border-b-2 border-ink pb-2">
               <h3 className="font-display font-bold text-ink text-xl uppercase tracking-widest">Edit Role</h3>
@@ -230,7 +230,7 @@ export function AdminUsers() {
               <option value="admin">Administrator (Full permissions)</option>
             </select>
 
-            <div className="flex justify-end gap-3 pt-4">
+            <div className="flex justify-end gap-6 pt-4">
               <button
                 type="button"
                 onClick={() => setEditingUser(null)}

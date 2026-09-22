@@ -66,7 +66,7 @@ export default function PatientGames() {
                 <p className="text-sand text-sm font-bold smallcaps">Choose a cognitive area</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 {CATEGORIES.map((cat, idx) => (
                   <motion.button
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -74,7 +74,7 @@ export default function PatientGames() {
                     transition={{ delay: idx * 0.05 }}
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className="relative p-5 text-left group btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] transition-all flex flex-col items-start bg-kraft2/30"
+                    className="relative p-6 text-left group btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] transition-all flex flex-col items-start bg-kraft2/30"
                   >
                     <div className="text-3xl mb-4 relative z-10 group-hover:scale-110 transition-transform origin-bottom-left">{cat.icon}</div>
                     <h3 className="font-bold text-ink text-[15px] leading-tight mb-1">{cat.title}</h3>
@@ -92,9 +92,9 @@ export default function PatientGames() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="space-y-4"
+            className="space-y-8"
           >
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-6 mb-6">
               <button 
                 onClick={() => setSelectedCategory(null)}
                 className="btn btn-ghost !p-2 !border-ink shadow-[2px_2px_0_var(--color-ink)]"
@@ -106,7 +106,7 @@ export default function PatientGames() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-6">
               {filteredGames.length > 0 ? filteredGames.map((game, idx) => (
                 <motion.button
                   initial={{ opacity: 0, y: 10 }}
@@ -118,7 +118,7 @@ export default function PatientGames() {
                 >
                   <div className="relative z-10 flex-1">
                     <h4 className="font-display font-bold text-ink text-[16px] mb-1.5">{game.name}</h4>
-                    <div className="flex gap-2">
+                    <div className="flex gap-6">
                        <span className="smallcaps text-sand">{game.difficulty}</span>
                        <span className="smallcaps text-sand">⏱ {game.time}</span>
                     </div>

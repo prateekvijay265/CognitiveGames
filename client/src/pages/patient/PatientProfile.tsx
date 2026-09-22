@@ -36,7 +36,7 @@ export default function PatientProfile() {
       className="px-5 pt-6 pb-8 space-y-5"
     >
       {/* Header */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-6">
         <button onClick={() => navigate('/patient')} className="icon-btn">
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -49,7 +49,7 @@ export default function PatientProfile() {
       </div>
 
       {/* Profile Card */}
-      <div className="arcade-card p-5 flex items-center gap-4">
+      <div className="arcade-card p-6 flex items-center gap-6">
         <div className="w-16 h-16 bg-vermilion border-2 border-ink flex items-center justify-center shadow-[3px_3px_0_var(--color-ink)] flex-shrink-0">
           <span className="font-display font-black text-kraft text-2xl">
             {patientName.charAt(0).toUpperCase()}
@@ -68,9 +68,9 @@ export default function PatientProfile() {
         <div className="arcade-card overflow-hidden">
           <button
             onClick={() => setShowLanguage(!showLanguage)}
-            className="w-full flex items-center justify-between p-4 hover:bg-kraft2 transition-colors group"
+            className="w-full flex items-center justify-between p-6 hover:bg-kraft2 transition-colors group"
           >
-            <div className="flex items-center gap-4 text-ink">
+            <div className="flex items-center gap-6 text-ink">
               <Globe className="w-5 h-5 text-ink/70" />
               <div className="text-left">
                 <span className="font-mono font-bold text-ink block">{currentLang.label}</span>
@@ -98,17 +98,17 @@ export default function PatientProfile() {
                         key={lang.code}
                         onClick={() => {
                           i18n.changeLanguage(lang.code);
-                          localStorage.setItem('smriti_language', lang.code);
+                          localStorage.setItem('Neuro Mind_language', lang.code);
                           toast.success(`Language changed to ${lang.label}`);
                           setShowLanguage(false);
                         }}
-                        className={`w-full flex items-center justify-between px-4 py-3 transition-all border-2 ${
+                        className={`w-full flex items-center justify-between px-6 py-3 transition-all border-2 ${
                           isActive
                             ? 'border-ink bg-ink text-kraft shadow-[2px_2px_0_var(--color-vermilion)]'
                             : 'border-transparent hover:border-ink hover:bg-kraft'
                         }`}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-6">
                           <span className="text-lg">{lang.flag}</span>
                           <div className="text-left">
                             <span className="font-mono font-bold block text-sm">
@@ -140,9 +140,9 @@ export default function PatientProfile() {
             <button
               key={idx}
               onClick={onClick ?? (() => toast.info(`${label} settings coming soon!`))}
-              className="w-full flex items-center justify-between p-4 hover:bg-kraft2 transition-colors group border-b last:border-0 border-ink/10"
+              className="w-full flex items-center justify-between p-6 hover:bg-kraft2 transition-colors group border-b last:border-0 border-ink/10"
             >
-              <div className="flex items-center gap-4 text-ink">
+              <div className="flex items-center gap-6 text-ink">
                 <Icon className="w-5 h-5 text-ink/70" />
                 <div className="text-left">
                   <span className="font-mono font-bold text-ink block text-sm">{label}</span>
@@ -171,9 +171,10 @@ export default function PatientProfile() {
 
       {/* Footer */}
       <div className="text-center pt-4 pb-4 space-y-1">
-        <p className="smallcaps text-sand/60">Smriti Care v1.0</p>
+        <p className="smallcaps text-sand/60">Neuro Mind v1.0</p>
         <p className="smallcaps text-sand/40">Healthy mind. Brighter tomorrow.</p>
       </div>
     </motion.div>
   );
 }
+

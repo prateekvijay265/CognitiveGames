@@ -67,10 +67,10 @@ export function AdminContent() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Administrator • Content</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -93,7 +93,7 @@ export function AdminContent() {
           <button
             key={id}
             onClick={() => setActiveTab(id as typeof activeTab)}
-            className={`px-4 py-2 font-bold uppercase text-sm flex items-center gap-2 border-2 transition-all ${
+            className={`px-6 py-2 font-bold uppercase text-sm flex items-center gap-6 border-2 transition-all ${
               activeTab === id
                 ? 'bg-vermilion border-ink text-kraft shadow-[2px_2px_0px_#1a1512]'
                 : 'bg-kraft2 border-transparent text-ink hover:border-ink hover:shadow-[2px_2px_0px_#1a1512]'
@@ -108,7 +108,7 @@ export function AdminContent() {
       {/* Tab 1: Games Catalogue */}
       {activeTab === 'games' && (
         <div className="arcade-card overflow-hidden">
-          <div className="p-4 border-b-2 border-ink bg-kraft2 flex items-center justify-between">
+          <div className="p-6 border-b-2 border-ink bg-kraft2 flex items-center justify-between">
             <h3 className="font-bold text-ink uppercase tracking-wider">Active Modules</h3>
             <span className="badge badge-ochre">
               10 of 10 Games Active
@@ -177,7 +177,7 @@ export function AdminContent() {
 
       {/* Tab 2: Translations */}
       {activeTab === 'translations' && (
-        <div className="arcade-card p-6 space-y-4">
+        <div className="arcade-card p-6 space-y-8">
           <div className="flex items-center justify-between border-b-2 border-ink pb-3">
             <div>
               <h3 className="font-bold text-ink uppercase tracking-widest text-lg">Regional Language Keys</h3>
@@ -210,7 +210,7 @@ export function AdminContent() {
 
       {/* Tab 3: Reminders Templates */}
       {activeTab === 'reminders' && (
-        <div className="arcade-card p-6 space-y-4">
+        <div className="arcade-card p-6 space-y-8">
           <div className="border-b-2 border-ink pb-3">
             <h3 className="font-bold text-ink uppercase tracking-widest text-lg">Standard Routine Prompts</h3>
             <p className="font-mono text-xs text-sand mt-1">
@@ -218,7 +218,7 @@ export function AdminContent() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
               { time: '08:00', title: 'Morning Medicine & Red Tea', type: 'Medicine' },
               { time: '10:00', title: 'Hydration (Fresh Water)', type: 'Hydration' },
@@ -226,7 +226,7 @@ export function AdminContent() {
               { time: '17:00', title: 'Courtyard Walk', type: 'Exercise' },
               { time: '18:30', title: 'Light Diya & Evening Medicine', type: 'Medicine' },
             ].map((tmpl) => (
-              <div key={tmpl.time} className="p-4 bg-kraft2 border-2 border-ink flex flex-col justify-between">
+              <div key={tmpl.time} className="p-6 bg-kraft2 border-2 border-ink flex flex-col justify-between">
                 <div className="flex justify-between items-start mb-2">
                   <span className="badge badge-ochre">
                     {tmpl.type}
@@ -242,7 +242,7 @@ export function AdminContent() {
 
       {/* Tab 4: Cultural Content */}
       {activeTab === 'cultural' && (
-        <div className="arcade-card p-6 space-y-4">
+        <div className="arcade-card p-6 space-y-8">
           <div className="border-b-2 border-ink pb-3">
             <h3 className="font-bold text-ink uppercase tracking-widest text-lg">North-Eastern Cultural Asset Pool</h3>
             <p className="font-mono text-xs text-sand mt-1">
@@ -250,7 +250,7 @@ export function AdminContent() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-6">
             {MEMORY_CARDS.map((c) => (
               <div key={c.id} className="p-3 bg-kraft2 border-2 border-ink flex flex-col items-center text-center hover-lift">
                 <span className="text-4xl mb-2">{c.emoji}</span>

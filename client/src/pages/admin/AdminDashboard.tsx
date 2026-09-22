@@ -68,13 +68,13 @@ export function AdminDashboard() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Administrator • Dashboard</div>
-          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest flex items-center gap-2">
+          <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest flex items-center gap-6">
             <ShieldCheck className="w-6 h-6 text-ochre" /> System Admin
           </h1>
           <p className="font-mono text-sand/70 text-sm mt-1">
@@ -89,7 +89,7 @@ export function AdminDashboard() {
       </div>
 
       {/* Stats Cards Row */}
-      <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-6 gap-6">
         <div className="stat-card animate-card-in">
           <div className="stat-value">{totalUsers}</div>
           <div className="stat-label">Total Users</div>
@@ -122,9 +122,9 @@ export function AdminDashboard() {
       </div>
 
       {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* User Distribution PieChart */}
-        <div className="arcade-card p-5">
+        <div className="arcade-card p-6">
           <h2 className="smallcaps text-ink mb-1">User Role Distribution</h2>
           <p className="font-mono text-sand text-xs mb-4">Breakdown of platform accounts by security role</p>
 
@@ -156,7 +156,7 @@ export function AdminDashboard() {
         </div>
 
         {/* Language Usage BarChart */}
-        <div className="arcade-card p-5">
+        <div className="arcade-card p-6">
           <h2 className="smallcaps text-ink mb-1">Language Dialect Distribution</h2>
           <p className="font-mono text-sand text-xs mb-4">Patient active preferences across North-Eastern languages</p>
 
@@ -175,9 +175,9 @@ export function AdminDashboard() {
       </div>
 
       {/* System Health Indicators Strip & Audit Preview */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Health Details */}
-        <div className="arcade-card p-5 space-y-4">
+        <div className="arcade-card p-6 space-y-8">
           <h2 className="smallcaps text-ink">Service Infrastructure Health</h2>
           <div className="space-y-3">
             {[
@@ -190,7 +190,7 @@ export function AdminDashboard() {
                 key={srv.name}
                 className="p-3 bg-kraft2 border-2 border-ink flex items-center justify-between"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-6">
                   <srv.icon className="w-5 h-5 text-ink" />
                   <div>
                     <h4 className="font-bold text-ink text-sm">{srv.name}</h4>
@@ -206,7 +206,7 @@ export function AdminDashboard() {
         </div>
 
         {/* Recent Audit Log Preview */}
-        <div className="lg:col-span-2 arcade-card p-5 space-y-4">
+        <div className="lg:col-span-2 arcade-card p-6 space-y-8">
           <div className="flex items-center justify-between border-b-2 border-ink/10 pb-2">
             <div>
               <h2 className="smallcaps text-ink">Recent Security Audit Events</h2>

@@ -102,10 +102,10 @@ export default function PatientReminders() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-7xl mx-auto p-4 lg:p-6 space-y-6"
+      className="max-w-7xl mx-auto p-6 lg:p-6 space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">{todayFormatted}</div>
           <h1 className="font-display font-bold text-ink text-2xl lg:text-3xl uppercase tracking-widest">
@@ -121,7 +121,7 @@ export default function PatientReminders() {
       </div>
 
       {/* REMINDER ITEMS LIST */}
-      <div className="space-y-4 max-w-3xl">
+      <div className="space-y-8 max-w-3xl">
         <AnimatePresence>
           {reminders.map((reminder) => {
             const icon = TYPE_ICONS[reminder.type] || '🔔';
@@ -134,11 +134,11 @@ export default function PatientReminders() {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                className={`arcade-card p-5 ${isDone ? 'opacity-60 bg-kraft2' : ''}`}
+                className={`arcade-card p-6 ${isDone ? 'opacity-60 bg-kraft2' : ''}`}
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                   {/* Left: Icon, Time, Title */}
-                  <div className="flex items-start gap-4 sm:gap-5">
+                  <div className="flex items-start gap-6 sm:gap-6">
                     <div
                       className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center shrink-0 border-2 border-ink text-4xl sm:text-5xl select-none ${
                         isDone ? 'bg-kraft3' : 'bg-ochre'
@@ -148,7 +148,7 @@ export default function PatientReminders() {
                     </div>
 
                     <div className="space-y-1">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-6">
                         <span className="font-mono font-bold text-ink flex items-center gap-1.5">
                           <Clock className="w-4 h-4" />
                           {formatReminderTime(reminder.scheduledTime)}
@@ -175,9 +175,9 @@ export default function PatientReminders() {
                   </div>
 
                   {/* Right: Actions */}
-                  <div className="flex flex-row sm:flex-col items-center justify-end gap-3 shrink-0 pt-2 sm:pt-0">
+                  <div className="flex flex-row sm:flex-col items-center justify-end gap-6 shrink-0 pt-2 sm:pt-0">
                     {isDone ? (
-                      <div className="flex items-center gap-2 px-4 py-2 font-mono font-bold text-ink">
+                      <div className="flex items-center gap-6 px-6 py-2 font-mono font-bold text-ink">
                         <CheckCircle2 className="w-5 h-5" />
                         <span>Done!</span>
                       </div>

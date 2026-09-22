@@ -26,7 +26,7 @@ export function CaregiverPatientDetail() {
   
   if (!patient) {
     return (
-      <div className="flex-1 p-4 flex items-center justify-center h-full">
+      <div className="flex-1 p-6 flex items-center justify-center h-full">
         <div className="arcade-card p-8 text-center bg-kraft2">
           <h2 className="font-display font-bold text-ink text-xl uppercase mb-2">Patient Not Found</h2>
           <p className="font-mono text-sand mb-6">We couldn't find the requested patient profile.</p>
@@ -98,30 +98,30 @@ export function CaregiverPatientDetail() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       <button
         onClick={() => navigate('/caregiver/patients')}
-        className="btn btn-sm btn-ghost mb-2 inline-flex items-center gap-2"
+        className="btn btn-sm btn-ghost mb-2 inline-flex items-center gap-6"
       >
         <ArrowLeft size={14} /> BACK
       </button>
 
       {/* Patient Header */}
       <div className="arcade-card p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-kraft2">
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-6">
           <div className="w-20 h-20 border-2 border-ink flex items-center justify-center font-display font-bold text-kraft text-3xl shadow-[4px_4px_0px_#1a1512]" style={{ backgroundColor: '#2563eb' }}>
             {patient.name.split(' ').map((n) => n[0]).join('')}
           </div>
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-6">
               <h1 className="font-display font-bold text-ink text-2xl sm:text-3xl uppercase tracking-widest">{patient.name}</h1>
               <span className="badge bg-ink text-kraft">{patient.language?.toUpperCase()}</span>
             </div>
             <p className="font-mono text-sand text-sm mt-2">
               Age: {patient.age} • Emergency: {patient.emergencyContact?.name} ({patient.emergencyContact?.relationship})
             </p>
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-sand mt-2 uppercase">
+            <div className="flex flex-wrap items-center gap-6 text-xs font-mono text-sand mt-2 uppercase">
               <span>CG: Priya Sharma</span>
               <span>•</span>
               <span className="text-vermilion font-bold">● SYNCED</span>
@@ -130,19 +130,19 @@ export function CaregiverPatientDetail() {
         </div>
         <button
           onClick={() => navigate('/caregiver/settings')}
-          className="btn btn-ghost btn-sm flex items-center gap-2"
+          className="btn btn-ghost btn-sm flex items-center gap-6"
         >
           <SlidersHorizontal size={14} /> SETTINGS
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-hide border-b-2 border-ink">
+      <div className="flex overflow-x-auto gap-6 pb-2 scrollbar-hide border-b-2 border-ink">
         {tabs.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setActiveTab(id as typeof activeTab)}
-            className={`px-4 py-2 flex items-center gap-2 font-mono text-sm uppercase transition-all whitespace-nowrap ${
+            className={`px-6 py-2 flex items-center gap-6 font-mono text-sm uppercase transition-all whitespace-nowrap ${
               activeTab === id
                 ? 'bg-ink text-kraft'
                 : 'bg-transparent text-ink hover:bg-kraft2'
@@ -157,9 +157,9 @@ export function CaregiverPatientDetail() {
       {/* Tab Content */}
       <div className="pt-2 animate-fade-up">
         {activeTab === 'overview' && (
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="arcade-card p-5">
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="arcade-card p-6">
                 <h3 className="smallcaps text-sand mb-2">Today's Progress</h3>
                 <div className="text-3xl font-display font-bold text-vermilion mb-3">4 of 5 Done</div>
                 <div className="arcade-progress mb-2">
@@ -167,12 +167,12 @@ export function CaregiverPatientDetail() {
                 </div>
                 <p className="text-xs font-mono text-ink">Completed Match, Memory, Routine.</p>
               </div>
-              <div className="arcade-card p-5">
+              <div className="arcade-card p-6">
                 <h3 className="smallcaps text-sand mb-2">Reminders</h3>
                 <div className="text-3xl font-display font-bold text-ochre mb-3">100%</div>
                 <p className="text-xs font-mono text-ink">All prompts acknowledged on time.</p>
               </div>
-              <div className="arcade-card p-5">
+              <div className="arcade-card p-6">
                 <h3 className="smallcaps text-sand mb-2">Latest Mood</h3>
                 <div className="text-3xl font-display font-bold text-ink mb-3">😊 Good</div>
                 <p className="text-xs font-mono text-ink">Recorded at 8:30 AM.</p>
@@ -180,7 +180,7 @@ export function CaregiverPatientDetail() {
             </div>
 
             <div className="arcade-card overflow-hidden">
-              <div className="p-4 border-b-2 border-ink bg-kraft2 flex justify-between items-center">
+              <div className="p-6 border-b-2 border-ink bg-kraft2 flex justify-between items-center">
                 <h3 className="font-display font-bold uppercase text-ink tracking-widest text-sm">Recent Games</h3>
               </div>
               <div className="overflow-x-auto">
@@ -210,11 +210,11 @@ export function CaregiverPatientDetail() {
         )}
 
         {activeTab === 'cognitive' && (
-          <div className="space-y-6">
-            <div className="arcade-card p-5">
+          <div className="space-y-8">
+            <div className="arcade-card p-6">
               <div className="flex flex-col sm:flex-row justify-between mb-4">
                 <h3 className="font-display font-bold uppercase tracking-widest text-ink">Performance Trend</h3>
-                <div className="flex gap-2">
+                <div className="flex gap-6">
                   {(['7d', '30d', '3m'] as const).map((r) => (
                     <button
                       key={r}
@@ -242,7 +242,7 @@ export function CaregiverPatientDetail() {
               </div>
             </div>
             
-            <div className="arcade-card p-5">
+            <div className="arcade-card p-6">
               <h3 className="font-display font-bold uppercase tracking-widest text-ink mb-4">Domain Score</h3>
               <div className="h-56 w-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -291,15 +291,15 @@ export function CaregiverPatientDetail() {
         )}
 
         {activeTab === 'reminders' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {reminders.map((rem) => (
-              <div key={rem.id} className="arcade-card p-4 flex flex-col justify-between h-full bg-kraft2">
+              <div key={rem.id} className="arcade-card p-6 flex flex-col justify-between h-full bg-kraft2">
                 <div>
                    <span className="badge badge-ochre">{rem.type}</span>
                    <h4 className="font-bold font-mono text-ink text-base mt-2 uppercase">{rem.title}</h4>
                    <p className="text-sm font-mono text-sand mt-1">{rem.description}</p>
                 </div>
-                <div className="flex items-center gap-2 mt-4 pt-4 border-t-2 border-dashed border-ink/20 font-mono text-sm">
+                <div className="flex items-center gap-6 mt-4 pt-4 border-t-2 border-dashed border-ink/20 font-mono text-sm">
                    <Clock size={14} className="text-ink" />
                    <span className="text-ink">{rem.scheduledTime} DAILY</span>
                 </div>
@@ -309,11 +309,11 @@ export function CaregiverPatientDetail() {
         )}
 
         {activeTab === 'routine' && (
-          <div className="arcade-card p-5">
+          <div className="arcade-card p-6">
             <h3 className="font-display font-bold uppercase tracking-widest text-ink mb-4">Daily Timeline</h3>
             <div className="space-y-3">
               {routineList.map((item, idx) => (
-                <div key={item.id} className="flex items-center gap-4 p-3 bg-kraft border-2 border-ink">
+                <div key={item.id} className="flex items-center gap-6 p-3 bg-kraft border-2 border-ink">
                   <span className="font-display font-bold text-sand text-xl w-6">{idx + 1}</span>
                   <span className="text-2xl">{item.icon}</span>
                   <div className="flex-1">
@@ -327,8 +327,8 @@ export function CaregiverPatientDetail() {
         )}
 
         {activeTab === 'notes' && (
-          <div className="space-y-4">
-            <form onSubmit={handleAddNote} className="arcade-card p-5 bg-kraft2">
+          <div className="space-y-8">
+            <form onSubmit={handleAddNote} className="arcade-card p-6 bg-kraft2">
               <h3 className="font-display font-bold uppercase tracking-widest text-ink mb-3 text-sm">Add Observation</h3>
               <textarea
                 value={newNoteContent}
@@ -342,9 +342,9 @@ export function CaregiverPatientDetail() {
 
             <div className="space-y-3">
               {notes.map((note) => (
-                <div key={note.id} className="arcade-card p-4">
+                <div key={note.id} className="arcade-card p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-6">
                       <span className="font-mono font-bold uppercase text-ink">{note.authorName}</span>
                       <span className="badge bg-ink text-kraft">{note.authorRole}</span>
                     </div>

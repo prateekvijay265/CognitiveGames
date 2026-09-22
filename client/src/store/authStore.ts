@@ -87,8 +87,9 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       setUser: (user) => set({ user }),
     }),
     {
-      name: 'smriti-auth',
+      name: 'Neuro Mind-auth',
       partialize: (state) => ({ user: state.user, token: state.token, isAuthenticated: state.isAuthenticated }),
     }
   )
 );
+

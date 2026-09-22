@@ -23,7 +23,7 @@ export function CaregiverReminders() {
 
   if (DEMO_PATIENTS.length === 0) {
     return (
-      <div className="flex-1 p-4 flex items-center justify-center">
+      <div className="flex-1 p-6 flex items-center justify-center">
         <EmptyState title="NO PATIENTS" description="Add a patient to start managing reminders." />
       </div>
     );
@@ -65,9 +65,9 @@ export function CaregiverReminders() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">Caregiver • Schedule</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
@@ -79,13 +79,13 @@ export function CaregiverReminders() {
         </div>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="btn btn-primary btn-sm flex items-center gap-2 self-start sm:self-auto"
+          className="btn btn-primary btn-sm flex items-center gap-6 self-start sm:self-auto"
         >
           <Plus size={16} /> {showAddForm ? 'CANCEL' : 'NEW REMINDER'}
         </button>
       </div>
 
-      <div className="arcade-card p-4 bg-kraft2 flex items-center gap-3">
+      <div className="arcade-card p-6 bg-kraft2 flex items-center gap-6">
         <User size={16} className="text-ink" />
         <span className="smallcaps text-ink">PATIENT:</span>
         <select
@@ -106,10 +106,10 @@ export function CaregiverReminders() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           onSubmit={handleCreateReminder}
-          className="arcade-card p-6 bg-kraft overflow-hidden space-y-4 border-l-4 border-l-vermilion"
+          className="arcade-card p-6 bg-kraft overflow-hidden space-y-8 border-l-4 border-l-vermilion"
         >
           <h3 className="font-display font-bold text-ink uppercase tracking-widest mb-4">Schedule Reminder</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div>
               <label className="smallcaps text-sand block mb-1">TITLE</label>
               <input type="text" required value={newTitle} onChange={(e) => setNewTitle(e.target.value)} className="arcade-input w-full" placeholder="e.g. WATER" />
@@ -135,31 +135,31 @@ export function CaregiverReminders() {
             <input type="text" value={newDesc} onChange={(e) => setNewDesc(e.target.value)} className="arcade-input w-full" placeholder="Optional details..." />
           </div>
           
-          <div className="flex flex-wrap gap-4 pt-4 border-t-2 border-ink/20">
-            <label className="flex items-center gap-2 cursor-pointer font-mono text-sm text-ink uppercase">
+          <div className="flex flex-wrap gap-6 pt-4 border-t-2 border-ink/20">
+            <label className="flex items-center gap-6 cursor-pointer font-mono text-sm text-ink uppercase">
               <input type="checkbox" checked={voiceEnabled} onChange={e => setVoiceEnabled(e.target.checked)} className="accent-vermilion" />
               <Volume2 size={16} /> VOICE
             </label>
-            <label className="flex items-center gap-2 cursor-pointer font-mono text-sm text-ink uppercase">
+            <label className="flex items-center gap-6 cursor-pointer font-mono text-sm text-ink uppercase">
               <input type="checkbox" checked={vibrationEnabled} onChange={e => setVibrationEnabled(e.target.checked)} className="accent-vermilion" />
               <Vibrate size={16} /> VIBRATE
             </label>
-            <label className="flex items-center gap-2 cursor-pointer font-mono text-sm text-ink uppercase">
+            <label className="flex items-center gap-6 cursor-pointer font-mono text-sm text-ink uppercase">
               <input type="checkbox" checked={caregiverNotify} onChange={e => setCaregiverNotify(e.target.checked)} className="accent-vermilion" />
               <ShieldCheck size={16} /> NOTIFY ME
             </label>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4">
+          <div className="flex justify-end gap-6 pt-4">
             <button type="button" onClick={() => setShowAddForm(false)} className="btn btn-ghost">CANCEL</button>
             <button type="submit" className="btn btn-primary">SAVE</button>
           </div>
         </motion.form>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {patientReminders.map((rem, i) => (
-          <div key={rem.id} className="arcade-card p-5 flex flex-col justify-between animate-fade-up bg-kraft" style={{ animationDelay: `${i*100}ms` }}>
+          <div key={rem.id} className="arcade-card p-6 flex flex-col justify-between animate-fade-up bg-kraft" style={{ animationDelay: `${i*100}ms` }}>
             <div>
               <div className="flex items-start justify-between mb-3">
                 <span className="badge badge-ochre">{rem.type}</span>
@@ -172,10 +172,10 @@ export function CaregiverReminders() {
             </div>
 
             <div className="mt-4 pt-4 border-t-2 border-dashed border-ink/20 flex items-center justify-between font-mono text-sm">
-              <div className="flex items-center gap-2 text-ink font-bold">
+              <div className="flex items-center gap-6 text-ink font-bold">
                 <Clock size={14} /> {rem.scheduledTime}
               </div>
-              <div className="flex items-center gap-2 text-vermilion">
+              <div className="flex items-center gap-6 text-vermilion">
                 {rem.voiceEnabled && <Volume2 size={14} />}
                 {rem.vibrationEnabled && <Vibrate size={14} />}
               </div>

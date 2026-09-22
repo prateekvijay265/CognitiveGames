@@ -63,10 +63,10 @@ export default function PatientMemoryBook() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-4xl mx-auto p-4 lg:p-6 space-y-6"
+      className="max-w-4xl mx-auto p-6 lg:p-6 space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
           <div className="smallcaps text-sand mb-1">{t('nav.notes', 'Memory Album')}</div>
           <h1 className="font-display font-bold text-ink text-2xl lg:text-3xl uppercase tracking-widest">
@@ -76,7 +76,7 @@ export default function PatientMemoryBook() {
             Memory {currentIndex + 1} of {memories.length}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-6">
           <button 
             className={`btn ${isQuizMode ? 'btn-primary' : 'btn-ghost'}`}
             onClick={() => {
@@ -107,7 +107,7 @@ export default function PatientMemoryBook() {
             </div>
 
             {!isQuizMode ? (
-              <div className="space-y-4 max-w-lg">
+              <div className="space-y-8 max-w-lg">
                 <div>
                   <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink uppercase tracking-widest">
                     {currentMemory.personName}
@@ -121,7 +121,7 @@ export default function PatientMemoryBook() {
                 </p>
               </div>
             ) : (
-              <div className="space-y-6 w-full max-w-md">
+              <div className="space-y-8 w-full max-w-md">
                 <div className="space-y-2">
                   <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink uppercase tracking-widest">
                     {t('memory_book.who_is_this', 'Who is this?')}
@@ -131,7 +131,7 @@ export default function PatientMemoryBook() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-6">
                   {quizOptions.map((name) => {
                     const isCorrect = name === currentMemory.personName;
                     const isChosen = quizAnswered === name;
@@ -168,7 +168,7 @@ export default function PatientMemoryBook() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 border-2 border-ink bg-ochre mt-6 shadow-[2px_2px_0px_rgba(26,21,18,1)] text-ink"
+                    className="p-6 border-2 border-ink bg-ochre mt-6 shadow-[2px_2px_0px_rgba(26,21,18,1)] text-ink"
                   >
                     <p className="text-lg font-mono font-bold leading-relaxed">
                       "{currentMemory.story}"
@@ -182,7 +182,7 @@ export default function PatientMemoryBook() {
       </AnimatePresence>
 
       {/* NAVIGATION CONTROLS */}
-      <div className="flex items-center justify-between gap-4 max-w-4xl pt-4">
+      <div className="flex items-center justify-between gap-6 max-w-4xl pt-4">
         <button className="btn btn-ghost flex-1" onClick={handlePrev}>
           <ArrowLeft className="w-5 h-5 mr-2" />
           Previous

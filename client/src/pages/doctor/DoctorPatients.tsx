@@ -36,26 +36,26 @@ export function DoctorPatients() {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 lg:p-6 max-w-7xl mx-auto space-y-6"
+      className="p-6 lg:p-6 max-w-7xl mx-auto space-y-8"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         <div>
-          <div className="smallcaps text-sand mb-1 flex items-center gap-2">
+          <div className="smallcaps text-sand mb-1 flex items-center gap-6">
             <Users className="w-4 h-4" /> Patient Management
           </div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
             Patient Registry
           </h1>
           <p className="font-mono text-sand/70 text-sm mt-1">
-            Clinical registry of patients enrolled in the SMRITI CARE program.
+            Clinical registry of patients enrolled in the Neuro Mind program.
           </p>
         </div>
 
         <div className="flex items-center gap-1 bg-ink/20 border-2 border-kraft/30 p-1 rounded-none self-start sm:self-auto">
           <button
             onClick={() => setViewMode('table')}
-            className={`p-2 font-mono text-xs uppercase font-bold flex items-center gap-2 ${
+            className={`p-2 font-mono text-xs uppercase font-bold flex items-center gap-6 ${
               viewMode === 'table'
                 ? 'bg-kraft text-ink shadow-[2px_2px_0px_rgba(26,21,18,1)]'
                 : 'text-kraft hover:bg-kraft/10'
@@ -65,7 +65,7 @@ export function DoctorPatients() {
           </button>
           <button
             onClick={() => setViewMode('cards')}
-            className={`p-2 font-mono text-xs uppercase font-bold flex items-center gap-2 ${
+            className={`p-2 font-mono text-xs uppercase font-bold flex items-center gap-6 ${
               viewMode === 'cards'
                 ? 'bg-kraft text-ink shadow-[2px_2px_0px_rgba(26,21,18,1)]'
                 : 'text-kraft hover:bg-kraft/10'
@@ -77,7 +77,7 @@ export function DoctorPatients() {
       </div>
 
       {/* Filters Bar */}
-      <div className="arcade-card p-4 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+      <div className="arcade-card p-6 flex flex-col md:flex-row gap-6 items-stretch md:items-center justify-between">
         <div className="relative flex-1">
           <Search className="w-4 h-4 text-ink absolute left-3 top-1/2 -translate-y-1/2" />
           <input
@@ -89,7 +89,7 @@ export function DoctorPatients() {
           />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <select
             value={languageFilter}
             onChange={(e) => setLanguageFilter(e.target.value)}
@@ -120,11 +120,11 @@ export function DoctorPatients() {
           <table className="arcade-table w-full text-left text-sm">
             <thead>
               <tr>
-                <th className="py-3 px-4">Patient</th>
-                <th className="py-3 px-4">Language</th>
-                <th className="py-3 px-4">Status</th>
-                <th className="py-3 px-4">Caregiver</th>
-                <th className="py-3 px-4 text-right">Actions</th>
+                <th className="py-3 px-6">Patient</th>
+                <th className="py-3 px-6">Language</th>
+                <th className="py-3 px-6">Status</th>
+                <th className="py-3 px-6">Caregiver</th>
+                <th className="py-3 px-6 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -132,22 +132,22 @@ export function DoctorPatients() {
                 const isReview = p.id === 'pat-2' || p.id === 'pat-3';
                 return (
                   <tr key={p.id}>
-                    <td className="py-3 px-4 font-bold font-mono uppercase text-ink">
+                    <td className="py-3 px-6 font-bold font-mono uppercase text-ink">
                       <div>{p.name}</div>
                       <div className="text-xs text-sand font-normal mt-1">Age: {p.age}</div>
                     </td>
-                    <td className="py-3 px-4 font-mono text-xs uppercase text-ink">
+                    <td className="py-3 px-6 font-mono text-xs uppercase text-ink">
                       {p.language}
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-6">
                       {isReview ? (
                         <span className="badge badge-vermilion">Review</span>
                       ) : (
                         <span className="badge bg-[#7c3aed] text-white border-2 border-ink">Stable</span>
                       )}
                     </td>
-                    <td className="py-3 px-4 font-mono text-xs text-ink">Priya Sharma</td>
-                    <td className="py-3 px-4 text-right">
+                    <td className="py-3 px-6 font-mono text-xs text-ink">Priya Sharma</td>
+                    <td className="py-3 px-6 text-right">
                       <button
                         onClick={() => navigate(`/doctor/patients/${p.id}`)}
                         className="btn btn-sm"
@@ -170,11 +170,11 @@ export function DoctorPatients() {
             return (
               <div
                 key={p.id}
-                className="arcade-card p-5 flex flex-col justify-between hover-lift"
+                className="arcade-card p-6 flex flex-col justify-between hover-lift"
               >
                 <div>
                   <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-6">
                       <div className="w-12 h-12 bg-[#7c3aed] border-2 border-ink flex items-center justify-center font-display font-bold text-white text-xl shadow-[2px_2px_0px_rgba(26,21,18,1)]">
                         {p.name[0]}
                       </div>
@@ -209,7 +209,7 @@ export function DoctorPatients() {
 
                 <button
                   onClick={() => navigate(`/doctor/patients/${p.id}`)}
-                  className="btn w-full mt-4 flex items-center justify-center gap-2"
+                  className="btn w-full mt-4 flex items-center justify-center gap-6"
                   style={{ backgroundColor: '#7c3aed', color: 'white' }}
                 >
                   View Profile <ExternalLink className="w-4 h-4" />
@@ -224,3 +224,4 @@ export function DoctorPatients() {
 }
 
 export default DoctorPatients;
+
