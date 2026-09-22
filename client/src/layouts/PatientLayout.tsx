@@ -1,6 +1,6 @@
 import { Outlet, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Home, Gamepad2, Bell, TrendingUp, HelpCircle } from 'lucide-react';
+import { Home, Gamepad2, TrendingUp, User } from 'lucide-react';
 import { useUIStore } from '../store/uiStore';
 import { useReminderEngine } from '../hooks/useReminderEngine';
 import { cn } from '../lib/utils';
@@ -14,16 +14,15 @@ export default function PatientLayout() {
   useReminderEngine();
 
   const navItems = [
-    { to: '/patient', label: t('nav.home'), icon: Home, exact: true },
-    { to: '/patient/games', label: t('nav.games'), icon: Gamepad2 },
-    { to: '/patient/reminders', label: t('nav.reminders'), icon: Bell },
-    { to: '/patient/progress', label: t('nav.progress'), icon: TrendingUp },
-    { to: '/patient/help', label: t('nav.help'), icon: HelpCircle },
+    { to: '/patient', label: 'Home', icon: Home, exact: true },
+    { to: '/patient/games', label: 'Games', icon: Gamepad2 },
+    { to: '/patient/progress', label: 'Progress', icon: TrendingUp },
+    { to: '/patient/settings', label: 'Profile', icon: User },
   ];
 
   return (
     <div className={cn(
-      'min-h-screen flex flex-col bg-[#f8f7f4] patient-mode',
+      'min-h-screen flex flex-col bg-[#FDFBF7] patient-mode font-sans',
       fontSize === 'large' && 'text-lg',
       fontSize === 'x-large' && 'text-xl',
     )}>
@@ -38,8 +37,8 @@ export default function PatientLayout() {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-100 shadow-lg z-50">
-        <div className="flex items-stretch justify-around max-w-lg mx-auto">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-100 rounded-t-3xl shadow-lg z-50">
+        <div className="flex items-stretch justify-around max-w-lg mx-auto py-2">
           {navItems.map(({ to, label, icon: Icon, exact }) => (
             <NavLink
               key={to}
@@ -47,15 +46,15 @@ export default function PatientLayout() {
               end={exact}
               replace
               className={({ isActive }) => cn(
-                'flex flex-col items-center justify-center gap-1 py-3 px-2 flex-1 transition-colors min-h-[4rem]',
-                'text-stone-400 hover:text-teal-600',
-                isActive && 'text-teal-600 bg-teal-50'
+                'flex flex-col items-center justify-center gap-1.5 py-2 px-2 flex-1 transition-all min-h-[4rem]',
+                'text-stone-400 hover:text-[#4A856E]',
+                isActive && 'text-[#4A856E]'
               )}
             >
               {({ isActive }) => (
                 <>
-                  <Icon size={24} strokeWidth={isActive ? 2.5 : 1.8} />
-                  <span className="text-xs font-medium">{label}</span>
+                  <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
+                  <span className={cn("text-[10px] font-semibold transition-all", isActive ? "text-[#4A856E]" : "text-stone-500")}>{label}</span>
                 </>
               )}
             </NavLink>
