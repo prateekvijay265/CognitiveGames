@@ -7,9 +7,18 @@ const router = Router();
 
 router.get('/', authenticate, async (req: AuthRequest, res: Response, next) => {
   try {
-    const { patientId } = req.query as { patientId: string };
+    let { patientId } = req.query as Record<string, string>;
+    const userId = req.user!.id;
+    const role = req.user!.role;
+
+    if (!patientId && role === 'patient') {
+      const p = await prisma.patient.findFirst({ where: { userId } });
+      if (p) patientId = p.id;
+    }
+
     if (!patientId) return next(createError('patientId required.', 400));
-    const hasAccess = await authorizePatientAccess(req.user!.id, req.user!.role, patientId);
+    
+    const hasAccess = await authorizePatientAccess(userId, role, patientId);
     if (!hasAccess) return next(createError('Access denied.', 403));
     const reminders = await prisma.reminder.findMany({ where: { patientId, isActive: true }, orderBy: { scheduledTime: 'asc' } });
     res.json({ success: true, data: reminders });

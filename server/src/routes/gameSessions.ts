@@ -75,11 +75,18 @@ router.post('/', authenticate, async (req: AuthRequest, res: Response, next) => 
 // GET /api/game-sessions?patientId=&limit=&gameId=
 router.get('/', authenticate, async (req: AuthRequest, res: Response, next) => {
   try {
-    const { patientId, limit = '50', gameId, startDate, endDate } = req.query as Record<string, string>;
-    if (!patientId) return next(createError('patientId required.', 400));
-
+    let { patientId, limit = '50', gameId, startDate, endDate } = req.query as Record<string, string>;
+    
     const userId = req.user!.id;
     const role = req.user!.role;
+
+    if (!patientId && role === 'patient') {
+      const p = await prisma.patient.findFirst({ where: { userId } });
+      if (p) patientId = p.id;
+    }
+
+    if (!patientId) return next(createError('patientId required.', 400));
+
     const hasAccess = await authorizePatientAccess(userId, role, patientId);
     if (!hasAccess) return next(createError('Access denied.', 403));
 

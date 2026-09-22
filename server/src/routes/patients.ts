@@ -70,9 +70,15 @@ router.get('/', authenticate, requireRole('caregiver', 'doctor', 'admin'), async
 // GET /api/patients/:id — patient detail
 router.get('/:id', authenticate, async (req: AuthRequest, res: Response, next) => {
   try {
-    const { id } = req.params;
+    let { id } = req.params;
     const userId = req.user!.id;
     const role = req.user!.role;
+
+    if (id === 'me' && role === 'patient') {
+      const patientRecord = await prisma.patient.findFirst({ where: { userId } });
+      if (!patientRecord) return next(createError('Patient not found.', 404));
+      id = patientRecord.id;
+    }
 
     const hasAccess = await authorizePatientAccess(userId, role, id);
     if (!hasAccess) {
