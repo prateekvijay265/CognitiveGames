@@ -8,7 +8,7 @@ const baseURL = import.meta.env.PROD
 
 export const api = axios.create({
   baseURL,
-  timeout: 15000,
+  timeout: 60000, // Increased to 60s to allow Render free tier to wake up from sleep
   headers: {
     'Content-Type': 'application/json',
   },
