@@ -49,19 +49,19 @@
 
 ```mermaid
 flowchart TD
-    subgraph Patient Device (Mobile/Tablet)
+    subgraph PatientDevice ["Patient Device (Mobile/Tablet)"]
         A[Smriti Care PWA]
         B[(IndexedDB / Local Cache)]
         A <-->|Plays Games, Logs Mood Offline| B
     end
 
-    subgraph Cloud Infrastructure (Render/Vercel)
+    subgraph CloudInfrastructure ["Cloud Infrastructure (Render/Vercel)"]
         C{Background Sync Engine}
         D[Node.js / Express API]
         E[(PostgreSQL Database)]
     end
     
-    subgraph Monitoring Dashboards
+    subgraph Dashboards ["Monitoring Dashboards"]
         F[Caregiver Portal]
         G[Doctor/Clinical Portal]
     end
