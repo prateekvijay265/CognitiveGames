@@ -661,93 +661,58 @@ export const GameResult: React.FC<GameResultProps> = ({
   onPlayAgain,
   onExit,
 }) => {
-  // Positive encouraging messages only
-  const getEncouragingPhrase = (accuracy: number) => {
-    if (accuracy >= 85) return 'Wonderful Effort! Outstanding Work!';
-    if (accuracy >= 65) return 'Great Work! You Did Splendidly!';
-    return 'Good Try! Every Activity Keeps Your Mind Fresh!';
-  };
-
-  const minutes = Math.floor((Number(session.metadata?.elapsedSeconds) || 30) / 60);
-  const seconds = (Number(session.metadata?.elapsedSeconds) || 30) % 60;
-  const timeFormatted = `${minutes > 0 ? `${minutes}m ` : ''}${seconds}s`;
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-stone-100 dark:from-stone-900 dark:to-stone-950 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-4 font-sans relative overflow-hidden">
+      
+      {/* Background Decor */}
+      <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-sky-50 to-[#FDFBF7] pointer-events-none"></div>
+
       <motion.div
-        initial={{ opacity: 0, scale: 0.92, y: 15 }}
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="bg-white dark:bg-stone-900 rounded-3xl p-6 sm:p-10 max-w-lg w-full shadow-xl border border-amber-200 dark:border-stone-700 text-center"
+        className="w-full max-w-sm flex flex-col items-center text-center relative z-10"
       >
-        {/* Celebration icon badge */}
+        {/* Smiling Sun Illustration */}
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.1 }}
-          className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-tr from-amber-400 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg text-white"
+          initial={{ scale: 0, rotate: -20 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
+          className="relative w-40 h-40 mb-6"
         >
-          <Trophy className="w-10 h-10 sm:w-12 sm:h-12 drop-shadow-xs" />
+           <div className="absolute inset-0 bg-[#FFD166] rounded-full flex items-center justify-center border-4 border-white shadow-md">
+             <div className="flex gap-4 mb-2">
+                <div className="w-2.5 h-4 bg-amber-900 rounded-full"></div>
+                <div className="w-2.5 h-4 bg-amber-900 rounded-full"></div>
+             </div>
+             <div className="absolute bottom-10 w-8 h-3.5 border-b-4 border-amber-900 rounded-b-full"></div>
+             {/* Sparkles */}
+             <div className="absolute -top-2 -right-4 text-3xl">✨</div>
+             <div className="absolute top-4 -left-6 text-2xl">✨</div>
+           </div>
         </motion.div>
 
         {/* Heading */}
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-amber-950 dark:text-amber-100 mb-2">
-          {getEncouragingPhrase(session.accuracy)}
+        <h2 className="text-3xl font-extrabold text-stone-900 mb-2">
+          Nice try!
         </h2>
-        <p className="text-stone-600 dark:text-stone-300 text-base mb-6">
-          Activity completed with gentle attention and care.
+        <p className="text-stone-500 font-medium text-[15px] mb-10">
+          You completed the activity.
         </p>
 
-        {/* Stat metrics */}
-        <div className="grid grid-cols-3 gap-3 mb-6 bg-amber-50/70 dark:bg-stone-800/60 p-4 rounded-2xl border border-amber-100 dark:border-stone-700">
-          <div className="flex flex-col items-center">
-            <span className="text-xs text-stone-500 dark:text-stone-400">Accuracy</span>
-            <span className="text-2xl font-black text-amber-700 dark:text-amber-300 mt-0.5">
-              {session.accuracy}%
-            </span>
-          </div>
-          <div className="flex flex-col items-center border-x border-amber-200/70 dark:border-stone-700">
-            <span className="text-xs text-stone-500 dark:text-stone-400">Score</span>
-            <span className="text-2xl font-black text-amber-700 dark:text-amber-300 mt-0.5">
-              {session.score}
-            </span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-xs text-stone-500 dark:text-stone-400">Time Spent</span>
-            <span className="text-2xl font-black text-amber-700 dark:text-amber-300 mt-0.5">
-              {timeFormatted}
-            </span>
-          </div>
-        </div>
-
-        {/* Adaptive recommendation notice if present */}
-        {adaptiveFeedback && (
-          <div className="mb-6 p-3.5 bg-amber-100/60 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-900 text-left flex items-start gap-2.5">
-            <Sparkles className="w-5 h-5 text-amber-700 dark:text-amber-300 shrink-0 mt-0.5" />
-            <div className="text-xs sm:text-sm text-stone-700 dark:text-stone-300">
-              <span className="font-semibold text-amber-900 dark:text-amber-200">
-                Comfort Level: {adaptiveFeedback.recommendedDifficulty}
-              </span>
-              <p className="mt-0.5">{adaptiveFeedback.reason}</p>
-            </div>
-          </div>
-        )}
-
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col gap-3 w-full px-4">
           <button
             onClick={onPlayAgain}
-            className="flex-1 py-4 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-base sm:text-lg flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.98]"
+            className="w-full py-4 rounded-full bg-[#4A856E] text-white font-bold text-[17px] shadow-[0_4px_16px_rgba(74,133,110,0.3)] transition-transform active:scale-[0.98]"
           >
-            <RotateCcw className="w-5 h-5" />
-            Play Again
+            Replay
           </button>
           <button
             onClick={onExit}
-            className="flex-1 py-4 rounded-2xl bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-100 font-bold text-base sm:text-lg flex items-center justify-center gap-2 border border-stone-200 dark:border-stone-700 transition-all"
+            className="w-full py-4 rounded-full bg-stone-100 text-[#4A856E] font-bold text-[17px] transition-transform active:scale-[0.98]"
           >
-            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-            Finish
+            Next
           </button>
         </div>
       </motion.div>

@@ -128,9 +128,23 @@ export default function GamePlayer() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 bg-[#f8f7f4] overflow-y-auto patient-mode select-none"
+      className="fixed inset-0 z-50 bg-[#FDFBF7] overflow-y-auto patient-mode select-none flex flex-col"
     >
-      {renderGame()}
+      <div className="flex-1 relative z-10 pb-32">
+         {renderGame()}
+      </div>
+
+      {/* Persistent Landscape Footer */}
+      <div className="fixed bottom-0 left-0 right-0 h-32 pointer-events-none z-0 overflow-hidden">
+         {/* Light Green Hill (Back) */}
+         <div className="absolute bottom-6 -left-4 w-48 h-24 bg-[#75A586] rounded-t-full rotate-[-15deg] opacity-60"></div>
+         
+         {/* Medium Green Hill (Right) */}
+         <div className="absolute -bottom-4 -right-12 w-64 h-32 bg-[#5E947A] rounded-t-full rotate-[10deg] opacity-80"></div>
+         
+         {/* Dark Green Ground (Front) */}
+         <div className="absolute -bottom-10 -left-10 right-0 h-24 bg-[#3E705C] rounded-t-[50%] scale-x-125"></div>
+      </div>
     </motion.div>
   );
 }
