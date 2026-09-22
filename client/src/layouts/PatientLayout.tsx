@@ -23,7 +23,7 @@ export default function PatientLayout() {
   return (
     <div
       className={cn(
-        'min-h-[100dvh] flex flex-col felt-surface text-ink font-sans relative patient-mode',
+        'w-full min-h-[100dvh] flex flex-col felt-surface text-ink font-sans relative patient-mode',
         fontSize === 'large'   && 'text-lg',
         fontSize === 'x-large' && 'text-xl',
       )}
@@ -49,13 +49,13 @@ export default function PatientLayout() {
         <Outlet />
       </main>
 
-      {/* ── Bottom Navigation ─────────────────────────────── */}
+      {/* ✨ Bottom Navigation ✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨ */}
       <nav
         className={cn(
           'fixed bottom-0 left-0 right-0 z-50',
           'paper border-t-2 border-ink',
           // Centre the nav bar to match the paper column on wide screens
-          'lg:max-w-[480px] lg:mx-auto lg:left-auto lg:right-auto',
+          'lg:max-w-[480px] mx-auto',
           'lg:border-l-2 lg:border-r-2',
         )}
       >

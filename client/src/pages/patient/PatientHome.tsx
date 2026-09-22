@@ -34,7 +34,7 @@ export default function PatientHome() {
           <h1 className="text-[28px] font-display font-bold text-ink leading-tight mb-1 uppercase tracking-wider">
             {firstName} <span className="inline-block origin-bottom-right animate-wave text-2xl">👋</span>
           </h1>
-          <p className="text-sand text-xs font-bold font-mono">Ready to play?</p>
+          <p className="font-mono text-[13px] text-ink/70">Ready to play?</p>
         </div>
         <div className="flex items-center gap-6">
           <button 

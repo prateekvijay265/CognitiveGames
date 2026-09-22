@@ -545,9 +545,9 @@ export const DEMO_COGNITIVE_METRICS: CognitiveMetric[] = Array.from({ length: 28
 // DEMO AUTH CREDENTIALS (for display on login page)
 // ============================================================
 export const DEMO_CREDENTIALS = [
-  { role: 'Patient', email: 'patient@demo.smriticare.in', password: 'Demo@1234', icon: '👤', color: 'teal' },
-  { role: 'Caregiver', email: 'caregiver@demo.smriticare.in', password: 'Demo@1234', icon: '🤝', color: 'blue' },
+  { role: 'Patient', email: 'patient@demo.smriticare.in', password: 'Demo@1234', icon: '🧠', color: 'teal' },
+  { role: 'Caregiver', email: 'caregiver@demo.smriticare.in', password: 'Demo@1234', icon: '💚', color: 'blue' },
   { role: 'Doctor', email: 'doctor@demo.smriticare.in', password: 'Demo@1234', icon: '🩺', color: 'purple' },
-  { role: 'Admin', email: 'admin@demo.smriticare.in', password: 'Demo@1234', icon: '⚙️', color: 'amber' },
+  { role: 'Admin', email: 'admin@demo.smriticare.in', password: 'Demo@1234', icon: '⚡', color: 'amber' },
 ];
 

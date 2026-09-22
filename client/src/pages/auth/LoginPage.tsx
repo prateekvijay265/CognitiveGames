@@ -127,21 +127,21 @@ export default function LoginPage() {
           {/* Role selector */}
           <div className="mb-6">
             <p className="smallcaps text-sand mb-3">I am a —</p>
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-4 gap-2">
               {ROLE_TILES.map(({ role, emoji, label }) => (
-                <button
-                  key={role}
-                  type="button"
-                  onClick={() => setSelectedRole(role)}
-                  className={`flex flex-col items-center gap-1.5 p-3 border-2 transition-all ${
-                    selectedRole === role
-                      ? 'border-ink bg-ink text-kraft shadow-[3px_3px_0_var(--color-vermilion)]'
-                      : 'border-kraft3 bg-kraft2 text-ink hover:border-ink hover:shadow-[2px_2px_0_var(--color-ink)]'
-                  }`}
-                >
-                  <span className="text-xl">{emoji}</span>
-                  <span className="smallcaps text-[0.55rem]">{label}</span>
-                </button>
+                  <button
+                    key={role}
+                    type="button"
+                    onClick={() => setSelectedRole(role)}
+                    className={`flex flex-col items-center justify-center gap-1 p-2 sm:p-3 border-2 transition-all hover-lift ${
+                      selectedRole === role
+                        ? 'border-ink bg-ink text-kraft shadow-[3px_3px_0_var(--color-vermilion)]'
+                        : 'border-kraft3 bg-kraft2 text-ink hover:border-ink hover:shadow-[2px_2px_0_var(--color-ink)]'
+                    }`}
+                  >
+                    <span className="text-xl sm:text-2xl">{emoji}</span>
+                    <span className="font-mono text-[0.6rem] sm:text-xs font-bold uppercase tracking-widest text-center leading-none mt-1">{label}</span>
+                  </button>
               ))}
             </div>
           </div>
