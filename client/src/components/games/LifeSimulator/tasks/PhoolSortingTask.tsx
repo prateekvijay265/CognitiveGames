@@ -9,7 +9,7 @@ interface BloomingFlower {
   type: 'rose' | 'marigold' | 'jasmine';
   name: string;
   hindiName: string;
-  emoji: string;
+  image: string;
   color: string;
   isWatered: boolean;
   isBloomed: boolean;
@@ -18,12 +18,12 @@ interface BloomingFlower {
 }
 
 const INITIAL_FLOWERS: BloomingFlower[] = [
-  { id: 'f-1', type: 'rose', name: 'Red Rose', hindiName: 'लाल गुलाब', emoji: '🌹', color: 'rose', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
-  { id: 'f-2', type: 'marigold', name: 'Yellow Marigold', hindiName: 'पीला गेंदा', emoji: '🌼', color: 'amber', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
-  { id: 'f-3', type: 'jasmine', name: 'White Jasmine', hindiName: 'सफेद मोगरा', emoji: '🌸', color: 'stone', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
-  { id: 'f-4', type: 'rose', name: 'Red Rose', hindiName: 'लाल गुलाब', emoji: '🌹', color: 'rose', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
-  { id: 'f-5', type: 'marigold', name: 'Yellow Marigold', hindiName: 'पीला गेंदा', emoji: '🌼', color: 'amber', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
-  { id: 'f-6', type: 'jasmine', name: 'White Jasmine', hindiName: 'सफेद मोगरा', emoji: '🌸', color: 'stone', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
+  { id: 'f-1', type: 'rose', name: 'Red Rose', hindiName: 'लाल गुलाब', image: 'https://loremflickr.com/100/100/rose', color: 'rose', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
+  { id: 'f-2', type: 'marigold', name: 'Yellow Marigold', hindiName: 'पीला गेंदा', image: 'https://loremflickr.com/100/100/marigold', color: 'amber', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
+  { id: 'f-3', type: 'jasmine', name: 'White Jasmine', hindiName: 'सफेद मोगरा', image: 'https://loremflickr.com/100/100/jasmine', color: 'stone', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
+  { id: 'f-4', type: 'rose', name: 'Red Rose', hindiName: 'लाल गुलाब', image: 'https://loremflickr.com/100/100/rose', color: 'rose', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
+  { id: 'f-5', type: 'marigold', name: 'Yellow Marigold', hindiName: 'पीला गेंदा', image: 'https://loremflickr.com/100/100/marigold', color: 'amber', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
+  { id: 'f-6', type: 'jasmine', name: 'White Jasmine', hindiName: 'सफेद मोगरा', image: 'https://loremflickr.com/100/100/jasmine', color: 'stone', isWatered: false, isBloomed: false, isPlucked: false, isSorted: false },
 ];
 
 export const PhoolSortingTask: React.FC = () => {
@@ -213,7 +213,7 @@ export const PhoolSortingTask: React.FC = () => {
                     className="text-4xl sm:text-5xl cursor-pointer drop-shadow-md"
                     title={isHindi ? 'तोड़ने के लिए छुएं' : 'Tap to harvest'}
                   >
-                    {flower.emoji}
+                    <img src={flower.image} className="w-8 h-8 object-cover mx-auto" />
                   </motion.button>
                 ) : (
                   <div className="text-3xl text-emerald-800 animate-pulse">
@@ -273,7 +273,7 @@ export const PhoolSortingTask: React.FC = () => {
                         : 'bg-stone-50 border-stone-300 hover:border-rose-300'
                     }`}
                   >
-                    <span className="text-3xl">{flower.emoji}</span>
+                    <img src={flower.image} className=\"w-12 h-12 object-cover\" />
                     <span>{isHindi ? flower.hindiName : flower.name}</span>
                   </motion.button>
                 );
@@ -285,9 +285,9 @@ export const PhoolSortingTask: React.FC = () => {
       {/* 3 Color Baskets for Sorting */}
       <div className="w-full grid grid-cols-3 gap-3 mb-6">
         {[
-          { type: 'rose', name: isHindi ? 'लाल टोकरी (गुलाब)' : 'Red Basket', emoji: '🧺', color: 'border-rose-400 bg-rose-50 text-rose-900', targetEmoji: '🌹' },
-          { type: 'marigold', name: isHindi ? 'पीली टोकरी (गेंदा)' : 'Yellow Basket', emoji: '🧺', color: 'border-amber-400 bg-amber-50 text-amber-900', targetEmoji: '🌼' },
-          { type: 'jasmine', name: isHindi ? 'सफेद टोकरी (मोगरा)' : 'White Basket', emoji: '🧺', color: 'border-stone-300 bg-stone-50 text-stone-900', targetEmoji: '🌸' },
+          { type: 'rose', name: isHindi ? 'लाल टोकरी (गुलाब)' : 'Red Basket', image: 'https://loremflickr.com/100/100/basket', color: 'border-rose-400 bg-rose-50 text-rose-900', targetImage: 'https://loremflickr.com/100/100/rose' },
+          { type: 'marigold', name: isHindi ? 'पीली टोकरी (गेंदा)' : 'Yellow Basket', image: 'https://loremflickr.com/100/100/basket', color: 'border-amber-400 bg-amber-50 text-amber-900', targetImage: 'https://loremflickr.com/100/100/marigold' },
+          { type: 'jasmine', name: isHindi ? 'सफेद टोकरी (मोगरा)' : 'White Basket', image: 'https://loremflickr.com/100/100/basket', color: 'border-stone-300 bg-stone-50 text-stone-900', targetImage: 'https://loremflickr.com/100/100/jasmine' },
         ].map((b) => {
           const inThisBasket = flowers.filter((f) => f.isSorted && f.type === b.type);
 
@@ -304,7 +304,7 @@ export const PhoolSortingTask: React.FC = () => {
               }`}
             >
               <div>
-                <span className="text-3xl block mb-1">{b.emoji}</span>
+                <img src={b.image} className=\"w-12 h-12 object-cover block mb-1 mx-auto\" />
                 <span className="font-extrabold text-xs sm:text-sm block leading-tight">{b.name}</span>
               </div>
 
@@ -312,7 +312,7 @@ export const PhoolSortingTask: React.FC = () => {
                 {inThisBasket.length > 0 ? (
                   inThisBasket.map((f, i) => (
                     <span key={i} className="text-xl">
-                      {f.emoji}
+                      <img src={f.image} className="w-8 h-8 object-cover" />
                     </span>
                   ))
                 ) : (

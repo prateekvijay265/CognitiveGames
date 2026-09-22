@@ -8,7 +8,7 @@ export interface CourtyardDecoration {
   hindiName: string;
   category: 'paudhe' | 'panchhi' | 'baithak';
   cost: number;
-  emoji: string;
+  image: string;
   description: string;
   hindiDescription: string;
   slotPosition: 'left-porch' | 'center-courtyard' | 'right-garden' | 'tree-branch' | 'garden-border' | 'verandah-floor' | 'corner-shrine';
@@ -22,7 +22,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'पवित्र तुलसी का चौरा',
     category: 'paudhe',
     cost: 30,
-    emoji: '🌿',
+    
     description: 'Auspicious Basil planter bringing peace, health, and positive energy to your aangan.',
     hindiDescription: 'सुख, शांति और आरोग्य प्रदान करने वाला सुंदर तुलसी का पौधा।',
     slotPosition: 'corner-shrine',
@@ -33,7 +33,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'खिलते लाल गुलाब',
     category: 'paudhe',
     cost: 40,
-    emoji: '🌹',
+    
     description: 'Fragrant red and pink roses that fill the courtyard with sweet floral scent.',
     hindiDescription: 'सुगंधित लाल गुलाब जो आंगन को महकाते हैं।',
     slotPosition: 'right-garden',
@@ -44,7 +44,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'गेंदे के फूलों की क्यारी',
     category: 'paudhe',
     cost: 35,
-    emoji: '🌼',
+    
     description: 'Bright cheerful yellow and orange marigolds loved for festivals and daily pooja.',
     hindiDescription: 'त्योहारों और पूजा में काम आने वाले ताजे पीले गेंदे के फूल।',
     slotPosition: 'garden-border',
@@ -55,7 +55,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'सुगंधित चंपा का पौधा',
     category: 'paudhe',
     cost: 50,
-    emoji: '🌸',
+    
     description: 'Delicate white-yellow champa blossom adding soothing shade and beauty.',
     hindiDescription: 'सफेद और सुनहरे फूलों वाला खुशबूदार चंपा का पौधा।',
     slotPosition: 'garden-border',
@@ -68,7 +68,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'मिट्टी का दाना कुंडा',
     category: 'panchhi',
     cost: 25,
-    emoji: '🥣',
+    
     description: 'Traditional earthen plate filled with bajra and wheat grains for little birds.',
     hindiDescription: 'चिड़ियों के चुगने के लिए बाजरा और अनाज से भरा मिट्टी का सकोरा।',
     slotPosition: 'center-courtyard',
@@ -79,7 +79,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'चिड़िया का घोंसला',
     category: 'panchhi',
     cost: 35,
-    emoji: '🪺',
+    
     description: 'Warm natural straw shelter hanging gently from the Neem and Mango tree.',
     hindiDescription: 'पेड़ की शाखों पर नन्हीं गौरैया और बुलबुल का प्यारा सा बसेरा।',
     slotPosition: 'tree-branch',
@@ -90,7 +90,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'ठंडे पानी का मटका व सुराही',
     category: 'panchhi',
     cost: 20,
-    emoji: '🏺',
+    
     description: 'Cool natural clay pot providing soothing fresh water for birds and travelers.',
     hindiDescription: 'शीतल और मीठे पानी से भरा पारम्परिक देसी मटका।',
     slotPosition: 'left-porch',
@@ -101,7 +101,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'सुंदर आँगन रंगोली',
     category: 'panchhi',
     cost: 30,
-    emoji: '✨',
+    
     description: 'Traditional colored flower petal design welcoming warmth and happiness.',
     hindiDescription: 'रंग-बिरंगे फूलों और चावल से सजी शुभ स्वागत रंगोली।',
     slotPosition: 'verandah-floor',
@@ -114,7 +114,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'लकड़ी की आराम कुर्सी',
     category: 'baithak',
     cost: 60,
-    emoji: '🪑',
+    
     description: 'Solid Sheesham wood rocking chair for peaceful morning tea and newspaper reading.',
     hindiDescription: 'सुबह की धूप और चाय की चुस्की के लिए आरामदायक लकड़ी की कुर्सी।',
     slotPosition: 'left-porch',
@@ -125,7 +125,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'आँगन का लकड़ी का झूला',
     category: 'baithak',
     cost: 80,
-    emoji: '🛋️',
+    
     description: 'Traditional verandah swing adorned with brass chains and soft bolsters.',
     hindiDescription: 'पीतल की जंजीरों वाला सुंदर नक्काशीदार लकड़ी का झूला।',
     slotPosition: 'center-courtyard',
@@ -136,7 +136,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'हाथ से बुनी खाट / चारपाई',
     category: 'baithak',
     cost: 70,
-    emoji: '🛏️',
+    
     description: 'Classic cotton-rope charpai perfect for basking in gentle morning sunshine.',
     hindiDescription: 'सर्दियों की मीठी धूप सेंकने के लिए मजबूत देसी चारपाई।',
     slotPosition: 'center-courtyard',
@@ -147,7 +147,7 @@ export const CATALOG_DECORATIONS: CourtyardDecoration[] = [
     hindiName: 'पीतल का दिया स्तम्भ',
     category: 'baithak',
     cost: 45,
-    emoji: '🪔',
+    
     description: 'Glowing brass oil lamp illuminating the courtyard with warmth and serenity.',
     hindiDescription: 'संध्या बेला में आँगन को रोशन करने वाला जगमगाता पीतल का दीप-स्तम्भ।',
     slotPosition: 'verandah-floor',

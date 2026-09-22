@@ -140,7 +140,7 @@ export const SajawatModal: React.FC = () => {
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3 mb-2">
-                      <span className="text-4xl sm:text-5xl">{item.emoji}</span>
+                      <img src={item.image} alt={item.name} className=\"w-12 h-12 object-cover border-2 border-amber-900/20 rounded-md\" />
                       <div className="flex items-center gap-1.5">
                         {isOwned ? (
                           <span className="text-xs font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-3 py-1 rounded-full flex items-center gap-1">
