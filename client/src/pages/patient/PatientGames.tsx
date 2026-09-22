@@ -44,30 +44,41 @@ export default function PatientGames() {
     : [];
 
   return (
-    <div className="px-5 pt-6 pb-24 font-sans bg-[#FDFBF7] min-h-full">
-      <AnimatePresence mode="wait">
-        {!selectedCategory ? (
-          <motion.div
-            key="categories"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-          >
-            <div className="mb-6">
-              <h1 className="text-[26px] font-bold text-stone-900 leading-tight mb-1">
-                Cognitive Areas
-              </h1>
-              <p className="text-stone-500 text-sm font-medium">Choose an area to focus on today.</p>
-            </div>
+    <div className="px-5 pt-6 pb-24 font-sans bg-hope-gradient min-h-screen relative overflow-hidden">
+      {/* Background blobs for games screen */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-5%] right-[-10%] w-64 h-64 bg-teal-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+        <div className="absolute bottom-[20%] left-[-10%] w-64 h-64 bg-sky-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+      </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`relative p-5 rounded-[1.25rem] border ${cat.color} text-left active:scale-95 transition-transform shadow-[0_2px_12px_rgba(0,0,0,0.02)]`}
-                >
-                  <div className="text-3xl mb-4">{cat.icon}</div>
+      <div className="relative z-10">
+        <AnimatePresence mode="wait">
+          {!selectedCategory ? (
+            <motion.div
+              key="categories"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+            >
+              <div className="mb-6">
+                <h1 className="text-[26px] font-bold text-stone-900 leading-tight mb-1">
+                  Cognitive Areas
+                </h1>
+                <p className="text-stone-500 text-sm font-medium">Choose an area to focus on today.</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                {CATEGORIES.map((cat, idx) => (
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: idx * 0.05 }}
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`relative p-5 rounded-[1.25rem] border ${cat.color} glass text-left hover-lift hover-shimmer shadow-[0_4px_16px_rgba(0,0,0,0.04)] overflow-hidden group`}
+                  >
+                    <div className="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="text-3xl mb-4 relative z-10 group-hover:scale-110 transition-transform origin-bottom-left">{cat.icon}</div>
                   <h3 className="font-bold text-stone-900 text-[15px] leading-tight mb-1">{cat.title}</h3>
                   <div className="flex justify-between items-center w-full">
                     <p className="text-[11px] font-semibold opacity-60 text-stone-700">{cat.count} games</p>
@@ -98,23 +109,26 @@ export default function PatientGames() {
             </div>
 
             <div className="grid grid-cols-1 gap-3">
-              {filteredGames.length > 0 ? filteredGames.map(game => (
-                <button
+              {filteredGames.length > 0 ? filteredGames.map((game, idx) => (
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
                   key={game.id}
                   onClick={() => navigate(`/patient/game/${game.id}`)}
-                  className="bg-white rounded-[1.25rem] p-4 border border-stone-100 shadow-[0_4px_16px_rgba(0,0,0,0.03)] flex items-center justify-between active:scale-[0.98] transition-transform text-left"
+                  className="glass rounded-[1.25rem] p-4 shadow-[0_4px_16px_rgba(0,0,0,0.03)] flex items-center justify-between hover-lift hover-shimmer group text-left relative overflow-hidden"
                 >
-                  <div>
+                  <div className="relative z-10">
                     <h4 className="font-bold text-stone-900 text-[15px] mb-1.5">{game.name}</h4>
                     <div className="flex gap-2">
-                       <span className="text-[10px] font-bold px-2 py-0.5 bg-stone-100 text-stone-500 rounded-md uppercase tracking-wider">{game.difficulty}</span>
+                       <span className="text-[10px] font-bold px-2 py-0.5 bg-stone-100 text-stone-500 rounded-md uppercase tracking-wider shadow-inner">{game.difficulty}</span>
                        <span className="text-[10px] font-semibold text-stone-400 py-0.5">⏱ {game.time}</span>
                     </div>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-[#E8F3EF] text-[#4A856E] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-50 to-emerald-100 text-teal-600 flex items-center justify-center shrink-0 border border-teal-200 shadow-md group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300 relative z-10">
                     <Play className="w-4 h-4 ml-0.5 fill-current" />
                   </div>
-                </button>
+                </motion.button>
               )) : (
                 <p className="text-center text-stone-500 text-sm py-10">More games coming soon!</p>
               )}
@@ -122,6 +136,7 @@ export default function PatientGames() {
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
     </div>
   );
 }

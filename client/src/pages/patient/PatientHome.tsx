@@ -53,46 +53,41 @@ export default function PatientHome() {
       </div>
 
       {/* BANNER (Today's Brain Journey) */}
-      <div className="relative overflow-hidden rounded-3xl bg-[#4A856E] text-white p-6 mb-8 shadow-[0_8px_24px_rgba(74,133,110,0.25)] min-h-[140px] flex flex-col justify-end">
-        {/* Abstract Nature Background */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Sun */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-16 h-16 bg-[#FBE592] rounded-full blur-[2px] opacity-90"></div>
+      <div className="relative overflow-hidden rounded-3xl bg-life-gradient text-white p-6 mb-8 shadow-[0_8px_32px_rgba(255,138,101,0.3)] min-h-[160px] flex flex-col justify-end group hover-lift cursor-pointer">
+        
+        {/* Animated organic shapes in background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Sun/Light orb */}
+          <div className="absolute -top-4 -left-4 w-24 h-24 bg-yellow-200/50 rounded-full blur-[20px] animate-blob"></div>
           
-          {/* Light Green Hill (Back) */}
-          <div className="absolute bottom-6 -left-4 w-48 h-24 bg-[#75A586] rounded-t-full rotate-[-15deg] opacity-80"></div>
+          {/* Glowing floating shapes */}
+          <div className="absolute top-1/2 right-10 w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl rotate-12 animate-float shadow-[0_0_15px_rgba(255,255,255,0.4)] border border-white/30"></div>
+          <div className="absolute bottom-4 right-4 w-8 h-8 bg-white/30 rounded-full animate-float-rotate animation-delay-2000 blur-[1px]"></div>
           
-          {/* Medium Green Hill (Right) */}
-          <div className="absolute -bottom-4 -right-12 w-64 h-32 bg-[#5E947A] rounded-t-full rotate-[10deg]"></div>
-          
-          {/* Dark Green Ground (Front) */}
-          <div className="absolute -bottom-10 -left-10 right-0 h-24 bg-[#3E705C] rounded-t-[50%] scale-x-125"></div>
-
-          {/* Minimalist Trees */}
-          <div className="absolute bottom-4 right-10 flex items-end gap-1">
-             <div className="w-1.5 h-6 bg-[#355B49] rounded-sm relative">
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-4 h-6 bg-[#2B4B3C] rounded-full"></div>
-             </div>
-             <div className="w-1 h-4 bg-[#355B49] rounded-sm relative">
-                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-3 h-5 bg-[#2B4B3C] rounded-full"></div>
-             </div>
-          </div>
+          {/* Shimmer effect that sweeps across on hover */}
+          <div className="hover-shimmer"></div>
         </div>
         
         {/* Banner Content */}
-        <div className="relative z-10 bg-white/20 backdrop-blur-md p-4 rounded-2xl border border-white/20">
+        <div className="relative z-10 glass-card p-4 rounded-2xl border border-white/40">
           <div className="flex justify-between items-end">
-            <div>
-              <h3 className="font-bold text-base mb-1 text-white">Today's Brain Journey</h3>
-              <p className="text-white/80 text-[10px] font-semibold mb-2">{completedCount} / {totalCount} games completed</p>
+            <div className="flex-1 mr-4">
+              <h3 className="font-bold text-base mb-1 text-stone-900">Today's Brain Journey</h3>
+              <p className="text-stone-600 text-[11px] font-semibold mb-3">{completedCount} / {totalCount} games completed</p>
               
-              <div className="w-32 h-2.5 bg-black/20 rounded-full overflow-hidden">
-                <div className="h-full bg-white rounded-full transition-all duration-1000" style={{ width: `${progressPercent}%` }}></div>
+              <div className="w-full h-3 bg-black/5 rounded-full overflow-hidden shadow-inner border border-white/40">
+                <div 
+                  className="h-full bg-gradient-to-r from-orange-400 to-rose-400 rounded-full transition-all duration-1000 ease-out relative overflow-hidden" 
+                  style={{ width: `${progressPercent}%` }}
+                >
+                   {/* Mini shimmer inside the progress bar */}
+                   <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+                </div>
               </div>
             </div>
             
-            <button className="w-10 h-10 rounded-full bg-white text-[#4A856E] flex items-center justify-center shadow-lg active:scale-95 transition-transform">
-              <ArrowRight size={20} className="ml-0.5 stroke-[2.5]" />
+            <button className="w-11 h-11 shrink-0 rounded-full bg-white text-orange-500 flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.1)] group-hover:scale-110 group-active:scale-95 transition-all duration-300">
+              <ArrowRight size={22} className="stroke-[2.5]" />
             </button>
           </div>
         </div>
@@ -104,7 +99,7 @@ export default function PatientHome() {
           <h3 className="font-bold text-[17px] text-stone-900">Quick Games</h3>
           <button 
             onClick={() => navigate('/patient/games')}
-            className="text-[11px] font-bold text-[#4A856E] flex items-center gap-0.5 active:opacity-70"
+            className="text-[11px] font-bold text-orange-500 bg-orange-50 px-3 py-1.5 rounded-full flex items-center gap-1 hover:bg-orange-100 transition-colors"
           >
             See all <ChevronRight size={14} className="stroke-[2.5]" />
           </button>
@@ -115,22 +110,21 @@ export default function PatientHome() {
           {/* Card 1: Remember the picture */}
           <button 
             onClick={() => navigate('/patient/game/remember-objects')}
-            className="w-[150px] flex-shrink-0 bg-white rounded-3xl p-3.5 border border-stone-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] snap-start text-left active:scale-[0.98] transition-transform"
+            className="w-[150px] flex-shrink-0 glass rounded-3xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] snap-start text-left hover-lift hover-shimmer group"
           >
-            <div className="w-full aspect-square rounded-[1.25rem] bg-[#E3F2FD] mb-3 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#F5FAFF] to-[#D0E9FA] opacity-50"></div>
+            <div className="w-full aspect-square rounded-[1.25rem] bg-gradient-to-br from-rose-100 to-orange-100 mb-3 flex items-center justify-center relative overflow-hidden group-hover:shadow-inner transition-all">
               {/* Flower Icon Abstraction */}
-              <div className="relative grid grid-cols-2 gap-0.5 rotate-12 scale-110">
-                 <div className="w-6 h-6 rounded-full bg-[#FF7E87]"></div>
-                 <div className="w-6 h-6 rounded-full bg-[#FF7E87]"></div>
-                 <div className="w-6 h-6 rounded-full bg-[#FF7E87]"></div>
-                 <div className="w-6 h-6 rounded-full bg-[#FF7E87]"></div>
-                 <div className="absolute inset-0 m-auto w-4 h-4 rounded-full bg-[#FFD166] border-2 border-white"></div>
+              <div className="relative grid grid-cols-2 gap-0.5 rotate-12 scale-110 group-hover:scale-125 group-hover:rotate-45 transition-transform duration-500">
+                 <div className="w-6 h-6 rounded-full bg-rose-400 mix-blend-multiply"></div>
+                 <div className="w-6 h-6 rounded-full bg-orange-400 mix-blend-multiply"></div>
+                 <div className="w-6 h-6 rounded-full bg-pink-400 mix-blend-multiply"></div>
+                 <div className="w-6 h-6 rounded-full bg-amber-400 mix-blend-multiply"></div>
+                 <div className="absolute inset-0 m-auto w-4 h-4 rounded-full bg-white border-2 border-rose-200"></div>
               </div>
             </div>
             <h4 className="font-bold text-[13px] text-stone-900 leading-tight mb-3">Remember the Picture</h4>
             <div className="flex items-center justify-between mt-auto">
-               <span className="text-[9px] font-bold px-2 py-0.5 bg-stone-100 text-stone-500 rounded-md">Memory</span>
+               <span className="text-[9px] font-bold px-2 py-0.5 bg-rose-50 text-rose-500 rounded-md">Memory</span>
                <span className="text-[10px] font-semibold text-stone-400">~2 min</span>
             </div>
           </button>
@@ -138,19 +132,18 @@ export default function PatientHome() {
           {/* Card 2: Number Match */}
           <button 
             onClick={() => navigate('/patient/game/sequence-memory')}
-            className="w-[150px] flex-shrink-0 bg-white rounded-3xl p-3.5 border border-stone-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] snap-start text-left active:scale-[0.98] transition-transform"
+            className="w-[150px] flex-shrink-0 glass rounded-3xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] snap-start text-left hover-lift hover-shimmer group"
           >
-            <div className="w-full aspect-square rounded-[1.25rem] bg-[#E8EAF6] mb-3 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#F4F5F9] to-[#D5D8ED] opacity-50"></div>
+            <div className="w-full aspect-square rounded-[1.25rem] bg-gradient-to-br from-blue-100 to-indigo-100 mb-3 flex items-center justify-center relative overflow-hidden group-hover:shadow-inner transition-all">
               {/* Number Icon Abstraction */}
-              <div className="relative flex gap-2">
-                 <div className="w-9 h-11 rounded-lg bg-[#5C6BC0] text-white flex items-center justify-center font-bold text-lg shadow-sm">1</div>
-                 <div className="w-9 h-11 rounded-lg bg-[#9575CD] text-white flex items-center justify-center font-bold text-lg shadow-sm">3</div>
+              <div className="relative flex gap-2 group-hover:scale-110 transition-transform duration-500">
+                 <div className="w-9 h-11 rounded-xl bg-blue-500 text-white flex items-center justify-center font-bold text-lg shadow-lg -translate-y-2 group-hover:translate-y-0 transition-transform duration-300">1</div>
+                 <div className="w-9 h-11 rounded-xl bg-indigo-500 text-white flex items-center justify-center font-bold text-lg shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-300">3</div>
               </div>
             </div>
             <h4 className="font-bold text-[13px] text-stone-900 leading-tight mb-3">Number Match</h4>
             <div className="flex items-center justify-between mt-auto">
-               <span className="text-[9px] font-bold px-2 py-0.5 bg-stone-100 text-stone-500 rounded-md">Attention</span>
+               <span className="text-[9px] font-bold px-2 py-0.5 bg-blue-50 text-blue-500 rounded-md">Attention</span>
                <span className="text-[10px] font-semibold text-stone-400">~2 min</span>
             </div>
           </button>
@@ -158,19 +151,18 @@ export default function PatientHome() {
           {/* Card 3: Complete the Pattern */}
           <button 
             onClick={() => navigate('/patient/game/pattern-builder')}
-            className="w-[150px] flex-shrink-0 bg-white rounded-3xl p-3.5 border border-stone-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] snap-start text-left active:scale-[0.98] transition-transform"
+            className="w-[150px] flex-shrink-0 glass rounded-3xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] snap-start text-left hover-lift hover-shimmer group"
           >
-            <div className="w-full aspect-square rounded-[1.25rem] bg-[#FFF3E0] mb-3 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FFF9F2] to-[#FFE0B2] opacity-50"></div>
+            <div className="w-full aspect-square rounded-[1.25rem] bg-gradient-to-br from-amber-100 to-yellow-100 mb-3 flex items-center justify-center relative overflow-hidden group-hover:shadow-inner transition-all">
               {/* Pattern Icon Abstraction */}
-              <div className="relative flex flex-col gap-0 items-center">
-                 <div className="w-10 h-10 rounded-full bg-[#FFB74D] shadow-sm -mb-3 z-10 translate-x-2 border-2 border-white/50"></div>
-                 <div className="w-11 h-11 rounded-lg bg-[#FFA726] shadow-sm rotate-12 -translate-x-2 border-2 border-white/50"></div>
+              <div className="relative flex flex-col gap-0 items-center group-hover:scale-110 transition-transform duration-500">
+                 <div className="w-10 h-10 rounded-full bg-amber-400 shadow-md -mb-3 z-10 translate-x-2 border-2 border-white group-hover:-translate-x-2 transition-transform duration-500"></div>
+                 <div className="w-11 h-11 rounded-xl bg-yellow-400 shadow-md rotate-12 -translate-x-2 border-2 border-white group-hover:translate-x-2 group-hover:-rotate-12 transition-transform duration-500"></div>
               </div>
             </div>
             <h4 className="font-bold text-[13px] text-stone-900 leading-tight mb-3">Complete the Pattern</h4>
             <div className="flex items-center justify-between mt-auto">
-               <span className="text-[9px] font-bold px-2 py-0.5 bg-stone-100 text-stone-500 rounded-md">Reasoning</span>
+               <span className="text-[9px] font-bold px-2 py-0.5 bg-amber-50 text-amber-600 rounded-md">Reasoning</span>
                <span className="text-[10px] font-semibold text-stone-400">~4 min</span>
             </div>
           </button>
@@ -179,42 +171,42 @@ export default function PatientHome() {
       </div>
 
       {/* EXPLORE YOUR DAY (Restored Tabs) */}
-      <div className="mb-6">
+      <div className="mb-6 relative z-10">
         <h3 className="font-bold text-[17px] text-stone-900 mb-4">Explore Your Day</h3>
         <div className="grid grid-cols-2 gap-3">
           {/* Routine */}
           <button 
             onClick={() => navigate('/patient/routine')}
-            className="bg-white p-4 rounded-[1.25rem] border border-stone-100 shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-left flex flex-col gap-2 active:scale-95 transition-transform"
+            className="glass p-4 rounded-[1.25rem] shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-left flex flex-col gap-2 hover-lift group hover-shimmer"
           >
-            <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-xl">🌅</div>
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-400 to-cyan-400 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform">🌅</div>
             <h4 className="font-bold text-[14px] text-stone-900">My Day</h4>
           </button>
           
           {/* Reminders */}
           <button 
             onClick={() => navigate('/patient/reminders')}
-            className="bg-white p-4 rounded-[1.25rem] border border-stone-100 shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-left flex flex-col gap-2 active:scale-95 transition-transform"
+            className="glass p-4 rounded-[1.25rem] shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-left flex flex-col gap-2 hover-lift group hover-shimmer"
           >
-            <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-500 flex items-center justify-center text-xl">🔔</div>
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-teal-400 to-emerald-400 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform">🔔</div>
             <h4 className="font-bold text-[14px] text-stone-900">Reminders</h4>
           </button>
           
           {/* Memory Book */}
           <button 
             onClick={() => navigate('/patient/memory-book')}
-            className="bg-white p-4 rounded-[1.25rem] border border-stone-100 shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-left flex flex-col gap-2 active:scale-95 transition-transform"
+            className="glass p-4 rounded-[1.25rem] shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-left flex flex-col gap-2 hover-lift group hover-shimmer"
           >
-            <div className="w-10 h-10 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center text-xl">📖</div>
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-400 to-pink-400 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform">📖</div>
             <h4 className="font-bold text-[14px] text-stone-900">Memory Book</h4>
           </button>
           
           {/* Help */}
           <button 
             onClick={() => navigate('/patient/help')}
-            className="bg-white p-4 rounded-[1.25rem] border border-stone-100 shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-left flex flex-col gap-2 active:scale-95 transition-transform"
+            className="glass p-4 rounded-[1.25rem] shadow-[0_4px_12px_rgba(0,0,0,0.02)] text-left flex flex-col gap-2 hover-lift group hover-shimmer"
           >
-            <div className="w-10 h-10 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xl">🤝</div>
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-400 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform">🤝</div>
             <h4 className="font-bold text-[14px] text-stone-900">Support</h4>
           </button>
         </div>
