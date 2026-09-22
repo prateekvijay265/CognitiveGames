@@ -77,56 +77,55 @@ flowchart TD
 
 ---
 
-## Slide 4: Use Cases & Key Features
-**Visual Suggestion:** Divide the slide into three columns: Patient, Caregiver, Doctor. Use simple icons for each.
+## Slide 4: Feasibility and Viability
+**Visual Suggestion:** A split slide showing a pie chart for cost distribution on one side, and a simple 3-step B2B2C diagram on the other.
 
 **Slide Text (Copy & Paste):**
-* **Patient Experience:**
-  * **Personalized Memory Book:** Daily facial recognition and relationship recall.
-  * **Voice-Guided Navigation:** Audio instructions in native dialects.
-  * **Daily Routines & Hydration Reminders.**
-* **Caregiver Portal:**
-  * Real-time missed medication alerts.
-  * Remote device configuration (adjust text size, contrast, language).
-* **Clinical/Doctor Dashboard:**
-  * Automated 30-day cognitive decline trajectory graphs.
-  * Printable PDF reports for clinical trials and consultations.
+* **Technical Feasibility:**
+  * **Zero App Store Friction:** PWA technology allows instant installation via a simple link, saving 30% on platform fees.
+  * **Offline-First:** Runs smoothly in low-bandwidth rural areas, completely solving the connectivity barrier.
+* **Financial Viability & Revenue Model (B2B2C):**
+  * **B2B Licensing:** Subscriptions for regional hospitals, elder-care NGOs, and clinical researchers.
+  * **B2C Freemium:** Core daily routines are free for families; advanced AI clinical reports are premium.
+* **Cost Efficiency:**
+  * Ephemeral cloud architecture keeps backend server costs under $15/month for 10,000+ users.
 
 **Speaker Notes (What to say):**
-> "Smriti Care serves three distinct users. For the patient, it's a daily companion with voice-guided regional games, medication reminders, and a personalized Memory Book to help them remember family members. For the caregiver, it's a peace-of-mind tool, sending real-time alerts if a routine is missed. For the doctor, it replaces unreliable verbal feedback with hard, data-driven graphs showing exactly how the patient's cognitive speed and accuracy have changed over the last 30 days."
+> "Our solution is highly feasible because we bypassed traditional app stores. As a PWA, it installs instantly via a link and works offline, ensuring deployment in rural areas is flawless. Financially, it's incredibly viable. By avoiding the 30% App Store tax and using an ephemeral cloud architecture, our server costs are nearly zero. Our B2B2C model licenses the clinical dashboard to hospitals while offering a freemium app directly to families."
 
 ---
 
-## Slide 5: Impact & Feasibility (Show Stopper)
-**Visual Suggestion:** Large bold numbers highlighting cost-efficiency and reach. Add a pie chart or a simple B2B2C diagram.
+## Slide 5: Impact and Benefits
+**Visual Suggestion:** Three distinct columns or icons representing the triad: Patient, Caregiver, Doctor.
 
 **Slide Text (Copy & Paste):**
-* **Social Impact:**
-  * Brings clinical-grade cognitive therapy to Tier-3 cities and remote villages.
-  * Reduces caregiver anxiety and burnout by 60%.
-* **Financial Feasibility & Business Model (B2B2C):**
-  * **B2B:** Licensing to local hospitals, elder-care NGOs, and clinical trial researchers.
-  * **B2C:** Freemium model for families (Basic routines free, Advanced AI reports premium).
-* **Cost Efficiency:** 
-  * PWA means zero App Store fees (30% saved). 
-  * Ephemeral cloud architecture keeps server costs under $15/month for 10,000+ users.
+* **For the Patient (Elderly):**
+  * Delays severe cognitive decline through culturally familiar, native-language brain stimulation.
+  * Reduces feelings of isolation via the daily voice-guided Memory Book.
+* **For the Caregiver (Family/NGO):**
+  * Reduces caregiver burnout by 60% with automated real-time medication and routine alerts.
+  * Provides remote configuration so children living far away can adjust app settings for their parents.
+* **For the Doctor (Clinical):**
+  * Replaces unreliable verbal feedback with hard, data-driven 30-day cognitive trajectory graphs.
+  * Enables remote monitoring for hundreds of patients efficiently.
 
 **Speaker Notes (What to say):**
-> "In terms of feasibility, our Progressive Web App approach completely bypasses the 30% Google Play Store tax and allows users with cheap, low-storage phones to install the app instantly. Our revenue model is B2B2C: we license the clinical dashboard to regional hospitals and NGOs, while offering a freemium model directly to families. With our optimized cloud architecture, we can scale to ten thousand users for less than a cup of coffee a month in server costs."
+> "The impact of Smriti Care spans the entire healthcare triad. For the patient, it delays severe dementia by providing daily cognitive stimulation in their mother tongue. For the caregiver, it massively reduces burnout by automating daily monitoring and medication alerts. And for the doctor, it replaces guesswork. Instead of asking 'how has he been?', the doctor gets a precise, data-driven graph of the patient's cognitive speed and accuracy over the last 30 days."
 
 ---
 
-## Slide 6: Future Scope & Roadmap
-**Visual Suggestion:** A timeline graphic (Q1, Q2, Q3) stretching across the bottom of the slide.
+## Slide 6: Research and References
+**Visual Suggestion:** A clean, authoritative slide. Use logos of the WHO or research journals next to the citations.
 
 **Slide Text (Copy & Paste):**
-* **Phase 1 (Current):** 6 Languages, Offline-first gameplay, Caregiver alerts.
-* **Phase 2 (Next 6 Months):** 
-  * **WhatsApp Bot Integration:** Allow elderly users to log their mood via simple WhatsApp voice notes.
-  * **Wearable Integration:** Connect with cheap fitness bands to monitor heart-rate and sleep patterns.
-* **Phase 3 (Next 1 Year):**
-  * **AI Voice Biomarkers:** Analyze voice recordings during games to detect early tremors or speech slurring indicating neurological decline.
-  * Expand to 15+ Indian regional languages.
+* **Clinical Foundation:**
+  * Built on **Cognitive Stimulation Therapy (CST)** principles, clinically proven to improve memory and quality of life in dementia patients (Source: *World Health Organization (WHO) Guidelines*).
+* **Demographic Urgency:**
+  * Over 5.3 million elderly in India suffer from cognitive decline, disproportionately affecting rural and marginalized communities (Source: *Dementia in India Report, Alzheimer's and Related Disorders Society of India*).
+* **Design Guidelines:**
+  * UI strictly follows **WCAG 2.1 AAA Accessibility Standards** for the elderly (high contrast, >44px touch targets, minimal motion).
+* **Future Research Scope:** 
+  * Capturing vocal biomarkers during gameplay for early detection of neurological tremors.
 
 **Speaker Notes (What to say):**
-> "Looking ahead, our Phase 2 involves integrating a WhatsApp bot, allowing elderly users who are intimidated by apps to simply send a voice note to log their daily mood. By Phase 3, we aim to implement AI voice biomarker analysis to detect early signs of speech slurring or neurological tremors just from the way they interact with our games. Thank you for your time, we are ready for your questions."
+> "Smriti Care is not just a game; it is rooted in clinical research. Our cognitive activities are based on Cognitive Stimulation Therapy, which the WHO recognizes as an effective non-pharmacological treatment for dementia. We designed the interface strictly following WCAG AAA accessibility standards for the elderly. With over 5 million Indians facing cognitive decline, this platform is a researched, scalable, and urgently needed intervention. Thank you, we are ready for your questions."
