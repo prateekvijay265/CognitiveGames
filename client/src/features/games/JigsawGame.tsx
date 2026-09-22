@@ -1,182 +1,235 @@
-// @ts-nocheck
-import { useCallback, useEffect, useRef, useState } from "react";
-import GameBoard from "./GameBoard";
-import { GameOver, SheetPicker, Title } from "./Screens";
-import { proceduralSheet, resolveSheets, SHEETS } from "../../lib/art";
-import type { Sheet } from "../../lib/art";
-import { insertScore, loadScores, qualifies } from "../../lib/scores";
-import type { ScoreEntry } from "../../lib/scores";
-import * as sfx from "../../lib/audio";
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Shuffle, Sparkles } from 'lucide-react';
+import type { GameDifficulty, SupportedLanguage, GameSession } from '../../types';
+import { useGameSession, GameLayout, GameResult } from './GameEngine';
 
-type Level = { cols: number; rows: number; time: number };
+export interface JigsawGameProps {
+  difficulty?: GameDifficulty;
+  patientId?: string;
+  language?: SupportedLanguage;
+  onComplete?: (session: GameSession) => void;
+  onExit?: () => void;
+  muted?: boolean;
+  onMute?: () => void;
+}
 
-const LEVELS: Level[] = [
-  { cols: 4, rows: 3, time: 46 },
-  { cols: 6, rows: 4, time: 64 },
-  { cols: 7, rows: 5, time: 82 },
-  { cols: 8, rows: 5, time: 94 },
-  { cols: 9, rows: 6, time: 110 },
+const IMAGES = [
+  { id: 'train', src: '/images/train.jpg', name: 'Mountain Train' },
+  { id: 'garden', src: '/images/garden.jpg', name: 'Tea Garden' },
+  { id: 'market', src: '/images/market.jpg', name: 'Village Market' },
+  { id: 'harbor', src: '/images/harbor.jpg', name: 'River Boat' }
 ];
 
-const levelFor = (round: number): Level => LEVELS[Math.min(round - 1, LEVELS.length - 1)];
-const PREF_KEY = "diecut.sheet.v1";
-
 export default function JigsawGame({
+  difficulty = 'easy',
+  patientId = 'demo-patient',
+  language = 'en',
+  onComplete,
   onExit,
   muted,
   onMute,
-}: {
-  onExit: () => void;
-  muted: boolean;
-  onMute: () => void;
-}) {
-  const [sheets, setSheets] = useState<Sheet[] | null>(null);
-  const [screen, setScreen] = useState<"title" | "pick" | "play" | "over">("title");
-  const [scores, setScores] = useState<ScoreEntry[]>([]);
-  const [score, setScore] = useState(0);
-  const [round, setRound] = useState(1);
-  const [fits, setFits] = useState(0);
-  const [runId, setRunId] = useState(0);
-  const [canSign, setCanSign] = useState(false);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+}: JigsawGameProps) {
+  const getGrid = (diff: GameDifficulty) => {
+    if (diff === 'easy') return { rows: 3, cols: 3 };
+    if (diff === 'medium' || diff === 'adaptive') return { rows: 4, cols: 4 };
+    return { rows: 5, cols: 5 };
+  };
 
-  const latest = useRef({ score: 0, round: 1 });
-  latest.current = { score, round };
+  const { rows, cols } = getGrid(difficulty);
+  const totalPieces = rows * cols;
+  
+  const [currentRound, setCurrentRound] = useState(0);
+  const totalRounds = 3;
+  
+  const [image, setImage] = useState(IMAGES[0]);
+  const [pieces, setPieces] = useState<number[]>([]);
+  const [selectedPiece, setSelectedPiece] = useState<number | null>(null);
+  const [isSolved, setIsSolved] = useState(false);
+
+  const instructions = 'Tap two pieces to swap them. Complete the picture!';
+
+  const sessionEngine = useGameSession({
+    gameId: 'jigsaw',
+    patientId,
+    difficulty,
+    language,
+    cognitiveDomain: 'recognition',
+    instructions,
+    totalQuestions: totalRounds,
+    onComplete,
+    onExit,
+  });
+
+  const initRound = useCallback(() => {
+    const img = IMAGES[currentRound % IMAGES.length];
+    setImage(img);
+    
+    const solved = Array.from({ length: totalPieces }, (_, i) => i);
+    let shuffled = [...solved];
+    do {
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+    } while (shuffled.every((val, index) => val === solved[index]));
+    
+    setPieces(shuffled);
+    setSelectedPiece(null);
+    setIsSolved(false);
+  }, [currentRound, totalPieces]);
 
   useEffect(() => {
-    setScores(loadScores());
-    try {
-      const saved = localStorage.getItem(PREF_KEY);
-      if (saved) setSelectedId(saved);
-    } catch {
-      /* ignore */
+    if (sessionEngine.gameState === 'PLAYING') {
+      initRound();
     }
-    let alive = true;
-    resolveSheets()
-      .then((s) => {
-        if (!alive) return;
-        setSheets(s);
-        setSelectedId((prev) => (prev && s.some((x) => x.id === prev) ? prev : s[0]?.id ?? null));
-      })
-      .catch(() => {
-        if (!alive) return;
-        const fallback = SHEETS.map((s2, i) => ({ ...s2, src: proceduralSheet(i + 3) }));
-        setSheets(fallback);
-        setSelectedId((prev) => prev ?? fallback[0]?.id ?? null);
-      });
-    return () => {
-      alive = false;
-    };
-  }, []);
+  }, [sessionEngine.gameState, currentRound, initRound]);
 
-  useEffect(() => {
-    if (!selectedId) return;
-    try {
-      localStorage.setItem(PREF_KEY, selectedId);
-    } catch {
-      /* ignore */
+  const checkSolved = (currentPieces: number[]) => {
+    return currentPieces.every((p, i) => p === i);
+  };
+
+  const handlePieceClick = (index: number) => {
+    if (isSolved || sessionEngine.gameState !== 'PLAYING') return;
+    
+    if (selectedPiece === null) {
+      setSelectedPiece(index);
+    } else {
+      if (selectedPiece === index) {
+        setSelectedPiece(null);
+        return;
+      }
+      
+      const newPieces = [...pieces];
+      const temp = newPieces[selectedPiece];
+      newPieces[selectedPiece] = newPieces[index];
+      newPieces[index] = temp;
+      
+      setPieces(newPieces);
+      setSelectedPiece(null);
+      
+      if (checkSolved(newPieces)) {
+        setIsSolved(true);
+        setTimeout(() => {
+          sessionEngine.recordAnswer({ correct: true });
+          if (currentRound + 1 < totalRounds) {
+            setCurrentRound(r => r + 1);
+          } else {
+            sessionEngine.completeGame();
+          }
+        }, 2000);
+      }
     }
-  }, [selectedId]);
+  };
 
-  const startRun = useCallback(() => {
-    sfx.ensureAudio();
-    sfx.start();
-    setScore(0);
-    setRound(1);
-    setFits(0);
-    setCanSign(false);
-    setRunId((r) => r + 1);
-    setScreen("play");
-  }, []);
+  const handleRestart = () => {
+    setCurrentRound(0);
+    sessionEngine.restartGame();
+  };
 
-  const handleOver = useCallback(() => {
-    setCanSign(qualifies(loadScores(), latest.current.score));
-    setScreen("over");
-  }, []);
-
-  const sign = useCallback((initials: string) => {
-    const entry: ScoreEntry = {
-      initials: (initials || "AAA").slice(0, 3).toUpperCase(),
-      score: latest.current.score,
-      round: latest.current.round,
-      date: Date.now(),
-    };
-    setScores((prev) => insertScore(prev, entry));
-    setCanSign(false);
-  }, []);
-
-  if (!sheets) {
+  if (sessionEngine.gameState === 'RESULT' && sessionEngine.finalSession) {
     return (
-      <div className="paper grain flex h-[100dvh] w-full flex-col items-center justify-center gap-4">
-        <div className="font-display font-bold uppercase tracking-widest text-4xl tracking-[-0.03em]">
-          DIE<span className="text-vermilion">–</span>CUT
-        </div>
-        <div className="font-mono uppercase tracking-widest anim-blink text-sand">shuffling the box…</div>
-      </div>
-    );
-  }
-
-  const selected = sheets.find((s) => s.id === selectedId) ?? sheets[0] ?? null;
-  const level = levelFor(round);
-
-  if (screen === "play" && selected) {
-    return (
-      <GameBoard
-        key={`${runId}-${round}-${selected.id}`}
-        sheet={selected}
-        round={round}
-        cols={level.cols}
-        rows={level.rows}
-        roundTime={level.time}
-        score={score}
-        onDelta={(d) => setScore((s) => s + d)}
-        onSnap={() => setFits((n) => n + 1)}
-        onAdvance={() => setRound((r) => r + 1)}
-        onOver={handleOver}
-        onQuit={() => setScreen("title")}
-        onRestart={startRun}
-        muted={muted}
-        onMute={onMute}
+      <GameResult 
+        session={sessionEngine.finalSession} 
+        adaptiveFeedback={sessionEngine.adaptiveFeedback}
+        onPlayAgain={handleRestart}
+        onExit={sessionEngine.exitGame} 
       />
     );
   }
 
-  if (screen === "over") {
-    return (
-      <GameOver
-        score={score}
-        round={round}
-        snapped={fits}
-        scores={scores}
-        canSign={canSign}
-        onSign={sign}
-        onAgain={startRun}
-        onMenu={() => setScreen("title")}
-        onChangeSheet={() => setScreen("pick")}
-      />
-    );
-  }
-
-  if (screen === "pick") {
-    return (
-      <SheetPicker
-        sheets={sheets}
-        selectedId={selected?.id ?? null}
-        onSelect={setSelectedId}
-        onBack={() => setScreen("title")}
-        onPlay={startRun}
-      />
-    );
-  }
+  const progressPercent = Math.round((currentRound / totalRounds) * 100);
 
   return (
-    <Title
-      sheets={sheets}
-      scores={scores}
-      selected={selected}
-      onPick={() => setScreen("pick")}
-      onStart={startRun}
-      onExit={onExit}
-    />
+    <GameLayout
+      title="Jigsaw Puzzle"
+      gameId="jigsaw"
+      difficulty={difficulty}
+      cognitiveDomain="recognition"
+      instructions={instructions}
+      score={sessionEngine.metrics.score}
+      progressPercent={progressPercent}
+      isVoiceSpeaking={sessionEngine.isVoiceSpeaking}
+      onVoiceClick={sessionEngine.speakInstructions}
+      onPauseClick={sessionEngine.pauseGame}
+      onExitClick={sessionEngine.exitGame}
+      gameState={sessionEngine.gameState}
+      
+      onResume={sessionEngine.resumeGame}
+onRestart={handleRestart}
+      
+    >
+      <div className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto mt-4 px-4 h-full relative">
+        
+        {sessionEngine.gameState === 'PLAYING' && (
+          <div className="w-full flex flex-col items-center">
+            
+            <div className="flex justify-between w-full mb-4 items-center">
+              <div className="text-kraft font-mono uppercase tracking-widest text-sm bg-ink/50 px-3 py-1 border border-ink/40">
+                Round {currentRound + 1} of {totalRounds}
+              </div>
+              <div className="text-ink font-bold font-display tracking-widest uppercase text-xl text-center">
+                {image.name}
+              </div>
+              <button 
+                onClick={initRound}
+                disabled={isSolved}
+                className="btn btn-ghost disabled:opacity-50 !py-1 !px-3 !text-xs"
+              >
+                <Shuffle className="w-4 h-4 mr-2" /> Shuffle
+              </button>
+            </div>
+
+            <div className="relative w-full aspect-[4/3] max-h-[55vh] max-w-[700px] mx-auto border-4 border-ink shadow-[8px_8px_0_var(--color-ink)] bg-ink/20 flex-shrink-0">
+              
+              {isSolved && (
+                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in duration-500">
+                  <motion.div 
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="flex flex-col items-center bg-kraft border-4 border-ink p-6 shadow-[8px_8px_0_var(--color-ink)]"
+                  >
+                    <Sparkles className="w-12 h-12 text-vermilion mb-2" />
+                    <h2 className="text-2xl font-display font-bold uppercase tracking-widest text-ink">Excellent!</h2>
+                  </motion.div>
+                </div>
+              )}
+
+              <div 
+                className="absolute inset-0 grid" 
+                style={{ 
+                  gridTemplateColumns: `repeat(${cols}, 1fr)`,
+                  gridTemplateRows: `repeat(${rows}, 1fr)` 
+                }}
+              >
+                {pieces.map((pieceIdx, currentPos) => {
+                  const originalRow = Math.floor(pieceIdx / cols);
+                  const originalCol = pieceIdx % cols;
+                  
+                  return (
+                    <motion.div
+                      layout
+                      key={pieceIdx}
+                      onClick={() => handlePieceClick(currentPos)}
+                      className={`relative cursor-pointer box-border transition-all duration-200 ${
+                        selectedPiece === currentPos 
+                          ? 'border-4 border-vermilion z-10 shadow-xl scale-105' 
+                          : 'border-b border-r border-ink/30 hover:border-ink hover:z-10'
+                      }`}
+                      style={{
+                        backgroundImage: `url(${image.src})`,
+                        backgroundSize: `${cols * 100}% ${rows * 100}%`,
+                        backgroundPosition: `${(originalCol / (cols - 1)) * 100}% ${(originalRow / (rows - 1)) * 100}%`,
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            
+          </div>
+        )}
+      </div>
+    </GameLayout>
   );
 }

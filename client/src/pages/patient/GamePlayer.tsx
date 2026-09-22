@@ -125,7 +125,7 @@ export default function GamePlayer() {
       case 'sudoku':
         return <Sudoku onExit={handleExit} />;
       case 'jigsaw':
-        return <JigsawGame onExit={handleExit} muted={muted} onMute={handleMute} />;
+        return <JigsawGame {...commonProps} />;
       default:
         return (
           <div className="min-h-screen flex items-center justify-center p-6">

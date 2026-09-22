@@ -85,7 +85,7 @@ export type GameId =
   | 'pattern-builder'
   | 'attention-tap'
   | 'sound-memory'
-  | 'story-memory'
+  | 'story-memory' | 'jigsaw' | 'match3' | 'chess' | 'sudoku' | 'memory-game'
   | 'daily-life-simulator';
 
 export type CognitiveDomain =
