@@ -14,7 +14,7 @@ type UserRole = 'patient' | 'caregiver' | 'doctor' | 'admin';
 export default function LoginPage() {
   const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { login, isLoading, error, clearError } = useAuthStore();
   const { setPatientMode } = useUIStore();
   const navigate = useNavigate();
@@ -78,10 +78,31 @@ export default function LoginPage() {
 
       {/* Right panel - login form */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 lg:p-12">
-        {/* Mobile logo */}
-        <div className="flex items-center gap-3 mb-8 lg:hidden">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">S</div>
-          <div className="font-bold text-stone-900 text-xl">Smriti Care</div>
+        {/* Mobile top bar */}
+        <div className="flex items-center justify-between w-full mb-8 lg:absolute lg:top-8 lg:right-8 lg:w-auto lg:mb-0">
+          <div className="flex items-center gap-3 lg:hidden">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">S</div>
+            <div className="font-bold text-stone-900 text-xl">Smriti Care</div>
+          </div>
+          
+          {/* Language Switcher */}
+          <div className="relative">
+            <select
+              value={i18n.language}
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              className="appearance-none bg-stone-100 hover:bg-stone-200 border-none text-stone-700 text-sm font-medium py-2 pl-3 pr-8 rounded-lg cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500"
+            >
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="as">অসমীয়া</option>
+              <option value="mni">মৈতৈলোন্</option>
+              <option value="kha">Khasi</option>
+              <option value="lus">Mizo</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-stone-500">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
         </div>
 
         <motion.div

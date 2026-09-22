@@ -16,7 +16,7 @@ const ROLES = [
 ];
 
 export default function RegisterPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { register: registerUser, isLoading, error, clearError } = useAuthStore();
   const { setPatientMode } = useUIStore();
   const navigate = useNavigate();
@@ -52,10 +52,31 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-[#f8f7f4] flex flex-col items-center justify-center p-6">
-      {/* Logo */}
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">S</div>
-        <div className="font-bold text-stone-900 text-xl">Smriti Care</div>
+      {/* Top bar */}
+      <div className="w-full max-w-lg flex items-center justify-between mb-8">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">S</div>
+          <div className="font-bold text-stone-900 text-xl">Smriti Care</div>
+        </div>
+        
+        {/* Language Switcher */}
+        <div className="relative">
+          <select
+            value={i18n.language}
+            onChange={(e) => i18n.changeLanguage(e.target.value)}
+            className="appearance-none bg-stone-100 hover:bg-stone-200 border-none text-stone-700 text-sm font-medium py-2 pl-3 pr-8 rounded-lg cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="as">অসমীয়া</option>
+            <option value="mni">মৈতৈলোন্</option>
+            <option value="kha">Khasi</option>
+            <option value="lus">Mizo</option>
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-stone-500">
+            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+          </div>
+        </div>
       </div>
 
       <motion.div
