@@ -62,7 +62,7 @@ export function CaregiverDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <div className="smallcaps text-sand mb-1">Caregiver • Dashboard</div>
+          <div className="smallcaps text-sand mb-1">Caregiver Dashboard</div>
           <h1 className="font-display font-bold text-kraft text-2xl lg:text-3xl uppercase tracking-widest">
             Caregiver Insights
           </h1>

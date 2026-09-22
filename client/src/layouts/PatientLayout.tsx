@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Home, Gamepad2, TrendingUp, User, Menu, X, Bell, Settings } from 'lucide-react';
+import { Home, Gamepad2, TrendingUp, User } from 'lucide-react';
 import { useUIStore } from '../store/uiStore';
 import { useReminderEngine } from '../hooks/useReminderEngine';
 import { useAuthStore } from '../store/authStore';
@@ -11,15 +10,14 @@ export default function PatientLayout() {
   const { fontSize } = useUIStore();
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false);
 
   useReminderEngine();
 
   const navItems = [
-    { to: '/patient',          label: 'Home',     icon: Home,     exact: true },
-    { to: '/patient/games',    label: 'Games',    icon: Gamepad2               },
-    { to: '/patient/progress', label: 'Progress', icon: TrendingUp             },
-    { to: '/patient/settings', label: 'Profile',  icon: User                   },
+    { to: '/patient',          label: 'Home',     icon: Home,        exact: true },
+    { to: '/patient/games',    label: 'Games',    icon: Gamepad2                 },
+    { to: '/patient/progress', label: 'Progress', icon: TrendingUp               },
+    { to: '/patient/settings', label: 'Profile',  icon: User                     },
   ];
 
   return (
