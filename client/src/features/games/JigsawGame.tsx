@@ -15,10 +15,14 @@ export interface JigsawGameProps {
 }
 
 const IMAGES = [
-  { id: 'train', src: '/images/train.jpg', name: 'Mountain Train' },
-  { id: 'garden', src: '/images/garden.jpg', name: 'Tea Garden' },
-  { id: 'market', src: '/images/market.jpg', name: 'Village Market' },
-  { id: 'harbor', src: '/images/harbor.jpg', name: 'River Boat' }
+  { id: 'train', src: '/images/train.jpg', name: 'Steam Train' },
+  { id: 'garden', src: '/images/garden.jpg', name: 'Flower Garden' },
+  { id: 'market', src: '/images/market.jpg', name: 'Street Market' },
+  { id: 'harbor', src: '/images/harbor.jpg', name: 'Fishing Harbor' },
+  { id: 'lighthouse', src: '/images/lighthouse.jpg', name: 'Lighthouse' },
+  { id: 'snowcabin', src: '/images/snowcabin.jpg', name: 'Snow Cabin' },
+  { id: 'desert', src: '/images/desert.jpg', name: 'Desert Oasis' },
+  { id: 'vineyard', src: '/images/vineyard.jpg', name: 'Vineyard' }
 ];
 
 export default function JigsawGame({
@@ -60,6 +64,15 @@ export default function JigsawGame({
     onComplete,
     onExit,
   });
+
+  // Preload images for faster loading
+  useEffect(() => {
+    IMAGES.forEach(img => {
+      const imgEl = new Image();
+      imgEl.src = img.src;
+    });
+  }, []);
+
 
   const initRound = useCallback(() => {
     const img = IMAGES[currentRound % IMAGES.length];
@@ -117,7 +130,7 @@ export default function JigsawGame({
           } else {
             sessionEngine.completeGame();
           }
-        }, 2000);
+        }, 1000);
       }
     }
   };
@@ -159,7 +172,7 @@ export default function JigsawGame({
 onRestart={handleRestart}
       
     >
-      <div className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto mt-4 px-4 h-full relative">
+      <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto mt-4 px-4 h-full relative">
         
         {sessionEngine.gameState === 'PLAYING' && (
           <div className="w-full flex flex-col items-center">
@@ -180,7 +193,7 @@ onRestart={handleRestart}
               </button>
             </div>
 
-            <div className="relative w-full aspect-[4/3] max-h-[55vh] max-w-[700px] mx-auto border-4 border-ink shadow-[8px_8px_0_var(--color-ink)] bg-ink/20 flex-shrink-0">
+            <div className="relative w-full aspect-[4/3] max-h-[72vh] max-w-[950px] mx-auto border-4 border-ink shadow-[8px_8px_0_var(--color-ink)] bg-ink/20 flex-shrink-0">
               
               {isSolved && (
                 <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in duration-500">
