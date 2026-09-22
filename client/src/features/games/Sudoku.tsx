@@ -28,7 +28,7 @@ function NumberPad({
           type="button"
           disabled={disabled}
           onClick={() => onSelect(n)}
-          className="flex h-9 w-full items-center justify-center border-2 border-ink bg-kraft font-mono text-lg font-semibold transition hover:bg-ochre/40 disabled:opacity-30"
+          className="flex h-9 w-full items-center justify-center border-[3px] border-ink bg-kraft font-mono text-lg font-semibold transition hover:bg-ochre/40 disabled:opacity-30"
         >
           {n}
         </button>
@@ -37,7 +37,7 @@ function NumberPad({
         type="button"
         disabled={disabled}
         onClick={() => onSelect(0)}
-        className="col-span-3 flex h-9 items-center justify-center border-2 border-ink bg-ink text-kraft text-xs font-semibold uppercase tracking-wider transition hover:bg-ink/80 disabled:opacity-30"
+        className="col-span-3 flex h-9 items-center justify-center border-[3px] border-ink bg-ink text-kraft text-xs font-semibold uppercase tracking-wider transition hover:bg-ink/80 disabled:opacity-30"
       >
         Clear
       </button>
@@ -123,18 +123,18 @@ export default function Sudoku({ onExit }: { onExit: () => void }) {
     <div className="paper h-[100dvh] w-full overflow-y-auto">
       <div className="grain mx-auto min-h-full max-w-[880px] px-4 pb-14 sm:px-7">
         <div className="flex items-center justify-between gap-3 border-b-2 border-ink py-3">
-          <button className="btn btn-ghost !px-3 !py-1.5 text-[0.68rem]" onClick={onExit}>
+          <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onExit}>
             ← Arcade
           </button>
-          <span className="smallcaps text-sand">
+          <span className="font-mono uppercase tracking-widest text-sand">
             {done ? "Complete" : difficulty === 1 ? "Easy" : difficulty === 2 ? "Medium" : "Hard"}
             {best > 0 ? ` · best ${best}` : ""}
           </span>
         </div>
 
         <div className="pt-7">
-          <p className="smallcaps text-vermilion">A number grid · every row, column and box</p>
-          <h1 className="mt-1 font-display text-[clamp(2.8rem,11vw,5rem)] font-black leading-[0.85] tracking-[-0.035em]">
+          <p className="font-mono uppercase tracking-widest text-vermilion">A number grid · every row, column and box</p>
+          <h1 className="mt-1 font-display font-bold uppercase tracking-widest text-4xl leading-[0.85] tracking-[-0.035em]">
             SUDOKU
           </h1>
           <p className="mt-3 max-w-[48ch] text-ink/80">
@@ -149,7 +149,7 @@ export default function Sudoku({ onExit }: { onExit: () => void }) {
               key={d.value}
               type="button"
               onClick={() => restart(d.value)}
-              className={`border-2 px-3 py-1.5 font-mono text-[0.75rem] font-semibold uppercase tracking-wider transition ${
+              className={`border-[3px] px-3 py-1.5 font-mono text-[0.75rem] font-semibold uppercase tracking-wider transition ${
                 difficulty === d.value ? "border-ink bg-vermilion text-kraft" : "border-ink/40 hover:border-ink"
               }`}
             >
@@ -221,13 +221,13 @@ export default function Sudoku({ onExit }: { onExit: () => void }) {
 
           {/* controls */}
           <div className="w-full max-w-xs lg:max-w-[220px]">
-            <div className="paper border-2 border-ink p-4">
-              <div className="smallcaps">Input</div>
+            <div className="bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] p-6 paper border-[3px] border-ink p-4">
+              <div className="font-mono uppercase tracking-widest">Input</div>
               <NumberPad onSelect={setValue} disabled={done || !selected} />
               <p className="mt-2 text-xs text-ink/60">Select a cell, then press a number. 0 clears.</p>
 
               <div className="mt-4 border-t border-ink/25 pt-3">
-                <div className="smallcaps">Hints</div>
+                <div className="font-mono uppercase tracking-widest">Hints</div>
                 <div className="mt-2 font-mono text-sm leading-relaxed text-ink/70">
                   <div>Every row, column and 3×3 block must contain 1–9 exactly once.</div>
                   <div className="mt-1">Locked numbers at start are fixed.</div>
@@ -235,7 +235,7 @@ export default function Sudoku({ onExit }: { onExit: () => void }) {
               </div>
 
               <button
-                className="btn btn-primary mt-5 w-full"
+                className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2"
                 onClick={() => restart(difficulty)}
               >
                 New puzzle
@@ -247,9 +247,9 @@ export default function Sudoku({ onExit }: { onExit: () => void }) {
 
         {done && (
           <div className="flex items-center justify-center">
-            <div className="anim-banner border-2 border-ink bg-kraft px-5 py-3 text-center shadow-[6px_6px_0_rgba(0,0,0,.55)]">
-              <div className="font-display text-3xl font-black leading-none">SOLVED</div>
-              <div className="smallcaps mt-1 text-vermilion">grid complete</div>
+            <div className="anim-banner border-[3px] border-ink bg-kraft px-5 py-3 text-center shadow-[6px_6px_0_var(--color-ink)]">
+              <div className="font-display font-bold uppercase tracking-widest text-4xl leading-none">SOLVED</div>
+              <div className="font-mono uppercase tracking-widest mt-1 text-vermilion">grid complete</div>
             </div>
           </div>
         )}

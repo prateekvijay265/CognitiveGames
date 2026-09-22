@@ -164,25 +164,25 @@ export const AttentionTap: React.FC<AttentionTapProps> = ({
       onResume={sessionEngine.resumeGame}
       onRestart={handleRestart}
     >
-      <div className="w-full max-w-xl flex flex-col items-center">
+      <div className="bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6 w-full max-w-xl flex flex-col items-center">
         {/* Instruction Badge & Countdown */}
         <div className="w-full flex items-center justify-between mb-4 px-2">
           <div className="flex items-center gap-2">
-            <span className="text-sm sm:text-base font-bold text-amber-950 dark:text-amber-100">
+            <span className="text-sm sm:text-base font-mono uppercase tracking-widest text-ink">
               Found: {foundTargetsCount} of {totalTargets}
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5 font-bold text-amber-800 dark:text-amber-300 bg-amber-100/80 dark:bg-stone-800 px-3 py-1 rounded-full text-sm">
+          <div className="flex items-center gap-1.5 font-mono uppercase tracking-widest text-ink bg-ochre border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] px-3 py-1 text-sm">
             <Clock className="w-4 h-4" />
             <span>{timeLeft}s</span>
           </div>
         </div>
 
         {/* Soft countdown progress line */}
-        <div className="w-full bg-amber-100 dark:bg-stone-800 rounded-full h-2 mb-6 overflow-hidden">
+        <div className="w-full bg-kraft border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] h-4 mb-6 overflow-hidden">
           <div
-            className="bg-amber-500 h-full transition-all duration-1000 ease-linear"
+            className="bg-vermilion h-full transition-all duration-1000 ease-linear border-r-[3px] border-ink"
             style={{ width: `${(timeLeft / initialTimeSec) * 100}%` }}
           />
         </div>
@@ -199,12 +199,12 @@ export const AttentionTap: React.FC<AttentionTapProps> = ({
                 onClick={() => handleItemTap(item)}
                 whileTap={{ scale: 0.94 }}
                 disabled={isTapped || isFinished}
-                className={`aspect-square p-3 rounded-2xl border-2 flex flex-col items-center justify-center transition-all relative shadow-xs ${
+                className={`aspect-square p-3 border-[3px] border-ink flex flex-col items-center justify-center transition-all relative shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] font-mono font-bold uppercase tracking-widest ${
                   isTapped
                     ? isCorrectTarget
-                      ? 'bg-emerald-100 dark:bg-emerald-950/70 border-emerald-500 text-emerald-900 shadow-md ring-2 ring-emerald-300'
-                      : 'bg-stone-200 dark:bg-stone-800 border-stone-300 opacity-60'
-                    : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 hover:border-amber-400 hover:bg-amber-50/50'
+                      ? 'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)]'
+                      : 'bg-kraft opacity-60 border-ink shadow-[4px_4px_0_var(--color-ink)]'
+                    : 'bg-kraft border-ink hover:bg-ochre shadow-[4px_4px_0_var(--color-ink)]'
                 }`}
               >
                 {isTapped && isCorrectTarget && (
@@ -225,10 +225,10 @@ export const AttentionTap: React.FC<AttentionTapProps> = ({
         <button
           onClick={handleFinish}
           disabled={isFinished || tappedIds.length === 0}
-          className={`w-full max-w-xs py-3.5 rounded-2xl font-bold text-base shadow-md transition-all ${
+          className={`w-full max-w-xs py-3.5 border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest text-base ${
             tappedIds.length === 0
-              ? 'bg-stone-200 dark:bg-stone-800 text-stone-400 cursor-not-allowed'
-              : 'bg-amber-600 hover:bg-amber-700 text-white active:scale-[0.98]'
+              ? 'bg-kraft text-ink opacity-50 cursor-not-allowed'
+              : 'bg-vermilion text-kraft'
           }`}
         >
           I Found Them All!

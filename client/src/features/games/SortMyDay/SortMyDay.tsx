@@ -150,13 +150,13 @@ export const SortMyDay: React.FC<SortMyDayProps> = ({
       onResume={sessionEngine.resumeGame}
       onRestart={handleRestart}
     >
-      <div className="w-full max-w-xl flex flex-col items-center">
+      <div className="w-full max-w-xl flex flex-col items-center bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6">
         {/* Helper title */}
         <div className="text-center mb-4">
-          <p className="text-stone-600 dark:text-stone-300 text-sm font-medium">
+          <p className="font-mono uppercase tracking-widest text-ink text-sm">
             Tap an activity, then tap another to swap them into chronological order.
           </p>
-          <span className="text-xs font-semibold text-amber-700 dark:text-amber-300 mt-1 inline-block">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-vermilion mt-2 inline-block">
             {correctCount} of {currentCount} correctly arranged
           </span>
         </div>
@@ -173,24 +173,24 @@ export const SortMyDay: React.FC<SortMyDayProps> = ({
                 onClick={() => handleItemClick(index)}
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
-                className={`w-full p-3.5 sm:p-4 rounded-2xl border-2 flex items-center justify-between text-left transition-all shadow-xs ${
+                className={`w-full p-3.5 sm:p-4 border-[3px] border-ink flex items-center justify-between text-left transition-all font-mono uppercase tracking-widest ${
                   isSelected
-                    ? 'bg-amber-100 dark:bg-amber-950/60 border-amber-500 shadow-md ring-2 ring-amber-400'
+                    ? 'bg-ochre shadow-[4px_4px_0_var(--color-ink)] translate-x-1 -translate-y-1'
                     : isCorrectPosition
-                    ? 'bg-white dark:bg-stone-800 border-emerald-300 dark:border-emerald-800/60'
-                    : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 hover:border-amber-300'
+                    ? 'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)]'
+                    : 'bg-kraft text-ink shadow-[2px_2px_0_var(--color-ink)] hover:translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_var(--color-ink)]'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-7 h-7 rounded-full bg-amber-100 dark:bg-stone-700 flex items-center justify-center text-xs font-bold text-amber-900 dark:text-amber-200">
+                  <span className={`w-8 h-8 flex items-center justify-center text-xs font-bold border-[2px] border-ink ${isCorrectPosition ? 'bg-kraft text-ink' : 'bg-ink text-kraft'}`}>
                     {index + 1}
                   </span>
                   <span className="text-2xl sm:text-3xl">{act.emoji}</span>
                   <div>
-                    <h4 className="text-sm sm:text-base font-bold text-stone-900 dark:text-stone-100">
+                    <h4 className={`text-sm sm:text-base font-bold ${isCorrectPosition ? 'text-kraft' : 'text-ink'}`}>
                       {act.title}
                     </h4>
-                    <span className="text-xs text-stone-500 dark:text-stone-400">
+                    <span className={`text-xs ${isCorrectPosition ? 'text-kraft' : 'text-ink'} opacity-80`}>
                       {act.timeLabel}
                     </span>
                   </div>
@@ -198,11 +198,11 @@ export const SortMyDay: React.FC<SortMyDayProps> = ({
 
                 <div className="flex items-center gap-2">
                   {isCorrectPosition ? (
-                    <span className="text-emerald-600 font-bold text-xs flex items-center gap-1">
+                    <span className="font-bold text-xs flex items-center gap-1 text-kraft">
                       <CheckCircle2 className="w-4 h-4" /> Aligned
                     </span>
                   ) : (
-                    <ArrowUpDown className="w-4 h-4 text-stone-400" />
+                    <ArrowUpDown className="w-4 h-4 text-ink" />
                   )}
                 </div>
               </motion.button>
@@ -212,8 +212,8 @@ export const SortMyDay: React.FC<SortMyDayProps> = ({
 
         {/* Check / Finish action */}
         {isCompleted && (
-          <div className="text-center p-4 bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 rounded-2xl w-full">
-            <h4 className="text-emerald-900 dark:text-emerald-100 font-bold text-lg">
+          <div className="text-center p-4 bg-felt border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] w-full font-mono uppercase tracking-widest text-kraft">
+            <h4 className="font-bold text-lg">
               Wonderful! Your day is beautifully ordered.
             </h4>
           </div>

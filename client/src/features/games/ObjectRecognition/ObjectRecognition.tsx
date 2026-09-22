@@ -132,13 +132,13 @@ export const ObjectRecognition: React.FC<ObjectRecognitionProps> = ({
       onRestart={handleRestart}
     >
       {currentItem && (
-        <div className="w-full max-w-xl flex flex-col items-center">
+        <div className="bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6 w-full max-w-xl flex flex-col items-center">
           {/* Round Header */}
           <div className="text-center mb-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-stone-500">
+            <span className="text-xs font-mono uppercase tracking-widest text-ink">
               Question {currentIndex + 1} of {totalRounds}
             </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100 mt-0.5">
+            <h2 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink mt-0.5">
               What is this?
             </h2>
           </div>
@@ -148,7 +148,7 @@ export const ObjectRecognition: React.FC<ObjectRecognitionProps> = ({
             <motion.div
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-4 p-3 bg-amber-100/90 dark:bg-amber-950/60 border border-amber-300 rounded-xl text-stone-800 dark:text-stone-200 text-sm flex items-center gap-2 max-w-md"
+              className="mb-4 p-3 bg-ochre border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] text-ink font-mono uppercase tracking-widest text-sm flex items-center gap-2 max-w-md"
             >
               <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
               <span>
@@ -162,7 +162,7 @@ export const ObjectRecognition: React.FC<ObjectRecognitionProps> = ({
             key={currentItem.id}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-white dark:bg-stone-800 border-2 border-amber-200 dark:border-stone-700 shadow-lg flex items-center justify-center mb-6"
+            className="w-36 h-36 sm:w-44 sm:h-44 bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] flex items-center justify-center mb-6"
           >
             <span className="text-7xl sm:text-8xl select-none">{currentItem.emoji}</span>
           </motion.div>
@@ -174,17 +174,17 @@ export const ObjectRecognition: React.FC<ObjectRecognitionProps> = ({
               const isCorrectAnswer = option === currentItem.correctName;
 
               let buttonStyle =
-                'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-100 hover:border-amber-400 hover:bg-amber-50/50';
+                'bg-kraft text-ink border-ink hover:bg-ochre';
 
               if (showFeedback) {
                 if (isCorrectAnswer) {
                   buttonStyle =
-                    'bg-emerald-100 dark:bg-emerald-950/70 border-emerald-500 text-emerald-950 dark:text-emerald-100 shadow-md ring-2 ring-emerald-400';
+                    'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)]';
                 } else if (isChosen && !isCorrectAnswer) {
                   buttonStyle =
-                    'bg-amber-50 dark:bg-amber-950/40 border-amber-400 text-amber-900 dark:text-amber-200';
+                    'bg-vermilion text-kraft border-ink';
                 } else {
-                  buttonStyle = 'opacity-40 border-stone-200 bg-stone-50';
+                  buttonStyle = 'opacity-40 border-ink bg-kraft';
                 }
               }
 
@@ -193,7 +193,7 @@ export const ObjectRecognition: React.FC<ObjectRecognitionProps> = ({
                   key={option}
                   onClick={() => handleSelectOption(option)}
                   disabled={showFeedback}
-                  className={`p-4 rounded-2xl border-2 font-bold text-base sm:text-lg transition-all text-center shadow-xs flex items-center justify-center gap-2 ${buttonStyle}`}
+                  className={`p-4 border-[3px] border-ink font-mono font-bold uppercase tracking-widest text-base sm:text-lg transition-all text-center flex items-center justify-center gap-2 shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] ${buttonStyle}`}
                 >
                   {option}
                   {showFeedback && isCorrectAnswer && (

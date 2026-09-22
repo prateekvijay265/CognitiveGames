@@ -108,10 +108,10 @@ export default function JigsawGame({
   if (!sheets) {
     return (
       <div className="paper grain flex h-[100dvh] w-full flex-col items-center justify-center gap-4">
-        <div className="font-display text-5xl font-black tracking-[-0.03em]">
+        <div className="font-display font-bold uppercase tracking-widest text-4xl tracking-[-0.03em]">
           DIE<span className="text-vermilion">–</span>CUT
         </div>
-        <div className="smallcaps anim-blink text-sand">shuffling the box…</div>
+        <div className="font-mono uppercase tracking-widest anim-blink text-sand">shuffling the box…</div>
       </div>
     );
   }

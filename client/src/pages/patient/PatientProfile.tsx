@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   User, Bell, Gamepad2, Globe, HelpCircle,
-  ChevronRight, LogOut, ChevronLeft, Check, X,
+  ChevronRight, LogOut, Check, ChevronLeft,
 } from 'lucide-react';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '../../store/authStore';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
+import { cn } from '../../lib/utils';
 
 const LANGUAGES = [
   { code: 'en',  label: 'English',    native: 'English',      flag: '🇮🇳' },
@@ -25,156 +25,161 @@ export default function PatientProfile() {
   const patientName = user?.name || 'Abhishek';
 
   const [showLanguage, setShowLanguage] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
 
   const currentLang = LANGUAGES.find(l => l.code === i18n.language) || LANGUAGES[0];
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  const changeLanguage = (code: string) => {
+    i18n.changeLanguage(code);
+    setShowLanguage(false);
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="px-5 pt-6 pb-8 space-y-5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="w-full h-full font-sans flex flex-col gap-10 max-w-5xl mx-auto"
     >
-      {/* Header */}
-      <div className="flex items-center gap-6">
-        <button onClick={() => navigate('/patient')} className="icon-btn">
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <div>
-          <h1 className="font-display font-bold text-ink text-xl uppercase tracking-widest">
-            Profile & Settings
-          </h1>
-          <p className="smallcaps text-sand">Personalise your experience</p>
+      <header className="flex flex-col gap-6 border-b-[3px] border-ink pb-8">
+        <h1 className="text-5xl font-display font-black text-ink uppercase tracking-wider flex items-center gap-4">
+          <User size={48} className="text-vermilion" /> 
+          Profile & Settings
+        </h1>
+        <div className="flex items-center gap-6 p-6 bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)]">
+          <div className="w-20 h-20 bg-vermilion border-[3px] border-ink flex items-center justify-center text-4xl shadow-[4px_4px_0_var(--color-ink)]">
+            {patientName.charAt(0)}
+          </div>
+          <div>
+            <h2 className="font-display font-bold text-3xl uppercase tracking-widest text-ink">{patientName}</h2>
+            <p className="font-mono font-bold text-sand uppercase tracking-widest mt-1">Player Profile</p>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Profile Card */}
-      <div className="arcade-card p-6 flex items-center gap-6">
-        <div className="w-16 h-16 bg-vermilion border-2 border-ink flex items-center justify-center shadow-[3px_3px_0_var(--color-ink)] flex-shrink-0">
-          <span className="font-display font-black text-kraft text-2xl">
-            {patientName.charAt(0).toUpperCase()}
-          </span>
-        </div>
-        <div>
-          <h2 className="font-display font-bold text-ink text-lg uppercase tracking-wider">{patientName}</h2>
-          <p className="smallcaps text-sand">Brain Training User</p>
-          <p className="font-mono text-ink/50 text-xs mt-1">{user?.email}</p>
-        </div>
-      </div>
-
-      {/* ── Language Section ── */}
-      <div>
-        <p className="smallcaps text-sand mb-2 px-1">Language</p>
-        <div className="arcade-card overflow-hidden">
-          <button
-            onClick={() => setShowLanguage(!showLanguage)}
-            className="w-full flex items-center justify-between p-6 hover:bg-kraft2 transition-colors group"
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {/* Left Column: Settings */}
+        <div className="flex flex-col gap-6">
+          <h3 className="font-display font-bold text-2xl uppercase tracking-widest text-ink mb-2">Preferences</h3>
+          
+          <button 
+            onClick={() => setShowLanguage(true)}
+            className="group flex items-center justify-between p-6 bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:bg-kraft2 hover:-translate-y-1 hover:shadow-[8px_8px_0_var(--color-ink)] transition-all"
           >
-            <div className="flex items-center gap-6 text-ink">
-              <Globe className="w-5 h-5 text-ink/70" />
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-ochre border-[3px] border-ink flex items-center justify-center">
+                <Globe size={24} className="text-ink stroke-[2.5]" />
+              </div>
               <div className="text-left">
-                <span className="font-mono font-bold text-ink block">{currentLang.label}</span>
-                <span className="text-xs text-sand font-mono">{currentLang.native}</span>
+                <div className="font-display font-bold text-xl uppercase tracking-widest text-ink">Language</div>
+                <div className="font-mono text-sm font-bold text-sand uppercase tracking-widest">{currentLang.native}</div>
               </div>
             </div>
-            <ChevronRight
-              className={`w-5 h-5 text-ink/50 transition-transform duration-200 ${showLanguage ? 'rotate-90' : ''}`}
-            />
+            <ChevronRight size={24} className="text-ink group-hover:translate-x-1 transition-transform" />
           </button>
 
-          <AnimatePresence>
-            {showLanguage && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="overflow-hidden border-t-2 border-ink"
-              >
-                <div className="p-2 bg-kraft2 space-y-1">
-                  {LANGUAGES.map((lang) => {
-                    const isActive = i18n.language === lang.code;
-                    return (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          i18n.changeLanguage(lang.code);
-                          localStorage.setItem('Neuro Mind_language', lang.code);
-                          toast.success(`Language changed to ${lang.label}`);
-                          setShowLanguage(false);
-                        }}
-                        className={`w-full flex items-center justify-between px-6 py-3 transition-all border-2 ${
-                          isActive
-                            ? 'border-ink bg-ink text-kraft shadow-[2px_2px_0_var(--color-vermilion)]'
-                            : 'border-transparent hover:border-ink hover:bg-kraft'
-                        }`}
-                      >
-                        <div className="flex items-center gap-6">
-                          <span className="text-lg">{lang.flag}</span>
-                          <div className="text-left">
-                            <span className="font-mono font-bold block text-sm">
-                              {lang.label}
-                            </span>
-                            <span className="font-mono text-xs opacity-70">{lang.native}</span>
-                          </div>
-                        </div>
-                        {isActive && <Check className="w-4 h-4 flex-shrink-0" />}
-                      </button>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-
-      {/* ── Notification Preferences ── */}
-      <div>
-        <p className="smallcaps text-sand mb-2 px-1">Preferences</p>
-        <div className="arcade-card overflow-hidden">
-          {[
-            { icon: Bell,      label: 'Reminder Notifications', detail: 'Daily reminders & alerts' },
-            { icon: Gamepad2,  label: 'Game Suggestions',       detail: 'Daily activity tips'       },
-            { icon: HelpCircle,label: 'Help & Support',         detail: 'Get assistance anytime',   onClick: () => navigate('/patient/help') },
-          ].map(({ icon: Icon, label, detail, onClick }, idx) => (
-            <button
-              key={idx}
-              onClick={onClick ?? (() => toast.info(`${label} settings coming soon!`))}
-              className="w-full flex items-center justify-between p-6 hover:bg-kraft2 transition-colors group border-b last:border-0 border-ink/10"
-            >
-              <div className="flex items-center gap-6 text-ink">
-                <Icon className="w-5 h-5 text-ink/70" />
-                <div className="text-left">
-                  <span className="font-mono font-bold text-ink block text-sm">{label}</span>
-                  <span className="text-xs text-sand font-mono">{detail}</span>
-                </div>
+          <button className="group flex items-center justify-between p-6 bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:bg-kraft2 hover:-translate-y-1 hover:shadow-[8px_8px_0_var(--color-ink)] transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-blue-400 border-[3px] border-ink flex items-center justify-center">
+                <Bell size={24} className="text-ink stroke-[2.5]" />
               </div>
-              <ChevronRight className="w-4 h-4 text-ink/40 group-hover:text-ink" />
-            </button>
-          ))}
+              <div className="text-left">
+                <div className="font-display font-bold text-xl uppercase tracking-widest text-ink">Notifications</div>
+                <div className="font-mono text-sm font-bold text-sand uppercase tracking-widest">Enabled</div>
+              </div>
+            </div>
+            <ChevronRight size={24} className="text-ink group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        {/* Right Column: Danger Zone */}
+        <div className="flex flex-col gap-6">
+          <h3 className="font-display font-bold text-2xl uppercase tracking-widest text-ink mb-2">Account</h3>
+          
+          <button className="group flex items-center justify-between p-6 bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:bg-kraft2 hover:-translate-y-1 hover:shadow-[8px_8px_0_var(--color-ink)] transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-emerald-400 border-[3px] border-ink flex items-center justify-center">
+                <HelpCircle size={24} className="text-ink stroke-[2.5]" />
+              </div>
+              <div className="text-left">
+                <div className="font-display font-bold text-xl uppercase tracking-widest text-ink">Help & Support</div>
+                <div className="font-mono text-sm font-bold text-sand uppercase tracking-widest">Contact Caregiver</div>
+              </div>
+            </div>
+            <ChevronRight size={24} className="text-ink group-hover:translate-x-1 transition-transform" />
+          </button>
+
+          <button 
+            onClick={handleLogout}
+            className="group flex items-center justify-between p-6 bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:bg-vermilion hover:text-kraft hover:-translate-y-1 hover:shadow-[8px_8px_0_var(--color-ink)] transition-all mt-auto"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-kraft2 border-[3px] border-ink flex items-center justify-center group-hover:bg-kraft group-hover:text-vermilion">
+                <LogOut size={24} className="stroke-[2.5]" />
+              </div>
+              <div className="text-left">
+                <div className="font-display font-bold text-xl uppercase tracking-widest">Sign Out</div>
+              </div>
+            </div>
+          </button>
         </div>
       </div>
 
-      {/* ── Sign Out ── */}
-      <div>
-        <button
-          onClick={() => {
-            logout();
-            navigate('/login');
-          }}
-          className="btn btn-primary w-full"
-        >
-          <LogOut className="w-4 h-4" />
-          Sign Out
-        </button>
-      </div>
+      {/* Language Modal */}
+      <AnimatePresence>
+        {showLanguage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/80 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              className="bg-kraft w-full max-w-2xl border-[4px] border-ink shadow-[12px_12px_0_var(--color-vermilion)] p-8 flex flex-col gap-8 max-h-[90vh]"
+            >
+              <div className="flex items-center justify-between">
+                <h2 className="font-display font-bold text-3xl uppercase tracking-widest text-ink">Select Language</h2>
+                <button 
+                  onClick={() => setShowLanguage(false)}
+                  className="w-12 h-12 bg-kraft2 border-[3px] border-ink flex items-center justify-center hover:bg-vermilion hover:text-kraft transition-colors shadow-[4px_4px_0_var(--color-ink)]"
+                >
+                  <ChevronLeft size={28} />
+                </button>
+              </div>
 
-      {/* Footer */}
-      <div className="text-center pt-4 pb-4 space-y-1">
-        <p className="smallcaps text-sand/60">Neuro Mind v1.0</p>
-        <p className="smallcaps text-sand/40">Healthy mind. Brighter tomorrow.</p>
-      </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 overflow-y-auto pr-2 pb-2">
+                {LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang.code)}
+                    className={cn(
+                      'flex items-center justify-between p-6 border-[3px] border-ink transition-all',
+                      i18n.language === lang.code
+                        ? 'bg-ink text-kraft shadow-[6px_6px_0_var(--color-vermilion)] -translate-y-1'
+                        : 'bg-kraft2 text-ink shadow-[4px_4px_0_var(--color-ink)] hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] hover:bg-kraft'
+                    )}
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl">{lang.flag}</span>
+                      <div className="text-left">
+                        <div className="font-display font-bold text-xl uppercase tracking-widest">{lang.label}</div>
+                        <div className="font-mono text-sm uppercase tracking-widest opacity-80">{lang.native}</div>
+                      </div>
+                    </div>
+                    {i18n.language === lang.code && <Check size={28} className="text-vermilion" />}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
-

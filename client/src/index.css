@@ -382,31 +382,33 @@ button {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 0.75rem;
-  font-size: 0.8rem;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   font-family: var(--font-mono);
-  color: rgba(231,220,198,0.6);
-  border: 2px solid transparent;
-  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  color: var(--color-kraft);
+  border: 3px solid transparent;
+  transition: all 0.15s ease;
   cursor: pointer;
   text-decoration: none;
-  width: 100%;
+  font-size: 0.85rem;
 }
 
 .nav-item:hover {
-  color: var(--color-kraft);
-  background: rgba(231,220,198,0.08);
+  background: var(--color-kraft2);
+  color: var(--color-ink);
+  border: 3px solid var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  transform: translate(-2px, -2px);
 }
 
 .nav-item.active {
+  background: var(--color-vermilion);
   color: var(--color-kraft);
-  background: rgba(231,220,198,0.1);
-  border-color: rgba(231,220,198,0.25);
-  box-shadow: inset 3px 0 0 var(--color-vermilion);
+  border: 3px solid var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-ink);
 }
 
 /* ================================================================

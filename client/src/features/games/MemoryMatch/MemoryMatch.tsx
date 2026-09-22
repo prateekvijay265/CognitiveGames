@@ -221,9 +221,9 @@ export const MemoryMatch: React.FC<MemoryMatchProps> = ({
       <div className="w-full flex flex-col items-center">
         {/* Status indicator */}
         <div className="mb-4 text-center">
-          <p className="text-base sm:text-lg font-medium text-stone-700 dark:text-stone-300">
+          <p className="text-base sm:text-lg font-mono uppercase tracking-widest text-ink font-bold">
             Pairs Found:{' '}
-            <span className="font-bold text-amber-700 dark:text-amber-300">
+            <span className="font-bold text-vermilion">
               {matchesFound} of {currentPairCount}
             </span>
           </p>
@@ -241,12 +241,12 @@ export const MemoryMatch: React.FC<MemoryMatchProps> = ({
                 whileHover={!isRevealed ? { scale: 1.03 } : {}}
                 whileTap={!isRevealed ? { scale: 0.97 } : {}}
                 aria-label={isRevealed ? card.name : `Card ${index + 1}`}
-                className={`aspect-square min-w-[70px] sm:min-w-[90px] rounded-2xl p-2 sm:p-3 flex flex-col items-center justify-center transition-all duration-300 shadow-md border-2 ${
+                className={`aspect-square min-w-[70px] sm:min-w-[90px] border-[3px] border-ink p-2 sm:p-3 flex flex-col items-center justify-center transition-all duration-300 shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] ${
                   card.isMatched
-                    ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-500 text-emerald-900 dark:text-emerald-100 shadow-emerald-100'
+                    ? 'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)]'
                     : card.isFlipped
-                    ? 'bg-white dark:bg-stone-800 border-amber-500 shadow-amber-100'
-                    : 'bg-gradient-to-br from-amber-500 to-amber-600 border-amber-400 text-white hover:from-amber-600 hover:to-amber-700 shadow-amber-200'
+                    ? 'bg-kraft border-ink shadow-[4px_4px_0_var(--color-ink)]'
+                    : 'bg-vermilion border-ink text-kraft shadow-[4px_4px_0_var(--color-ink)] hover:bg-ochre hover:text-ink'
                 }`}
               >
                 {isRevealed ? (

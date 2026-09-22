@@ -157,38 +157,38 @@ export const SoundMemory: React.FC<SoundMemoryProps> = ({
       onResume={sessionEngine.resumeGame}
       onRestart={handleRestart}
     >
-      <div className="w-full max-w-xl flex flex-col items-center">
+      <div className="w-full max-w-xl flex flex-col items-center bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6">
         {/* Round Counter */}
         <div className="text-center mb-4">
-          <span className="text-xs font-bold uppercase tracking-wider text-stone-500">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-ink">
             Sound {currentIndex + 1} of {totalQuestions}
           </span>
-          <h2 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100 mt-0.5">
+          <h2 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink mt-0.5">
             Which picture matches this sound?
           </h2>
         </div>
 
         {/* Sound Card with Tone Player */}
-        <div className="w-full bg-white dark:bg-stone-800 rounded-3xl p-6 border-2 border-amber-200 dark:border-stone-700 shadow-md flex flex-col items-center text-center mb-6">
+        <div className="w-full bg-kraft border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] p-6 flex flex-col items-center text-center mb-6">
           <button
             onClick={playSoundTone}
-            className={`w-20 h-20 rounded-full flex items-center justify-center transition-all shadow-md mb-3 ${
+            className={`w-20 h-20 rounded-none border-[3px] border-ink flex items-center justify-center transition-all shadow-[4px_4px_0_var(--color-ink)] mb-3 ${
               isPlayingAudio
-                ? 'bg-amber-500 text-white scale-110 shadow-amber-300 ring-4 ring-amber-300'
-                : 'bg-amber-100 hover:bg-amber-200 text-amber-900'
+                ? 'bg-ochre text-ink translate-x-1 -translate-y-1'
+                : 'bg-kraft text-ink hover:bg-ochre'
             }`}
             title="Play sound again"
           >
             <Volume2 className="w-10 h-10" />
           </button>
 
-          <span className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-1">
+          <span className="text-xs font-mono font-bold text-ink uppercase tracking-widest mb-1">
             Sound Prompt
           </span>
-          <h3 className="text-xl font-extrabold text-stone-900 dark:text-stone-100">
+          <h3 className="text-xl font-display font-bold uppercase tracking-widest text-ink">
             {currentQ.soundLabel}
           </h3>
-          <p className="text-sm text-stone-600 dark:text-stone-300 mt-1 max-w-sm">
+          <p className="text-sm font-mono uppercase tracking-widest text-ink mt-1 max-w-sm">
             {currentQ.soundDescription}
           </p>
         </div>
@@ -198,9 +198,9 @@ export const SoundMemory: React.FC<SoundMemoryProps> = ({
           <motion.div
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-4 p-3 bg-amber-100/90 dark:bg-amber-950/50 border border-amber-300 rounded-xl text-stone-800 dark:text-stone-200 text-sm flex items-center gap-2 max-w-md text-center"
+            className="mb-4 p-3 bg-ochre border-[3px] border-ink font-mono font-bold uppercase tracking-widest text-ink text-sm flex items-center gap-2 max-w-md text-center shadow-[4px_4px_0_var(--color-ink)]"
           >
-            <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+            <Sparkles className="w-4 h-4 text-ink shrink-0" />
             <span>
               <strong>Hint:</strong> {currentQ.hint}
             </span>
@@ -214,16 +214,16 @@ export const SoundMemory: React.FC<SoundMemoryProps> = ({
             const isCorrect = option.isCorrect;
 
             let cardStyle =
-              'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 hover:border-amber-400 hover:scale-105 active:scale-95';
+              'bg-kraft text-ink hover:bg-ochre hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]';
 
             if (showFeedback) {
               if (isCorrect) {
                 cardStyle =
-                  'bg-emerald-100 dark:bg-emerald-950/70 border-emerald-500 shadow-md ring-2 ring-emerald-400';
+                  'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)] translate-x-1 -translate-y-1';
               } else if (isChosen && !isCorrect) {
-                cardStyle = 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 opacity-60';
+                cardStyle = 'bg-vermilion text-kraft opacity-80';
               } else {
-                cardStyle = 'opacity-40 border-stone-200 bg-stone-50';
+                cardStyle = 'bg-kraft text-ink opacity-50';
               }
             }
 
@@ -232,14 +232,14 @@ export const SoundMemory: React.FC<SoundMemoryProps> = ({
                 key={option.id}
                 onClick={() => handleSelectOption(option.id, option.isCorrect)}
                 disabled={showFeedback}
-                className={`p-4 rounded-2xl border-2 flex flex-col items-center justify-center transition-all shadow-xs ${cardStyle}`}
+                className={`p-4 border-[3px] border-ink flex flex-col items-center justify-center transition-all shadow-[4px_4px_0_var(--color-ink)] font-mono uppercase tracking-widest ${cardStyle}`}
               >
                 <span className="text-4xl sm:text-5xl mb-2">{option.emoji}</span>
-                <span className="text-sm font-bold text-stone-900 dark:text-stone-100 text-center">
+                <span className="text-sm font-bold text-center">
                   {option.label}
                 </span>
                 {showFeedback && isCorrect && (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-1" />
+                  <CheckCircle2 className="w-4 h-4 text-kraft mt-2" />
                 )}
               </button>
             );

@@ -64,22 +64,22 @@ export default function DashboardLayout({ role }: { role: Role }) {
   };
 
   const SidebarContent = ({ compact = false }) => (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-felt-surface">
       {/* Brand */}
       <div className={cn(
-        'border-b-2 border-kraft/20 flex-shrink-0',
-        compact ? 'p-3' : 'px-5 py-5',
+        'border-b-[3px] border-ink flex-shrink-0 bg-kraft',
+        compact ? 'p-4' : 'px-6 py-8',
       )}>
         {compact ? (
           <div className="flex flex-col items-center gap-2">
-            <img src="/logo.jpg" alt="Neuro Mind" className="w-10 h-10 object-cover border-2 border-kraft shadow-[2px_2px_0_var(--color-kraft)] bg-vermilion" />
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] bg-vermilion" />
           </div>
         ) : (
-          <div className="flex items-center gap-3">
-            <img src="/logo.jpg" alt="Neuro Mind" className="w-12 h-12 object-cover border-2 border-kraft shadow-[3px_3px_0_var(--color-kraft)] flex-shrink-0 bg-vermilion" />
+          <div className="flex items-center gap-4">
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-16 h-16 object-cover border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] flex-shrink-0 bg-vermilion" />
             <div>
-              <div className="font-display font-bold text-kraft text-lg leading-tight uppercase tracking-wide">Neuro Mind</div>
-              <div className="smallcaps text-kraft/50 mt-0.5">{meta.tag}</div>
+              <div className="font-display font-black text-ink text-2xl leading-tight uppercase tracking-widest">Neuro Mind</div>
+              <div className="font-mono text-ink/70 font-bold uppercase tracking-widest text-xs mt-1">{meta.tag}</div>
             </div>
           </div>
         )}
@@ -87,17 +87,16 @@ export default function DashboardLayout({ role }: { role: Role }) {
 
       {/* User card */}
       {!compact && (
-        <div className="mx-4 my-4 p-3 bg-felt/30 border border-kraft/20 flex-shrink-0">
-          <div className="flex items-center gap-3">
+        <div className="mx-6 my-6 p-4 bg-kraft2 border-[3px] border-ink flex-shrink-0 shadow-[4px_4px_0_var(--color-ink)]">
+          <div className="flex items-center gap-4">
             <div
-              className="w-9 h-9 flex-shrink-0 border-2 border-kraft flex items-center justify-center font-display font-bold text-kraft text-sm"
-              style={{ backgroundColor: meta.accent + '80' }}
+              className="w-12 h-12 flex-shrink-0 border-[3px] border-ink flex items-center justify-center font-display font-black text-ink text-xl shadow-[2px_2px_0_var(--color-ink)] bg-kraft"
             >
               {user?.name?.charAt(0) ?? 'U'}
             </div>
             <div className="min-w-0">
-              <div className="font-bold text-kraft text-sm truncate leading-tight">{user?.name ?? 'User'}</div>
-              <div className="smallcaps text-kraft/50 truncate mt-0.5">{meta.label}</div>
+              <div className="font-display font-bold text-ink text-lg truncate leading-tight uppercase tracking-wider">{user?.name ?? 'User'}</div>
+              <div className="font-mono text-sand font-bold uppercase tracking-widest text-xs truncate mt-1">{meta.label}</div>
             </div>
           </div>
         </div>

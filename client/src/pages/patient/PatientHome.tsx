@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Settings, User, ArrowRight, ChevronRight } from 'lucide-react';
-import { useAuthStore } from '@/store/authStore';
+import { ChevronRight, Target, Sparkles, Brain, Clock, Bell, Map, Phone } from 'lucide-react';
+import { useAuthStore } from '../../store/authStore';
 
 export default function PatientHome() {
   const navigate = useNavigate();
   const { user } = useAuthStore();
-
-  const patientName = user?.name || 'Abhishek';
-  const firstName = patientName.split(' ')[0];
+  const firstName = user?.name?.split(' ')[0] || 'Asha';
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -17,168 +15,115 @@ export default function PatientHome() {
     return 'Good evening';
   };
 
-  const completedCount = 3;
-  const totalCount = 5;
-  const progressPercent = Math.round((completedCount / totalCount) * 100);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="px-5 pt-4 pb-24 font-sans"
+      className="w-full h-full font-sans flex flex-col gap-12"
     >
-      {/* HEADER */}
-      <div className="flex justify-between items-start mb-6">
+      {/* 🚀 Massive Desktop Header */}
+      <header className="flex items-end justify-between border-b-[3px] border-ink pb-6">
         <div>
-          <h2 className="smallcaps text-sand mb-1">{getGreeting()}</h2>
-          <h1 className="text-[28px] font-display font-bold text-ink leading-tight mb-1 uppercase tracking-wider">
-            {firstName} <span className="inline-block origin-bottom-right animate-wave text-2xl">👋</span>
+          <h2 className="font-mono text-lg font-bold tracking-widest text-sand uppercase mb-2 flex items-center gap-2">
+            <Sparkles size={18} className="text-vermilion" /> {getGreeting()}
+          </h2>
+          <h1 className="text-6xl font-display font-black text-ink uppercase tracking-wider">
+            {firstName} <span className="inline-block origin-bottom-right animate-wave text-5xl">👋</span>
           </h1>
-          <p className="font-mono text-[13px] text-ink/70">Ready to play?</p>
         </div>
-        <div className="flex items-center gap-6">
-          <button 
-            onClick={() => navigate('/patient/settings')}
-            className="w-10 h-10 rounded-full flex items-center justify-center text-ink border-2 border-ink shadow-[2px_2px_0_var(--color-ink)] bg-kraft2 active:translate-y-px active:shadow-[1px_1px_0_var(--color-ink)] transition-all"
-          >
-            <Settings size={18} />
-          </button>
-          <button 
-            onClick={() => navigate('/patient/settings')}
-            className="w-10 h-10 rounded-full flex items-center justify-center text-kraft border-2 border-ink shadow-[2px_2px_0_var(--color-ink)] bg-vermilion active:translate-y-px active:shadow-[1px_1px_0_var(--color-ink)] transition-all"
-          >
-            <User size={18} />
-          </button>
-        </div>
-      </div>
-
-      {/* BANNER (Today's Brain Journey) */}
-      <div className="paper rounded-[1.5rem] border-2 border-ink p-6 mb-8 shadow-[6px_6px_0_var(--color-ink)] flex flex-col justify-end group hover-lift cursor-pointer transition-all">
-        
-        <div className="relative z-10 w-full">
-          <div className="flex justify-between items-end">
-            <div className="flex-1 mr-4">
-              <h3 className="font-display font-bold text-[18px] mb-2 text-ink uppercase tracking-widest">Daily Quest</h3>
-              <p className="smallcaps text-sand mb-4">{completedCount} / {totalCount} completed</p>
-              
-              <div className="w-full h-4 bg-kraft2 rounded-full overflow-hidden border-2 border-ink shadow-inner">
-                <div 
-                  className="h-full bg-vermilion transition-all duration-1000 ease-out border-r-2 border-ink" 
-                  style={{ width: `${progressPercent}%` }}
-                ></div>
-              </div>
+        <div className="text-right">
+          <p className="font-mono text-sand text-lg font-bold uppercase tracking-widest mb-2">Daily Progress</p>
+          <div className="flex items-center gap-4">
+            <div className="w-64 h-6 bg-kraft2 border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] overflow-hidden">
+              <div className="h-full bg-vermilion border-r-[3px] border-ink w-[60%]" />
             </div>
-            
-            <button className="w-12 h-12 shrink-0 rounded-full bg-felt text-kraft border-2 border-ink flex items-center justify-center shadow-[2px_2px_0_var(--color-ink)] group-hover:bg-ink transition-all">
-              <ArrowRight size={22} className="stroke-[2.5]" />
+            <span className="font-display font-bold text-2xl text-ink">60%</span>
+          </div>
+        </div>
+      </header>
+
+      {/* 📜 Desktop Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        
+        {/* LEFT COLUMN: Games */}
+        <div className="lg:col-span-2 flex flex-col gap-8">
+          <div className="flex items-center justify-between">
+            <h3 className="font-display font-bold text-3xl uppercase tracking-widest text-ink flex items-center gap-3">
+              <Brain size={32} className="text-vermilion stroke-[2.5]" />
+              Quick Games
+            </h3>
+            <button 
+              onClick={() => navigate('/patient/games')}
+              className="font-mono font-bold uppercase tracking-widest text-sm bg-kraft2 border-[3px] border-ink px-6 py-3 shadow-[4px_4px_0_var(--color-ink)] hover:bg-vermilion hover:text-kraft hover:translate-x-1 transition-all flex items-center gap-2"
+            >
+              View Arcade <ChevronRight size={18} />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6">
+            {[
+              { id: 'match3', name: 'Match 3', icon: '💎', color: 'bg-vermilion', stat: 'Processing' },
+              { id: 'sudoku', name: 'Sudoku', icon: '🔢', color: 'bg-ochre', stat: 'Logic' },
+              { id: 'jigsaw', name: 'Jigsaw', icon: '🧩', color: 'bg-blue-500', stat: 'Visual' }
+            ].map(game => (
+              <button
+                key={game.id}
+                onClick={() => navigate(`/patient/games/${game.id}`)}
+                className="group flex flex-col items-center bg-kraft border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:shadow-[8px_8px_0_var(--color-ink)] hover:-translate-y-1 transition-all"
+              >
+                <div className={`w-full aspect-square ${game.color} border-b-[3px] border-ink flex items-center justify-center text-7xl group-hover:scale-105 transition-transform`}>
+                  {game.icon}
+                </div>
+                <div className="p-4 w-full text-center">
+                  <div className="font-display font-bold text-xl uppercase tracking-widest text-ink mb-1">{game.name}</div>
+                  <div className="font-mono font-bold text-xs uppercase tracking-widest text-sand">{game.stat}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: Explore */}
+        <div className="flex flex-col gap-8">
+          <h3 className="font-display font-bold text-3xl uppercase tracking-widest text-ink flex items-center gap-3">
+            <Target size={32} className="text-ochre stroke-[2.5]" />
+            Your Day
+          </h3>
+          
+          <div className="flex flex-col gap-6">
+            <button className="w-full flex items-center gap-6 p-6 bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:-translate-y-1 transition-all text-left group">
+              <div className="w-16 h-16 bg-blue-400 border-[3px] border-ink flex items-center justify-center text-3xl shadow-[4px_4px_0_var(--color-ink)] group-hover:bg-vermilion transition-colors">
+                🌅
+              </div>
+              <div>
+                <div className="font-display font-bold text-2xl uppercase tracking-widest text-ink">My Day</div>
+                <div className="font-mono text-sm font-bold tracking-widest text-sand uppercase">Daily Routine</div>
+              </div>
+            </button>
+
+            <button className="w-full flex items-center gap-6 p-6 bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:-translate-y-1 transition-all text-left group">
+              <div className="w-16 h-16 bg-pink-400 border-[3px] border-ink flex items-center justify-center text-3xl shadow-[4px_4px_0_var(--color-ink)] group-hover:bg-vermilion transition-colors">
+                📸
+              </div>
+              <div>
+                <div className="font-display font-bold text-2xl uppercase tracking-widest text-ink">Memories</div>
+                <div className="font-mono text-sm font-bold tracking-widest text-sand uppercase">View Photo Album</div>
+              </div>
+            </button>
+
+            <button className="w-full flex items-center gap-6 p-6 bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] hover:-translate-y-1 transition-all text-left group">
+              <div className="w-16 h-16 bg-emerald-400 border-[3px] border-ink flex items-center justify-center text-3xl shadow-[4px_4px_0_var(--color-ink)] group-hover:bg-vermilion transition-colors">
+                <Bell size={28} className="text-ink stroke-[2.5]" />
+              </div>
+              <div>
+                <div className="font-display font-bold text-2xl uppercase tracking-widest text-ink">Alerts</div>
+                <div className="font-mono text-sm font-bold tracking-widest text-sand uppercase">2 Reminders</div>
+              </div>
             </button>
           </div>
         </div>
-      </div>
 
-      {/* QUICK GAMES SECTION */}
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-display font-bold text-[17px] text-ink uppercase tracking-widest">Quick Games</h3>
-          <button 
-            onClick={() => navigate('/patient/games')}
-            className="smallcaps text-ink bg-kraft2 px-3 py-1.5 border-2 border-ink shadow-[2px_2px_0_var(--color-ink)] hover:bg-vermilion hover:text-kraft transition-all flex items-center gap-1 active:translate-y-px active:shadow-[1px_1px_0_var(--color-ink)]"
-          >
-            See all <ChevronRight size={14} className="stroke-[2.5]" />
-          </button>
-        </div>
-        
-        <div className="flex gap-6 overflow-x-auto pb-6 -mx-5 px-5 snap-x hide-scrollbar">
-          
-          {/* Card 1: Match 3 */}
-          <button 
-            onClick={() => navigate('/patient/game/match3')}
-            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-6 transition-all"
-          >
-            <div className="w-full aspect-square rounded-[1rem] bg-vermilion border-2 border-ink mb-3 flex items-center justify-center relative overflow-hidden shadow-inner group-hover:bg-ochre transition-all">
-              <span className="text-3xl font-display text-kraft drop-shadow-md">💎</span>
-            </div>
-            <h4 className="font-display font-bold text-[14px] text-ink leading-tight mb-3">Match 3</h4>
-            <div className="flex items-center justify-between mt-auto w-full">
-               <span className="smallcaps text-sand">Process</span>
-               <span className="smallcaps text-sand">5m</span>
-            </div>
-          </button>
-          
-          {/* Card 2: Sudoku */}
-          <button 
-            onClick={() => navigate('/patient/game/sudoku')}
-            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-6 transition-all"
-          >
-            <div className="w-full aspect-square rounded-[1rem] bg-ochre border-2 border-ink mb-3 flex items-center justify-center relative overflow-hidden shadow-inner group-hover:bg-vermilion transition-all">
-               <span className="text-3xl font-display text-kraft drop-shadow-md">🔢</span>
-            </div>
-            <h4 className="font-display font-bold text-[14px] text-ink leading-tight mb-3">Sudoku</h4>
-            <div className="flex items-center justify-between mt-auto w-full">
-               <span className="smallcaps text-sand">Reason</span>
-               <span className="smallcaps text-sand">10m</span>
-            </div>
-          </button>
-
-          {/* Card 3: Jigsaw */}
-          <button 
-            onClick={() => navigate('/patient/game/jigsaw')}
-            className="w-[150px] flex-shrink-0 btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 snap-start text-left flex flex-col items-start p-6 transition-all"
-          >
-            <div className="w-full aspect-square rounded-[1rem] bg-sky-600 border-2 border-ink mb-3 flex items-center justify-center relative overflow-hidden shadow-inner group-hover:bg-indigo-600 transition-all">
-               <span className="text-3xl font-display text-kraft drop-shadow-md">🧩</span>
-            </div>
-            <h4 className="font-display font-bold text-[14px] text-ink leading-tight mb-3">Jigsaw</h4>
-            <div className="flex items-center justify-between mt-auto w-full">
-               <span className="smallcaps text-sand">Orient</span>
-               <span className="smallcaps text-sand">5m</span>
-            </div>
-          </button>
-        </div>
       </div>
-
-      {/* EXPLORE YOUR DAY (Restored Tabs) */}
-      <div className="mb-6 relative z-10">
-        <h3 className="font-display font-bold text-[17px] text-ink mb-4 uppercase tracking-widest">Explore Your Day</h3>
-        <div className="grid grid-cols-2 gap-6">
-          {/* Routine */}
-          <button 
-            onClick={() => navigate('/patient/routine')}
-            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-6 p-6 transition-all w-full"
-          >
-            <div className="w-12 h-12 rounded-[1rem] bg-indigo-500 border-2 border-ink text-white flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">🌅</div>
-            <h4 className="font-display font-bold text-[15px] text-ink">My Day</h4>
-          </button>
-          
-          {/* Reminders */}
-          <button 
-            onClick={() => navigate('/patient/reminders')}
-            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-6 p-6 transition-all w-full"
-          >
-            <div className="w-12 h-12 rounded-[1rem] bg-rose-500 border-2 border-ink text-white flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">🔔</div>
-            <h4 className="font-display font-bold text-[15px] text-ink">Reminders</h4>
-          </button>
-          
-          {/* Memory Book */}
-          <button 
-            onClick={() => navigate('/patient/memory')}
-            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-6 p-6 transition-all w-full"
-          >
-            <div className="w-12 h-12 rounded-[1rem] bg-amber-500 border-2 border-ink text-white flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">📸</div>
-            <h4 className="font-display font-bold text-[15px] text-ink">Memory Book</h4>
-          </button>
-          
-          {/* Emergency / Help */}
-          <button 
-            onClick={() => navigate('/patient/help')}
-            className="btn btn-ghost !border-ink shadow-[4px_4px_0_var(--color-ink)] hover:!shadow-[6px_6px_0_var(--color-ink)] bg-kraft2/30 text-left flex flex-col items-start gap-6 p-6 transition-all w-full"
-          >
-            <div className="w-12 h-12 rounded-[1rem] bg-emerald-500 border-2 border-ink text-white flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">❤️</div>
-            <h4 className="font-display font-bold text-[15px] text-ink">Help</h4>
-          </button>
-        </div>
-      </div>
-      
     </motion.div>
   );
 }

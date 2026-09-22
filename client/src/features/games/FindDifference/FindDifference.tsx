@@ -119,15 +119,15 @@ export const FindDifference: React.FC<FindDifferenceProps> = ({
       onResume={sessionEngine.resumeGame}
       onRestart={handleRestart}
     >
-      <div className="w-full max-w-4xl flex flex-col items-center">
+      <div className="bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6 w-full max-w-4xl flex flex-col items-center">
         {/* Title and Progress */}
         <div className="text-center mb-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100">
+          <h2 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink">
             {activeScene.title}
           </h2>
-          <p className="text-sm font-semibold text-stone-700 dark:text-stone-300 mt-0.5">
+          <p className="text-sm font-mono uppercase tracking-widest text-ink mt-0.5">
             Differences Found:{' '}
-            <span className="font-bold text-amber-700 dark:text-amber-300">
+            <span className="font-bold text-vermilion">
               {foundKeys.length} of {targetDifferencesCount}
             </span>
           </p>
@@ -138,7 +138,7 @@ export const FindDifference: React.FC<FindDifferenceProps> = ({
           <motion.div
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-4 p-3 bg-amber-100/90 dark:bg-amber-950/60 border border-amber-300 rounded-xl text-stone-800 dark:text-stone-200 text-sm flex items-center gap-2 max-w-lg"
+            className="mb-4 p-3 bg-ochre border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] text-ink font-mono uppercase tracking-widest text-sm flex items-center gap-2 max-w-lg"
           >
             <Sparkles className="w-5 h-5 text-amber-600 shrink-0" />
             <span>
@@ -151,11 +151,11 @@ export const FindDifference: React.FC<FindDifferenceProps> = ({
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-center">
           {/* Picture A (Left) */}
           <div className="flex flex-col items-center">
-            <span className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-ink mb-2">
               Picture A
             </span>
             <div
-              className="grid gap-2 sm:gap-3 p-4 bg-white dark:bg-stone-800 rounded-3xl border-2 border-amber-200 dark:border-stone-700 shadow-md"
+              className="grid gap-2 sm:gap-3 p-4 bg-kraft border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)]"
               style={{
                 gridTemplateColumns: `repeat(${activeScene.gridCols}, minmax(0, 1fr))`,
               }}
@@ -167,10 +167,10 @@ export const FindDifference: React.FC<FindDifferenceProps> = ({
                     <button
                       key={`left-${rIdx}-${cIdx}`}
                       onClick={() => handleCellClick(rIdx, cIdx)}
-                      className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl transition-all relative border-2 ${
+                      className={`w-14 h-14 sm:w-16 sm:h-16 border-[3px] border-ink flex items-center justify-center text-3xl sm:text-4xl transition-all relative shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] ${
                         isFound
-                          ? 'bg-emerald-100 dark:bg-emerald-950/70 border-emerald-500 shadow-sm ring-2 ring-emerald-400'
-                          : 'bg-amber-50/40 dark:bg-stone-900/60 border-stone-200 dark:border-stone-700 hover:border-amber-400'
+                          ? 'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)]'
+                          : 'bg-kraft border-ink hover:bg-ochre'
                       }`}
                     >
                       {emoji}
@@ -188,11 +188,11 @@ export const FindDifference: React.FC<FindDifferenceProps> = ({
 
           {/* Picture B (Right) */}
           <div className="flex flex-col items-center">
-            <span className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-ink mb-2">
               Picture B
             </span>
             <div
-              className="grid gap-2 sm:gap-3 p-4 bg-white dark:bg-stone-800 rounded-3xl border-2 border-amber-200 dark:border-stone-700 shadow-md"
+              className="grid gap-2 sm:gap-3 p-4 bg-kraft border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)]"
               style={{
                 gridTemplateColumns: `repeat(${activeScene.gridCols}, minmax(0, 1fr))`,
               }}
@@ -204,10 +204,10 @@ export const FindDifference: React.FC<FindDifferenceProps> = ({
                     <button
                       key={`right-${rIdx}-${cIdx}`}
                       onClick={() => handleCellClick(rIdx, cIdx)}
-                      className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl transition-all relative border-2 ${
+                      className={`w-14 h-14 sm:w-16 sm:h-16 border-[3px] border-ink flex items-center justify-center text-3xl sm:text-4xl transition-all relative shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] ${
                         isFound
-                          ? 'bg-emerald-100 dark:bg-emerald-950/70 border-emerald-500 shadow-sm ring-2 ring-emerald-400'
-                          : 'bg-amber-50/40 dark:bg-stone-900/60 border-stone-200 dark:border-stone-700 hover:border-amber-400'
+                          ? 'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)]'
+                          : 'bg-kraft border-ink hover:bg-ochre'
                       }`}
                     >
                       {emoji}

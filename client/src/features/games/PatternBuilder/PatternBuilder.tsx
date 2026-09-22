@@ -126,19 +126,19 @@ export const PatternBuilder: React.FC<PatternBuilderProps> = ({
       onRestart={handleRestart}
     >
       {currentPattern && (
-        <div className="w-full max-w-2xl flex flex-col items-center">
+        <div className="bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6 w-full max-w-2xl flex flex-col items-center">
           {/* Header */}
           <div className="text-center mb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-stone-500">
+            <span className="text-xs font-mono uppercase tracking-widest text-ink">
               Pattern {currentIndex + 1} of {totalQuestions}
             </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100 mt-1">
+            <h2 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink mt-1">
               What completes this pattern?
             </h2>
           </div>
 
           {/* Sequence Display Ribbon */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 bg-white dark:bg-stone-800 rounded-3xl border-2 border-amber-200 dark:border-stone-700 shadow-md mb-8">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-4 sm:p-6 bg-kraft border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] mb-8">
             {currentPattern.sequence.map((symbol, idx) => {
               const isMissingItem = symbol === '?';
               return (
@@ -146,10 +146,10 @@ export const PatternBuilder: React.FC<PatternBuilderProps> = ({
                   key={idx}
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
-                  className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl border-2 transition-all ${
+                  className={`w-14 h-14 sm:w-16 sm:h-16 border-[3px] border-ink flex items-center justify-center text-3xl sm:text-4xl transition-all shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] ${
                     isMissingItem
-                      ? 'bg-amber-100 dark:bg-amber-950/60 border-amber-500 text-amber-900 dark:text-amber-200 font-extrabold shadow-inner'
-                      : 'bg-amber-50/40 dark:bg-stone-900 border-stone-200 dark:border-stone-700'
+                      ? 'bg-ochre border-ink text-ink font-extrabold shadow-[4px_4px_0_var(--color-ink)]'
+                      : 'bg-kraft border-ink text-ink'
                   }`}
                 >
                   {isMissingItem && showFeedback ? currentPattern.correctAnswer : symbol}
@@ -163,7 +163,7 @@ export const PatternBuilder: React.FC<PatternBuilderProps> = ({
             <motion.div
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 p-3 bg-amber-100/90 dark:bg-amber-950/50 border border-amber-300 rounded-2xl text-stone-800 dark:text-stone-200 text-sm flex items-center gap-2 max-w-md text-center"
+              className="mb-6 p-3 bg-ochre border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] text-ink font-mono uppercase tracking-widest text-sm flex items-center gap-2 max-w-md text-center"
             >
               <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
               <span>{currentPattern.explanation}</span>
@@ -177,16 +177,16 @@ export const PatternBuilder: React.FC<PatternBuilderProps> = ({
               const isCorrect = option === currentPattern.correctAnswer;
 
               let btnClass =
-                'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 hover:border-amber-400 hover:scale-105 active:scale-95';
+                'bg-kraft text-ink border-ink hover:bg-vermilion hover:text-kraft';
 
               if (showFeedback) {
                 if (isCorrect) {
                   btnClass =
-                    'bg-emerald-100 dark:bg-emerald-950/70 border-emerald-500 shadow-md ring-2 ring-emerald-400';
+                    'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)]';
                 } else if (isChosen && !isCorrect) {
-                  btnClass = 'bg-amber-50 dark:bg-amber-950/40 border-amber-400 opacity-60';
+                  btnClass = 'bg-vermilion text-kraft opacity-60 border-ink';
                 } else {
-                  btnClass = 'opacity-40 border-stone-200 bg-stone-50';
+                  btnClass = 'opacity-40 border-ink bg-kraft text-ink';
                 }
               }
 
@@ -195,7 +195,7 @@ export const PatternBuilder: React.FC<PatternBuilderProps> = ({
                   key={option}
                   onClick={() => handleSelectOption(option)}
                   disabled={showFeedback}
-                  className={`p-4 rounded-2xl border-2 flex items-center justify-center text-4xl sm:text-5xl transition-all shadow-xs ${btnClass}`}
+                  className={`p-4 border-[3px] border-ink flex items-center justify-center text-4xl sm:text-5xl transition-all shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] font-mono font-bold uppercase tracking-widest ${btnClass}`}
                 >
                   {option}
                 </button>

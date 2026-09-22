@@ -167,13 +167,13 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
       onResume={sessionEngine.resumeGame}
       onRestart={handleRestart}
     >
-      <div className="w-full max-w-2xl flex flex-col items-center">
+      <div className="w-full max-w-2xl flex flex-col items-center bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6">
         {/* Sequence Title & Subtitle */}
         <div className="text-center mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100">
+          <h2 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink">
             {currentSequence.title}
           </h2>
-          <p className="text-sm text-stone-600 dark:text-stone-300 mt-1">
+          <p className="text-sm font-mono uppercase tracking-widest text-ink mt-1">
             {currentSequence.description}
           </p>
         </div>
@@ -181,7 +181,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
         {/* Phase 1: Showing Phase */}
         {phase === 'SHOWING' && (
           <div className="w-full flex flex-col items-center">
-            <div className="flex items-center gap-2 mb-4 text-amber-700 dark:text-amber-300 text-sm font-semibold">
+            <div className="flex items-center gap-2 mb-4 text-ink font-mono font-bold uppercase tracking-widest text-sm">
               <Eye className="w-4 h-4" /> Watch the steps in order:
             </div>
 
@@ -201,25 +201,25 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
                           ? { scale: 1, opacity: 0.9 }
                           : { scale: 0.9, opacity: 0.3 }
                       }
-                      className={`p-3 sm:p-4 rounded-2xl border-2 flex flex-col items-center w-24 sm:w-28 text-center transition-all ${
+                      className={`p-3 sm:p-4 border-[3px] border-ink flex flex-col items-center w-24 sm:w-28 text-center transition-all font-mono font-bold uppercase tracking-widest ${
                         isCurrentActive
-                          ? 'bg-amber-100 border-amber-600 shadow-lg text-amber-950 ring-4 ring-amber-300/60'
+                          ? 'bg-ochre shadow-[4px_4px_0_var(--color-ink)] text-ink'
                           : isPassed
-                          ? 'bg-white dark:bg-stone-800 border-stone-300'
-                          : 'bg-stone-100 dark:bg-stone-900 border-stone-200 opacity-40'
+                          ? 'bg-kraft border-ink text-ink'
+                          : 'bg-kraft border-ink opacity-60 text-ink'
                       }`}
                     >
-                      <span className="text-xs font-bold text-stone-500 mb-1">
+                      <span className="text-[10px] sm:text-xs mb-1">
                         Step {item.step}
                       </span>
                       <span className="text-3xl sm:text-4xl mb-1">{item.emoji}</span>
-                      <span className="text-xs font-semibold leading-tight line-clamp-2">
+                      <span className="text-[10px] sm:text-xs leading-tight line-clamp-2">
                         {item.name}
                       </span>
                     </motion.div>
 
                     {idx < currentSequence.items.length - 1 && (
-                      <ArrowRight className="w-4 h-4 text-stone-400 hidden sm:block" />
+                      <ArrowRight className="w-4 h-4 text-ink hidden sm:block" />
                     )}
                   </React.Fragment>
                 );
@@ -228,7 +228,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
 
             <button
               onClick={() => setPhase('RECALLING')}
-              className="mt-6 px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold flex items-center gap-2 shadow-xs"
+              className="mt-6 px-6 py-3 border-[3px] border-ink bg-vermilion text-kraft shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest flex items-center gap-2"
             >
               <Play className="w-4 h-4 fill-current" /> Ready to Arrange
             </button>
@@ -240,34 +240,34 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
           <div className="w-full flex flex-col items-center">
             {/* Answer Sequence Slots */}
             <div className="w-full mb-6">
-              <span className="text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2 block text-center">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-ink mb-2 block text-center">
                 Your Sequence (Tap an placed item to remove)
               </span>
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-3 bg-amber-50/60 dark:bg-stone-800/40 rounded-2xl border border-amber-200 dark:border-stone-700 min-h-[110px]">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-3 bg-kraft border-[3px] border-ink min-h-[110px]">
                 {currentSequence.items.map((_, slotIdx) => {
                   const itemInSlot = selectedItems[slotIdx];
                   return (
                     <div
                       key={slotIdx}
                       onClick={() => itemInSlot && handleRemoveFromSlot(slotIdx)}
-                      className={`w-20 sm:w-24 h-24 sm:h-28 rounded-xl border-2 flex flex-col items-center justify-center p-2 text-center cursor-pointer transition-all ${
+                      className={`w-20 sm:w-24 h-24 sm:h-28 border-[3px] border-ink flex flex-col items-center justify-center p-2 text-center cursor-pointer transition-all font-mono font-bold uppercase tracking-widest ${
                         itemInSlot
-                          ? 'bg-white dark:bg-stone-800 border-amber-500 shadow-sm hover:border-rose-400'
-                          : 'border-dashed border-stone-300 dark:border-stone-700 bg-white/40 dark:bg-stone-900/40 text-stone-400'
+                          ? 'bg-ochre shadow-[4px_4px_0_var(--color-ink)] text-ink'
+                          : 'border-dashed bg-kraft text-ink opacity-50'
                       }`}
                     >
                       {itemInSlot ? (
                         <>
-                          <span className="text-xs font-bold text-amber-700 mb-0.5">
+                          <span className="text-[10px] sm:text-xs mb-0.5">
                             Step {slotIdx + 1}
                           </span>
                           <span className="text-3xl mb-1">{itemInSlot.emoji}</span>
-                          <span className="text-[11px] font-semibold leading-tight line-clamp-1">
+                          <span className="text-[9px] sm:text-[10px] leading-tight line-clamp-1">
                             {itemInSlot.name}
                           </span>
                         </>
                       ) : (
-                        <span className="text-sm font-semibold text-stone-400">
+                        <span className="text-sm">
                           {slotIdx + 1}
                         </span>
                       )}
@@ -279,7 +279,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
 
             {/* Options Bank */}
             <div className="w-full">
-              <span className="text-xs font-semibold uppercase tracking-wider text-stone-500 mb-3 block text-center">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-ink mb-3 block text-center">
                 Tap to place in sequence:
               </span>
               <div className="flex flex-wrap justify-center gap-3">
@@ -290,14 +290,14 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
                       key={item.id}
                       onClick={() => handleSelectOption(item)}
                       disabled={isUsed}
-                      className={`p-3 sm:p-4 rounded-2xl border-2 flex flex-col items-center w-24 sm:w-28 text-center transition-all shadow-xs ${
+                      className={`p-3 sm:p-4 border-[3px] border-ink flex flex-col items-center w-24 sm:w-28 text-center transition-all font-mono font-bold uppercase tracking-widest ${
                         isUsed
-                          ? 'opacity-30 border-stone-200 dark:border-stone-800 bg-stone-100 cursor-not-allowed'
-                          : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 hover:border-amber-400 hover:scale-105 active:scale-95'
+                          ? 'opacity-50 bg-kraft cursor-not-allowed text-ink'
+                          : 'bg-kraft text-ink shadow-[4px_4px_0_var(--color-ink)] hover:bg-ochre hover:-translate-y-1 hover:translate-x-1 hover:shadow-[6px_6px_0_var(--color-ink)]'
                       }`}
                     >
                       <span className="text-3xl sm:text-4xl mb-1">{item.emoji}</span>
-                      <span className="text-xs font-semibold text-stone-800 dark:text-stone-200 leading-tight line-clamp-2">
+                      <span className="text-[10px] sm:text-xs leading-tight line-clamp-2">
                         {item.name}
                       </span>
                     </button>
@@ -311,13 +311,13 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
         {/* Phase 3: Feedback Phase */}
         {phase === 'FEEDBACK' && (
           <div className="w-full flex flex-col items-center text-center">
-            <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-950/60 rounded-full flex items-center justify-center text-emerald-600 dark:text-emerald-300 mb-2">
+            <div className="w-14 h-14 bg-felt border-[3px] border-ink rounded-none flex items-center justify-center text-kraft shadow-[4px_4px_0_var(--color-ink)] mb-3">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-2xl font-bold text-amber-950 dark:text-amber-100 mb-1">
+            <h3 className="text-2xl font-display font-bold uppercase tracking-widest text-ink mb-1">
               Sequence Completed!
             </h3>
-            <p className="text-stone-600 dark:text-stone-300 text-sm mb-6">
+            <p className="text-sm font-mono uppercase tracking-widest text-ink mb-6">
               Here is the natural order of steps:
             </p>
 
@@ -325,13 +325,13 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
               {currentSequence.items.map((item, idx) => (
                 <div
                   key={item.id}
-                  className="p-3 rounded-xl border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-950 dark:text-emerald-100 flex flex-col items-center w-24"
+                  className="p-3 border-[3px] border-ink bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)] flex flex-col items-center w-24 font-mono font-bold uppercase tracking-widest"
                 >
-                  <span className="text-xs font-bold text-emerald-700 mb-0.5">
+                  <span className="text-[10px] sm:text-xs mb-0.5">
                     Step {idx + 1}
                   </span>
                   <span className="text-3xl mb-1">{item.emoji}</span>
-                  <span className="text-[11px] font-semibold text-center line-clamp-1">
+                  <span className="text-[9px] sm:text-[10px] text-center line-clamp-1">
                     {item.name}
                   </span>
                 </div>
@@ -340,7 +340,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
 
             <button
               onClick={handleNextSet}
-              className="px-8 py-4 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg flex items-center gap-2 shadow-md active:scale-[0.98]"
+              className="px-8 py-4 border-[3px] border-ink bg-vermilion text-kraft shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest flex items-center gap-2"
             >
               {currentSetIndex + 1 < availableSets.length ? 'Next Sequence' : 'Finish Activity'}
               <ArrowRight className="w-5 h-5" />

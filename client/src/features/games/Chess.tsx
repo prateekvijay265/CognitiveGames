@@ -221,17 +221,17 @@ export default function Chess({
       <div className="paper h-[100dvh] w-full overflow-y-auto">
         <div className="grain mx-auto min-h-full max-w-[860px] px-5 pb-14 sm:px-7">
           <div className="flex items-center justify-between border-b-2 border-ink py-3">
-            <button className="btn btn-ghost !px-3 !py-1.5 text-[0.68rem]" onClick={onExit}>
+            <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onExit}>
               ← Arcade
             </button>
-            <span className="smallcaps text-sand">
+            <span className="font-mono uppercase tracking-widest text-sand">
               {record.w}W · {record.l}L · {record.d}D
             </span>
           </div>
 
           <div className="pt-8">
-            <p className="smallcaps text-vermilion">Two players, one board</p>
-            <h1 className="mt-1 font-display text-[clamp(3rem,11vw,6rem)] font-black leading-[0.82] tracking-[-0.035em]">
+            <p className="font-mono uppercase tracking-widest text-vermilion">Two players, one board</p>
+            <h1 className="mt-1 font-display font-bold uppercase tracking-widest text-4xl leading-[0.82] tracking-[-0.035em]">
               THE
               <br />
               BOARD
@@ -244,16 +244,16 @@ export default function Chess({
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             <div>
-              <div className="smallcaps mb-2 border-b-2 border-ink pb-1">Play as</div>
+              <div className="font-mono uppercase tracking-widest mb-2 border-b-2 border-ink pb-1">Play as</div>
               <div className="flex gap-2">
                 {(["w", "b"] as Color[]).map((c) => (
                   <button
                     key={c}
                     type="button"
                     onClick={() => setSide(c)}
-                    className={`flex flex-1 items-center justify-center gap-2 border-2 py-3 font-mono text-sm font-semibold uppercase tracking-wider transition ${
+                    className={`flex flex-1 items-center justify-center gap-2 border-[3px] py-3 font-mono text-sm font-semibold uppercase tracking-wider transition ${
                       side === c
-                        ? "border-ink bg-vermilion text-kraft shadow-[4px_4px_0_var(--color-ink)]"
+                        ? "border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)]"
                         : "border-ink/40 hover:border-ink"
                     }`}
                   >
@@ -264,16 +264,16 @@ export default function Chess({
               </div>
             </div>
             <div>
-              <div className="smallcaps mb-2 border-b-2 border-ink pb-1">Engine strength</div>
+              <div className="font-mono uppercase tracking-widest mb-2 border-b-2 border-ink pb-1">Engine strength</div>
               <div className="flex flex-col gap-2">
                 {DIFFS.map((d) => (
                   <button
                     key={d.id}
                     type="button"
                     onClick={() => setDifficulty(d.id)}
-                    className={`flex items-baseline justify-between gap-2 border-2 px-3 py-2 text-left transition ${
+                    className={`flex items-baseline justify-between gap-2 border-[3px] px-3 py-2 text-left transition ${
                       difficulty === d.id
-                        ? "border-ink bg-ochre/30 shadow-[4px_4px_0_var(--color-ink)]"
+                        ? "border-ink bg-ochre/30 shadow-[6px_6px_0_var(--color-ink)]"
                         : "border-ink/40 hover:border-ink"
                     }`}
                   >
@@ -285,7 +285,7 @@ export default function Chess({
             </div>
           </div>
 
-          <button className="btn btn-primary mt-8" onClick={() => newGame(side, difficulty)}>
+          <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={() => newGame(side, difficulty)}>
             Start game
           </button>
         </div>
@@ -320,16 +320,16 @@ export default function Chess({
     <div className="flex h-[100dvh] w-full flex-col overflow-hidden bg-felt">
       <header className="paper grain shrink-0 border-b-2 border-ink">
         <div className="flex items-center gap-3 px-3 py-2 sm:px-5">
-          <button className="btn btn-ghost !px-2.5 !py-1.5 text-[0.65rem]" onClick={onExit}>
+          <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onExit}>
             ← Arcade
           </button>
           <div className="min-w-0">
-            <div className="smallcaps text-sand">
+            <div className="font-mono uppercase tracking-widest text-sand">
               {DIFFS.find((d) => d.id === difficulty)?.label} · you are{" "}
               {side === "w" ? "white" : "black"}
             </div>
             <div
-              className={`truncate font-display text-base font-bold sm:text-lg ${
+              className={`truncate font-display font-bold uppercase tracking-widest sm:text-lg ${
                 check && !result.over ? "text-vermilion" : ""
               }`}
             >
@@ -337,10 +337,10 @@ export default function Chess({
             </div>
           </div>
           <div className="ml-auto flex shrink-0 items-center gap-2">
-            <span className="smallcaps hidden text-sand sm:block">
+            <span className="font-mono uppercase tracking-widest hidden text-sand sm:block">
               {record.w}W·{record.l}L·{record.d}D
             </span>
-            <button className="icon-btn" onClick={undo} aria-label="Undo move">
+            <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all flex items-center justify-center p-2" onClick={undo} aria-label="Undo move">
               <svg width="16" height="14" viewBox="0 0 16 14" aria-hidden="true">
                 <path
                   d="M6 2L1 6l5 4V7.5c4 0 7 1 8 4 .5-5-3-7-8-7z"
@@ -348,7 +348,7 @@ export default function Chess({
                 />
               </svg>
             </button>
-            <button className="icon-btn" onClick={onMute} aria-label="Mute">
+            <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all flex items-center justify-center p-2" onClick={onMute} aria-label="Mute">
               <svg width="16" height="14" viewBox="0 0 16 14" aria-hidden="true">
                 <path d="M0 5h3l4-4v12L3 9H0z" fill="currentColor" />
                 {muted ? (
@@ -365,7 +365,7 @@ export default function Chess({
       <div className="feltsurface relative flex min-h-0 flex-1 flex-col items-center gap-3 overflow-y-auto p-3 lg:flex-row lg:items-start lg:justify-center lg:p-6">
         {/* board */}
         <div
-          className={`relative w-full max-w-[min(92vw,68vh)] shrink-0 border-2 border-ink shadow-[8px_8px_0_rgba(0,0,0,.5)] ${
+          className={`relative w-full max-w-[min(92vw,68vh)] shrink-0 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] ${
             flash ? "chess-flash" : ""
           }`}
         >
@@ -448,15 +448,15 @@ export default function Chess({
 
           {promo && (
             <div className="absolute inset-0 z-30 flex items-center justify-center bg-ink/70">
-              <div className="paper border-2 border-ink p-3 text-center">
-                <div className="smallcaps mb-2">Promote to</div>
+              <div className="bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] p-6 paper border-[3px] border-ink p-3 text-center">
+                <div className="font-mono uppercase tracking-widest mb-2">Promote to</div>
                 <div className="flex gap-2">
                   {["q", "r", "b", "n"].map((k) => (
                     <button
                       key={k}
                       type="button"
                       onClick={() => finishPromo(k)}
-                      className="flex h-12 w-12 items-center justify-center border-2 border-ink bg-kraft2 text-3xl hover:bg-ochre/40"
+                      className="flex h-12 w-12 items-center justify-center border-[3px] border-ink bg-kraft2 text-3xl hover:bg-ochre/40"
                     >
                       <span style={{ color: side === "w" ? "#f6efe0" : "#161210",
                         textShadow: side === "w" ? "0 0 1px #1a1512, 1px 1px 0 #1a1512, -1px 1px 0 #1a1512" : "none" }}>
@@ -472,10 +472,10 @@ export default function Chess({
 
         {/* side panel */}
         <div className="w-full max-w-[min(92vw,68vh)] shrink-0 lg:w-64">
-          <div className="paper grain border-2 border-ink">
+          <div className="bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] p-6 paper grain border-[3px] border-ink">
             <div className="flex items-center justify-between border-b-2 border-ink px-3 py-1.5">
-              <span className="smallcaps">Move list</span>
-              <span className="smallcaps text-sand">{Math.ceil(sans.length / 2)} moves</span>
+              <span className="font-mono uppercase tracking-widest">Move list</span>
+              <span className="font-mono uppercase tracking-widest text-sand">{Math.ceil(sans.length / 2)} moves</span>
             </div>
             <ol className="tabular max-h-40 overflow-y-auto px-3 py-2 font-mono text-[0.72rem] lg:max-h-[46vh]">
               {sans.length === 0 && <li className="text-sand">— game start —</li>}
@@ -488,11 +488,11 @@ export default function Chess({
               ))}
             </ol>
             <div className="flex gap-2 border-t-2 border-ink p-2">
-              <button className="btn btn-ghost flex-1 !px-2 !py-1.5 !text-[0.62rem]" onClick={undo}>
+              <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={undo}>
                 Undo
               </button>
               <button
-                className="btn btn-primary flex-1 !px-2 !py-1.5 !text-[0.62rem]"
+                className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2"
                 onClick={() => newGame()}
               >
                 New game
@@ -501,7 +501,7 @@ export default function Chess({
           </div>
           <div className="mt-2 flex gap-2">
             <button
-              className="btn btn-ghost flex-1 !px-2 !py-1.5 !text-[0.62rem] !text-kraft !border-kraft/50"
+              className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2"
               onClick={() => setStarted(false)}
             >
               Change sides
@@ -511,25 +511,25 @@ export default function Chess({
 
         {result.over && (
           <div className="absolute inset-0 z-40 flex items-center justify-center bg-ink/65 px-4">
-            <div className="paper grain w-full max-w-sm border-2 border-ink p-6 text-center shadow-[10px_10px_0_rgba(0,0,0,.55)]">
-              <div className="smallcaps text-sand">Game over</div>
-              <div className="font-display text-3xl font-black leading-none">
+            <div className="bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] p-6 paper grain w-full max-w-sm border-[3px] border-ink p-6 text-center shadow-[6px_6px_0_var(--color-ink)]">
+              <div className="font-mono uppercase tracking-widest text-sand">Game over</div>
+              <div className="font-display font-bold uppercase tracking-widest text-4xl leading-none">
                 {result.result === "checkmate"
                   ? result.winner === side
                     ? "YOU WIN"
                     : "ENGINE WINS"
                   : "DRAW"}
               </div>
-              <div className="smallcaps mt-2 text-vermilion">{statusLine}</div>
+              <div className="font-mono uppercase tracking-widest mt-2 text-vermilion">{statusLine}</div>
               <div className="mt-5 flex flex-col gap-3">
-                <button className="btn btn-primary" onClick={() => newGame()}>
+                <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={() => newGame()}>
                   Play again
                 </button>
                 <div className="flex gap-3">
-                  <button className="btn btn-ghost flex-1" onClick={() => setStarted(false)}>
+                  <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={() => setStarted(false)}>
                     Setup
                   </button>
-                  <button className="btn btn-ghost flex-1" onClick={onExit}>
+                  <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onExit}>
                     Arcade
                   </button>
                 </div>

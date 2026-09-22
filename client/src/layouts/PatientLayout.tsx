@@ -28,7 +28,7 @@ export default function PatientLayout() {
         fontSize === 'x-large' && 'text-xl',
       )}
     >
-      {/* ── Scan-line decorative overlay ─────────────────── */}
+      {/* 📺 Scan-line decorative overlay */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-[0.03]">
         <div
           className="absolute w-full h-[2px] bg-kraft"
@@ -36,68 +36,56 @@ export default function PatientLayout() {
         />
       </div>
 
-      {/* ── Main paper column ─────────────────────────────── */}
-      <main
-        className={cn(
-          'flex-1 overflow-y-auto pb-[76px] paper grain relative z-10',
-          'w-full max-w-[480px] mx-auto',
-          // On larger screens, give it a subtle shadow so it looks like a centred card
-          'lg:shadow-[8px_0_48px_rgba(0,0,0,0.35),-8px_0_48px_rgba(0,0,0,0.35)]',
-          'lg:min-h-[100dvh]',
-        )}
-      >
-        <Outlet />
-      </main>
+      {/* 🚀 Desktop Top Navigation */}
+      <header className="w-full bg-kraft border-b-[3px] border-ink shadow-[0_4px_0_var(--color-ink)] relative z-50">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          
+          {/* Logo / Brand */}
+          <div className="flex items-center gap-3">
+            <img src="/logo.jpg" alt="Neuro Mind" className="w-10 h-10 object-cover bg-vermilion border-2 border-ink shadow-[2px_2px_0_var(--color-ink)]" />
+            <div className="font-display font-bold text-2xl uppercase tracking-widest text-ink mt-1">Neuro Mind</div>
+          </div>
 
-      {/* ✨ Bottom Navigation ✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨ */}
-      <nav
-        className={cn(
-          'fixed bottom-0 left-0 right-0 z-50',
-          'paper border-t-2 border-ink',
-          // Centre the nav bar to match the paper column on wide screens
-          'lg:max-w-[480px] mx-auto',
-          'lg:border-l-2 lg:border-r-2',
-        )}
-      >
-        <div className="flex items-stretch justify-around px-2 py-1">
-          {navItems.map(({ to, label, icon: Icon, exact }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={exact}
-              replace
-              className={({ isActive }) => cn(
-                'flex flex-col items-center justify-center gap-1 py-2 px-3 flex-1 transition-all min-h-[3.75rem] group',
-                isActive ? 'text-ink' : 'text-sand hover:text-ink',
-              )}
-            >
-              {({ isActive }) => (
-                <>
-                  {/* Active dot indicator */}
-                  <span
-                    className={cn(
-                      'w-1 h-1 rounded-full mb-0.5 transition-all duration-300',
-                      isActive ? 'bg-vermilion scale-150' : 'bg-transparent',
-                    )}
-                  />
-                  <div className={cn(
-                    'w-10 h-10 flex items-center justify-center transition-all duration-200',
-                    isActive
-                      ? 'bg-ink text-kraft shadow-[2px_2px_0_var(--color-vermilion)]'
-                      : 'bg-transparent group-hover:bg-kraft3',
-                  )}>
-                    <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
-                  </div>
-                  <span className={cn(
-                    'text-[9px] font-mono font-bold uppercase tracking-widest',
-                    isActive ? 'text-ink' : 'text-sand',
-                  )}>{label}</span>
-                </>
-              )}
-            </NavLink>
-          ))}
+          {/* Nav Links */}
+          <nav className="flex items-center gap-8">
+            {navItems.map(({ to, label, icon: Icon, exact }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={exact}
+                className={({ isActive }) => cn(
+                  'flex items-center gap-2 group transition-all',
+                  isActive ? 'text-ink' : 'text-sand hover:text-ink'
+                )}
+              >
+                {({ isActive }) => (
+                  <>
+                    <div className={cn(
+                      'w-10 h-10 flex items-center justify-center border-2 transition-all',
+                      isActive 
+                        ? 'bg-vermilion border-ink text-kraft shadow-[2px_2px_0_var(--color-ink)] -translate-y-0.5' 
+                        : 'bg-kraft2 border-transparent group-hover:border-ink group-hover:shadow-[2px_2px_0_var(--color-ink)]'
+                    )}>
+                      <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                    </div>
+                    <span className={cn(
+                      'font-mono text-sm font-bold uppercase tracking-widest mt-1',
+                      isActive ? 'text-ink' : 'text-sand'
+                    )}>{label}</span>
+                  </>
+                )}
+              </NavLink>
+            ))}
+          </nav>
         </div>
-      </nav>
+      </header>
+
+      {/* 📜 Main Content Area (Full Desktop Grid) */}
+      <main className="flex-1 w-full max-w-7xl mx-auto p-8 relative z-10">
+        <div className="paper grain w-full min-h-full border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-8">
+          <Outlet />
+        </div>
+      </main>
     </div>
   );
 }

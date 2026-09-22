@@ -156,19 +156,19 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
       onResume={sessionEngine.resumeGame}
       onRestart={handleRestart}
     >
-      <div className="w-full max-w-2xl flex flex-col items-center">
+      <div className="w-full max-w-2xl flex flex-col items-center bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6">
         {/* Round Header */}
-        <div className="flex items-center justify-between w-full mb-4">
-          <span className="text-sm font-semibold text-stone-600 dark:text-stone-300">
+        <div className="flex items-center justify-between w-full mb-4 font-mono uppercase tracking-widest text-ink">
+          <span className="font-bold">
             Round {currentRound} of {totalRounds}
           </span>
           {phase === 'MEMORIZING' && (
-            <span className="text-sm font-bold text-amber-700 dark:text-amber-300 flex items-center gap-1">
+            <span className="font-bold text-vermilion flex items-center gap-1">
               <Eye className="w-4 h-4" /> Remember these ({countdown}s left)
             </span>
           )}
           {phase === 'SELECTING' && (
-            <span className="text-sm font-semibold text-stone-600 dark:text-stone-300">
+            <span className="font-bold">
               Selected: {selectedIds.length} of {targetObjects.length}
             </span>
           )}
@@ -178,18 +178,18 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
         {phase === 'MEMORIZING' && (
           <div className="w-full flex flex-col items-center">
             {/* Visual countdown bar */}
-            <div className="w-full bg-amber-100 dark:bg-stone-800 rounded-full h-2 mb-6 overflow-hidden">
+            <div className="w-full bg-kraft border-[3px] border-ink h-4 mb-6 relative">
               <div
-                className="bg-amber-600 h-full transition-all duration-1000 ease-linear"
+                className="bg-vermilion h-full border-r-[3px] border-ink transition-all duration-1000 ease-linear"
                 style={{ width: `${(countdown / config.viewDurationSec) * 100}%` }}
               />
             </div>
 
             <div className="text-center mb-6">
-              <h3 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100">
+              <h3 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink">
                 Memorize These Items
               </h3>
-              <p className="text-sm text-stone-600 dark:text-stone-300 mt-1">
+              <p className="font-mono uppercase tracking-widest text-ink mt-1 text-sm">
                 Take a good look and remember their names!
               </p>
             </div>
@@ -200,10 +200,10 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                   key={item.id}
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className="w-24 sm:w-28 h-28 sm:h-32 rounded-2xl bg-white dark:bg-stone-800 border-2 border-amber-300 dark:border-stone-700 shadow-md flex flex-col items-center justify-center p-2 text-center"
+                  className="w-24 sm:w-28 h-28 sm:h-32 bg-kraft border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] flex flex-col items-center justify-center p-2 text-center"
                 >
                   <span className="text-4xl sm:text-5xl mb-1">{item.emoji}</span>
-                  <span className="text-xs sm:text-sm font-semibold text-stone-800 dark:text-stone-200 line-clamp-1">
+                  <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-ink line-clamp-1">
                     {item.name}
                   </span>
                 </motion.div>
@@ -215,7 +215,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                 if (countdownTimerRef.current) clearInterval(countdownTimerRef.current);
                 setPhase('SELECTING');
               }}
-              className="mt-6 px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold shadow-xs"
+              className="mt-6 px-6 py-3 border-[3px] border-ink bg-vermilion text-kraft shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest"
             >
               I am Ready Now!
             </button>
@@ -226,10 +226,10 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
         {phase === 'SELECTING' && (
           <div className="w-full flex flex-col items-center">
             <div className="text-center mb-6">
-              <h3 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100">
+              <h3 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink">
                 Which items did you see?
               </h3>
-              <p className="text-sm text-stone-600 dark:text-stone-300 mt-1">
+              <p className="font-mono uppercase tracking-widest text-ink mt-1 text-sm">
                 Tap all the items that were shown a moment ago.
               </p>
             </div>
@@ -241,19 +241,19 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                   <button
                     key={item.id}
                     onClick={() => toggleSelect(item.id)}
-                    className={`p-4 rounded-2xl border-2 flex flex-col items-center justify-center transition-all shadow-xs relative ${
+                    className={`p-4 border-[3px] border-ink flex flex-col items-center justify-center transition-all relative font-mono font-bold uppercase tracking-widest ${
                       isSelected
-                        ? 'bg-amber-100 dark:bg-amber-950/60 border-amber-600 shadow-amber-200'
-                        : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 hover:border-amber-400'
+                        ? 'bg-ochre text-ink shadow-[4px_4px_0_var(--color-ink)] translate-x-0.5 -translate-y-0.5'
+                        : 'bg-kraft text-ink hover:bg-ochre hover:-translate-y-1 hover:translate-x-1 hover:shadow-[4px_4px_0_var(--color-ink)]'
                     }`}
                   >
                     {isSelected && (
-                      <div className="absolute top-2 right-2 w-6 h-6 bg-amber-600 text-white rounded-full flex items-center justify-center">
+                      <div className="absolute top-2 right-2 w-6 h-6 bg-ink text-kraft rounded-none flex items-center justify-center">
                         <Check className="w-4 h-4 stroke-[3]" />
                       </div>
                     )}
                     <span className="text-4xl mb-2">{item.emoji}</span>
-                    <span className="text-xs sm:text-sm font-semibold text-stone-800 dark:text-stone-200 text-center">
+                    <span className="text-xs sm:text-sm text-center">
                       {item.name}
                     </span>
                   </button>
@@ -264,10 +264,10 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
             <button
               onClick={handleConfirm}
               disabled={selectedIds.length === 0}
-              className={`w-full max-w-xs py-4 rounded-2xl font-bold text-lg shadow-md transition-all ${
+              className={`w-full max-w-xs py-4 border-[3px] border-ink font-mono font-bold uppercase tracking-widest transition-all ${
                 selectedIds.length === 0
-                  ? 'bg-stone-200 dark:bg-stone-800 text-stone-400 cursor-not-allowed'
-                  : 'bg-amber-600 hover:bg-amber-700 text-white active:scale-[0.98]'
+                  ? 'bg-kraft text-ink opacity-50 cursor-not-allowed'
+                  : 'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]'
               }`}
             >
               Confirm Choices
@@ -278,13 +278,13 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
         {/* Phase 3: Round Feedback Phase */}
         {phase === 'FEEDBACK' && (
           <div className="w-full flex flex-col items-center text-center">
-            <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/60 rounded-full flex items-center justify-center text-emerald-600 dark:text-emerald-300 mb-3">
+            <div className="w-16 h-16 bg-felt border-[3px] border-ink flex items-center justify-center text-kraft mb-3 shadow-[4px_4px_0_var(--color-ink)]">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h3 className="text-2xl font-bold text-amber-950 dark:text-amber-100 mb-1">
+            <h3 className="text-2xl font-display font-bold uppercase tracking-widest text-ink mb-1">
               Good Recall!
             </h3>
-            <p className="text-stone-600 dark:text-stone-300 text-sm mb-6">
+            <p className="font-mono uppercase tracking-widest text-ink text-sm mb-6">
               Here are the original items from this round:
             </p>
 
@@ -294,15 +294,15 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                 return (
                   <div
                     key={item.id}
-                    className={`p-3 rounded-xl border-2 flex flex-col items-center w-24 sm:w-28 ${
+                    className={`p-3 border-[3px] border-ink flex flex-col items-center w-24 sm:w-28 font-mono font-bold uppercase tracking-widest ${
                       wasFound
-                        ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 text-emerald-900'
-                        : 'bg-stone-50 dark:bg-stone-800 border-stone-300 text-stone-600'
+                        ? 'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)]'
+                        : 'bg-kraft text-ink'
                     }`}
                   >
                     <span className="text-3xl mb-1">{item.emoji}</span>
-                    <span className="text-xs font-semibold">{item.name}</span>
-                    <span className="text-[10px] mt-1 font-bold">
+                    <span className="text-xs">{item.name}</span>
+                    <span className="text-[10px] mt-1">
                       {wasFound ? '✓ Remembered' : '○ Missed'}
                     </span>
                   </div>
@@ -312,7 +312,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
 
             <button
               onClick={handleNextRound}
-              className="px-8 py-4 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg flex items-center gap-2 shadow-md active:scale-[0.98]"
+              className="px-8 py-4 border-[3px] border-ink bg-vermilion text-kraft shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest flex items-center gap-2"
             >
               {currentRound < totalRounds ? 'Next Round' : 'See Results'}
               <ArrowRight className="w-5 h-5" />

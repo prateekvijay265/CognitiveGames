@@ -95,15 +95,15 @@ export default function Memory({ onExit }: { onExit: () => void }) {
     <div className="paper h-[100dvh] w-full overflow-y-auto">
       <div className="grain mx-auto min-h-full max-w-[860px] px-5 pb-14 sm:px-7">
         <div className="flex items-center justify-between border-b-2 border-ink py-3">
-          <button className="btn btn-ghost !px-3 !py-1.5 text-[0.68rem]" onClick={onExit}>
+          <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onExit}>
             ← Arcade
           </button>
-          <span className="smallcaps text-sand">{done ? "Matched" : `Moves ${moves}`}</span>
+          <span className="font-mono uppercase tracking-widest text-sand">{done ? "Matched" : `Moves ${moves}`}</span>
         </div>
 
         <div className="pt-7">
-          <p className="smallcaps text-vermilion">Memory · flip pairs</p>
-          <h1 className="mt-1 font-display text-[clamp(3rem,11vw,6rem)] font-black leading-[0.82] tracking-[-0.035em]">
+          <p className="font-mono uppercase tracking-widest text-vermilion">Memory · flip pairs</p>
+          <h1 className="mt-1 font-display font-bold uppercase tracking-widest text-4xl leading-[0.82] tracking-[-0.035em]">
             MEMORY
             <br />
             PRESS
@@ -124,8 +124,8 @@ export default function Memory({ onExit }: { onExit: () => void }) {
                 type="button"
                 disabled={done || paused || selected.length >= 2 || st.matched || (st.visible && !st.matched)}
                 onClick={() => flip(i)}
-                className={`relative aspect-square overflow-hidden border-2 text-[clamp(14px,5vw,30px)] transition ${
-                  st.matched ? "border-ink/20 opacity-30" : "border-ink hover:-translate-y-0.5 hover:shadow-[3px_3px_0_var(--color-ink)]"
+                className={`relative aspect-square overflow-hidden border-[3px] text-[clamp(14px,5vw,30px)] transition ${
+                  st.matched ? "border-ink/20 opacity-30" : "border-ink hover:-translate-y-0.5 hover:shadow-[6px_6px_0_var(--color-ink)]"
                 }`}
                 aria-label={show ? `card ${card.pairId}` : "hidden"}
               >
@@ -137,7 +137,7 @@ export default function Memory({ onExit }: { onExit: () => void }) {
                     }}
                   >
                   {show && (
-                    <span className="flex h-full w-full items-center justify-center text-[clamp(18px,6vw,36px)] text-kraft drop-shadow-[0_1px_0_rgba(26,21,18,.5)]">
+                    <span className="flex h-full w-full items-center justify-center text-[clamp(18px,6vw,36px)] text-kraft drop-shadow-[6px_6px_0_var(--color-ink)]">
                       {card.icon}
                     </span>
                   )}
@@ -154,24 +154,24 @@ export default function Memory({ onExit }: { onExit: () => void }) {
 
         {done && (
           <div className="mt-6 text-center">
-            <div className="inline-block border-2 border-ink bg-kraft px-5 py-3 shadow-[6px_6px_0_var(--color-ink)]">
-              <div className="font-display text-2xl font-black">COMPLETE</div>
-              <div className="smallcaps text-vermilion mt-0.5">{moves} moves · all pairs matched</div>
+            <div className="inline-block border-[3px] border-ink bg-kraft px-5 py-3 shadow-[6px_6px_0_var(--color-ink)]">
+              <div className="font-display font-bold uppercase tracking-widest text-4xl">COMPLETE</div>
+              <div className="font-mono uppercase tracking-widest text-vermilion mt-0.5">{moves} moves · all pairs matched</div>
             </div>
-            <button className="btn btn-ghost mt-4" onClick={init}>
+            <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={init}>
               Play again
             </button>
           </div>
         )}
 
         <div className="mt-6 flex gap-3">
-          <button className="btn btn-ghost" onClick={init}>Restart</button>
-          <button className="btn btn-ghost" onClick={() => setPaused((p) => !p)}>
+          <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={init}>Restart</button>
+          <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={() => setPaused((p) => !p)}>
             {paused ? "Resume" : "Pause"}
           </button>
         </div>
 
-        <p className="smallcaps mt-8 border-t-2 border-ink pt-3 text-sand">
+        <p className="font-mono uppercase tracking-widest mt-8 border-t-2 border-ink pt-3 text-sand">
           Memory · 8 pairs · 16 cards · pairs stay matched
         </p>
       </div>

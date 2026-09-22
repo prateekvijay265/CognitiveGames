@@ -140,34 +140,34 @@ export const StoryMemory: React.FC<StoryMemoryProps> = ({
       onResume={sessionEngine.resumeGame}
       onRestart={handleRestart}
     >
-      <div className="w-full max-w-2xl flex flex-col items-center">
+      <div className="w-full max-w-2xl flex flex-col items-center bg-kraft2 border-[3px] border-ink shadow-[8px_8px_0_var(--color-ink)] p-6">
         {/* Phase 1: Reading the Story */}
         {phase === 'READING' && (
           <div className="w-full flex flex-col items-center">
             {/* Story Card */}
-            <div className="w-full bg-white dark:bg-stone-800 rounded-3xl p-6 sm:p-8 border-2 border-amber-200 dark:border-stone-700 shadow-md mb-6">
+            <div className="w-full bg-kraft border-[3px] border-ink shadow-[4px_4px_0_var(--color-ink)] p-6 sm:p-8 mb-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300">
+                <div className="flex items-center gap-2 text-ink">
                   <BookOpen className="w-6 h-6" />
-                  <h2 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100">
+                  <h2 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink">
                     {activeStory.title}
                   </h2>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-xs font-semibold bg-amber-100 dark:bg-stone-700 px-3 py-1 rounded-full text-amber-900 dark:text-amber-200">
+                <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-widest bg-ink px-3 py-1 text-kraft">
                   <Clock className="w-3.5 h-3.5" />
                   <span>{secondsRemaining}s</span>
                 </div>
               </div>
 
-              <p className="text-base sm:text-lg leading-relaxed text-stone-800 dark:text-stone-200 font-serif mb-6">
+              <p className="text-base sm:text-lg leading-relaxed text-ink font-mono font-bold tracking-widest uppercase mb-6 border-b-[3px] border-dashed border-ink pb-6">
                 {activeStory.storyText}
               </p>
 
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-amber-100 dark:border-stone-700">
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
                 <button
                   onClick={handleReadStoryAloud}
-                  className="px-4 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-semibold text-sm flex items-center gap-2 transition-all"
+                  className="px-4 py-2 border-[3px] border-ink bg-ochre text-ink font-mono font-bold uppercase tracking-widest text-sm flex items-center gap-2 transition-all shadow-[2px_2px_0_var(--color-ink)] hover:translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_var(--color-ink)]"
                 >
                   <Volume2 className="w-4 h-4" />
                   Read Story to Me
@@ -175,7 +175,7 @@ export const StoryMemory: React.FC<StoryMemoryProps> = ({
 
                 <button
                   onClick={handleStartQuestions}
-                  className="px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-base flex items-center gap-2 shadow-xs transition-all active:scale-[0.98]"
+                  className="px-6 py-3 border-[3px] border-ink bg-vermilion text-kraft font-mono font-bold uppercase tracking-widest text-base flex items-center gap-2 shadow-[4px_4px_0_var(--color-ink)] transition-all hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]"
                 >
                   I am Ready for Questions
                   <ArrowRight className="w-4 h-4" />
@@ -189,10 +189,10 @@ export const StoryMemory: React.FC<StoryMemoryProps> = ({
         {phase === 'QUESTIONS' && currentQ && (
           <div className="w-full flex flex-col items-center">
             <div className="text-center mb-6">
-              <span className="text-xs font-bold uppercase tracking-wider text-stone-500">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-ink">
                 Question {currentQuestionIndex + 1} of {totalQuestions}
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-100 mt-1">
+              <h3 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-widest text-ink mt-2">
                 {currentQ.question}
               </h3>
             </div>
@@ -204,16 +204,16 @@ export const StoryMemory: React.FC<StoryMemoryProps> = ({
                 const isCorrect = opt === currentQ.correctAnswer;
 
                 let btnClass =
-                  'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-100 hover:border-amber-400';
+                  'bg-kraft text-ink hover:bg-ochre hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]';
 
                 if (showFeedback) {
                   if (isCorrect) {
                     btnClass =
-                      'bg-emerald-100 dark:bg-emerald-950/70 border-emerald-500 text-emerald-950 dark:text-emerald-100 shadow-md ring-2 ring-emerald-400';
+                      'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)] translate-x-1 -translate-y-1';
                   } else if (isChosen && !isCorrect) {
-                    btnClass = 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 opacity-60';
+                    btnClass = 'bg-vermilion text-kraft opacity-80';
                   } else {
-                    btnClass = 'opacity-40 border-stone-200 bg-stone-50';
+                    btnClass = 'bg-kraft text-ink opacity-50';
                   }
                 }
 
@@ -222,11 +222,11 @@ export const StoryMemory: React.FC<StoryMemoryProps> = ({
                     key={opt}
                     onClick={() => handleSelectAnswer(opt)}
                     disabled={showFeedback}
-                    className={`p-4 rounded-2xl border-2 font-bold text-base sm:text-lg transition-all text-center shadow-xs flex items-center justify-center gap-2 ${btnClass}`}
+                    className={`p-4 border-[3px] border-ink font-mono font-bold uppercase tracking-widest text-base sm:text-lg transition-all text-center shadow-[4px_4px_0_var(--color-ink)] flex items-center justify-center gap-2 ${btnClass}`}
                   >
                     {opt}
                     {showFeedback && isCorrect && (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-kraft shrink-0" />
                     )}
                   </button>
                 );
@@ -237,7 +237,7 @@ export const StoryMemory: React.FC<StoryMemoryProps> = ({
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-sm text-stone-600 dark:text-stone-300 text-center italic"
+                className="text-sm font-mono font-bold uppercase tracking-widest text-ink text-center mt-4 bg-ochre border-[3px] border-ink p-4 shadow-[4px_4px_0_var(--color-ink)]"
               >
                 {currentQ.explanation}
               </motion.p>

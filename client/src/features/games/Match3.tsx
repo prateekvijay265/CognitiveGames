@@ -67,17 +67,17 @@ function LevelMap({
     <div className="paper h-[100dvh] w-full overflow-y-auto">
       <div className="grain mx-auto min-h-full max-w-[1000px] px-4 pb-14 sm:px-6">
         <div className="flex items-center justify-between gap-3 border-b-2 border-ink py-3">
-          <button className="btn btn-ghost !px-3 !py-1.5 text-[0.68rem]" onClick={onExit}>
+          <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onExit}>
             ← Arcade
           </button>
-          <span className="smallcaps text-sand">
+          <span className="font-mono uppercase tracking-widest text-sand">
             {total} / {LEVELS.length * 3} stars
           </span>
         </div>
 
         <div className="pt-7">
-          <p className="smallcaps text-vermilion">Sweet shop · match three</p>
-          <h1 className="mt-1 font-display text-[clamp(2.6rem,9vw,4.6rem)] font-black leading-[0.85] tracking-[-0.03em]">
+          <p className="font-mono uppercase tracking-widest text-vermilion">Sweet shop · match three</p>
+          <h1 className="mt-1 font-display font-bold uppercase tracking-widest text-4xl leading-[0.85] tracking-[-0.03em]">
             SUGAR
             <br />
             PRESS
@@ -99,10 +99,10 @@ function LevelMap({
                 type="button"
                 disabled={locked}
                 onClick={() => onPlay(lv)}
-                className={`group border-2 p-3 text-left transition ${
+                className={`group border-[3px] p-3 text-left transition ${
                   locked
                     ? "cursor-not-allowed border-ink/25 bg-kraft2/30 opacity-55"
-                    : "border-ink bg-kraft/70 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_var(--color-ink)]"
+                    : "border-ink bg-kraft/70 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_var(--color-ink)]"
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -123,15 +123,15 @@ function LevelMap({
                     <Stars n={stars} />
                   )}
                 </div>
-                <div className="mt-2 font-display text-lg font-bold leading-tight">{lv.name}</div>
-                <div className="smallcaps mt-1 text-sand">
+                <div className="mt-2 font-display font-bold uppercase tracking-widest leading-tight">{lv.name}</div>
+                <div className="font-mono uppercase tracking-widest mt-1 text-sand">
                   {lv.moves} moves · {lv.colors} colours
                 </div>
                 <div className="mt-2 border-t border-ink/25 pt-1.5 font-mono text-[0.66rem] text-ink/75">
                   {objectiveText(lv.objective)}
                 </div>
                 {best > 0 && (
-                  <div className="smallcaps mt-1 text-sand">best {best.toLocaleString()}</div>
+                  <div className="font-mono uppercase tracking-widest mt-1 text-sand">best {best.toLocaleString()}</div>
                 )}
               </button>
             );
@@ -460,7 +460,7 @@ function Playfield({
       <header className="paper grain relative z-20 shrink-0 border-b-2 border-ink">
         <div className="flex items-center gap-3 px-3 py-2 sm:px-5">
           <button
-            className="icon-btn shrink-0"
+            className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all flex items-center justify-center p-2"
             onClick={() => setPaused((p) => !p)}
             aria-label="Pause"
           >
@@ -470,7 +470,7 @@ function Playfield({
             </svg>
           </button>
           <div className="min-w-0 leading-tight">
-            <div className="smallcaps text-sand">
+            <div className="font-mono uppercase tracking-widest text-sand">
               Level {String(level.no).padStart(2, "0")} · {level.name}
             </div>
             <div className="truncate font-mono text-[0.72rem] text-ink/80">
@@ -479,13 +479,13 @@ function Playfield({
           </div>
           <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-5">
             <div className="text-right">
-              <div className="smallcaps hidden text-sand sm:block">Score</div>
+              <div className="font-mono uppercase tracking-widest hidden text-sand sm:block">Score</div>
               <div className="tabular font-mono text-lg font-semibold leading-none sm:text-2xl">
                 {score.toLocaleString()}
               </div>
             </div>
             <div className="text-right">
-              <div className="smallcaps hidden text-sand sm:block">Moves</div>
+              <div className="font-mono uppercase tracking-widest hidden text-sand sm:block">Moves</div>
               <div
                 className={`tabular font-mono text-lg font-semibold leading-none sm:text-2xl ${
                   moves <= 3 ? "text-vermilion" : ""
@@ -494,7 +494,7 @@ function Playfield({
                 {moves}
               </div>
             </div>
-            <button className="icon-btn shrink-0" onClick={onMute} aria-label="Mute">
+            <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all flex items-center justify-center p-2" onClick={onMute} aria-label="Mute">
               <svg width="16" height="14" viewBox="0 0 16 14" aria-hidden="true">
                 <path d="M0 5h3l4-4v12L3 9H0z" fill="currentColor" />
                 {muted ? (
@@ -599,7 +599,7 @@ function Playfield({
                   }
                   busy.current = false;
                 }}
-                className={`shrink-0 border-2 px-2 py-1 font-mono text-[0.62rem] font-semibold uppercase tracking-wider transition ${
+                className={`shrink-0 border-[3px] px-2 py-1 font-mono text-[0.62rem] font-semibold uppercase tracking-wider transition ${
                   pw.uses <= 0
                     ? "border-ink/20 bg-ink/5 text-ink/30"
                     : "border-ink bg-kraft hover:bg-ochre/30"
@@ -617,7 +617,7 @@ function Playfield({
               return (
                 <span
                   key={n.type}
-                  className={`flex shrink-0 items-center gap-1.5 border-2 px-2 py-0.5 font-mono text-[0.7rem] ${
+                  className={`flex shrink-0 items-center gap-1.5 border-[3px] px-2 py-0.5 font-mono text-[0.7rem] ${
                     done ? "border-ink bg-vermilion text-kraft" : "border-ink/40"
                   }`}
                 >
@@ -635,10 +635,10 @@ function Playfield({
             </span>
           )}
           {goalDone && status === "play" && (
-            <span className="smallcaps anim-blink shrink-0 text-vermilion">order filled!</span>
+            <span className="font-mono uppercase tracking-widest anim-blink shrink-0 text-vermilion">order filled!</span>
           )}
           {comboLabel && (
-            <span className="anim-pop ml-auto shrink-0 border-2 border-ink bg-ochre px-2 py-0.5 font-mono text-[0.7rem] font-semibold">
+            <span className="anim-pop ml-auto shrink-0 border-[3px] border-ink bg-ochre px-2 py-0.5 font-mono text-[0.7rem] font-semibold">
               {comboLabel}
             </span>
           )}
@@ -652,7 +652,7 @@ function Playfield({
         <div ref={shakeRef} className="flex items-center justify-center">
           <div
             ref={boardRef}
-            className="relative border-2 border-ink bg-ink/25"
+            className="relative border-[3px] border-ink bg-ink/25"
             style={{ width: boardW, height: boardH, touchAction: "none" }}
             onPointerDown={onDown}
             onPointerMove={onMove}
@@ -699,7 +699,7 @@ function Playfield({
                   }}
                 >
                   <div
-                    className={`relative flex h-full w-full items-center justify-center border-2 border-ink font-bold ${
+                    className={`relative flex h-full w-full items-center justify-center border-[3px] border-ink font-bold ${
                       isPop ? "m3-pop" : "m3-in"
                     } ${isSel ? "m3-sel" : ""}`}
                     style={{
@@ -729,7 +729,7 @@ function Playfield({
               {pops.map((p) => (
                 <div
                   key={p.id}
-                  className="anim-float absolute -translate-x-1/2 -translate-y-1/2 font-mono text-lg font-semibold text-kraft drop-shadow-[0_2px_0_rgba(26,21,18,.9)]"
+                  className="anim-float absolute -translate-x-1/2 -translate-y-1/2 font-mono text-lg font-semibold text-kraft drop-shadow-[6px_6px_0_var(--color-ink)]"
                   style={{ left: p.x, top: p.y }}
                 >
                   {p.text}
@@ -741,11 +741,11 @@ function Playfield({
 
         {(status !== "play" || paused) && (
           <div className="absolute inset-0 z-40 flex items-center justify-center bg-ink/65 px-4">
-            <div className="paper grain w-full max-w-sm border-2 border-ink p-6 text-center shadow-[10px_10px_0_rgba(0,0,0,.55)]">
+            <div className="bg-kraft2 border-[3px] border-ink shadow-[6px_6px_0_var(--color-ink)] p-6 paper grain w-full max-w-sm border-[3px] border-ink p-6 text-center shadow-[6px_6px_0_var(--color-ink)]">
               {status === "won" ? (
                 <>
-                  <div className="smallcaps text-sand">Order filled</div>
-                  <div className="font-display text-4xl font-black leading-none">LEVEL CLEAR</div>
+                  <div className="font-mono uppercase tracking-widest text-sand">Order filled</div>
+                  <div className="font-display font-bold uppercase tracking-widest text-4xl leading-none">LEVEL CLEAR</div>
                   <div className="mt-3 flex justify-center">
                     <Stars n={stars} size={26} />
                   </div>
@@ -754,15 +754,15 @@ function Playfield({
                   </div>
                   <div className="mt-6 flex flex-col gap-3">
                     {level.no < LEVELS.length && (
-                      <button className="btn btn-primary" onClick={() => onNext(LEVELS[level.no])}>
+                      <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={() => onNext(LEVELS[level.no])}>
                         Next level
                       </button>
                     )}
                     <div className="flex gap-3">
-                      <button className="btn btn-ghost flex-1" onClick={onReplay}>
+                      <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onReplay}>
                         Replay
                       </button>
-                      <button className="btn btn-ghost flex-1" onClick={onQuit}>
+                      <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onQuit}>
                         Levels
                       </button>
                     </div>
@@ -770,8 +770,8 @@ function Playfield({
                 </>
               ) : status === "lost" ? (
                 <>
-                  <div className="smallcaps text-sand">Out of moves</div>
-                  <div className="font-display text-4xl font-black leading-none">
+                  <div className="font-mono uppercase tracking-widest text-sand">Out of moves</div>
+                  <div className="font-display font-bold uppercase tracking-widest text-4xl leading-none">
                     ORDER
                     <br />
                     MISSED
@@ -780,30 +780,30 @@ function Playfield({
                     {score.toLocaleString()}
                   </div>
                   <div className="mt-6 flex flex-col gap-3">
-                    <button className="btn btn-primary" onClick={onReplay}>
+                    <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onReplay}>
                       Try again
                       <span className="border border-kraft/60 px-1.5 py-0.5 font-mono text-[0.65rem]">
                         R
                       </span>
                     </button>
-                    <button className="btn btn-ghost" onClick={onQuit}>
+                    <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onQuit}>
                       Levels
                     </button>
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="smallcaps text-sand">Sweet shop paused</div>
-                  <div className="font-display text-4xl font-black leading-none">PAUSED</div>
+                  <div className="font-mono uppercase tracking-widest text-sand">Sweet shop paused</div>
+                  <div className="font-display font-bold uppercase tracking-widest text-4xl leading-none">PAUSED</div>
                   <div className="mt-6 flex flex-col gap-3">
-                    <button className="btn btn-primary" onClick={() => setPaused(false)}>
+                    <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={() => setPaused(false)}>
                       Resume
                     </button>
                     <div className="flex gap-3">
-                      <button className="btn btn-ghost flex-1" onClick={onReplay}>
+                      <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onReplay}>
                         Restart
                       </button>
-                      <button className="btn btn-ghost flex-1" onClick={onQuit}>
+                      <button className="border-[3px] border-ink bg-vermilion text-kraft shadow-[6px_6px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest px-4 py-2" onClick={onQuit}>
                         Levels
                       </button>
                     </div>
