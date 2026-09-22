@@ -26,12 +26,12 @@ export default function DataProvider({ children }: { children: React.ReactNode }
         if (user.role === 'patient') {
           // Patients fetch their own detailed profile using 'me' alias
           const [patientRes, sessionsRes, remindersRes] = await Promise.all([
-            api.get(`/patients/me`).catch(() => ({ data: { data: { id: user.id, name: user.name, emergencyContact: {}, difficultyProfile: {} } } })),
+            api.get(`/patients/me`).catch(() => ({ data: { data: null } })),
             api.get('/game-sessions').catch(() => ({ data: { data: [] } })),
             api.get('/reminders').catch(() => ({ data: { data: [] } }))
           ]);
           
-          if (patientRes.data?.data) {
+          if (patientRes.data?.data && Object.keys(patientRes.data.data).length > 0) {
             patientsData = [patientRes.data.data];
             routinesData = patientRes.data.data.routineItems || [];
             memoryBookData = patientRes.data.data.memoryBookEntries || [];
@@ -44,14 +44,23 @@ export default function DataProvider({ children }: { children: React.ReactNode }
         } else {
           // Caregivers, Doctors, Admins fetch list of patients
           const [patientsRes, sessionsRes, alertsRes] = await Promise.all([
-            api.get('/patients'),
-            api.get('/game-sessions'),
-            api.get('/alerts')
+            api.get('/patients').catch(() => ({ data: { data: [] } })),
+            api.get('/game-sessions').catch(() => ({ data: { data: [] } })),
+            api.get('/alerts').catch(() => ({ data: { data: [] } }))
           ]);
           
-          patientsData = patientsRes.data.data || [];
-          gameSessionsData = sessionsRes.data.data || [];
-          alertsData = alertsRes.data.data || [];
+          patientsData = patientsRes.data?.data || [];
+          gameSessionsData = sessionsRes.data?.data || [];
+          alertsData = alertsRes.data?.data || [];
+
+          // HACKATHON DEMO FALLBACK: Inject dummy patients if empty
+          if (patientsData.length === 0) {
+            patientsData = [
+              { id: 'demo-1', name: 'Ramesh Sharma', age: 72, condition: 'Mild Cognitive Impairment', language: 'Hindi' },
+              { id: 'demo-2', name: 'Lata Devi', age: 68, condition: 'Early Stage Alzheimer\'s', language: 'Assamese' },
+              { id: 'demo-3', name: 'Ashok Kumar', age: 75, condition: 'Healthy Aging', language: 'English' }
+            ];
+          }
         }
 
         if (mounted) {

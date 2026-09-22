@@ -37,12 +37,18 @@ export default function PatientHome() {
           <p className="text-stone-500 text-xs font-medium">Let's give your brain a little workout.</p>
         </div>
         <div className="flex items-center gap-2">
-          <button className="w-8 h-8 rounded-full flex items-center justify-center text-stone-400 bg-transparent active:bg-stone-100 transition-colors">
+          <button 
+            onClick={() => navigate('/patient/settings')}
+            className="w-8 h-8 rounded-full flex items-center justify-center text-stone-400 bg-transparent active:bg-stone-100 transition-colors"
+          >
             <Settings size={20} />
           </button>
-          <div className="w-9 h-9 rounded-full overflow-hidden bg-sky-100 flex items-center justify-center border-2 border-white shadow-sm">
+          <button 
+            onClick={() => navigate('/patient/settings')}
+            className="w-9 h-9 rounded-full overflow-hidden bg-sky-100 flex items-center justify-center border-2 border-white shadow-sm active:scale-95 transition-transform"
+          >
             <User size={18} className="text-sky-700" />
-          </div>
+          </button>
         </div>
       </div>
 
