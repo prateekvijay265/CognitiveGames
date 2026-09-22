@@ -8,7 +8,6 @@ import { useUIStore } from './store/uiStore';
 import { syncEngine } from './services/sync';
 
 // Lazy-loaded pages
-const LandingPage = React.lazy(() => import('./pages/LandingPage'));
 const LoginPage = React.lazy(() => import('./pages/auth/LoginPage'));
 const RegisterPage = React.lazy(() => import('./pages/auth/RegisterPage'));
 const ForgotPasswordPage = React.lazy(() => import('./pages/auth/ForgotPasswordPage'));
