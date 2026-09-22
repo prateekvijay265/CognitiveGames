@@ -44,14 +44,41 @@
 **Visual Suggestion:** Recreate the flowchart below using standard PPT shapes (Rectangles and Arrows). Make the "Offline Cache" prominent.
 
 **Slide Text (Copy & Paste):**
-* **Tech Stack:** React, TypeScript, Tailwind, Zustand, Node.js, Prisma, PostgreSQL.
+* **Tech Stack:** 
+  * **Frontend:** React, TypeScript, Tailwind CSS, Vite PWA (Offline-first caching)
+  * **Backend & API:** Node.js, Express.js, Zustand (State Management)
+  * **Database & ORM:** PostgreSQL, Prisma ORM
+  * **Hosting:** Vercel (Client), Render (API Backend)
+
 * **Core Flow:** 
 
 ```mermaid
-flowchart LR
-    A["📱 Offline PWA (Patient)"] <-->|"Auto-Sync"| B[("☁️ Cloud Server & DB")]
-    B -->|"Live Alerts"| C["👨‍⚕️ Caregiver Dashboard"]
-    B -->|"Cognitive Reports"| D["🏥 Clinical Portal"]
+flowchart TD
+    subgraph Frontend ["📱 Client Application (PWA)"]
+        A["React + TypeScript UI"]
+        B[("IndexedDB (Offline Cache)")]
+        A <-->|"Reads/Writes offline data"| B
+    end
+
+    subgraph Backend ["☁️ Cloud Services & API"]
+        C{"Background Sync Engine"}
+        D["Node.js / Express API"]
+    end
+
+    subgraph Database ["🗄️ Secure Storage"]
+        E[("PostgreSQL Database")]
+    end
+
+    subgraph Portals ["📊 Web Dashboards"]
+        F["👨‍⚕️ Caregiver Portal"]
+        G["🏥 Clinical Dashboard"]
+    end
+
+    B <-->|"Auto-syncs when online"| C
+    C <-->|"Routes Data"| D
+    D <-->|"Queries"| E
+    E -->|"Real-time Alerts"| F
+    E -->|"Aggregated Reports"| G
 ```
 
 **Speaker Notes (What to say):**
