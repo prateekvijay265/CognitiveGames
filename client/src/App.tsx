@@ -112,9 +112,9 @@ function AppRoutes() {
   return (
     <Routes>
       {/* Public */}
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={isAuthenticated ? <Navigate to={getDefaultRoute()} /> : <LoginPage />} />
-      <Route path="/register" element={isAuthenticated ? <Navigate to={getDefaultRoute()} /> : <RegisterPage />} />
+      <Route path="/" element={<Navigate to={getDefaultRoute()} replace />} />
+      <Route path="/login" element={isAuthenticated ? <Navigate to={getDefaultRoute()} replace /> : <LoginPage />} />
+      <Route path="/register" element={isAuthenticated ? <Navigate to={getDefaultRoute()} replace /> : <RegisterPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
       {/* Patient */}

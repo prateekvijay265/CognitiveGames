@@ -45,6 +45,7 @@ export default function PatientLayout() {
               key={to}
               to={to}
               end={exact}
+              replace
               className={({ isActive }) => cn(
                 'flex flex-col items-center justify-center gap-1 py-3 px-2 flex-1 transition-colors min-h-[4rem]',
                 'text-stone-400 hover:text-teal-600',

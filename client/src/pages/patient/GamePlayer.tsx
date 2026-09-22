@@ -54,7 +54,11 @@ export default function GamePlayer() {
     'easy';
 
   const handleExit = useCallback(() => {
-    navigate('/patient/games');
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate('/patient/games', { replace: true });
+    }
   }, [navigate]);
 
   const handleComplete = useCallback(

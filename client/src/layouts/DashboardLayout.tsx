@@ -99,6 +99,7 @@ export default function DashboardLayout({ role }: { role: Role }) {
             key={to}
             to={to}
             end={to.split('/').length <= 2}
+            replace
             onClick={() => setMobileOpen(false)}
             className={({ isActive }) => cn(
               'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
@@ -150,6 +151,7 @@ export default function DashboardLayout({ role }: { role: Role }) {
                 key={to}
                 to={to}
                 end={to.split('/').length <= 2}
+                replace
                 className={({ isActive }) => cn(
                   'w-10 h-10 flex items-center justify-center rounded-xl transition-colors',
                   isActive ? 'bg-teal-50 text-teal-700' : 'text-stone-400 hover:text-stone-700 hover:bg-stone-50'
