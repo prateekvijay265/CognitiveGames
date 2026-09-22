@@ -23,15 +23,20 @@ const GAMES_LIST: GameInfo[] = [
   { id: 'sound-memory', name: 'Sound Memory', domain: 'Memory', time: '5 min', difficulty: 'medium' },
   { id: 'story-memory', name: 'Story Memory', domain: 'Language', time: '6 min', difficulty: 'medium' },
   { id: 'object-recognition', name: 'Word Match', domain: 'Language', time: '4 min', difficulty: 'easy' },
+  { id: 'chess', name: 'Chess', domain: 'Reasoning', time: '10 min', difficulty: 'hard' },
+  { id: 'match3', name: 'Match 3', domain: 'Processing', time: '5 min', difficulty: 'medium' },
+  { id: 'memory-game', name: 'Card Memory', domain: 'Memory', time: '3 min', difficulty: 'easy' },
+  { id: 'sudoku', name: 'Sudoku', domain: 'Reasoning', time: '10 min', difficulty: 'hard' },
+  { id: 'jigsaw', name: 'Jigsaw Puzzle', domain: 'Orientation', time: '5 min', difficulty: 'medium' },
 ];
 
 const CATEGORIES = [
-  { id: 'Memory', title: 'Memory', icon: '🧠', color: 'bg-rose-50 text-rose-500 border-rose-100', count: 4 },
-  { id: 'Attention', title: 'Attention', icon: '👁️', color: 'bg-sky-50 text-sky-500 border-sky-100', count: 2 },
-  { id: 'Reasoning', title: 'Reasoning', icon: '🧩', color: 'bg-fuchsia-50 text-fuchsia-500 border-fuchsia-100', count: 1 },
-  { id: 'Language', title: 'Language', icon: '💬', color: 'bg-orange-50 text-orange-500 border-orange-100', count: 2 },
-  { id: 'Orientation', title: 'Orientation', icon: '📍', color: 'bg-emerald-50 text-emerald-500 border-emerald-100', count: 1 },
-  { id: 'Processing', title: 'Processing', icon: '⚡', color: 'bg-violet-50 text-violet-500 border-violet-100', count: 1 },
+  { id: 'Memory', title: 'Memory', icon: '🧠', color: 'bg-rose-50 text-rose-500 border-rose-100', count: 5 },
+  { id: 'Attention', title: 'Attention', icon: '🎯', color: 'bg-sky-50 text-sky-500 border-sky-100', count: 2 },
+  { id: 'Reasoning', title: 'Reasoning', icon: '🧩', color: 'bg-fuchsia-50 text-fuchsia-500 border-fuchsia-100', count: 3 },
+  { id: 'Language', title: 'Language', icon: '🗣️', color: 'bg-orange-50 text-orange-500 border-orange-100', count: 2 },
+  { id: 'Orientation', title: 'Orientation', icon: '🧭', color: 'bg-emerald-50 text-emerald-500 border-emerald-100', count: 2 },
+  { id: 'Processing', title: 'Processing', icon: '⚡', color: 'bg-violet-50 text-violet-500 border-violet-100', count: 2 },
 ];
 
 export default function PatientGames() {

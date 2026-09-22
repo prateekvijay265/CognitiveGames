@@ -17,13 +17,18 @@ import {
   AttentionTap,
   SoundMemory,
   StoryMemory,
+  Chess,
+  Match3,
+  MemoryGame,
+  Sudoku,
+  JigsawGame,
 } from '@/features/games';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { toast } from 'sonner';
 
 
 export default function GamePlayer() {
-  const { patients: DEMO_PATIENTS, gameSessions: DEMO_GAME_SESSIONS, reminders: DEMO_REMINDERS, alerts: DEMO_ALERTS, routines: DEMO_ROUTINE, memoryBook: DEMO_MEMORY_BOOK, users: DEMO_USERS, notes: DEMO_NOTES, metrics: DEMO_COGNITIVE_METRICS } = useAppDataStore();
+  const { patients: DEMO_PATIENTS } = useAppDataStore();
 
   const { gameId } = useParams<{ gameId: string }>();
   const navigate = useNavigate();
@@ -34,7 +39,7 @@ export default function GamePlayer() {
   const currentLang = (i18n.language as SupportedLanguage) || 'en';
 
   // Map kebab-case gameId to difficulty profile camelCase key
-  const difficultyMap: Record<string, keyof typeof patient.difficultyProfile> = {
+  const difficultyMap: Record<string, any> = {
     'memory-match': 'memoryMatch',
     'remember-objects': 'rememberObjects',
     'sequence-memory': 'sequenceMemory',
@@ -45,20 +50,18 @@ export default function GamePlayer() {
     'attention-tap': 'attentionTap',
     'sound-memory': 'soundMemory',
     'story-memory': 'storyMemory',
+    'chess': 'chess',
+    'match3': 'match3',
+    'memory-game': 'memoryGame',
+    'sudoku': 'sudoku',
+    'jigsaw': 'jigsaw',
   };
 
   const profileKey = gameId ? difficultyMap[gameId] : undefined;
-  const difficulty: GameDifficulty =
-    (profileKey && (patient.difficultyProfile[profileKey] as GameDifficulty)) ||
-    (patient.difficultyProfile.recommendedDifficulty as GameDifficulty) ||
-    'easy';
+  const difficulty: GameDifficulty = profileKey ? (patient.difficultyProfile as any)[profileKey] || 'medium' : 'medium';
 
   const handleExit = useCallback(() => {
-    if (window.history.state && window.history.state.idx > 0) {
-      navigate(-1);
-    } else {
-      navigate('/patient/games', { replace: true });
-    }
+    navigate('/patient/games');
   }, [navigate]);
 
   const handleComplete = useCallback(
@@ -106,6 +109,16 @@ export default function GamePlayer() {
         return <SoundMemory {...commonProps} />;
       case 'story-memory':
         return <StoryMemory {...commonProps} />;
+      case 'chess':
+        return <Chess onExit={handleExit} muted={false} onMute={() => {}} />;
+      case 'match3':
+        return <Match3 onExit={handleExit} muted={false} onMute={() => {}} />;
+      case 'memory-game':
+        return <MemoryGame onExit={handleExit} />;
+      case 'sudoku':
+        return <Sudoku onExit={handleExit} />;
+      case 'jigsaw':
+        return <JigsawGame onExit={handleExit} muted={false} onMute={() => {}} />;
       default:
         return (
           <div className="min-h-screen flex items-center justify-center p-6">

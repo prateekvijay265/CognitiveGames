@@ -141,3 +141,9 @@ export const ALL_COGNITIVE_GAMES: Game[] = [
 export function getGameMetadata(id: GameId): Game | undefined {
   return ALL_COGNITIVE_GAMES.find((g) => g.id === id);
 }
+
+export { default as Chess } from './Chess';
+export { default as Match3 } from './Match3';
+export { default as MemoryGame } from './Memory';
+export { default as Sudoku } from './Sudoku';
+export { default as JigsawGame } from './JigsawGame';
