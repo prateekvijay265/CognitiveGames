@@ -49,9 +49,9 @@
 
 ```mermaid
 flowchart LR
-    A[📱 Offline PWA (Patient)] <-->|Auto-Sync| B[(☁️ Cloud Server & DB)]
-    B -->|Live Alerts| C[👨‍⚕️ Caregiver Dashboard]
-    B -->|Cognitive Reports| D[🏥 Clinical Portal]
+    A["📱 Offline PWA (Patient)"] <-->|"Auto-Sync"| B[("☁️ Cloud Server & DB")]
+    B -->|"Live Alerts"| C["👨‍⚕️ Caregiver Dashboard"]
+    B -->|"Cognitive Reports"| D["🏥 Clinical Portal"]
 ```
 
 **Speaker Notes (What to say):**
