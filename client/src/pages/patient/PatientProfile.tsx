@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { User, Bell, Gamepad2, Globe, HelpCircle, ChevronRight, LogOut, ChevronLeft } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
+import { toast } from 'sonner';
 
 export default function PatientProfile() {
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ export default function PatientProfile() {
         {menuItems.map((item, idx) => (
           <button 
             key={idx}
+            onClick={() => toast.info(`${item.label} coming soon!`)}
             className="w-full flex items-center justify-between p-4 active:bg-stone-50 transition-colors rounded-2xl group"
           >
             <div className="flex items-center gap-4 text-stone-700 group-hover:text-stone-900">

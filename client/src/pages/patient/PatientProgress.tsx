@@ -1,6 +1,16 @@
 import { motion } from 'framer-motion';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function PatientProgress() {
+  const weeklyData = [
+    { day: 'Mon', count: 3 },
+    { day: 'Tue', count: 4 },
+    { day: 'Wed', count: 2 },
+    { day: 'Thu', count: 5 },
+    { day: 'Fri', count: 4 },
+    { day: 'Sat', count: 6 },
+    { day: 'Sun', count: 3 },
+  ];
   const cognitiveProgress = [
     { domain: 'Memory', score: 82, icon: '🧠', color: 'bg-rose-100', text: 'text-rose-500', barColor: 'bg-[#4A856E]' },
     { domain: 'Attention', score: 67, icon: '👁️', color: 'bg-sky-100', text: 'text-sky-500', barColor: 'bg-teal-400' },
@@ -79,6 +89,45 @@ export default function PatientProgress() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Weekly Activity Chart (Restored) */}
+      <div className="mt-6 bg-white rounded-3xl p-5 border border-stone-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <div className="flex justify-between items-center mb-5">
+           <h3 className="font-bold text-[15px] text-stone-900">Activity This Week</h3>
+           <span className="text-[11px] font-bold text-[#4A856E] bg-[#4A856E]/10 px-2 py-1 rounded-full">24 Completed</span>
+        </div>
+        <div className="h-44 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={weeklyData} margin={{ top: 0, right: 0, left: -25, bottom: 0 }}>
+              <XAxis
+                dataKey="day"
+                tick={{ fill: '#A8A29E', fontSize: 11, fontWeight: 600 }}
+                axisLine={false}
+                tickLine={false}
+                dy={10}
+              />
+              <YAxis
+                allowDecimals={false}
+                tick={{ fill: '#A8A29E', fontSize: 11 }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip
+                cursor={{ fill: '#F5F5F4' }}
+                contentStyle={{
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  border: 'none',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                  fontSize: '12px',
+                  fontWeight: 'bold',
+                }}
+              />
+              <Bar dataKey="count" fill="#4A856E" radius={[4, 4, 0, 0]} barSize={24} />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </motion.div>
