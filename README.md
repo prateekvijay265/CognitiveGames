@@ -48,29 +48,10 @@
 * **Core Flow:** 
 
 ```mermaid
-flowchart TD
-    subgraph PatientDevice ["Patient Device (Mobile/Tablet)"]
-        A[Smriti Care PWA]
-        B[(IndexedDB / Local Cache)]
-        A <-->|Plays Games, Logs Mood Offline| B
-    end
-
-    subgraph CloudInfrastructure ["Cloud Infrastructure (Render/Vercel)"]
-        C{Background Sync Engine}
-        D[Node.js / Express API]
-        E[(PostgreSQL Database)]
-    end
-    
-    subgraph Dashboards ["Monitoring Dashboards"]
-        F[Caregiver Portal]
-        G[Doctor/Clinical Portal]
-    end
-
-    B <-->|Auto-syncs when online| C
-    C <--> D
-    D <--> E
-    E -->|Real-time Alerts & Analytics| F
-    E -->|Cognitive Trend Reports| G
+flowchart LR
+    A[📱 Offline PWA (Patient)] <-->|Auto-Sync| B[(☁️ Cloud Server & DB)]
+    B -->|Live Alerts| C[👨‍⚕️ Caregiver Dashboard]
+    B -->|Cognitive Reports| D[🏥 Clinical Portal]
 ```
 
 **Speaker Notes (What to say):**
