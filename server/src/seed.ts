@@ -17,16 +17,14 @@ async function main() {
   // ============================================================
   // USERS
   // ============================================================
-  const [adminUser, caregiverUser, caregiverUser2, doctorUser, patientUser1, patientUser2, patientUser3, patientUser4, patientUser5] = await Promise.all([
-    upsertUser({ email: 'admin@demo.smriticare.in', passwordHash, name: 'Rajiv Borah', role: 'admin', language: 'en', isDemo: true }),
-    upsertUser({ email: 'caregiver@demo.smriticare.in', passwordHash, name: 'Priya Sharma', role: 'caregiver', language: 'en', isDemo: true }),
-    upsertUser({ email: 'caregiver2@demo.smriticare.in', passwordHash, name: 'Sanjay Nath', role: 'caregiver', language: 'en', isDemo: true }),
-    upsertUser({ email: 'doctor@demo.smriticare.in', passwordHash, name: 'Dr. Ananya Das', role: 'doctor', language: 'en', isDemo: true }),
-    upsertUser({ email: 'patient@demo.smriticare.in', passwordHash, name: 'Asha Devi', role: 'patient', language: 'as', isDemo: true }),
-    upsertUser({ email: 'patient2@demo.smriticare.in', passwordHash, name: 'Mohan Basumatary', role: 'patient', language: 'en', isDemo: true }),
-    upsertUser({ email: 'patient3@demo.smriticare.in', passwordHash, name: 'Lalhmingmawii Sailo', role: 'patient', language: 'lus', isDemo: true }),
-    upsertUser({ email: 'patient4@demo.smriticare.in', passwordHash, name: 'Tombi Singh', role: 'patient', language: 'mni', isDemo: true }),
-    upsertUser({ email: 'patient5@demo.smriticare.in', passwordHash, name: 'Biren Khongmei', role: 'patient', language: 'en', isDemo: true }),
+  const [adminUser, caregiverUser, doctorUser, patientUser1, patientUser2, patientUser3, patientUser4] = await Promise.all([
+    upsertUser({ email: 'admin@demo.com', passwordHash, name: 'Admin Demo', role: 'admin', language: 'en', isDemo: true }),
+    upsertUser({ email: 'caregiver@demo.com', passwordHash, name: 'Caregiver Demo', role: 'caregiver', language: 'en', isDemo: true }),
+    upsertUser({ email: 'doctor@demo.com', passwordHash, name: 'Doctor Demo', role: 'doctor', language: 'en', isDemo: true }),
+    upsertUser({ email: 'patient-easy@demo.com', passwordHash, name: 'Asha (Easy)', role: 'patient', language: 'en', isDemo: true }),
+    upsertUser({ email: 'patient-medium@demo.com', passwordHash, name: 'Mohan (Medium)', role: 'patient', language: 'en', isDemo: true }),
+    upsertUser({ email: 'patient-hard@demo.com', passwordHash, name: 'Lalhmingmawii (Hard)', role: 'patient', language: 'en', isDemo: true }),
+    upsertUser({ email: 'patient-adaptive@demo.com', passwordHash, name: 'Tombi (Adaptive)', role: 'patient', language: 'en', isDemo: true }),
   ]);
 
   console.log('✅ Users created');
@@ -35,7 +33,6 @@ async function main() {
   // ROLE RECORDS
   // ============================================================
   const caregiver1 = await upsertCaregiver(caregiverUser.id);
-  const caregiver2 = await upsertCaregiver(caregiverUser2.id);
   const doctor1 = await upsertDoctor(doctorUser.id);
 
   console.log('✅ Role records created');
@@ -43,17 +40,17 @@ async function main() {
   // ============================================================
   // PATIENTS
   // ============================================================
-  const accessibilityLarge = JSON.stringify({ fontSize: 'x-large', highContrast: false, reducedMotion: false, voiceEnabled: true, soundEnabled: true, hapticEnabled: true });
-  const difficultyEasy = JSON.stringify({ memoryMatch: 'easy', rememberObjects: 'easy', sequenceMemory: 'easy', findDifference: 'medium', sortMyDay: 'easy', objectRecognition: 'medium', patternBuilder: 'easy', attentionTap: 'medium', soundMemory: 'easy', storyMemory: 'easy' });
-  const difficultyMedium = JSON.stringify({ memoryMatch: 'medium', rememberObjects: 'medium', sequenceMemory: 'medium', findDifference: 'medium', sortMyDay: 'easy', objectRecognition: 'medium', patternBuilder: 'medium', attentionTap: 'easy', soundMemory: 'medium', storyMemory: 'medium' });
-  const difficultyHard = JSON.stringify({ memoryMatch: 'hard', rememberObjects: 'medium', sequenceMemory: 'hard', findDifference: 'hard', sortMyDay: 'medium', objectRecognition: 'hard', patternBuilder: 'hard', attentionTap: 'medium', soundMemory: 'medium', storyMemory: 'medium' });
+  const accessibilityNormal = JSON.stringify({ fontSize: 'normal', highContrast: false, reducedMotion: false, voiceEnabled: true, soundEnabled: true, hapticEnabled: true });
+  const difficultyEasy = JSON.stringify({ recommendedDifficulty: 'easy', memoryMatch: 'easy', rememberObjects: 'easy', sequenceMemory: 'easy', findDifference: 'easy', sortMyDay: 'easy', objectRecognition: 'easy', patternBuilder: 'easy', attentionTap: 'easy', soundMemory: 'easy', storyMemory: 'easy' });
+  const difficultyMedium = JSON.stringify({ recommendedDifficulty: 'medium', memoryMatch: 'medium', rememberObjects: 'medium', sequenceMemory: 'medium', findDifference: 'medium', sortMyDay: 'medium', objectRecognition: 'medium', patternBuilder: 'medium', attentionTap: 'medium', soundMemory: 'medium', storyMemory: 'medium' });
+  const difficultyHard = JSON.stringify({ recommendedDifficulty: 'hard', memoryMatch: 'hard', rememberObjects: 'hard', sequenceMemory: 'hard', findDifference: 'hard', sortMyDay: 'hard', objectRecognition: 'hard', patternBuilder: 'hard', attentionTap: 'hard', soundMemory: 'hard', storyMemory: 'hard' });
+  const difficultyAdaptive = JSON.stringify({ recommendedDifficulty: 'adaptive', memoryMatch: 'adaptive', rememberObjects: 'adaptive', sequenceMemory: 'adaptive', findDifference: 'adaptive', sortMyDay: 'adaptive', objectRecognition: 'adaptive', patternBuilder: 'adaptive', attentionTap: 'adaptive', soundMemory: 'adaptive', storyMemory: 'adaptive' });
 
   const patients = await Promise.all([
-    upsertPatient(patientUser1.id, { dateOfBirth: '1954-03-12', emergencyContactName: 'Priya Sharma', emergencyContactRelationship: 'Daughter', emergencyContactPhone: '+91 98765 43210', accessibilityJson: accessibilityLarge, difficultyJson: difficultyEasy, lastActiveAt: new Date(), isDemo: true }),
-    upsertPatient(patientUser2.id, { dateOfBirth: '1958-07-22', emergencyContactName: 'Deepa Basumatary', emergencyContactRelationship: 'Wife', emergencyContactPhone: '+91 87654 32109', accessibilityJson: JSON.stringify({ fontSize: 'large', highContrast: false, reducedMotion: false, voiceEnabled: true, soundEnabled: true, hapticEnabled: false }), difficultyJson: difficultyMedium, lastActiveAt: subDays(1), isDemo: true }),
-    upsertPatient(patientUser3.id, { dateOfBirth: '1951-11-05', emergencyContactName: 'Remi Sailo', emergencyContactRelationship: 'Son', emergencyContactPhone: '+91 76543 21098', accessibilityJson: JSON.stringify({ fontSize: 'x-large', highContrast: true, reducedMotion: true, voiceEnabled: true, soundEnabled: false, hapticEnabled: true }), difficultyJson: difficultyEasy, lastActiveAt: subDays(2), isDemo: true }),
-    upsertPatient(patientUser4.id, { dateOfBirth: '1956-04-18', emergencyContactName: 'Sangeeta Singh', emergencyContactRelationship: 'Daughter', emergencyContactPhone: '+91 65432 10987', accessibilityJson: JSON.stringify({ fontSize: 'large', highContrast: false, reducedMotion: false, voiceEnabled: false, soundEnabled: true, hapticEnabled: true }), difficultyJson: difficultyMedium, lastActiveAt: new Date(), isDemo: true }),
-    upsertPatient(patientUser5.id, { dateOfBirth: '1961-09-30', emergencyContactName: 'Rita Khongmei', emergencyContactRelationship: 'Wife', emergencyContactPhone: '+91 54321 09876', accessibilityJson: JSON.stringify({ fontSize: 'normal', highContrast: false, reducedMotion: false, voiceEnabled: true, soundEnabled: true, hapticEnabled: false }), difficultyJson: difficultyHard, lastActiveAt: new Date(), isDemo: true }),
+    upsertPatient(patientUser1.id, { dateOfBirth: '1954-03-12', emergencyContactName: 'Caregiver Demo', emergencyContactRelationship: 'Caregiver', emergencyContactPhone: '+91 98765 43210', accessibilityJson: accessibilityNormal, difficultyJson: difficultyEasy, lastActiveAt: new Date(), isDemo: true }),
+    upsertPatient(patientUser2.id, { dateOfBirth: '1958-07-22', emergencyContactName: 'Caregiver Demo', emergencyContactRelationship: 'Caregiver', emergencyContactPhone: '+91 98765 43210', accessibilityJson: accessibilityNormal, difficultyJson: difficultyMedium, lastActiveAt: subDays(1), isDemo: true }),
+    upsertPatient(patientUser3.id, { dateOfBirth: '1951-11-05', emergencyContactName: 'Caregiver Demo', emergencyContactRelationship: 'Caregiver', emergencyContactPhone: '+91 98765 43210', accessibilityJson: accessibilityNormal, difficultyJson: difficultyHard, lastActiveAt: subDays(2), isDemo: true }),
+    upsertPatient(patientUser4.id, { dateOfBirth: '1956-04-18', emergencyContactName: 'Caregiver Demo', emergencyContactRelationship: 'Caregiver', emergencyContactPhone: '+91 98765 43210', accessibilityJson: accessibilityNormal, difficultyJson: difficultyAdaptive, lastActiveAt: new Date(), isDemo: true }),
   ]);
 
   console.log('✅ Patients created');
@@ -64,9 +61,8 @@ async function main() {
   await Promise.all([
     linkPatientCaregiver(patients[0].id, caregiver1.id),
     linkPatientCaregiver(patients[1].id, caregiver1.id),
-    linkPatientCaregiver(patients[4].id, caregiver1.id),
-    linkPatientCaregiver(patients[2].id, caregiver2.id),
-    linkPatientCaregiver(patients[3].id, caregiver2.id),
+    linkPatientCaregiver(patients[2].id, caregiver1.id),
+    linkPatientCaregiver(patients[3].id, caregiver1.id),
   ]);
 
   // PATIENT-DOCTOR LINKS
@@ -170,7 +166,7 @@ async function main() {
         const gameId = gameIds[Math.floor(Math.random() * gameIds.length)];
         const hour = 8 + Math.floor(Math.random() * 10);
         date.setHours(hour, Math.floor(Math.random() * 60));
-        const baseAcc = patient.id === patients[4].id ? 83 : 68;
+        const baseAcc = patient.id === patients[3].id ? 83 : 68;
         const accuracy = clamp(baseAcc + (Math.random() * 20 - 10), 20, 100);
         const sid = `demo-session-${patient.id}-${daysAgo}-${s}`;
         try {
@@ -318,12 +314,15 @@ async function main() {
 
   console.log('✅ Audit logs created');
 
-  console.log('\n🎉 Database seeded successfully!\n');
-  console.log('📋 Demo Credentials:');
-  console.log('   Patient:   patient@demo.smriticare.in / Demo@1234');
-  console.log('   Caregiver: caregiver@demo.smriticare.in / Demo@1234');
-  console.log('   Doctor:    doctor@demo.smriticare.in / Demo@1234');
-  console.log('   Admin:     admin@demo.smriticare.in / Demo@1234\n');
+  console.log('🎉 Database seeded successfully!\n');
+  console.log('🔑 Demo Credentials (Password for all: Demo@1234):');
+  console.log('   Patient (Easy):     patient-easy@demo.com');
+  console.log('   Patient (Medium):   patient-medium@demo.com');
+  console.log('   Patient (Hard):     patient-hard@demo.com');
+  console.log('   Patient (Adaptive): patient-adaptive@demo.com');
+  console.log('   Caregiver:          caregiver@demo.com');
+  console.log('   Doctor:             doctor@demo.com');
+  console.log('   Admin:              admin@demo.com\n');
 }
 
 // Helpers
