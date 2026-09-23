@@ -301,7 +301,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                     }`}
                   >
                     <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
-                    <img src={item.name} className="w-12 h-12 object-cover border-2 border-ink" />
+                    
                     <span className="text-[10px] mt-1">
                       {wasFound ? '✓ Remembered' : '○ Missed'}
                     </span>
