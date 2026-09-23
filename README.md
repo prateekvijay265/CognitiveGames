@@ -19,7 +19,7 @@
 
 ## ✨ What the Project Does
 
-Smriti Care bridges the gap in mental healthcare by providing culturally familiar, native-language cognitive stimulation for users in rural and North-Eastern India (supporting **Assamese, Manipuri, Khasi, Mizo, Hindi, and English**).
+Neuro Mind bridges the gap in mental healthcare by providing culturally familiar, native-language cognitive stimulation for users in rural and North-Eastern India (supporting **Assamese, Manipuri, Khasi, Mizo, Hindi, and English**).
 
 The platform connects a triad of users:
 - 👴 **Patients (The Elderly):** Play AI-adaptive cognitive games (Memory Match, Jigsaw, Sequence Memory), track daily routines, and log moods via a highly accessible, voice-guided Progressive Web App (PWA).
@@ -51,12 +51,12 @@ graph TD
     classDef users fill:#fbcfe8,stroke:#db2777,stroke-width:2px,color:#0f172a
 
     %% Users
-    U1((👴 Patient)):::users
-    U2((🧑‍⚕️ Caregiver)):::users
-    U3((🩺 Doctor)):::users
+    U1(("👴 Patient")):::users
+    U2(("🧑‍⚕️ Caregiver")):::users
+    U3(("🩺 Doctor")):::users
 
     %% Frontend App
-    subgraph Frontend [📱 PWA Client (Offline First)]
+    subgraph Frontend ["📱 PWA Client (Offline First)"]
         UI[React UI Interface]:::frontend
         TTS[Web Speech API]:::frontend
         Cache[(IndexedDB / Cache)]:::db
@@ -64,7 +64,7 @@ graph TD
     end
 
     %% Backend Server
-    subgraph BackendAPI [☁️ Cloud Server]
+    subgraph BackendAPI ["☁️ Cloud Server"]
         Node[Node.js / Express API]:::backend
         Prisma[Prisma ORM]:::backend
     end
@@ -123,10 +123,10 @@ This project is a monorepo containing both the `client` (React frontend) and `se
 
 > [!TIP]
 > **Demo Accounts:** <br>
-> 👴 **Patient:** `patient@demo.smriticare.in` / `Demo@1234` <br>
-> 🧑‍⚕️ **Caregiver:** `caregiver@demo.smriticare.in` / `Demo@1234` <br>
-> 🩺 **Doctor:** `doctor@demo.smriticare.in` / `Demo@1234` <br>
-> 👑 **Admin:** `admin@demo.smriticare.in` / `Demo@1234`
+> 👴 **Patient:** `patient@demo.neuromind.in` / `Demo@1234` <br>
+> 🧑‍⚕️ **Caregiver:** `caregiver@demo.neuromind.in` / `Demo@1234` <br>
+> 🩺 **Doctor:** `doctor@demo.neuromind.in` / `Demo@1234` <br>
+> 👑 **Admin:** `admin@demo.neuromind.in` / `Demo@1234`
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png" width="100%" />

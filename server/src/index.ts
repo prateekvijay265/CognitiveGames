@@ -91,14 +91,14 @@ app.use('/api/audit', auditRouter);
 app.get('/api/health', (_req, res) => {
   res.json({
     success: true,
-    message: 'SMRITI CARE API is running',
+    message: 'NEURO MIND API is running',
     timestamp: new Date().toISOString()
   });
 });
 
 // Root route so visitors don't see 'Cannot GET /'
 app.get('/', (_req, res) => {
-  res.send('SMRITI CARE Backend API is running successfully! The frontend application should connect to /api endpoints.');
+  res.send('NEURO MIND Backend API is running successfully! The frontend application should connect to /api endpoints.');
 });
 
 // Error handler
@@ -111,13 +111,13 @@ async function bootstrap() {
     console.log('✅ Database connected');
 
     app.listen(PORT, () => {
-      console.log(`🚀 SMRITI CARE API running on http://localhost:${PORT}`);
+      console.log(`🚀 NEURO MIND API running on http://localhost:${PORT}`);
       console.log(`📊 Environment: ${process.env.NODE_ENV}`);
       console.log(`\n📋 Demo Accounts:`);
-      console.log(`   Patient:   patient@demo.smriticare.in / Demo@1234`);
-      console.log(`   Caregiver: caregiver@demo.smriticare.in / Demo@1234`);
-      console.log(`   Doctor:    doctor@demo.smriticare.in / Demo@1234`);
-      console.log(`   Admin:     admin@demo.smriticare.in / Demo@1234`);
+      console.log(`   Patient:   patient@demo.neuromind.in / Demo@1234`);
+      console.log(`   Caregiver: caregiver@demo.neuromind.in / Demo@1234`);
+      console.log(`   Doctor:    doctor@demo.neuromind.in / Demo@1234`);
+      console.log(`   Admin:     admin@demo.neuromind.in / Demo@1234`);
     });
   } catch (error) {
     console.error('❌ Failed to connect to database:', error);

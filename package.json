@@ -1,7 +1,7 @@
 {
   "name": "smriti-care",
   "version": "1.0.0",
-  "description": "SMRITI CARE - AI-Powered Cognitive Gaming & Memory Assistance Platform",
+  "description": "NEURO MIND - AI-Powered Cognitive Gaming & Memory Assistance Platform",
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",

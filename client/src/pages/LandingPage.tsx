@@ -11,7 +11,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-teal-700 flex items-center justify-center text-white font-serif italic text-xl">S</div>
-            <span className="font-bold text-xl tracking-tight text-stone-900">Smriti Care</span>
+            <span className="font-bold text-xl tracking-tight text-stone-900">Neuro Mind</span>
           </div>
           <div className="flex items-center gap-6 font-medium text-sm">
             <a href="#work" className="hidden sm:block hover:text-teal-700 transition-colors">Our Work</a>
@@ -73,7 +73,7 @@ export default function LandingPage() {
       <section className="py-32 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center" id="work">
         <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 tracking-tight">We show up for those everyone else overlooks.</h2>
         <p className="text-xl sm:text-2xl text-stone-600 leading-relaxed font-medium">
-          Smriti Care was born from a simple belief: that every elderly person deserves to age with dignity, routine, and joy. Not just the ones in urban centers. Every. Single. One.
+          Neuro Mind was born from a simple belief: that every elderly person deserves to age with dignity, routine, and joy. Not just the ones in urban centers. Every. Single. One.
         </p>
       </section>
 
@@ -114,7 +114,7 @@ export default function LandingPage() {
               "Memory loss shouldn't mean the loss of dignity."
             </h2>
             <p className="text-xl text-teal-700 font-medium mb-10 max-w-2xl">
-              In remote areas, families often face cognitive decline alone. Smriti Care brings daily structure, cognitive support, and clinical monitoring directly to their hands—completely offline.
+              In remote areas, families often face cognitive decline alone. Neuro Mind brings daily structure, cognitive support, and clinical monitoring directly to their hands—completely offline.
             </p>
             <Link to="/login" className="inline-flex items-center justify-center font-bold text-teal-700 hover:text-teal-900 text-lg underline underline-offset-8">
               Read The Campaign <ChevronRight className="ml-1 w-5 h-5" />
@@ -145,7 +145,7 @@ export default function LandingPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
-              { img: '/images/priya.jpg', quote: "Smriti Care gave me the confidence to leave my mother at home while I work. The voice reminders in Assamese mean she never misses her medicine.", author: "Priya S.", role: "Caregiver, Guwahati" },
+              { img: '/images/priya.jpg', quote: "Neuro Mind gave me the confidence to leave my mother at home while I work. The voice reminders in Assamese mean she never misses her medicine.", author: "Priya S.", role: "Caregiver, Guwahati" },
               { img: '/images/doctor.jpg', quote: "I can review patient progress from 200 kilometers away. The offline sync ensures I get the data whenever they enter a connectivity zone.", author: "Dr. Ananya Das", role: "Neurologist, Shillong" },
               { img: '/images/hero.jpg', quote: "The Bihu and Tea Garden memory games make him smile. He recognizes the images, and it keeps his mind active every morning.", author: "Remi S.", role: "Son, Aizawl" },
             ].map((t, i) => (
@@ -173,7 +173,7 @@ export default function LandingPage() {
               <div key={role} className="bg-stone-50 p-6 rounded-2xl shadow-sm text-left border border-stone-200">
                 <div className="font-bold text-lg mb-2">{role}</div>
                 <div className="text-xs text-stone-500 space-y-1 font-mono">
-                  <div>{role.toLowerCase()}@demo.smriticare.in</div>
+                  <div>{role.toLowerCase()}@demo.neuromind.in</div>
                   <div>Demo@1234</div>
                 </div>
               </div>
@@ -186,12 +186,12 @@ export default function LandingPage() {
       <section className="py-32 bg-stone-900 text-center px-4">
         <h2 className="text-4xl sm:text-6xl font-extrabold text-white mb-10 tracking-tight">The world needs people<br/>who show up.</h2>
         <Link to="/login" className="inline-flex items-center justify-center px-10 py-5 text-xl font-bold bg-white text-stone-900 rounded-full hover:bg-teal-50 transition-colors">
-          Access Smriti Care
+          Access Neuro Mind
         </Link>
       </section>
       
       <footer className="bg-black text-stone-500 py-8 text-center text-sm">
-        <p>Smriti Care Foundation. Designed for the North Eastern Region.</p>
+        <p>Neuro Mind Foundation. Designed for the North Eastern Region.</p>
         <p className="mt-2 flex items-center justify-center gap-1"><Heart size={14} className="text-rose-500"/> Not a medical diagnostic tool.</p>
       </footer>
     </div>

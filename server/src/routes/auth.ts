@@ -44,11 +44,11 @@ router.post('/login', async (req: Request, res: Response, next) => {
     // If not found, check demo aliases
     if (!user) {
       const aliasMap: Record<string, string> = {
-        'patient@demo.smriticare.in': 'patient-easy@demo.com',
+        'patient@demo.neuromind.in': 'patient-easy@demo.com',
         'patient@demo.com': 'patient-easy@demo.com',
-        'caregiver@demo.smriticare.in': 'caregiver@demo.com',
-        'doctor@demo.smriticare.in': 'doctor@demo.com',
-        'admin@demo.smriticare.in': 'admin@demo.com',
+        'caregiver@demo.neuromind.in': 'caregiver@demo.com',
+        'doctor@demo.neuromind.in': 'doctor@demo.com',
+        'admin@demo.neuromind.in': 'admin@demo.com',
       };
       if (aliasMap[cleanEmail]) {
         user = await prisma.user.findUnique({ where: { email: aliasMap[cleanEmail] } });

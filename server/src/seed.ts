@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 const DEMO_PASSWORD = 'Demo@1234';
 
 async function main() {
-  console.log('🌱 Seeding SMRITI CARE database...\n');
+  console.log('🌱 Seeding NEURO MIND database...\n');
 
   // Hash password once
   const passwordHash = await bcrypt.hash(DEMO_PASSWORD, 12);

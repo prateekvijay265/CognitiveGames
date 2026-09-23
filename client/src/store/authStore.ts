@@ -51,17 +51,17 @@ export const useAuthStore = create<AuthState & AuthActions>()(
 
           // Check if this matches a demo account or fallback
           const fallbackUsers: Record<string, User> = {
-            'patient@demo.smriticare.in': { id: 'pat-1', email: 'patient@demo.smriticare.in', name: 'Asha Devi', role: 'patient', language: 'as', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+            'patient@demo.neuromind.in': { id: 'pat-1', email: 'patient@demo.neuromind.in', name: 'Asha Devi', role: 'patient', language: 'as', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
             'patient-easy@demo.com': { id: 'pat-1', email: 'patient-easy@demo.com', name: 'Asha (Easy)', role: 'patient', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
             'patient-medium@demo.com': { id: 'pat-2', email: 'patient-medium@demo.com', name: 'Mohan (Medium)', role: 'patient', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
             'patient-hard@demo.com': { id: 'pat-3', email: 'patient-hard@demo.com', name: 'Lalhmingmawii (Hard)', role: 'patient', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
             'patient-adaptive@demo.com': { id: 'pat-4', email: 'patient-adaptive@demo.com', name: 'Tombi (Adaptive)', role: 'patient', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
             'patient@demo.com': { id: 'pat-1', email: 'patient@demo.com', name: 'Asha Devi', role: 'patient', language: 'as', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-            'caregiver@demo.smriticare.in': { id: 'caregiver-1', email: 'caregiver@demo.smriticare.in', name: 'Priya Sharma', role: 'caregiver', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+            'caregiver@demo.neuromind.in': { id: 'caregiver-1', email: 'caregiver@demo.neuromind.in', name: 'Priya Sharma', role: 'caregiver', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
             'caregiver@demo.com': { id: 'caregiver-1', email: 'caregiver@demo.com', name: 'Priya Sharma', role: 'caregiver', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-            'doctor@demo.smriticare.in': { id: 'doctor-1', email: 'doctor@demo.smriticare.in', name: 'Dr. Ananya Das', role: 'doctor', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+            'doctor@demo.neuromind.in': { id: 'doctor-1', email: 'doctor@demo.neuromind.in', name: 'Dr. Ananya Das', role: 'doctor', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
             'doctor@demo.com': { id: 'doctor-1', email: 'doctor@demo.com', name: 'Dr. Ananya Das', role: 'doctor', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-            'admin@demo.smriticare.in': { id: 'admin-1', email: 'admin@demo.smriticare.in', name: 'Rajiv Borah', role: 'admin', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+            'admin@demo.neuromind.in': { id: 'admin-1', email: 'admin@demo.neuromind.in', name: 'Rajiv Borah', role: 'admin', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
             'admin@demo.com': { id: 'admin-1', email: 'admin@demo.com', name: 'Rajiv Borah', role: 'admin', language: 'en', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
           };
 
@@ -103,7 +103,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         } catch (error: unknown) {
           // Fallback PIN login
           if (pin === '1234' || pin.length === 4) {
-            const user: User = { id: patientId || 'pat-1', email: 'patient@demo.smriticare.in', name: 'Asha Devi', role: 'patient', language: 'as', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+            const user: User = { id: patientId || 'pat-1', email: 'patient@demo.neuromind.in', name: 'Asha Devi', role: 'patient', language: 'as', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
             const token = `mock-pin-token-${Date.now()}`;
             set({ user, token, isAuthenticated: true, isLoading: false, error: null });
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`;

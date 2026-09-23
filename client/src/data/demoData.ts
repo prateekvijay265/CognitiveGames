@@ -18,7 +18,7 @@ import type {
 export const DEMO_USERS: User[] = [
   {
     id: 'patient-1',
-    email: 'patient@demo.smriticare.in',
+    email: 'patient@demo.neuromind.in',
     name: 'Asha Devi',
     role: 'patient',
     language: 'as',
@@ -27,7 +27,7 @@ export const DEMO_USERS: User[] = [
   },
   {
     id: 'caregiver-1',
-    email: 'caregiver@demo.smriticare.in',
+    email: 'caregiver@demo.neuromind.in',
     name: 'Priya Sharma',
     role: 'caregiver',
     language: 'en',
@@ -36,7 +36,7 @@ export const DEMO_USERS: User[] = [
   },
   {
     id: 'doctor-1',
-    email: 'doctor@demo.smriticare.in',
+    email: 'doctor@demo.neuromind.in',
     name: 'Dr. Ananya Das',
     role: 'doctor',
     language: 'en',
@@ -45,7 +45,7 @@ export const DEMO_USERS: User[] = [
   },
   {
     id: 'admin-1',
-    email: 'admin@demo.smriticare.in',
+    email: 'admin@demo.neuromind.in',
     name: 'Rajiv Borah',
     role: 'admin',
     language: 'en',
@@ -545,9 +545,9 @@ export const DEMO_COGNITIVE_METRICS: CognitiveMetric[] = Array.from({ length: 28
 // DEMO AUTH CREDENTIALS (for display on login page)
 // ============================================================
 export const DEMO_CREDENTIALS = [
-  { role: 'Patient', email: 'patient@demo.smriticare.in', password: 'Demo@1234', icon: '🧠', color: 'teal' },
-  { role: 'Caregiver', email: 'caregiver@demo.smriticare.in', password: 'Demo@1234', icon: '💚', color: 'blue' },
-  { role: 'Doctor', email: 'doctor@demo.smriticare.in', password: 'Demo@1234', icon: '🩺', color: 'purple' },
-  { role: 'Admin', email: 'admin@demo.smriticare.in', password: 'Demo@1234', icon: '⚡', color: 'amber' },
+  { role: 'Patient', email: 'patient@demo.neuromind.in', password: 'Demo@1234', icon: '🧠', color: 'teal' },
+  { role: 'Caregiver', email: 'caregiver@demo.neuromind.in', password: 'Demo@1234', icon: '💚', color: 'blue' },
+  { role: 'Doctor', email: 'doctor@demo.neuromind.in', password: 'Demo@1234', icon: '🩺', color: 'purple' },
+  { role: 'Admin', email: 'admin@demo.neuromind.in', password: 'Demo@1234', icon: '⚡', color: 'amber' },
 ];
 

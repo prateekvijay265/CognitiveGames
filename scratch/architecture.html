@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    color: #0d9488;
+    text-align: center;
+    font-size: 36px;
+    border-bottom: 3px solid #0d9488;
+    padding-bottom: 10px;
+  }
+  h2 {
+    color: #115e59;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 30px;
+  }
+  h3 {
+    color: #0f766e;
+  }
+  .tech-card {
+    background: #f0fdfa;
+    border-left: 4px solid #0d9488;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+  }
+  .tech-title {
+    font-weight: bold;
+    color: #0f766e;
+    font-size: 18px;
+  }
+  ul {
+    margin-top: 10px;
+  }
+  li {
+    margin-bottom: 8px;
+  }
+  .workflow-step {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 6px;
+  }
+</style>
+</head>
+<body>
+
+<h1>SMRITI CARE (Neuro Mind)</h1>
+<p style="text-align: center; font-size: 18px; color: #666;">App Working, Tech Stack & Workflow Guide</p>
+
+<h2>1. App Kya Hai? (Introduction)</h2>
+<p>
+  <strong>Smriti Care (Neuro Mind)</strong> ek AI-powered platform hai jo mainly older adults (buzurgon) ki memory aur cognitive health (dimaghi sehat) ko improve karne ke liye banaya gaya hai. <br><br>
+  Is app mein memory games (jaise Match 3, Jigsaw, Sudoku, etc.) hain jo brain ki exercise karate hain. Sath hi isme caregivers (dekhbhal karne wale) aur doctors ke liye bhi features hain jisse wo patient ki progress track kar sakein. Isme North-Eastern languages (Assamese, Manipuri, Khasi, Mizo) ko bhi support kiya gaya hai taaki local log apni bhasha mein ise use kar sakein.
+</p>
+
+<h2>2. Tech Stack (Kaunsi Technologies Use Hui Hain?)</h2>
+
+<div class="tech-card">
+  <div class="tech-title">Frontend (Jo User Ko Dikhta Hai)</div>
+  <ul>
+    <li><strong>React 19 & Vite:</strong> App ka UI banane ke liye. Vite isko super fast banata hai development aur build time mein.</li>
+    <li><strong>TypeScript:</strong> JavaScript ka advanced version jo code mein errors kam karta hai by adding "types".</li>
+    <li><strong>Tailwind CSS:</strong> App ki styling (colors, layout) ke liye use hua hai. Ye directly HTML/TSX classes mein likha jata hai (e.g., <code>text-xl bg-blue-500</code>).</li>
+    <li><strong>Zustand:</strong> Global state management ke liye. Jaise ki kaunsa user logged in hai, wo data poore app mein maintain karne ke liye (<code>authStore</code>, <code>uiStore</code>).</li>
+    <li><strong>React Router DOM:</strong> Pages ke beech navigation ke liye (jaise Home se Games page par jana).</li>
+    <li><strong>i18next:</strong> Multi-language support (i18n) ke liye. Jab user bhasha badalta hai, toh poori app instantly translate ho jati hai bina page reload hue.</li>
+    <li><strong>Framer Motion:</strong> Smooth animations aur transitions ke liye jo app ko premium feel dete hain.</li>
+    <li><strong>PWA (Progressive Web App):</strong> Iski madad se website ek mobile app ki tarah phone mein install ho sakti hai aur offline/slow internet mein bhi cache ki wajah se chal sakti hai.</li>
+  </ul>
+</div>
+
+<div class="tech-card">
+  <div class="tech-title">Backend (Jo Data Handle Karta Hai)</div>
+  <ul>
+    <li><strong>Node.js & Express:</strong> Server banane ke liye aur API endpoints (jaise <code>/api/login</code>) ko handle karne ke liye.</li>
+    <li><strong>Prisma ORM:</strong> Database se baat karne ka tool. Isse hume direct SQL queries nahi likhni padti, balki Prisma ka asaan code likhna padta hai (e.g., <code>prisma.user.findMany()</code>).</li>
+    <li><strong>PostgreSQL / SQLite:</strong> Database jahan saara data (users, scores, notes) save hota hai. Local testing mein SQLite use hua hai, aur cloud (Antideploy/Render) par PostgreSQL.</li>
+    <li><strong>JWT (JSON Web Tokens):</strong> Security aur login sessions manage karne ke liye. Jab user login karta hai toh ek token milta hai jisse wo securely private data access kar pata hai.</li>
+  </ul>
+</div>
+
+<h2>3. App Ka Workflow (App Kaam Kaise Karti Hai?)</h2>
+
+<h3>A. User Roles (4 Tarah Ke Users Hain)</h3>
+<ul>
+  <li><strong>Patient:</strong> Inka dashboard bahut simple aur aasan hota hai. Inhe PIN se login karvaya jata hai (kyunki passwords yaad rakhna mushkil hota hai). Inko Games khelne hote hain aur apni feelings (mood) track karni hoti hai.</li>
+  <li><strong>Caregiver:</strong> Ye wo log hain jo patient ka dhyan rakhte hain. Ye patients add kar sakte hain, unke liye reminders (davai, khana) set kar sakte hain aur unke game scores dekh sakte hain.</li>
+  <li><strong>Doctor:</strong> Doctor patients ki history, unke clinical reports aur cognitive progress graphs dekhta hai aur notes add karta hai.</li>
+  <li><strong>Admin:</strong> System ke sabhi users aur games ko manage karta hai.</li>
+</ul>
+
+<h3>B. Step-by-Step App Workflow</h3>
+<div class="workflow-step">
+  <strong>1. Authentication (Login / Signup):</strong><br>
+  Jab user website kholta hai, wo apna role (Patient, Caregiver, Doctor) select karke login karta hai. Frontend API ko request bhejta hai, backend verify karke ek JWT token deta hai jo browser ke local storage mein save ho jata hai (Zustand <code>authStore</code> ke through).
+</div>
+
+<div class="workflow-step">
+  <strong>2. Patient Dashboard & Games:</strong><br>
+  Patient login hone par <code>PatientLayout</code> load hota hai. Yahan badi screen par "Activities" aur "Reminders" dikhte hain. Jab Patient "Games" par click karta hai, toh list aati hai (Memory Match, Jigsaw). Har game React components se bana hai jo user ka time, score aur accuracy track karta hai.
+</div>
+
+<div class="workflow-step">
+  <strong>3. Voice Instructions (Text-To-Speech):</strong><br>
+  App mein "Speaker" icon hai. Jab user us par click karta hai, app ka <code>GameEngine.tsx</code> browser ki native <strong>Web Speech API</strong> ko use karta hai. Jo language select ki gayi hai (jaise Hindi, English), app usi aawaz mein text ko padh kar sunati hai.
+</div>
+
+<div class="workflow-step">
+  <strong>4. Data Saving & Sync:</strong><br>
+  Game khatam hone par, frontend ek request <code>/api/game-sessions</code> par bhejta hai. Backend Prisma ke zariye is data ko database mein save kar leta hai, taaki baad mein doctor ya caregiver uski report dekh sake.
+</div>
+
+<div class="workflow-step">
+  <strong>5. Caregiver & Doctor Reports:</strong><br>
+  Caregiver apne dashboard par jata hai toh backend se un patients ki list aati hai jo unse linked hain. Doctor PDF ya CSV format mein patient ka data download kar sakte hain, jisse ye pata chalta hai ki patient ki memory weak ho rahi hai ya improve ho rahi hai.
+</div>
+
+<h2>4. Hosting & Deployment (Cloud Par Kaise Rakha Hai?)</h2>
+<p>
+  Ye ek <strong>Monorepo</strong> hai jismein <code>client</code> aur <code>server</code> dono ek hi jagah hain.
+  <ul>
+    <li><strong>Backend API:</strong> Antideploy par host kiya gaya hai jo automatically Node.js server aur PostgreSQL database run karta hai.</li>
+    <li><strong>Frontend Web:</strong> Ye bhi Antideploy par host kiya gaya hai. Iska API URL (<code>VITE_API_URL</code>) hamare deployed backend ki taraf point karta hai.</li>
+  </ul>
+</p>
+
+<hr>
+<p style="text-align: center; color: #888; font-size: 14px;">Generated by Antigravity Agent - Smriti Care (Neuro Mind)</p>
+
+</body>
+</html>
