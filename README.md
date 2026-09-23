@@ -1,6 +1,6 @@
 <div align="center">
   
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=800&size=45&pause=1000&color=0D9488&center=true&vCenter=true&width=800&lines=SMRITI+CARE;Neuro+Mind;AI+Cognitive+Wellness" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=800&size=45&pause=1000&color=0D9488&center=true&vCenter=true&width=800&lines=NEURO+MIND;Neuro+Mind;AI+Cognitive+Wellness" alt="Typing SVG" />
 
   <p align="center">
     <strong>An AI-powered, offline-first cognitive wellness and memory assistance platform designed specifically for older adults.</strong>
