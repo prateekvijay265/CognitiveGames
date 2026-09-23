@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { CheckCircle2, RotateCcw, ArrowRight, Eye, Play } from 'lucide-react';
 import type { GameDifficulty, SupportedLanguage, GameSession } from '../../../types';
@@ -20,6 +21,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
   onComplete,
   onExit,
 }) => {
+  const { t } = useTranslation();
   const diffKey = difficulty === 'adaptive' ? 'medium' : difficulty;
   const availableSets = SEQUENCE_SETS[diffKey] || SEQUENCE_SETS.easy;
 
@@ -83,6 +85,7 @@ export const SequenceMemory: React.FC<SequenceMemoryProps> = ({
 
   // Tap an option from the scrambled bank
   const handleSelectOption = (item: { id: string; image: string; name: string }) => {
+  const { t } = useTranslation();
     if (phase !== 'RECALLING') return;
     if (selectedItems.some((s) => s.id === item.id)) return;
 

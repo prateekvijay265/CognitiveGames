@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Check, Sparkles } from 'lucide-react';
 import type { GameDifficulty, SupportedLanguage, GameSession } from '../../../types';
@@ -30,6 +31,7 @@ export const MemoryMatch: React.FC<MemoryMatchProps> = ({
   onComplete,
   onExit,
 }) => {
+  const { t } = useTranslation();
   const pairCounts: Record<GameDifficulty, number> = {
     easy: 3, // 3 pairs = 6 cards (3x2)
     medium: 6, // 6 pairs = 12 cards (4x3)

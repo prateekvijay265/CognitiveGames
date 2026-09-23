@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, HelpCircle, ArrowRight, Sparkles } from 'lucide-react';
 import type { GameDifficulty, SupportedLanguage, GameSession } from '../../../types';
@@ -219,3 +220,4 @@ export const ObjectRecognition: React.FC<ObjectRecognitionProps> = ({
     </GameLayout>
   );
 };
+

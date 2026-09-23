@@ -261,7 +261,11 @@
     "games": "गेम्स",
     "routine": "दिनचर्या",
     "memory_book": "यादें",
-    "reminders": "रिमाइंडर"
+    "reminders": "रिमाइंडर",
+    "activity_paused": "खेल रुका हुआ है",
+    "resume_activity": "खेल फिर से शुरू करें",
+    "restart_activity": "फिर से शुरू करें",
+    "exit_activity": "बाहर निकलें"
   },
   "game_instructions": {
     "jigsaw": "अदला-बदली करने के लिए दो टुकड़ों पर टैप करें। तस्वीर को पूरा करें!",
@@ -279,5 +283,46 @@
     "match3": "एक कतार में 3 मिलाने के लिए आइटम की अदला-बदली करें।",
     "memory_game": "जोड़े खोजने के लिए कार्ड पलटें।",
     "sudoku": "ग्रिड को नंबरों से भरें।"
+  },
+  "game_ui": {
+    "moves": "चाल",
+    "pairs": "जोड़े",
+    "matches": "मिलान",
+    "level": "स्तर",
+    "time": "समय",
+    "found": "मिला",
+    "next_round": "अगला राउंड",
+    "see_results": "परिणाम देखें",
+    "confirm_choices": "पुष्टि करें",
+    "good_recall": "बहुत बढ़िया!",
+    "remembered": "याद रहा",
+    "missed": "चूक गए",
+    "original_items": "यहाँ इस राउंड की असली वस्तुएं हैं:",
+    "watch_sequence": "क्रम को ध्यान से देखें...",
+    "your_turn": "अब आपकी बारी!",
+    "morning": "सुबह",
+    "afternoon": "दोपहर",
+    "evening": "शाम",
+    "night": "रात"
+  },
+  "game_items": {
+    "tea-cup": "चाय का कप",
+    "bamboo": "बाँस",
+    "orange": "संतरा",
+    "rice": "चावल",
+    "flower": "फूल",
+    "home": "घर",
+    "rain": "बारिश",
+    "elephant": "हाथी",
+    "peacock": "मोर",
+    "leaf": "चाय की पत्ती",
+    "lemon": "नींबू",
+    "teapot": "चायदानी",
+    "paddy": "धान का खेत",
+    "banyan": "बरगद का पेड़",
+    "fish": "मछली",
+    "diya": "दीया",
+    "hibiscus": "गुड़हल",
+    "coconut": "नारियल"
   }
 }

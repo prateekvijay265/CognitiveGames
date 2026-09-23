@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Eye, Check, CheckCircle2, ArrowRight } from 'lucide-react';
 import type { GameDifficulty, SupportedLanguage, GameSession } from '../../../types';
@@ -20,6 +21,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
   onComplete,
   onExit,
 }) => {
+  const { t } = useTranslation();
   // Config per difficulty
   const config = {
     easy: { objectCount: 3, optionCount: 6, viewDurationSec: 6 },
@@ -160,7 +162,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
         {/* Round Header */}
         <div className="flex items-center justify-between w-full mb-4 font-mono uppercase tracking-widest text-ink">
           <span className="font-bold">
-            Round {currentRound} of {totalRounds}
+            {t('arcade.round', 'Round')} {currentRound} {t('arcade.of', 'of')} {totalRounds}
           </span>
           {phase === 'MEMORIZING' && (
             <span className="font-bold text-vermilion flex items-center gap-1">
@@ -204,7 +206,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                 >
                   <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                   <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-ink line-clamp-1">
-                    {item.name}
+                    {t('game_items.' + item.id, item.name)}
                   </span>
                 </motion.div>
               ))}
@@ -254,7 +256,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                     )}
                     <img src={item.image} className="w-12 h-12 object-cover border-2 border-ink mb-2" />
                     <span className="text-xs sm:text-sm text-center">
-                      {item.name}
+                      {t('game_items.' + item.id, item.name)}
                     </span>
                   </button>
                 );
@@ -270,7 +272,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
                   : 'bg-felt text-kraft shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)]'
               }`}
             >
-              Confirm Choices
+              {t('game_ui.confirm_choices', 'Confirm Choices')}
             </button>
           </div>
         )}
@@ -314,7 +316,7 @@ export const RememberObjects: React.FC<RememberObjectsProps> = ({
               onClick={handleNextRound}
               className="px-8 py-4 border-[3px] border-ink bg-vermilion text-kraft shadow-[4px_4px_0_var(--color-ink)] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--color-ink)] transition-all font-mono font-bold uppercase tracking-widest flex items-center gap-2"
             >
-              {currentRound < totalRounds ? 'Next Round' : 'See Results'}
+              {currentRound < totalRounds ? t('game_ui.next_round', 'Next Round') : t('game_ui.see_results', 'See Results')}
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>

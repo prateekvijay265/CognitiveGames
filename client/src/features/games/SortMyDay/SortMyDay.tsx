@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ArrowUpDown, CheckCircle2, RotateCcw, ArrowRight } from 'lucide-react';
 import type { GameDifficulty, SupportedLanguage, GameSession } from '../../../types';
@@ -20,6 +21,7 @@ export const SortMyDay: React.FC<SortMyDayProps> = ({
   onComplete,
   onExit,
 }) => {
+  const { t } = useTranslation();
   const activityCounts: Record<GameDifficulty, number> = {
     easy: 4,
     medium: 6,

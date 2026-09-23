@@ -665,6 +665,7 @@ export const GameResult: React.FC<GameResultProps> = ({
   onPlayAgain,
   onExit,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-4 font-sans relative overflow-hidden">
       

@@ -261,7 +261,11 @@
     "games": "GAMES",
     "routine": "ROUTINE",
     "memory_book": "MEMORY BOOK",
-    "reminders": "REMINDERS"
+    "reminders": "REMINDERS",
+    "activity_paused": "Activity Paused",
+    "resume_activity": "Resume Activity",
+    "restart_activity": "Restart Activity",
+    "exit_activity": "Exit Activity"
   },
   "game_instructions": {
     "jigsaw": "Tap two pieces to swap them. Complete the picture!",
@@ -279,5 +283,46 @@
     "match3": "Swap items to match 3 in a row.",
     "memory_game": "Flip cards to find pairs.",
     "sudoku": "Fill the grid with numbers."
+  },
+  "game_ui": {
+    "moves": "MOVES",
+    "pairs": "PAIRS",
+    "matches": "MATCHES",
+    "level": "LEVEL",
+    "time": "TIME",
+    "found": "FOUND",
+    "next_round": "Next Round",
+    "see_results": "See Results",
+    "confirm_choices": "Confirm Choices",
+    "good_recall": "Good Recall!",
+    "remembered": "Remembered",
+    "missed": "Missed",
+    "original_items": "Here are the original items from this round:",
+    "watch_sequence": "Watch the sequence...",
+    "your_turn": "Now your turn!",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
+    "night": "Night"
+  },
+  "game_items": {
+    "tea-cup": "Tea Cup",
+    "bamboo": "Bamboo",
+    "orange": "Orange",
+    "rice": "Rice",
+    "flower": "Flower",
+    "home": "Home",
+    "rain": "Rain",
+    "elephant": "Elephant",
+    "peacock": "Peacock",
+    "leaf": "Tea Leaf",
+    "lemon": "Lemon",
+    "teapot": "Teapot",
+    "paddy": "Paddy Field",
+    "banyan": "Banyan Tree",
+    "fish": "Fish",
+    "diya": "Diya Lamp",
+    "hibiscus": "Hibiscus",
+    "coconut": "Coconut"
   }
 }
