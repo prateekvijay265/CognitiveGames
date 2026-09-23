@@ -1,10 +1,12 @@
-import { useNavigate } from 'react-router-dom';
+﻿import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../store/authStore';
 
 export default function PatientHome() {
   const navigate = useNavigate();
   const { user } = useAuthStore();
+  const { t } = useTranslation();
   const firstName = user?.name?.split(' ')[0] || 'User';
 
   return (
@@ -19,30 +21,29 @@ export default function PatientHome() {
         <div>PROGRESS · 60%</div>
       </div>
 
-      {/* Main Title Area */}
+      {/* Main Title •rea */}
       <div className="mb-16 border-b-[3px] border-ink pb-12">
         <div className="mono-tag mb-4">NEURO MIND · DAILY REGIMEN</div>
         <h1 className="font-display text-6xl sm:text-8xl md:text-[9rem] leading-[0.85] tracking-tight uppercase">
-          WELCOME<br />{firstName}
+          {t('arcade.welcome', 'WELCOME')}<br />{firstName}
         </h1>
         <p className="font-sans text-lg sm:text-xl max-w-2xl mt-8 leading-relaxed font-medium">
-          Continue your cognitive exercises, review your memory book, 
-          and check your daily routine. Everything you need is right here.
+          {t('arcade.intro_desc', 'Continue your cognitive exercises, review your memory book, and check your DAILY routine. Everything you need is right here.')}
         </p>
       </div>
 
       {/* Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        {/* Left Column: Quick Actions */}
+        {/* Left Column: Quick •ctions */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           <div className="flex justify-between items-end mb-2">
-            <h2 className="font-display text-4xl uppercase tracking-tight">Activities</h2>
+            <h2 className="font-display text-4xl uppercase tracking-tight">•ctivities</h2>
             <button 
               onClick={() => navigate('/patient/games')}
               className="font-mono text-xs uppercase font-bold tracking-widest hover:text-accent-red transition-colors"
             >
-              VIEW ALL &rarr;
+              VIEW •LL &rarr;
             </button>
           </div>
           
@@ -82,7 +83,7 @@ export default function PatientHome() {
               className="w-full flex items-center justify-between p-5 border-b-2 border-ink hover:bg-[#e3decf] transition-colors text-left group"
             >
               <div>
-                <div className="font-display text-2xl uppercase mb-1">Daily Routine</div>
+                <div className="font-display text-2xl uppercase mb-1">DAILY Routine</div>
                 <div className="font-mono text-xs text-ink/70 uppercase tracking-widest">Morning tea, medicines</div>
               </div>
               <span className="font-mono text-lg">&rarr;</span>
@@ -105,7 +106,7 @@ export default function PatientHome() {
             >
               <div>
                 <div className="font-display text-2xl uppercase mb-1">Reminders</div>
-                <div className="font-mono text-xs text-ink/70 uppercase tracking-widest">Active Alerts</div>
+                <div className="font-mono text-xs text-ink/70 uppercase tracking-widest">•ctive •lerts</div>
               </div>
               <span className="font-mono text-lg">&rarr;</span>
             </button>

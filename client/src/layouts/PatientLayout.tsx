@@ -6,7 +6,7 @@ import { useAuthStore } from '../store/authStore';
 import { cn } from '../lib/utils';
 
 export default function PatientLayout() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { fontSize } = useUIStore();
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ export default function PatientLayout() {
   useReminderEngine();
 
   const navItems = [
-    { to: '/patient',          label: 'Home',     exact: true },
-    { to: '/patient/games',    label: 'Games'                 },
+    { to: '/patient',          label: t('arcade.home', 'Home'),     exact: true },
+    { to: '/patient/games',    label: t('arcade.games', 'Games')                 },
     { to: '/patient/progress', label: 'Progress'              },
     { to: '/patient/settings', label: 'Profile'               },
   ];
@@ -68,7 +68,7 @@ export default function PatientLayout() {
             {/* Language Selector */}
             <div className="h-full flex items-center border-l-[3px] border-ink pl-2 sm:pl-4 ml-1 sm:ml-2">
               <select 
-                className="appearance-none bg-transparent font-mono font-bold text-xs uppercase tracking-wider text-ink hover:text-accent-red transition-colors focus:outline-none cursor-pointer"
+                className="bg-paper border-2 border-ink font-mono font-bold text-xs uppercase text-ink px-1 focus:outline-none cursor-pointer hover:bg-[#e3decf]"
                 value={i18n.language}
                 onChange={(e) => i18n.changeLanguage(e.target.value)}
               >

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   Volume2,
   VolumeX,
@@ -63,6 +64,8 @@ export function useGameSession({
   onComplete,
   onExit,
 }: UseGameSessionProps) {
+  const { t } = useTranslation();
+  const translatedInstructions = gameId ? t('game_instructions.' + gameId.replace('-', '_'), instructions) : instructions;
   const [gameState, setGameState] = useState<GameState>('PLAYING');
   const [previousState, setPreviousState] = useState<GameState>('PLAYING');
   const [startedAt, setStartedAt] = useState<string>(() => new Date().toISOString());
@@ -154,8 +157,8 @@ export function useGameSession({
   );
 
   const speakInstructions = useCallback(() => {
-    speakText(instructions);
-  }, [speakText, instructions]);
+    speakText(translatedInstructions);
+  }, [speakText, translatedInstructions]);
 
   // Web Audio chime for encouraging feedback
   const playChime = useCallback(
@@ -424,6 +427,7 @@ export const GameLayout: React.FC<GameLayoutProps> = ({
   onRestart,
   children,
 }) => {
+  const { t } = useTranslation();
   const [showExitConfirm, setShowExitConfirm] = useState(false);
 
   const difficultyColors: Record<GameDifficulty, string> = {
@@ -503,7 +507,7 @@ export const GameLayout: React.FC<GameLayoutProps> = ({
               onClick={() => setShowExitConfirm(true)}
               aria-label="Exit game"
               className="p-2.5 sm:px-3 sm:py-2 rounded-xl font-medium text-sm flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:hover:bg-rose-900/60 dark:text-rose-200 border border-rose-200 dark:border-rose-900 transition-all shadow-xs"
-              title="Exit Activity"
+              title="{t('arcade.exit', 'Exit Activity')}"
             >
               <LogOut className="w-5 h-5" />
               <span className="hidden sm:inline">Exit</span>
@@ -565,7 +569,7 @@ export const GameLayout: React.FC<GameLayoutProps> = ({
                 <Pause className="w-8 h-8" />
               </div>
               <h2 className="text-2xl font-bold mb-2 text-stone-900 dark:text-stone-100">
-                Activity Paused
+                {t('arcade.activity_paused', 'Activity Paused')}
               </h2>
               <p className="text-stone-600 dark:text-stone-300 text-base mb-6">
                 Take a breath! You can resume right where you left off, or restart whenever you are ready.
@@ -577,7 +581,7 @@ export const GameLayout: React.FC<GameLayoutProps> = ({
                   className="w-full py-4 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.98]"
                 >
                   <Play className="w-6 h-6 fill-current" />
-                  Resume Activity
+                  {t('arcade.resume', 'Resume Activity')}
                 </button>
                 <button
                   onClick={onRestart}
@@ -591,7 +595,7 @@ export const GameLayout: React.FC<GameLayoutProps> = ({
                   className="w-full py-3 text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-200 font-medium text-sm flex items-center justify-center gap-1.5 transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
-                  Exit Activity
+                  {t('arcade.exit', 'Exit Activity')}
                 </button>
               </div>
             </motion.div>

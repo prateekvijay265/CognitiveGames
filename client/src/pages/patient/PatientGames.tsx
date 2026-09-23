@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 interface GameInfo {
   id: string;
@@ -33,6 +34,7 @@ const GAMES_LIST: GameInfo[] = [
 
 export default function PatientGames() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <motion.div
