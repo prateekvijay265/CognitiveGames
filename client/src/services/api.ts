@@ -3,7 +3,7 @@ import axios from 'axios';
 // In production (Vercel), forcefully use the Render backend URL to avoid 404s.
 // Locally (npm run dev), fallback to '/api' to use the vite proxy.
 const baseURL = import.meta.env.PROD 
-  ? 'https://cognitivegames-5az6.onrender.com/api' 
+  ? (import.meta.env.VITE_API_URL || 'https://cognitivegames-5az6.onrender.com/api') 
   : '/api';
 
 export const api = axios.create({
@@ -52,4 +52,5 @@ api.interceptors.response.use(
 );
 
 export default api;
+
 
