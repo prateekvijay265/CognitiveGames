@@ -68,7 +68,7 @@ export default function GamePlayer() {
   }, [muted]);
 
   const handleExit = useCallback(() => {
-    navigate('/patient/games');
+    navigate('/patient/games', { replace: true });
   }, [navigate]);
 
   const handleComplete = useCallback(
